@@ -211,7 +211,7 @@ namespace quile {
     static constexpr std::size_t size() { return N; }
     
     static constexpr domain<T, N>* constraints() {
-      static domain<T, N> res = D? *D : domain<T, N>{};
+      domain<T, N> res = D? *D : domain<T, N>{};
       return res;
     }
     
@@ -254,28 +254,12 @@ namespace quile {
       return *this;
     }
 
-    auto operator<=>(const genotype<T>& g) const
+    auto operator<=>(const genotype& g) const
     { return chain_ <=> g.chain_; }
 
   private:
     chain chain_;
   };
-
-} // namespace quile
-
-template<typename G> requires quile::chromosome<G>
-struct std::hash<G> {
-  std::size_t operator()(const G& g) const noexcept {
-    const std::size_t sz{sizeof(std::size_t) * CHAR_BIT};
-    std::size_t res{0};
-    for (std::size_t i = 0; i < g.size(); ++i) {
-      res ^= std::hash{}(g.value(i)) << i % sz;
-    }
-    return res;
-  }
-};
-  
-namespace quile {
 
   template<typename T, std::size_t N, const domain<T, N>* D>
   std::ostream& operator<<(std::ostream& os, const genotype<T, N, D>& g) {
@@ -292,8 +276,8 @@ namespace quile {
   template<typename T, std::size_t N, const domain<T, N>* D>
   struct is_genotype<genotype<T, N, D>> : std::true_type {};
   
-  template<typename T, std::size_t N, const domain<T, N>* D>
-  inline constexpr bool is_genotype_v = is_genotype<T, N, D>::value;
+  template<typename T>
+  inline constexpr bool is_genotype_v = is_genotype<T>::value;
   
   template<typename G>
   concept chromosome = is_genotype_v<G>;
@@ -308,13 +292,30 @@ namespace quile {
 
   template<typename G>
   concept boolean_chromosome = chromosome<G>
-                          && std::is_same_v<typename G::type, bool>
+                          && std::is_same_v<typename G::type, bool>;
   
   template<typename F, typename G>
   concept genotype_constraints = std::predicate<F, G> && chromosome<G>;
+
+  template<typename G> requires chromosome<G>
+  const auto constraints_satisfied = [](const G&) { return true; };
   
-  const auto constraints_satisfied = [](const genotype&) { return true; };
+} // namespace quile
+
+template<typename G> requires quile::chromosome<G>
+struct std::hash<G> {
+  std::size_t operator()(const G& g) const noexcept {
+    const std::size_t sz{sizeof(std::size_t) * CHAR_BIT};
+    std::size_t res{0};
+    for (std::size_t i = 0; i < g.size(); ++i) {
+      res ^= std::hash<typename G::type>{}(g.value(i)) << i % sz;
+    }
+    return res;
+  }
+};
   
+namespace quile {
+
   ////////////////
   // Population //
   ////////////////
@@ -340,12 +341,13 @@ namespace quile {
   using populate_0_fn = std::function<population<G>(std::size_t)>;
   // - parents selection
   template<typename G> requires chromosome<G>
-  using populate_1_fn = std::function<population(std::size_t, population)>;
+  using populate_1_fn = std::function<population<G>(std::size_t,
+                                                    const population<G>&)>;
   // - survivor selection
   template<typename G> requires chromosome<G>
-  using populate_2_fn = std::function<population(std::size_t,
-                                                 population,
-                                                 population)>;
+  using populate_2_fn = std::function<population<G>(std::size_t,
+                                                    const population<G>&,
+                                                    const population<G>&)>;
   
   template<typename G> requires chromosome<G>
   using generations = std::vector<population<G>>;
@@ -382,7 +384,7 @@ namespace quile {
   template<auto M, auto R, typename G>
   requires mutation<decltype(M), G> && recombination<decltype(R), G>
   population<G> offspring(const G& g0, const G& g1) {
-    population res{};
+    population<G> res{};
     for (const auto& g : recombine_(g0, g1)) {
       res.push_back(mutate_(g).at(0));
     }
@@ -396,7 +398,7 @@ namespace quile {
     if (p.size() % 2) {
       throw std::invalid_argument{"wrong population size"};
     }
-    population res;
+    population<G> res;
     for (std::size_t i = 0; i < p.size(); i += 2) {
       for (const auto& g : offspring<M, R, G>(p[i], p[i + 1])) {
         res.push_back(g);
@@ -427,11 +429,11 @@ namespace quile {
                            const populate_2_fn<G>& p2,
                            const termination_condition_fn<G>& tc,
                            std::size_t parents_sz) {
-    generations res{};
+    generations<G> res{};
     const std::size_t generation_sz = first_generation.size();
     for (std::size_t i = 0; !tc(i, res); ++i) {
       const population<G> p{i == 0
-                            ? first_generation,
+                            ? first_generation
                             : p2_(generation_sz,
                                   res.beck(),
                                   offspring<M, R, G>(p1_(parents_sz,
@@ -466,11 +468,11 @@ namespace quile {
   class fitness_db {
   public:
     explicit fitness_db(const fitness_function<G>& f,
-                        const genotype_constraints auto& gc =
-                          constraints_satisfied,
+                        const genotype_constraints<G> auto& gc =
+                          constraints_satisfied<G>,
                         unsigned int thread_sz =
-                          std::thread::hardware_concurrency();)
-      : function_{[=](const genotype& g) { return gc(g)? f(g) : incalculable; }}
+                          std::thread::hardware_concurrency())
+      : function_{[=](const G& g) { return gc(g)? f(g) : incalculable; }}
       , thread_sz_{thread_sz}
     {}
     
@@ -485,7 +487,7 @@ namespace quile {
     }
     
     fitnesses operator()(const population<G>& p) const {
-      if (thread_sz > 1 && p.size() > 1) {
+      if (thread_sz_ > 1 && p.size() > 1) {
         multithreaded_calculations(p);
       }
       fitnesses res{};
@@ -498,16 +500,16 @@ namespace quile {
     
   private:
     auto uncalculated_fitnesses(const population<G>& p) const {
-      std::unordered_set<genotype> res{};
+      std::unordered_set<G> res{};
       std::ranges::copy_if(p, std::inserter(res, std::end(res)),
-                           [this](const genotype& g) {
+                           [this](const G& g) {
                              return !fitness_values_->contains(g);
                            });
       return res;
     }
     
     void multithreaded_calculations(const population<G>& p) const {
-      using type = std::pair<genotype, fitness>;
+      using type = std::pair<G, fitness>;
       thread_pool tp{thread_sz_};
       std::vector<std::future<type>> v{};
       for (const auto& x : uncalculated_fitnesses(p)) {
@@ -535,13 +537,13 @@ namespace quile {
   
   using selection_probabilities = std::vector<probability>;
   
-  template<typename G> requires chromosome
+  template<typename G> requires chromosome<G>
   using selection_probabilities_fn =
     std::function<selection_probabilities(const population<G>&)>;
   
   template<typename G> requires chromosome<G>
   selection_probabilities
-  cumulative_probabilities(const selection_probabilities_fn& spf,
+  cumulative_probabilities(const selection_probabilities_fn<G>& spf,
                            const population<G>& p) {
     auto res = spf(p);
     std::partial_sum(res.begin(), res.end(), res.begin());
@@ -570,7 +572,7 @@ namespace quile {
   
   inline fitnesses select_calculable(const fitnesses& fs,
                                      bool require_nonempty_result = false) {
-    return select_different_than(fitnesses,
+    return select_different_than(fs,
                                  incalculable,
                                  require_nonempty_result);
   }
@@ -638,7 +640,7 @@ namespace quile {
   }
   
   template<auto C, typename G>
-  requires genotype_constraints<C, G>
+  requires genotype_constraints<decltype(C), G> && chromosome<G>
   class random_population {
   public:
     random_population() = default;
@@ -652,10 +654,10 @@ namespace quile {
       std::vector<std::future<G>> v{};
       for (std::size_t i = 0; i < lambda; ++i) {
         v.push_back(tp.async<G>(std::launch::async,
-                                   [g = g_, this]() mutable -> G {
-                                     while (!C(random_reset(g)));
-                                     return g;
-                                   }));
+                                [g = G{}, this]() mutable -> G {
+                                  while (!C(g.random_reset()));
+                                  return g;
+                                }));
       }
       population<G> res{};
       for (auto& x : v) {
@@ -676,7 +678,7 @@ namespace quile {
     {}
     
     population<G> operator()(std::size_t lambda, const population<G>& p) const {
-      const auto f = [&, c = cumulative_probabilities(spf_, p)]() -> genotype {
+      const auto f = [&, c = cumulative_probabilities(spf_, p)]() -> G {
           return p.at(std::distance(c.begin(),
                                     std::lower_bound(c.begin(),
                                                      c.end(),
@@ -697,11 +699,11 @@ namespace quile {
       : spf_{spf}
     {}
     
-    population operator()(std::size_t lambda, const population<G>& p) const {
+    population<G> operator()(std::size_t lambda, const population<G>& p) const {
       const auto a = cumulative_probabilities(spf_, p);
       auto r = U<double>(0., 1. / lambda);
       
-      population res{};
+      population<G> res{};
       for (std::size_t i = 0, j = 0; j < lambda; ++i) {
         for (; r <= a.at(i) && j < lambda; r += 1. / lambda, ++j) {
           res.push_back(p.at(i));
@@ -716,9 +718,10 @@ namespace quile {
   };
 
   template<typename G> requires chromosome<G>
-  population generational_survivor_selection(std::size_t sz,
-                                             const population<G>& generation,
-                                             const population<G>& offspring) {
+  population<G>
+  generational_survivor_selection(std::size_t sz,
+                                  const population<G>& generation,
+                                  const population<G>& offspring) {
     if (generation.size() != sz || offspring.size() != sz) {
       throw std::invalid_argument{"bad size"};
     }
@@ -766,12 +769,12 @@ namespace quile {
   }
   
   template<typename G>
-  termination_condition max_iterations_termination(std::size_t max) {
+  termination_condition_fn<G> max_iterations_termination(std::size_t max) {
     return [=](std::size_t i, const generations<G>&) { return i == max; };
   }
   
   template<typename G>
-  termination_condition
+  termination_condition_fn<G>
   max_fitness_improvement_termination(const fitness_db<G>& ff,
                                       std::size_t n,
                                       double frac) {
