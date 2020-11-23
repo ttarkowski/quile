@@ -247,7 +247,7 @@ namespace quile {
       return *this;
     }
 
-    genotype& random_reset() override {
+    genotype& random_reset() {
       for (std::size_t i = 0; i < N; ++i) {
         chain_[i] = U<T>(constraints()[i].min(), constraints()[i].max());
       }
