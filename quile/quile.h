@@ -375,11 +375,11 @@ namespace quile {
   using recombination_fn = std::function<population<G>(const G&, const G&)>;
   
   template<typename G> requires chromosome<G>
-  population<G> unary_identity(const G& g) { return population{g}; }
+  population<G> unary_identity(const G& g) { return population<G>{g}; }
   
   template<typename G> requires chromosome<G>
   population<G> binary_identity(const G& g0, const G& g1)
-  { return population{g0, g1}; }
+  { return population<G>{g0, g1}; }
   
   template<auto M, auto R, typename G>
   requires mutation<decltype(M), G> && recombination<decltype(R), G>
@@ -632,7 +632,7 @@ namespace quile {
     return [=](std::size_t sz,
                const population<G>& p0,
                const population<G>& p1) {
-             population p{p0};
+             population<G> p{p0};
              p.insert(p.end(), p1.begin(), p1.end());
              return fn(sz, p);
            };
