@@ -468,8 +468,7 @@ namespace quile {
   class fitness_db {
   public:
     explicit fitness_db(const fitness_function<G>& f,
-                        const genotype_constraints<G> auto& gc =
-                          constraints_satisfied<G>,
+                        const genotype_constraints<G> auto& gc,
                         unsigned int thread_sz =
                           std::thread::hardware_concurrency())
       : function_{[=](const G& g) { return gc(g)? f(g) : incalculable; }}
