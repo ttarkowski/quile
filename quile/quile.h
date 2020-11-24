@@ -210,7 +210,7 @@ namespace quile {
     using type = T;
     static constexpr std::size_t size() { return N; }
     
-    static constexpr domain<T, N>* constraints() {
+    static constexpr domain<T, N> constraints() {
       domain<T, N> res = D? *D : domain<T, N>{};
       return res;
     }
@@ -219,7 +219,8 @@ namespace quile {
     genotype()
       : chain_{[]() {
                  chain res{};
-                 std::ranges::transform(constraints(), std::begin(res),
+                 const auto c = constraints();
+                 std::ranges::transform(c, std::begin(res),
                                         std::identity{}, &range<T>::min);
                  return res;
                }()}
@@ -254,8 +255,8 @@ namespace quile {
       return *this;
     }
 
-    auto operator<=>(const genotype& g) const
-    { return chain_ <=> g.chain_; }
+    auto operator<=>(const genotype& g) const { return chain_ <=> g.chain_; }
+    bool operator==(const genotype& g) const { return chain_ == g.chain_; }
 
   private:
     chain chain_;
@@ -385,8 +386,8 @@ namespace quile {
   requires mutation<decltype(M), G> && recombination<decltype(R), G>
   population<G> offspring(const G& g0, const G& g1) {
     population<G> res{};
-    for (const auto& g : recombine_(g0, g1)) {
-      res.push_back(mutate_(g).at(0));
+    for (const auto& g : R(g0, g1)) {
+      res.push_back(M(g).at(0));
     }
     assert(res.size() == 1 || res.size() == 2);
     return res;
@@ -434,10 +435,10 @@ namespace quile {
     for (std::size_t i = 0; !tc(i, res); ++i) {
       const population<G> p{i == 0
                             ? first_generation
-                            : p2_(generation_sz,
-                                  res.beck(),
-                                  offspring<M, R, G>(p1_(parents_sz,
-                                                         res.beack())))};
+                            : p2(generation_sz,
+                                 res.back(),
+                                 offspring<M, R, G>(p1(parents_sz,
+                                                       res.back())))};
       res.push_back(p);
     }
     return res;
@@ -683,7 +684,7 @@ namespace quile {
                                                      c.end(),
                                                      U<double>(0., 1.))));
         };
-      return detail::generate(lambda, f);
+      return detail::generate<G>(lambda, f);
     }
     
   private:
