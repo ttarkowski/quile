@@ -226,21 +226,15 @@ namespace quile {
   // Genotype //
   //////////////
   
-  // D == nullptr might be used if domain is totally unconstrained.
-  template<typename T, std::size_t N, const domain<T, N>* D = nullptr>
+  template<typename T, std::size_t N, const domain<T, N>* D>
   class genotype {
+    static_assert(D != nullptr);
+    
   public:
     using chain = std::array<T, N>;
     using type = T;
     static constexpr std::size_t size() { return N; }
-    
-    static constexpr domain<T, N> constraints() {
-      if constexpr (D) {
-        return *D;
-      } else {
-        return domain<T, N>{};
-      }
-    }
+    static constexpr domain<T, N> constraints() { return *D; }
     
   public:
     genotype()
@@ -255,10 +249,8 @@ namespace quile {
     
     explicit genotype(const chain& c)
       : chain_{c} {
-      if constexpr (D) {
-        if (!contains(*D, c)) {
-          throw std::invalid_argument{"chain out of domain"};
-        }
+      if (!contains(*D, c)) {
+        throw std::invalid_argument{"chain out of domain"};
       }
     }
 
@@ -270,10 +262,8 @@ namespace quile {
     T value(std::size_t i) const { return chain_[i]; }
 
     genotype& value(std::size_t i, T t) {
-      if constexpr (D) {
-        if (!(*D)[i].contains(t)) {
-          throw std::invalid_argument{"bad value"};
-        }
+      if (!(*D)[i].contains(t)) {
+        throw std::invalid_argument{"bad value"};
       }
       chain_[i] = t;
       return *this;
