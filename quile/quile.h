@@ -211,8 +211,11 @@ namespace quile {
     static constexpr std::size_t size() { return N; }
     
     static constexpr domain<T, N> constraints() {
-      domain<T, N> res = D? *D : domain<T, N>{};
-      return res;
+      if constexpr (D) {
+        return *D;
+      } else {
+        return domain<T, N>{};
+      }
     }
     
   public:
@@ -228,8 +231,10 @@ namespace quile {
     
     explicit genotype(const chain& c)
       : chain_{c} {
-      if (D && !contains(*D, c)) {
-        throw std::invalid_argument{"chain out of domain"};
+      if constexpr (D) {
+        if (!contains(*D, c)) {
+          throw std::invalid_argument{"chain out of domain"};
+        }
       }
     }
 
@@ -241,8 +246,10 @@ namespace quile {
     T value(std::size_t i) const { return chain_[i]; }
 
     genotype& value(std::size_t i, T t) {
-      if (D && !(*D)[i].contains(t)) {
-        throw std::invalid_argument{"bad value"};
+      if constexpr (D) {
+        if (!(*D)[i].contains(t)) {
+          throw std::invalid_argument{"bad value"};
+        }
       }
       chain_[i] = t;
       return *this;
@@ -262,15 +269,6 @@ namespace quile {
     chain chain_;
   };
 
-  template<typename T, std::size_t N, const domain<T, N>* D>
-  std::ostream& operator<<(std::ostream& os, const genotype<T, N, D>& g) {
-    os << '[';
-    for (std::size_t i = 0; i < N; ++i) {
-      os << g.value(i) << i + 1 < N? ", " : ']';
-    }
-    return os;
-  }
-  
   template<typename T>
   struct is_genotype : std::false_type {};
   
@@ -300,6 +298,15 @@ namespace quile {
 
   template<typename G> requires chromosome<G>
   const auto constraints_satisfied = [](const G&) { return true; };
+  
+  template<typename G> requires chromosome<G>
+  std::ostream& operator<<(std::ostream& os, const G& g) {
+    os << '[';
+    for (std::size_t i = 0; i < G::size(); ++i) {
+      os << g.value(i) << i + 1 < G::size()? ", " : ']';
+    }
+    return os;
+  }
   
 } // namespace quile
 
