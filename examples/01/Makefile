@@ -12,6 +12,12 @@ $(TARGET): $(SOURCES)
 run:
 	./$(TARGET)
 
+postprocessing:
+	./postprocessing.sh
+
+view:
+	totem result.ogv
+
 .PHONY: clean
 clean:
 	rm -f *~ $(TARGET)
