@@ -50,6 +50,6 @@ int main() {
     for (const auto& xx : x) {
       file << i << ' ' << xx.value(0) << '\n';
     }
-    i++;
+    ++i;
   }
 }
