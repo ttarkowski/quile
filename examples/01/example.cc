@@ -44,11 +44,12 @@ int main() {
   const std::size_t parents_sz{42};
   const auto tc = max_iterations_termination<G>(100);
 
+  const variation<G> v{arithmetic_recombination<G>};
+
   std::ofstream file{"evolution.dat"};
   for (std::size_t i = 0;
        const auto& x :
-         evolution<unary_identity<G>, arithmetic_recombination<G>, G>
-         (p0, p1, p2, tc, generation_sz, parents_sz)) {
+         evolution<G>(v, p0, p1, p2, tc, generation_sz, parents_sz)) {
     for (const auto& xx : x) {
       file << i << ' ' << xx.value(0) << '\n';
     }
