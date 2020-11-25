@@ -1,6 +1,7 @@
 // Evolutionary search for a maximum of given function over domain
 // - function: f(x) = sin(2 * x) * exp(-0.05 * x^2) + pi
 // - domain: [-10, +10]
+// - representation: floating-point
 // - variation type: no mutation, arithmetic recombination
 
 #include <cmath>

@@ -815,6 +815,7 @@ namespace quile {
   
   /////////////////////////////////////////////////
   // Concrete mutation & recombination operators //
+  //     for floating point representation       //
   /////////////////////////////////////////////////
 
   template<typename G> requires floating_point_chromosome<G>
