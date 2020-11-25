@@ -3,6 +3,8 @@
 // - domain: [-10, +10]
 // - representation: floating-point
 // - variation type: no mutation, arithmetic recombination
+// - parents/surivor selection: roulette wheel selection
+// - termination condition: fixed number of iterations
 
 #include <cmath>
 #include <cstddef>
