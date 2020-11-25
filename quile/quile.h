@@ -306,6 +306,9 @@ namespace quile {
   template<typename G>
   concept binary_chromosome = chromosome<G>
     && std::is_same_v<typename G::type, bool>;
+
+  template<typename G>
+  concept permutation_chromosome = chromosome<G>;
   
   template<typename F, typename G>
   concept genotype_constraints = std::predicate<F, G> && chromosome<G>;
@@ -835,28 +838,40 @@ namespace quile {
   
   /////////////////////////////////////////////////
   // Concrete mutation & recombination operators //
-  //     for floating point representation       //
   /////////////////////////////////////////////////
 
-  template<typename G> requires floating_point_chromosome<G>
-  auto Gaussian_mutation(typename G::type sigma) {
-    return [=](const G& g) -> population<G> {
-      G res{};
-      for (std::size_t i = 0; i < G::size(); ++i) {
-        res.value(i, G::constraints()[i].clamp(g.value(i) + sigma * N(0., 1.)));
-      }
-      return population<G>{res};
-    };
-  }
-  
-  template<typename G> requires floating_point_chromosome<G>
-  population<G> arithmetic_recombination(const G& g0, const G& g1) {
-    G res{};
-    for (std::size_t i = 0; i < G::size(); ++i) {
-      res.value(i, std::midpoint(g0.value(i), g1.value(i)));
+  namespace floating_point {
+
+    namespace mutation {
+
+    template<typename G> requires floating_point_chromosome<G>
+    auto Gaussian(typename G::type sigma) {
+      return [=](const G& g) -> population<G> {
+        G res{};
+        const auto c = G::constraints();
+        for (std::size_t i = 0; i < G::size(); ++i) {
+          res.value(i, c[i].clamp(g.value(i) + sigma * N(0., 1.)));
+        }
+        return population<G>{res};
+      };
     }
-    return population<G>{res};
-  }
+
+    } // namespace mutation
+
+    namespace recombination {
+    
+      template<typename G> requires floating_point_chromosome<G>
+      population<G> arithmetic(const G& g0, const G& g1) {
+        G res{};
+        for (std::size_t i = 0; i < G::size(); ++i) {
+          res.value(i, std::midpoint(g0.value(i), g1.value(i)));
+        }
+        return population<G>{res};
+      }
+
+    } // namespace recombination
+
+  } // namespace floating_point
 
 } // namespace quile
 

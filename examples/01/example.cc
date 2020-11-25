@@ -44,7 +44,7 @@ int main() {
   const std::size_t parents_sz{42};
   const auto tc = max_iterations_termination<G>(100);
 
-  const variation<G> v{arithmetic_recombination<G>};
+  const variation<G> v{floating_point::recombination::arithmetic<G>};
 
   std::ofstream file{"evolution.dat"};
   for (std::size_t i = 0;
