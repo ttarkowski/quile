@@ -297,15 +297,15 @@ namespace quile {
 
   template<typename G>
   concept floating_point_chromosome = chromosome<G>
-                          && std::floating_point<typename G::type>;
+    && std::floating_point<typename G::type>;
 
   template<typename G>
-  concept integral_chromosome = chromosome<G>
-                          && std::integral<typename G::type>;
+  concept integer_chromosome = chromosome<G>
+    && std::integral<typename G::type>;
 
   template<typename G>
-  concept boolean_chromosome = chromosome<G>
-                          && std::is_same_v<typename G::type, bool>;
+  concept binary_chromosome = chromosome<G>
+    && std::is_same_v<typename G::type, bool>;
   
   template<typename F, typename G>
   concept genotype_constraints = std::predicate<F, G> && chromosome<G>;
