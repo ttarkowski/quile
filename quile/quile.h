@@ -402,33 +402,53 @@ namespace quile {
   template<typename G> requires chromosome<G>
   population<G> binary_identity(const G& g0, const G& g1)
   { return population<G>{g0, g1}; }
-  
-  template<auto M, auto R, typename G>
-  requires mutation<decltype(M), G> && recombination<decltype(R), G>
-  population<G> offspring(const G& g0, const G& g1) {
-    population<G> res{};
-    for (const auto& g : R(g0, g1)) {
-      res.push_back(M(g).at(0));
-    }
-    assert(res.size() == 1 || res.size() == 2);
-    return res;
-  }
-  
-  template<auto M, auto R, typename G>
-  requires mutation<decltype(M), G> && recombination<decltype(R), G>
-  population<G> offspring(const population<G>& p) {
-    if (p.size() % 2) {
-      throw std::invalid_argument{"wrong population size"};
-    }
-    population<G> res;
-    for (std::size_t i = 0; i < p.size(); i += 2) {
-      for (const auto& g : offspring<M, R, G>(p[i], p[i + 1])) {
-        res.push_back(g);
+
+  template<typename G> requires chromosome<G>
+  class variation {
+  public:
+    variation(const mutation_fn<G>& m, const recombination_fn<G>& r)
+      : m_{m}, r_{r}
+    {}
+
+    variation()
+      : variation{unary_identity<G>, binary_identity<G>}
+    {}
+
+    explicit variation(const mutation_fn<G>& m)
+      : variation{m, binary_identity<G>}
+    {}
+
+    explicit variation(const recombination_fn<G>& r)
+      : variation{unary_identity<G>, r}
+    {}
+
+    population<G> operator()(const G& g0, const G& g1) const {
+      population<G> res{};
+      for (const auto& g : r_(g0, g1)) {
+        res.push_back(m_(g).at(0));
       }
+      assert(res.size() == 1 || res.size() == 2);
+      return res;
     }
-    assert(res.size() == p.size() / 2 || res.size() == p.size());
-    return res;
-  }
+    
+    population<G> operator()(const population<G>& p) const {
+      if (p.size() % 2) {
+        throw std::invalid_argument{"wrong population size"};
+      }
+      population<G> res;
+      for (std::size_t i = 0; i < p.size(); i += 2) {
+        for (const auto& g : this->operator()(p[i], p[i + 1])) {
+          res.push_back(g);
+        }
+      }
+      assert(res.size() == p.size() / 2 || res.size() == p.size());
+      return res;
+    }
+    
+  private:
+    mutation_fn<G> m_;
+    recombination_fn<G> r_;
+  };
   
   ///////////////
   // Evolution //
@@ -444,9 +464,9 @@ namespace quile {
   
   // TODO: Is there any way to reduce number of arguments of this function
   // without increasing solution's complexity?
-  template<auto M, auto R, typename G>
-  requires mutation<decltype(M), G> && recombination<decltype(R), G>
-  generations<G> evolution(const population<G>& first_generation,
+  template<typename G> requires chromosome<G>
+  generations<G> evolution(const variation<G> v,
+                           const population<G>& first_generation,
                            const populate_1_fn<G>& p1,
                            const populate_2_fn<G>& p2,
                            const termination_condition_fn<G>& tc,
@@ -458,21 +478,21 @@ namespace quile {
                             ? first_generation
                             : p2(generation_sz,
                                  res.back(),
-                                 offspring<M, R, G>(p1(parents_sz,
-                                                       res.back())))};
+                                 v(p1(parents_sz, res.back())))};
       res.push_back(p);
     }
     return res;
   }
   
-  template<auto M, auto R, typename G>
-  generations<G> evolution(const populate_0_fn<G>& p0,
+  template<typename G> requires chromosome<G>
+  generations<G> evolution(const variation<G>& v,
+                           const populate_0_fn<G>& p0,
                            const populate_1_fn<G>& p1,
                            const populate_2_fn<G>& p2,
                            const termination_condition_fn<G>& tc,
                            std::size_t generation_sz,
                            std::size_t parents_sz)
-  { return evolution<M, R, G>(p0(generation_sz), p1, p2, tc, parents_sz); }
+  { return evolution<G>(v, p0(generation_sz), p1, p2, tc, parents_sz); }
   
   //////////////////////
   // Fitness function //
