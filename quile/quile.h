@@ -177,7 +177,7 @@ namespace quile {
   T N(T mean, T standard_deviation) {
     return random_from_normal_distribution<T>(mean, standard_deviation);
   }
-  
+
   template<typename T>
   T random_from_uniform_distribution(T a, T b) {
     auto& generator{random_engine()};
@@ -185,15 +185,15 @@ namespace quile {
       assert(a < b);
       return // Check whether b - a overflows [N4861, 26.6.8.2.2].
         a > 0. || b <= std::numeric_limits<T>::max() + a
-          ? std::uniform_real_distribution<T>{ a, b }(generator) // [a, b)
+          ? std::uniform_real_distribution<T>{a, b}(generator) // [a, b)
           : random_from_uniform_distribution(false, true)
             ? random_from_uniform_distribution<T>(a, std::midpoint(a, b))
             : random_from_uniform_distribution<T>(std::midpoint(a, b), b);
     } else if constexpr (std::is_same_v<T, bool>) {
-      return a == b ? a : std::bernoulli_distribution{ 0.5 }(generator);
+      return a == b ? a : std::bernoulli_distribution{0.5}(generator);
     } else { // [a, b]
       assert(a <= b);
-      return std::uniform_int_distribution<T>{ a, b }(generator);
+      return std::uniform_int_distribution<T>{a, b}(generator);
     }
   }
 
@@ -232,6 +232,7 @@ namespace quile {
     
   public:
     using chain = std::array<T, N>;
+    using const_iterator = typename chain::const_iterator;
     using type = T;
     static constexpr std::size_t size() { return N; }
     static constexpr domain<T, N> constraints() { return *D; }
@@ -279,6 +280,10 @@ namespace quile {
     auto operator<=>(const genotype& g) const { return chain_ <=> g.chain_; }
     bool operator==(const genotype& g) const { return chain_ == g.chain_; }
 
+    const chain& chain() const { return chain_; }
+    const_iterator begin() const { return chain_.begin(); }
+    const_iterator end() const { return chain_.end(); }
+
   private:
     chain chain_;
   };
@@ -307,9 +312,6 @@ namespace quile {
   concept binary_chromosome = chromosome<G>
     && std::is_same_v<typename G::type, bool>;
 
-  template<typename G>
-  concept permutation_chromosome = chromosome<G>;
-  
   template<typename F, typename G>
   concept genotype_constraints = std::predicate<F, G> && chromosome<G>;
 
