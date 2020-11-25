@@ -823,7 +823,7 @@ namespace quile {
     return [=](const G& g) -> population<G> {
       G res{};
       for (std::size_t i = 0; i < G::size(); ++i) {
-        res.value(i, G::constraints().clamp(g.value(i) + sigma * N(0., 1.)));
+        res.value(i, G::constraints()[i].clamp(g.value(i) + sigma * N(0., 1.)));
       }
       return population<G>{res};
     };
