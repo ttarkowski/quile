@@ -280,7 +280,7 @@ namespace quile {
     auto operator<=>(const genotype& g) const { return chain_ <=> g.chain_; }
     bool operator==(const genotype& g) const { return chain_ == g.chain_; }
 
-    const chain& chain() const { return chain_; }
+    const chain& data() const { return chain_; }
     const_iterator begin() const { return chain_.begin(); }
     const_iterator end() const { return chain_.end(); }
 
@@ -824,57 +824,46 @@ namespace quile {
   max_fitness_improvement_termination(const fitness_db<G>& ff,
                                       std::size_t n,
                                       double frac) {
-    return [=]([[maybe_unused]] std::size_t i, const generations<G>& gs) {
-             assert(i == gs.size());
-             if (gs.size() <= n) {
-               return false;
-             } else {
-               const fitnesses fs{max(gs, ff)};
-               const fitness min_last_n =
-                 *std::min_element(fs.end() - n, fs.end());
-               const double x = (max(fs) - min_last_n) / (max(fs) - min(fs));
-               return x <= frac;
-             }
-           };
+    return
+      [=]([[maybe_unused]] std::size_t i, const generations<G>& gs) {
+        assert(i == gs.size());
+        if (gs.size() <= n) {
+          return false;
+        } else {
+          const fitnesses fs{max(gs, ff)};
+          const fitness min_last_n =
+            *std::min_element(fs.end() - n, fs.end());
+          const double x = (max(fs) - min_last_n) / (max(fs) - min(fs));
+          return x <= frac;
+        }
+      };
   }
   
   /////////////////////////////////////////////////
   // Concrete mutation & recombination operators //
   /////////////////////////////////////////////////
-
-  namespace floating_point {
-
-    namespace mutation {
-
-    template<typename G> requires floating_point_chromosome<G>
-    auto Gaussian(typename G::type sigma) {
-      return [=](const G& g) -> population<G> {
-        G res{};
-        const auto c = G::constraints();
-        for (std::size_t i = 0; i < G::size(); ++i) {
-          res.value(i, c[i].clamp(g.value(i) + sigma * N(0., 1.)));
-        }
-        return population<G>{res};
-      };
-    }
-
-    } // namespace mutation
-
-    namespace recombination {
-    
-      template<typename G> requires floating_point_chromosome<G>
-      population<G> arithmetic(const G& g0, const G& g1) {
-        G res{};
-        for (std::size_t i = 0; i < G::size(); ++i) {
-          res.value(i, std::midpoint(g0.value(i), g1.value(i)));
-        }
-        return population<G>{res};
+  
+  template<typename G> requires floating_point_chromosome<G>
+  auto Gaussian_mutation(typename G::type sigma) {
+    return [=](const G& g) -> population<G> {
+      G res{};
+      const auto c = G::constraints();
+      for (std::size_t i = 0; i < G::size(); ++i) {
+        res.value(i, c[i].clamp(g.value(i) + sigma * N(0., 1.)));
       }
-
-    } // namespace recombination
-
-  } // namespace floating_point
-
+      return population<G>{res};
+    };
+  }
+  
+  template<typename G> requires floating_point_chromosome<G>
+  population<G> arithmetic_recombination(const G& g0, const G& g1) {
+    G res{};
+    for (std::size_t i = 0; i < G::size(); ++i) {
+      res.value(i, std::midpoint(g0.value(i), g1.value(i)));
+    }
+    return population<G>{res};
+  }
+  
 } // namespace quile
 
 #endif // QUILE_H
