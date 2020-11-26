@@ -32,6 +32,7 @@
 #include <concepts>
 #include <condition_variable>
 #include <cstddef>
+#include <deque>
 #include <iostream>
 #include <iterator>
 #include <map>
@@ -110,7 +111,7 @@ namespace quile {
   template<typename T>
   class range {
   public:
-    range(T min, T max) : min_{min}, max_{max} {
+    constexpr range(T min, T max) : min_{min}, max_{max} {
       if (min > max) {
         throw std::invalid_argument{"range: min greater than max"};
       }
@@ -119,12 +120,12 @@ namespace quile {
     template<
       typename U = T,
       typename = std::enable_if_t<std::numeric_limits<U>::is_specialized>>
-    range()
+    constexpr range()
       : range{std::numeric_limits<T>::lowest(), std::numeric_limits<T>::max()}
     {}
     
-    range(const range&) = default;
-    range(range&&) = default;
+    constexpr range(const range&) = default;
+    constexpr range(range&&) = default;
     range& operator=(const range&) = default;
     range& operator=(range&&) = default;
     T min() const { return min_; }
@@ -221,6 +222,19 @@ namespace quile {
     }
     return res;
   }
+
+  template<typename T, std::size_t N>
+  constexpr domain<T, N> uniform_domain(const range<T>& r) {
+    domain<T, N> res{};
+    std::generate_n(std::begin(res), N, [&]() { return r; });
+    return res;
+  }
+
+  template<typename T, std::size_t N>
+  constexpr bool uniform(const domain<T, N>& d) {
+    const auto x0 = N == 0? range<T>{} : d[0];
+    return std::ranges::all_of(d, [&](const auto& x) { return x0 == x; });
+  }
   
   //////////////
   // Genotype //
@@ -229,6 +243,7 @@ namespace quile {
   template<typename T, std::size_t N, const domain<T, N>* D>
   class genotype {
     static_assert(D != nullptr);
+    static_assert(N > 0);
     
   public:
     using chain = std::array<T, N>;
@@ -236,6 +251,7 @@ namespace quile {
     using type = T;
     static constexpr std::size_t size() { return N; }
     static constexpr domain<T, N> constraints() { return *D; }
+    static constexpr bool uniform_domain = uniform(*D);
     
   public:
     genotype()
@@ -272,11 +288,16 @@ namespace quile {
 
     genotype& random_reset() {
       for (std::size_t i = 0; i < N; ++i) {
-        chain_[i] = U<T>(constraints()[i].min(), constraints()[i].max());
+        random_reset(i);
       }
       return *this;
     }
-
+    
+    genotype& random_reset(std::size_t i) {
+      chain_[i] = U<T>(constraints()[i].min(), constraints()[i].max());
+      return *this;
+    }
+    
     auto operator<=>(const genotype& g) const { return chain_ <=> g.chain_; }
     bool operator==(const genotype& g) const { return chain_ == g.chain_; }
 
@@ -311,6 +332,9 @@ namespace quile {
   template<typename G>
   concept binary_chromosome = chromosome<G>
     && std::is_same_v<typename G::type, bool>;
+
+  template<typename G>
+  concept uniform_chromosome = chromosome<G> && G::uniform_domain;
 
   template<typename F, typename G>
   concept genotype_constraints = std::predicate<F, G> && chromosome<G>;
@@ -377,7 +401,7 @@ namespace quile {
                                                     const population<G>&)>;
   
   template<typename G> requires chromosome<G>
-  using generations = std::vector<population<G>>;
+  using generations = std::deque<population<G>>;
   
   //////////////////////////////
   // Mutation & recombination //
@@ -475,7 +499,8 @@ namespace quile {
                            const populate_1_fn<G>& p1,
                            const populate_2_fn<G>& p2,
                            const termination_condition_fn<G>& tc,
-                           std::size_t parents_sz) {
+                           std::size_t parents_sz,
+                           std::size_t max_history = 0) {
     generations<G> res{};
     const std::size_t generation_sz = first_generation.size();
     for (std::size_t i = 0; !tc(i, res); ++i) {
@@ -485,6 +510,9 @@ namespace quile {
                                  res.back(),
                                  v(p1(parents_sz, res.back())))};
       res.push_back(p);
+      if (max_history && res.size() > max_history) {
+        res.pop_front();
+      }
     }
     return res;
   }
@@ -496,8 +524,11 @@ namespace quile {
                            const populate_2_fn<G>& p2,
                            const termination_condition_fn<G>& tc,
                            std::size_t generation_sz,
-                           std::size_t parents_sz)
-  { return evolution<G>(v, p0(generation_sz), p1, p2, tc, parents_sz); }
+                           std::size_t parents_sz,
+                           std::size_t max_history = 0) {
+    return
+      evolution<G>(v, p0(generation_sz), p1, p2, tc, parents_sz, max_history);
+  }
   
   //////////////////////
   // Fitness function //
@@ -838,18 +869,58 @@ namespace quile {
         }
       };
   }
+
+  template<typename G>
+  termination_condition_fn<G>
+  fitness_treshold_termination(const fitness_db<G>& fd,
+                               fitness tr,
+                               fitness eps) {
+    return
+      [=](std::size_t, const generations<G>& gs) {
+        return gs.empty()
+          ? false
+          : std::ranges::any_of(gs.back(),
+                                [=, &fd](const G& g) {
+                                  return std::fabs(fd(g) - tr) <= eps;
+                                });
+      };
+  }
   
   /////////////////////////////////////////////////
   // Concrete mutation & recombination operators //
   /////////////////////////////////////////////////
   
   template<typename G> requires floating_point_chromosome<G>
-  auto Gaussian_mutation(typename G::type sigma) {
+  auto Gaussian_mutation(typename G::type sigma, probability p) {
     return [=](const G& g) -> population<G> {
       G res{};
       const auto c = G::constraints();
       for (std::size_t i = 0; i < G::size(); ++i) {
-        res.value(i, c[i].clamp(g.value(i) + sigma * N(0., 1.)));
+        if (success(p)) {
+          res.value(i, c[i].clamp(g.value(i) + sigma * N(0., 1.)));
+        }
+      }
+      return population<G>{res};
+    };
+  }
+  
+  template<typename G> requires uniform_chromosome<G>
+  population<G> swap_mutation(const G& g) {
+    const std::size_t n = G::size();
+    auto d = g.data();
+    std::swap(d[U<std::size_t>(0, n - 1)], d[U<std::size_t>(0, n - 1)]);
+    return population<G>{G{d}};
+  }
+  
+  template<typename G> requires chromosome<G>
+  auto random_reset(probability p) {
+    return
+      [=](const G& g) -> population<G> {
+      G res{g};
+      for (std::size_t i = 0; i < G::size(); ++i) {
+        if (success(p)) {
+          res.random_reset();
+        }
       }
       return population<G>{res};
     };
@@ -862,6 +933,18 @@ namespace quile {
       res.value(i, std::midpoint(g0.value(i), g1.value(i)));
     }
     return population<G>{res};
+  }
+
+  template<typename G> requires uniform_chromosome<G>
+  population<G> one_point_xover(const G& g0, const G& g1) {
+    auto d0 = g0.data();
+    auto d1 = g1.data();
+    const std::size_t n = G::size();
+    const auto cp = U<std::size_t>(0, n - 1);
+    for (std::size_t i = cp; i < n; ++i) {
+      std::swap(d0[i], d1[i]);
+    }
+    return population<G>{G{d0}, G{d1}};
   }
   
 } // namespace quile

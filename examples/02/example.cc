@@ -48,7 +48,7 @@ int main() {
   const auto tc = max_fitness_improvement_termination<G>(fd, 10, 0.05);
 
   const type sigma{.2};
-  const variation<G> v{Gaussian_mutation<G>(sigma)};
+  const variation<G> v{Gaussian_mutation<G>(sigma, 1.)};
   
   std::ofstream file{"evolution.dat"};
   for (std::size_t i = 0;
