@@ -141,7 +141,7 @@ namespace quile {
     
     bool contains(T t) const { return t >= min_ && t <= max_; }
     auto operator<=>(const range<T>& r) const = default;
-    
+
   private:
     T min_;
     T max_;
@@ -151,6 +151,15 @@ namespace quile {
   std::ostream& operator<<(std::ostream& os, const range<T>& r)
   { return (os << '[' << r.min() << ", " << r.max() << ']'); }
   
+  template<typename T, std::size_t N>
+  std::array<T, N> iota(T t) {
+    std::array<T, N> res{};
+    std::ranges::transform(std::views::iota(t) | std::views::take(N),
+                           std::begin(res),
+                           std::identity{});
+    return res;
+  }
+    
   ////////////////////
   // Random numbers //
   ////////////////////
@@ -175,7 +184,7 @@ namespace quile {
   }
 
   template<std::floating_point T>
-  T N(T mean, T standard_deviation) {
+  T normal(T mean, T standard_deviation) {
     return random_from_normal_distribution<T>(mean, standard_deviation);
   }
 
@@ -199,13 +208,13 @@ namespace quile {
   }
 
   template<typename T>
-  T U(T a, T b) {
+  T uniform(T a, T b) {
     return random_from_uniform_distribution(a, b);
   }
   
   template<typename T>
   T random(const range<T>& r)
-  { return U<T>(r.min(), r.max()); }
+  { return uniform<T>(r.min(), r.max()); }
 
   ////////////
   // Domain //
@@ -240,15 +249,45 @@ namespace quile {
   // Genotype //
   //////////////
   
-  template<typename T, std::size_t N, const domain<T, N>* D>
+  struct g_floating_point;
+  struct g_integer;
+  struct g_binary;
+  struct g_permutation;
+  struct g_unknown;
+  
+  template<typename T>
+  struct default_genotype {
+    using type = std::
+      conditional_t<std::is_floating_point_v<T>,
+                    g_floating_point,
+                    std::conditional_t<std::is_same_v<T, bool>,
+                                       g_binary,
+                                       std::conditional<std::is_integral_v<T>,
+                                                        g_integer,
+                                                        g_unknown>>>;
+  };
+  
+  template<typename T>
+  using default_genotype_t = typename default_genotype<T>::type;
+  
+  template<typename T,
+           std::size_t N,
+           const domain<T, N>* D,
+           typename G = default_genotype_t<T>>
   class genotype {
     static_assert(D != nullptr);
     static_assert(N > 0);
     
+    // Permutation chromosome has uniform domain
+    // and integral non-boolean gene type.
+    static_assert(!std::is_same_v<G, g_permutation>
+                  || ((*D)[0].max() - (*D)[0].min() + 1 == N));
+    
   public:
     using chain = std::array<T, N>;
     using const_iterator = typename chain::const_iterator;
-    using type = T;
+    using gene_t = T;
+    using genotype_t = G;
     static constexpr std::size_t size() { return N; }
     static constexpr domain<T, N> constraints() { return *D; }
     static constexpr bool uniform_domain = uniform(*D);
@@ -256,11 +295,15 @@ namespace quile {
   public:
     genotype()
       : chain_{[]() {
-                 chain res{};
                  const auto c = constraints();
-                 std::ranges::transform(c, std::begin(res),
-                                        std::identity{}, &range<T>::min);
-                 return res;
+                 if constexpr (std::is_same_v<genotype_t, g_permutation>) {
+                   return iota<gene_t, N>(c[0].min());
+                 } else {
+                   chain res{};
+                   std::ranges::transform(c, std::begin(res),
+                                          std::identity{}, &range<T>::min);
+                   return res;
+                 }
                }()}
     {}
     
@@ -269,15 +312,23 @@ namespace quile {
       if (!contains(*D, c)) {
         throw std::invalid_argument{"chain out of domain"};
       }
+      if (std::is_same_v<genotype_t, g_permutation>) {
+        const auto i = iota<gene_t, N>(c[0].min());
+        if (!std::is_permutation(std::begin(c), std::end(c))) {
+          throw std::invalid_argument{"invalid permutation"};
+        }
+      }
     }
-
+    
     genotype(const genotype&) = default;
     genotype(genotype&&) = default;
     genotype& operator=(const genotype&) = default;
     genotype& operator=(genotype&&) = default;
-
+    
     T value(std::size_t i) const { return chain_[i]; }
-
+    
+    template<typename U = genotype_t,
+             typename = std::enable_if_t<!std::is_same_v<U, g_permutation>>>
     genotype& value(std::size_t i, T t) {
       if (!(*D)[i].contains(t)) {
         throw std::invalid_argument{"bad value"};
@@ -285,26 +336,32 @@ namespace quile {
       chain_[i] = t;
       return *this;
     }
-
+    
     genotype& random_reset() {
-      for (std::size_t i = 0; i < N; ++i) {
-        random_reset(i);
+      if constexpr (std::is_same_v<genotype_t, g_permutation>) {
+        std::shuffle(chain_.begin(), chain_.end(), random_engine());
+      } else {
+        for (std::size_t i = 0; i < N; ++i) {
+          random_reset(i);
+        }
       }
       return *this;
     }
     
+    template<typename U = genotype_t,
+             typename = std::enable_if_t<!std::is_same_v<U, g_permutation>>>
     genotype& random_reset(std::size_t i) {
-      chain_[i] = U<T>(constraints()[i].min(), constraints()[i].max());
+      chain_[i] = uniform<T>(constraints()[i].min(), constraints()[i].max());
       return *this;
     }
     
     auto operator<=>(const genotype& g) const { return chain_ <=> g.chain_; }
     bool operator==(const genotype& g) const { return chain_ == g.chain_; }
-
+    
     const chain& data() const { return chain_; }
     const_iterator begin() const { return chain_.begin(); }
     const_iterator end() const { return chain_.end(); }
-
+    
   private:
     chain chain_;
   };
@@ -323,18 +380,28 @@ namespace quile {
 
   template<typename G>
   concept floating_point_chromosome = chromosome<G>
-    && std::floating_point<typename G::type>;
+    && std::floating_point<typename G::gene_t>
+    && std::is_same_v<typename G::genotype_t, g_floating_point>;
 
   template<typename G>
   concept integer_chromosome = chromosome<G>
-    && std::integral<typename G::type>;
+    && std::integral<typename G::gene_t>
+    && !std::is_same_v<typename G::gene_t, bool>
+    && std::is_same_v<typename G::genotype_t, g_integer>;
 
   template<typename G>
   concept binary_chromosome = chromosome<G>
-    && std::is_same_v<typename G::type, bool>;
+    && std::is_same_v<typename G::gene_t, bool>
+    && std::is_same_v<typename G::genotype_t, g_binary>;
 
   template<typename G>
   concept uniform_chromosome = chromosome<G> && G::uniform_domain;
+
+  template<typename G>
+  concept permutation_chromosome = uniform_chromosome<G>
+    && std::integral<typename G::gene_t>
+    && !std::is_same_v<typename G::gene_t, bool>
+    && std::is_same_v<typename G::genotype_t, g_permutation>;
 
   template<typename F, typename G>
   concept genotype_constraints = std::predicate<F, G> && chromosome<G>;
@@ -359,7 +426,7 @@ struct std::hash<G> {
     const std::size_t sz{sizeof(std::size_t) * CHAR_BIT};
     std::size_t res{0};
     for (std::size_t i = 0; i < g.size(); ++i) {
-      res ^= std::hash<typename G::type>{}(g.value(i)) << i % sz;
+      res ^= std::hash<typename G::gene_t>{}(g.value(i)) << i % sz;
     }
     return res;
   }
@@ -759,7 +826,7 @@ namespace quile {
           return p.at(std::distance(c.begin(),
                                     std::lower_bound(c.begin(),
                                                      c.end(),
-                                                     U<double>(0., 1.))));
+                                                     uniform<double>(0., 1.))));
         };
       return detail::generate<G>(lambda, f);
     }
@@ -778,7 +845,7 @@ namespace quile {
     
     population<G> operator()(std::size_t lambda, const population<G>& p) const {
       const auto a = cumulative_probabilities(spf_, p);
-      auto r = U<double>(0., 1. / lambda);
+      auto r = uniform<double>(0., 1. / lambda);
       
       population<G> res{};
       for (std::size_t i = 0, j = 0; j < lambda; ++i) {
@@ -891,13 +958,13 @@ namespace quile {
   /////////////////////////////////////////////////
   
   template<typename G> requires floating_point_chromosome<G>
-  auto Gaussian_mutation(typename G::type sigma, probability p) {
+  auto Gaussian_mutation(typename G::gene_t sigma, probability p) {
     return [=](const G& g) -> population<G> {
       G res{};
       const auto c = G::constraints();
       for (std::size_t i = 0; i < G::size(); ++i) {
         if (success(p)) {
-          res.value(i, c[i].clamp(g.value(i) + sigma * N(0., 1.)));
+          res.value(i, c[i].clamp(g.value(i) + sigma * normal(0., 1.)));
         }
       }
       return population<G>{res};
@@ -908,7 +975,8 @@ namespace quile {
   population<G> swap_mutation(const G& g) {
     const std::size_t n = G::size();
     auto d = g.data();
-    std::swap(d[U<std::size_t>(0, n - 1)], d[U<std::size_t>(0, n - 1)]);
+    std::swap(d[uniform<std::size_t>(0, n - 1)],
+              d[uniform<std::size_t>(0, n - 1)]);
     return population<G>{G{d}};
   }
   
@@ -940,11 +1008,28 @@ namespace quile {
     auto d0 = g0.data();
     auto d1 = g1.data();
     const std::size_t n = G::size();
-    const auto cp = U<std::size_t>(0, n - 1);
+    const auto cp = uniform<std::size_t>(0, n - 1);
     for (std::size_t i = cp; i < n; ++i) {
       std::swap(d0[i], d1[i]);
     }
     return population<G>{G{d0}, G{d1}};
+  }
+
+  template<typename G> requires permutation_chromosome<G>
+  population<G> cut_n_crossfill(const G& g0, const G& g1) {
+    const auto f =
+      [cp = uniform<std::size_t>(1, G::size() - 1)](const G& g, auto&& d) {
+        auto it = std::begin(d);
+        std::advance(it, cp);
+        for (auto x : g) {
+          if (std::find(std::begin(d), it, x) == it) {
+            *it++ = x;
+          }
+        }
+        assert(it == std::end(d));
+        return d;
+      };
+    return population<G>{G{f(g1, g0.data())}, G{f(g0, g1.data())}};
   }
   
 } // namespace quile
