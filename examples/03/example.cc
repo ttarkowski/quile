@@ -82,7 +82,8 @@ int main() {
        const auto& x : evolution<G>(v,
                                     p0, p1, p2,
                                     tc,
-                                    generation_sz, parents_sz)) {
+                                    generation_sz, parents_sz,
+                                    1)) {
     for (const auto& xx : x) {
       file << i;
       for (auto p : xx) {
