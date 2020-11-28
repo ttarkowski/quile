@@ -341,31 +341,31 @@ namespace quile {
   template<typename T>
   concept binary_representation = is_g_binary_v<T>;
   
-  template<typename T, range<T> R>
+  template<typename T, std::size_t N, T M>
   requires std::integral<T> && (!std::is_same_v<T, bool>)
   struct g_permutation {
     using type = T;
-    static constexpr std::size_t size() { return R.max() - R.min() + 1; }
+    static constexpr std::size_t size() { return N; }
     
     static constexpr const domain<type, size()> constraints()
-    { return uniform_domain<type, size()>(R); }
+    { return uniform_domain<type, size()>(range<type>{M, M + N - 1}); }
     
     using chain_t = chain<type, size()>;
     
     static bool valid(const chain<type, size()>& c) {
-      const auto i = iota<type, size()>(R.min());
+      const auto i = iota<type, size()>(M);
       return contains(constraints(), c)
         && std::is_permutation(std::begin(c), std::end(c), std::begin(i));
     }
     
-    static chain_t default_chain() { return iota<type, size()>(R.min()); }
+    static chain_t default_chain() { return iota<type, size()>(M); }
   };
   
   template<typename T>
   struct is_g_permutation : std::false_type {};
   
-  template<typename T, range<T> R>
-  struct is_g_permutation<g_permutation<T, R>> : std::true_type {};
+  template<typename T, std::size_t N, T M>
+  struct is_g_permutation<g_permutation<T, N, M>> : std::true_type {};
   
   template<typename T>
   inline constexpr bool is_g_permutation_v = is_g_permutation<T>::value;
@@ -1095,7 +1095,7 @@ namespace quile {
   template<typename G> requires permutation_chromosome<G>
   population<G> cut_n_crossfill(const G& g0, const G& g1) {
     const auto f =
-      [cp = uniform<std::size_t>(1, G::size() - 1)](const G& g, auto&& d) {
+      [cp = uniform<std::size_t>(1, G::size() - 1)](const G& g, auto d) {
         auto it = std::begin(d);
         std::advance(it, cp);
         for (auto x : g) {
