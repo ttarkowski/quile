@@ -245,78 +245,162 @@ namespace quile {
     return std::ranges::all_of(d, [&](const auto& x) { return x0 == x; });
   }
   
+  template<typename T, std::size_t N>
+  using chain = std::array<T, N>;
+  
+  template<typename T, std::size_t N>
+  chain<T, N> chain_min(const domain<T, N>& d) {
+    chain<T, N> res{};
+    std::ranges::transform(d, std::begin(res), std::identity{}, &range<T>::min);
+    return res;
+  }
+  
   //////////////
   // Genotype //
   //////////////
   
-  struct g_floating_point;
-  struct g_integer;
-  struct g_binary;
-  struct g_permutation;
-  struct g_unknown;
-  
-  template<typename T>
-  struct default_genotype {
-    using type = std::
-      conditional_t<std::is_floating_point_v<T>,
-                    g_floating_point,
-                    std::conditional_t<std::is_same_v<T, bool>,
-                                       g_binary,
-                                       std::conditional<std::is_integral_v<T>,
-                                                        g_integer,
-                                                        g_unknown>>>;
+  template<typename T, std::size_t N, const domain<T, N>* D>
+  requires std::floating_point<T>
+  struct g_floating_point {
+    static_assert(D != nullptr);
+    static_assert(N > 0);
+    using type = T;
+    static constexpr std::size_t size() { return N; }
+    static constexpr const domain<type, size()>& constraints() { return *D; }
+    using chain_t = chain<type, size()>;
+    
+    static bool valid(const chain<type, size()>& c)
+    { return contains(constraints(), c); }
+
+    static chain_t default_chain() { return chain_min(constraints()); }
   };
   
   template<typename T>
-  using default_genotype_t = typename default_genotype<T>::type;
+  struct is_g_floating_point : std::false_type {};
   
-  template<typename T,
-           std::size_t N,
-           const domain<T, N>* D,
-           typename G = default_genotype_t<T>>
-  class genotype {
+  template<typename T, std::size_t N, const domain<T, N>* D>
+  struct is_g_floating_point<g_floating_point<T, N, D>> : std::true_type {};
+  
+  template<typename T>
+  inline constexpr bool is_g_floating_point_v = is_g_floating_point<T>::value;
+  
+  template<typename T>
+  concept floating_point_representation = is_g_floating_point_v<T>;
+  
+  template<typename T, std::size_t N, const domain<T, N>* D>
+  requires std::integral<T> && (!std::is_same_v<T, bool>)
+  struct g_integer {
     static_assert(D != nullptr);
     static_assert(N > 0);
-    
-    // Permutation chromosome has uniform domain
-    // and integral non-boolean gene type.
-    static_assert(!std::is_same_v<G, g_permutation>
-                  || ((*D)[0].max() - (*D)[0].min() + 1 == N));
-    
-  public:
-    using chain = std::array<T, N>;
-    using const_iterator = typename chain::const_iterator;
-    using gene_t = T;
-    using genotype_t = G;
+    using type = T;
     static constexpr std::size_t size() { return N; }
-    static constexpr domain<T, N> constraints() { return *D; }
-    static constexpr bool uniform_domain = uniform(*D);
+    static constexpr const domain<type, size()>& constraints() { return *D; }
+    using chain_t = chain<type, size()>;
+    
+    static bool valid(const chain<type, size()>& c)
+    { return contains(constraints(), c); }
+    
+    static chain_t default_chain() { return chain_min(constraints()); }
+  };
+  
+  template<typename T>
+  struct is_g_integer : std::false_type {};
+  
+  template<typename T, std::size_t N, const domain<T, N>* D>
+  struct is_g_integer<g_integer<T, N, D>> : std::true_type {};
+  
+  template<typename T>
+  inline constexpr bool is_g_integer_v = is_g_integer<T>::value;
+  
+  template<typename T>
+  concept integer_representation = is_g_integer_v<T>;
+  
+  template<std::size_t N>
+  struct g_binary {
+    static_assert(N > 0);
+    using type = bool;
+    static constexpr std::size_t size() { return N; }
+    static constexpr const domain<type, size()>& constraints()
+    { return domain<type, size()>{}; }
+    
+    using chain_t = chain<type, size()>;
+    
+    static bool valid(const chain<type, size()>& c) { return true; }
+    static chain_t default_chain() { return chain_min(constraints()); }
+  };
+  
+  template<typename T>
+  struct is_g_binary : std::false_type {};
+  
+  template<std::size_t N>
+  struct is_g_binary<g_binary<N>> : std::true_type {};
+  
+  template<typename T>
+  inline constexpr bool is_g_binary_v = is_g_binary<T>::value;
+  
+  template<typename T>
+  concept binary_representation = is_g_binary_v<T>;
+  
+  template<typename T, range<T> R>
+  requires std::integral<T> && (!std::is_same_v<T, bool>)
+  struct g_permutation {
+    using type = T;
+    static constexpr std::size_t size() { return R.max() - R.min() + 1; }
+    
+    static constexpr const domain<type, size()>& constraints()
+    { return uniform_domain<type, size()>(R); }
+    
+    using chain_t = chain<type, size()>;
+    
+    static bool valid(const chain<type, size()>& c) {
+      const auto i = iota<type, size()>(R.min());
+      return contains(constraints(), c)
+        && std::is_permutation(std::begin(c), std::end(c), std::begin(i));
+    }
+    
+    static chain_t default_chain() { return iota<type, size()>(R.min()); }
+  };
+  
+  template<typename T>
+  struct is_g_permutation : std::false_type {};
+  
+  template<typename T, range<T> R>
+  struct is_g_permutation<g_permutation<T, R>> : std::true_type {};
+  
+  template<typename T>
+  inline constexpr bool is_g_permutation_v = is_g_permutation<T>::value;
+  
+  template<typename T>
+  concept permutation_representation = is_g_permutation_v<T>;
+  
+  template<typename T>
+  concept chromosome_representation = floating_point_representation<T>
+                                            || integer_representation<T>
+                                            || binary_representation<T>
+                                            || permutation_representation<T>;
+  
+  template<typename R> requires chromosome_representation<R>
+  class genotype {
+  public:
+    using chain_t = chain<typename R::type, R::size()>;
+    using const_iterator = typename chain_t::const_iterator;
+    using gene_t = R::type;
+    using genotype_t = R;
+    static constexpr std::size_t size() { return R::size(); }
+    
+    static constexpr const domain<gene_t, size()>& constraints()
+    { return R::constraints(); }
+    
+    static constexpr bool uniform_domain = uniform(constraints());
+    static bool valid(const chain_t& c) { return R::valid(c); }
     
   public:
-    genotype()
-      : chain_{[]() {
-                 const auto c = constraints();
-                 if constexpr (std::is_same_v<genotype_t, g_permutation>) {
-                   return iota<gene_t, N>(c[0].min());
-                 } else {
-                   chain res{};
-                   std::ranges::transform(c, std::begin(res),
-                                          std::identity{}, &range<T>::min);
-                   return res;
-                 }
-               }()}
-    {}
+    genotype() : chain_{R::default_chain()} {}
     
-    explicit genotype(const chain& c)
+    explicit genotype(const chain_t& c)
       : chain_{c} {
-      if (!contains(*D, c)) {
-        throw std::invalid_argument{"chain out of domain"};
-      }
-      if (std::is_same_v<genotype_t, g_permutation>) {
-        const auto i = iota<gene_t, N>(c[0].min());
-        if (!std::is_permutation(std::begin(c), std::end(c))) {
-          throw std::invalid_argument{"invalid permutation"};
-        }
+      if (!valid(c)) {
+        throw std::invalid_argument{"invalid chain"};
       }
     }
     
@@ -325,87 +409,80 @@ namespace quile {
     genotype& operator=(const genotype&) = default;
     genotype& operator=(genotype&&) = default;
     
-    T value(std::size_t i) const { return chain_[i]; }
+    gene_t value(std::size_t i) const { return chain_[i]; }
     
-    template<typename U = genotype_t,
-             typename = std::enable_if_t<!std::is_same_v<U, g_permutation>>>
-    genotype& value(std::size_t i, T t) {
-      if (!(*D)[i].contains(t)) {
+    template<typename = std::enable_if_t<!permutation_representation<R>>>
+    genotype& value(std::size_t i, gene_t v) {
+      if (!constraints()[i].contains(v)) {
         throw std::invalid_argument{"bad value"};
       }
-      chain_[i] = t;
+      chain_[i] = v;
       return *this;
     }
     
     genotype& random_reset() {
-      if constexpr (std::is_same_v<genotype_t, g_permutation>) {
+      if constexpr (permutation_representation<R>) {
         std::shuffle(chain_.begin(), chain_.end(), random_engine());
       } else {
-        for (std::size_t i = 0; i < N; ++i) {
+        for (std::size_t i = 0; i < size(); ++i) {
           random_reset(i);
         }
       }
       return *this;
     }
     
-    template<typename U = genotype_t,
-             typename = std::enable_if_t<!std::is_same_v<U, g_permutation>>>
+    template<typename = std::enable_if_t<!permutation_representation<R>>>
     genotype& random_reset(std::size_t i) {
-      chain_[i] = uniform<T>(constraints()[i].min(), constraints()[i].max());
+      const auto& c = constraints();
+      chain_[i] = uniform<gene_t>(c[i].min(), c[i].max());
       return *this;
     }
     
     auto operator<=>(const genotype& g) const { return chain_ <=> g.chain_; }
     bool operator==(const genotype& g) const { return chain_ == g.chain_; }
     
-    const chain& data() const { return chain_; }
+    const chain_t& data() const { return chain_; }
     const_iterator begin() const { return chain_.begin(); }
     const_iterator end() const { return chain_.end(); }
     
   private:
-    chain chain_;
+    chain_t chain_;
   };
-
+  
   template<typename T>
   struct is_genotype : std::false_type {};
   
-  template<typename T, std::size_t N, const domain<T, N>* D>
-  struct is_genotype<genotype<T, N, D>> : std::true_type {};
+  template<typename T>
+  struct is_genotype<genotype<T>> : std::true_type {};
   
   template<typename T>
   inline constexpr bool is_genotype_v = is_genotype<T>::value;
   
   template<typename G>
   concept chromosome = is_genotype_v<G>;
-
+  
   template<typename G>
   concept floating_point_chromosome = chromosome<G>
-    && std::floating_point<typename G::gene_t>
-    && std::is_same_v<typename G::genotype_t, g_floating_point>;
+    && floating_point_representation<typename G::genotype_t>;
 
   template<typename G>
   concept integer_chromosome = chromosome<G>
-    && std::integral<typename G::gene_t>
-    && !std::is_same_v<typename G::gene_t, bool>
-    && std::is_same_v<typename G::genotype_t, g_integer>;
-
+    && integer_representation<typename G::genotype_t>;
+  
   template<typename G>
   concept binary_chromosome = chromosome<G>
-    && std::is_same_v<typename G::gene_t, bool>
-    && std::is_same_v<typename G::genotype_t, g_binary>;
+    && binary_representation<typename G::genotype_t>;
+  
+  template<typename G>
+  concept permutation_chromosome = chromosome<G>
+    && permutation_representation<typename G::genotype_t>;
 
   template<typename G>
   concept uniform_chromosome = chromosome<G> && G::uniform_domain;
-
-  template<typename G>
-  concept permutation_chromosome = uniform_chromosome<G>
-    && std::integral<typename G::gene_t>
-    && !std::is_same_v<typename G::gene_t, bool>
-    && std::is_same_v<typename G::genotype_t, g_permutation>;
-
+  
   template<typename F, typename G>
   concept genotype_constraints = std::predicate<F, G> && chromosome<G>;
-
+  
   template<typename G> requires chromosome<G>
   const auto constraints_satisfied = [](const G&) { return true; };
   

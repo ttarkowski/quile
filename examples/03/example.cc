@@ -38,7 +38,7 @@ fitness f(const auto& chessboard) {
 // Domain
 constexpr domain<type, n> d = uniform_domain<type, n>(range<type>{0, n - 1});
 
-using G = genotype<type, n, &d>;
+using G = genotype<g_integer<type, n, &d>>;
 
 std::string Forsyth_Edwards_Notation(const G& g) {
   std::string res{};

@@ -27,7 +27,7 @@ const auto f =
 const domain<type, 1> d{range{-10., +10.}};
 
 int main() {
-  using G = genotype<type, 1, &d>;
+  using G = genotype<g_floating_point<type, 1, &d>>;
   const fitness_function<G> ff = [](const G& g) { return f(g.value(0)); };
   const fitness_db<G> fd{ff, constraints_satisfied<G>};
   const fitness_proportional_selection<G> fps{fd};

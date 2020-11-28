@@ -29,7 +29,7 @@ const auto f =
 const domain<type, 2> d{range{-10., +10.}, range{-10., +10.}};
 
 int main() {
-  using G = genotype<type, 2, &d>;
+  using G = genotype<g_floating_point<type, 2, &d>>;
   const fitness_function<G> ff =
     [](const G& g) { return f(g.value(0), g.value(1)); };
   const fitness_db<G> fd{ff, constraints_satisfied<G>};
