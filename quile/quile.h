@@ -320,7 +320,7 @@ namespace quile {
     static_assert(N > 0);
     using type = bool;
     static constexpr std::size_t size() { return N; }
-    static constexpr const domain<type, size()>& constraints()
+    static constexpr const domain<type, size()> constraints()
     { return domain<type, size()>{}; }
     
     using chain_t = chain<type, size()>;
@@ -347,7 +347,7 @@ namespace quile {
     using type = T;
     static constexpr std::size_t size() { return R.max() - R.min() + 1; }
     
-    static constexpr const domain<type, size()>& constraints()
+    static constexpr const domain<type, size()> constraints()
     { return uniform_domain<type, size()>(R); }
     
     using chain_t = chain<type, size()>;
@@ -388,7 +388,7 @@ namespace quile {
     using genotype_t = R;
     static constexpr std::size_t size() { return R::size(); }
     
-    static constexpr const domain<gene_t, size()>& constraints()
+    static constexpr const domain<gene_t, size()> constraints()
     { return R::constraints(); }
     
     static constexpr bool uniform_domain = uniform(constraints());
