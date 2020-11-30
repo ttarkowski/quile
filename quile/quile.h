@@ -622,6 +622,23 @@ namespace quile {
     mutation_fn<G> m_;
     recombination_fn<G> r_;
   };
+
+  template<typename G> requires chromosome<G>
+  auto stochastic_mutation(const mutation_fn<G>& m, probability p)
+  { return [=](const G& g) { return success(p)? m(g) : population<G>{g}; }; }
+
+  template<typename G> requires chromosome<G>
+  auto stochastic_recombination(const recombination_fn<G>& r, probability p) {
+    return
+      [=](const G& g0, const G& g1) {
+        const auto tmp = r(g0, g1);
+        return success(p)
+          ? tmp
+          : tmp.size() == 2
+            ? population<G>{g0, g1}
+            : success(.5)? population<G>{g0} : population<G>{g1};
+      };
+  }
   
   ///////////////
   // Evolution //
