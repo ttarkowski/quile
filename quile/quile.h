@@ -1074,14 +1074,29 @@ namespace quile {
     return population<G>{G{d}};
   }
   
-  template<typename G> requires chromosome<G>
+  template<typename G>
+  requires floating_point_chromosome<G>
+    || integer_chromosome<G>
+    || binary_chromosome<G>
   auto random_reset(probability p) {
-    return
-      [=](const G& g) -> population<G> {
+    return [=](const G& g) -> population<G> {
       G res{g};
       for (std::size_t i = 0; i < G::size(); ++i) {
         if (success(p)) {
-          res.random_reset();
+          res.random_reset(i);
+        }
+      }
+      return population<G>{res};
+    };
+  }
+
+  template<typename G> requires binary_chromosome<G>
+  auto bit_flipping(probability p) {
+    return [=](const G& g) -> population<G> {
+      G res{g};
+      for (std::size_t i = 0; i < G::size(); ++i) {
+        if (success(p)) {
+          res.value(i, !res.value(i));
         }
       }
       return population<G>{res};
@@ -1097,7 +1112,10 @@ namespace quile {
     return population<G>{res};
   }
 
-  template<typename G> requires uniform_chromosome<G>
+  template<typename G>
+  requires floating_point_chromosome<G>
+    || integer_chromosome<G>
+    || binary_chromosome<G>
   population<G> one_point_xover(const G& g0, const G& g1) {
     auto d0 = g0.data();
     auto d1 = g1.data();
