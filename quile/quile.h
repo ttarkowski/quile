@@ -488,9 +488,8 @@ namespace quile {
   
   template<typename G> requires chromosome<G>
   std::ostream& operator<<(std::ostream& os, const G& g) {
-    os << '[';
     for (std::size_t i = 0; i < G::size(); ++i) {
-      os << g.value(i) << (i + 1 < G::size()? ", " : "]");
+      os << g.value(i) << (i + 1 < G::size()? " " : "");
     }
     return os;
   }
