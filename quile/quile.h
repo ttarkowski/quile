@@ -490,7 +490,7 @@ namespace quile {
   std::ostream& operator<<(std::ostream& os, const G& g) {
     os << '[';
     for (std::size_t i = 0; i < G::size(); ++i) {
-      os << g.value(i) << i + 1 < G::size()? ", " : ']';
+      os << g.value(i) << (i + 1 < G::size()? ", " : "]");
     }
     return os;
   }
@@ -705,6 +705,12 @@ namespace quile {
   
   template<typename G> requires chromosome<G>
   class fitness_db {
+  private:
+    using database = std::unordered_map<G, fitness>;
+    
+  public:
+    using const_iterator = typename database::const_iterator;
+    
   public:
     explicit fitness_db(const fitness_function<G>& f,
                         const genotype_constraints<G> auto& gc,
@@ -736,6 +742,22 @@ namespace quile {
     
     std::size_t size() const { return fitness_values_->size(); }
     
+    const_iterator begin() const { return fitness_values_->begin(); }
+    const_iterator end() const { return fitness_values_->end(); }
+    
+    std::vector<G> rank_order() const {
+      std::vector<G> res{};
+      std::ranges::transform(*this,
+                             std::back_inserter(res),
+                             std::identity{},
+                             &database::value_type::first);
+      std::ranges::sort(res,
+                        [this](const G& g0, const G& g1) {
+                          return this->operator()(g0) > this->operator()(g1);
+                        });
+      return res;
+    }
+    
   private:
     auto uncalculated_fitnesses(const population<G>& p) const {
       std::unordered_set<G> res{};
@@ -765,8 +787,7 @@ namespace quile {
   private:
     fitness_function<G> function_;
     unsigned int thread_sz_;
-    std::shared_ptr<std::unordered_map<G, fitness>> fitness_values_ =
-      std::make_shared<std::unordered_map<G, fitness>>();
+    std::shared_ptr<database> fitness_values_ = std::make_shared<database>();
   };
   
   /////////////////////////////
