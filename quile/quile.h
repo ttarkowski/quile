@@ -745,8 +745,8 @@ namespace quile {
     const_iterator begin() const { return fitness_values_->begin(); }
     const_iterator end() const { return fitness_values_->end(); }
     
-    std::vector<G> rank_order() const {
-      std::vector<G> res{};
+    population<G> rank_order() const {
+      population<G> res{};
       std::ranges::transform(*this,
                              std::back_inserter(res),
                              std::identity{},
