@@ -51,7 +51,7 @@ int main() {
        const auto& x :
          evolution<G>(v, p0, p1, p2, tc, generation_sz, parents_sz)) {
     for (const auto& xx : x) {
-      file << i << ' ' << xx.value(0) << '\n';
+      file << i << ' ' << xx << '\n';
     }
     ++i;
   }

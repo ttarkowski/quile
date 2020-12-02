@@ -74,21 +74,7 @@ int main() {
   
   const variation<G> v{swap_mutation<G>, cut_n_crossfill<G>};
   
-  std::ofstream file{"evolution.dat"};
-  for (std::size_t i = 0;
-       const auto& x : evolution<G>(v,
-                                    p0, p1, p2,
-                                    tc,
-                                    generation_sz, parents_sz)) {
-    for (const auto& xx : x) {
-      file << i;
-      for (auto p : xx) {
-        file << ' ' << p;
-      }
-      file << ' ' << Forsyth_Edwards_Notation(xx)
-           << ' ' << fd(xx)
-           << '\n';
-    }
-    ++i;
-  }
+  evolution<G>(v, p0, p1, p2, tc, generation_sz, parents_sz);
+  std::ofstream file{"solution.dat"};
+  file << Forsyth_Edwards_Notation(fd.rank_order()[0]) << '\n';
 }
