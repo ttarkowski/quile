@@ -8,6 +8,7 @@
 
 #include <cassert>
 #include <cstddef>
+#include <iostream>
 #include <fstream>
 #include <string>
 #include <quile/quile.h>
@@ -69,12 +70,14 @@ int main() {
   const auto p2 = adapter<G>(stochastic_universal_sampling<G>{fps});
 
   const std::size_t generation_sz{20};
-  const std::size_t parents_sz{4};
+  const std::size_t parents_sz{2};
   const auto tc = fitness_treshold_termination<G>(fd, 0., 0.01);
   
   const variation<G> v{swap_mutation<G>, cut_n_crossfill<G>};
   
-  evolution<G>(v, p0, p1, p2, tc, generation_sz, parents_sz);
+  const auto e = evolution<G>(v, p0, p1, p2, tc, generation_sz, parents_sz);
   std::ofstream file{"solution.dat"};
   file << Forsyth_Edwards_Notation(fd.rank_order()[0]) << '\n';
+  std::cout << fd.size() << " genotypes created in "
+            << e.size() << " generations.\n";
 }
