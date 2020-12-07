@@ -39,7 +39,8 @@ instructions below, you will need GNU/Linux operating system.
 1. Directory change (please replace *nn* with example number)  
     *cd examples/nn*
 2. Code compilation  
-    *g++ -Wall -Wextra -pedantic -O3 -std=c++20 -fconcepts -pthread -I../../*
+    *g++ -Wall -Wextra -pedantic -O3 -std=c++20 -fconcepts -pthread -I../../
+    example.cc*
 3. Program execution  
     *./a.out*
 4. Postprocessing (please see note below)  
