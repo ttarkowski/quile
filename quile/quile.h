@@ -72,6 +72,16 @@ namespace quile {
     }
   };
   
+  //////////////////////////////////
+  // Functional logical operators //
+  //////////////////////////////////
+  
+  auto fn_and(const auto&... fs)
+  { return [=]<typename... Xs>(const Xs&... xs) { return (fs(xs...) && ...); }; }
+  
+  auto fn_or(const auto&... fs)
+  { return [=]<typename... Xs>(const Xs&... xs) { return (fs(xs...) || ...); }; }
+  
   /////////////////
   // Thread pool //
   /////////////////
