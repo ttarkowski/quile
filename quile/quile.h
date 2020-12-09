@@ -55,6 +55,23 @@
 
 namespace quile {
 
+  //////////////
+  // TMP loop //
+  //////////////
+  
+  template<std::integral T, T I, T N>
+  struct static_loop {
+    static void body(auto&&) {}
+  };
+  
+  template<std::integral T, T I, T N> requires (I < N)
+  struct static_loop<T, I, N> {
+    static void body(auto&& f) {
+      f(std::integral_constant<T, I>{});
+      static_loop<T, I + 1, N>::body(std::forward<decltype(f)>(f));
+    }
+  };
+  
   /////////////////
   // Thread pool //
   /////////////////
