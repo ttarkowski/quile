@@ -7,8 +7,7 @@ of the MIT License.
 
 The part *chromo-* of the word *chromosome*, which is central term in genetics,
 comes from the Greek χρῶμα and means *color*. Similarly, the name of this
-library origins from fictional language Quenya (more precisely: Neo-Quenya) and
-means *color* as well.
+library origins from fictional language Neo-Quenya and means *color* as well.
 
 ## Features
 - Gene- and genotype-level constraints
