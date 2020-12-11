@@ -55,9 +55,9 @@
 
 namespace quile {
 
-  //////////////
-  // TMP loop //
-  //////////////
+  //////////////////////////////
+  // Template metaprogramming //
+  //////////////////////////////
   
   template<std::integral T, T I, T N>
   struct static_loop {
@@ -71,6 +71,59 @@ namespace quile {
       static_loop<T, I + 1, N>::body(std::forward<decltype(f)>(f));
     }
   };
+  
+  template<typename...>
+  struct typelist;
+  
+  template<typename>
+  struct is_typelist : std::false_type {};
+  
+  template<typename... Ts>
+  struct is_typelist<typelist<Ts...>> : std::true_type {};
+  
+  template<typename T>
+  constexpr inline bool is_typelist_v = is_typelist<T>::value;
+  
+  template<typename...>
+  struct typelist_cat;
+  
+  template<>
+  struct typelist_cat<typelist<>> {
+    using type = typelist<>;
+  };
+  
+  template<typename... Ts>
+  struct typelist_cat<typelist<Ts...>> {
+    using type = typelist<Ts...>;
+  };
+  
+  template<typename... Ts, typename... Us>
+  struct typelist_cat<typelist<Ts...>, typelist<Us...>> {
+    using type = typelist<Ts..., Us...>;
+  };
+  
+  template<typename... Ts, typename... Us, typename... Rest>
+  struct typelist_cat<typelist<Ts...>, typelist<Us...>, Rest...> {
+    using type = typename typelist_cat<typelist<Ts..., Us...>, Rest...>::type;
+  };
+  
+  template<typename... Ts>
+  using typelist_cat_t = typename typelist_cat<Ts...>::type;
+  
+  template<typename T, std::size_t N>
+  struct repeated_type {
+    using type =
+      typename typelist_cat<typelist<T>,
+                            typename repeated_type<T, N - 1>::type>::type;
+  };
+  
+  template<typename T>
+  struct repeated_type<T, 0> {
+    using type = typelist<>;
+  };
+  
+  template<typename T, std::size_t N>
+  using repeated_type_t = typename repeated_type<T, N>::type;
   
   //////////////////////////////////
   // Functional logical operators //
@@ -1190,7 +1243,7 @@ namespace quile {
       };
     return population<G>{G{f(g1, g0.data())}, G{f(g0, g1.data())}};
   }
-  
+
 } // namespace quile
 
 #endif // QUILE_H
