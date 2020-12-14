@@ -251,10 +251,10 @@ namespace quile {
   using domain = std::array<range<T>, N>;
   
   template<typename T>
-  struct is_domain : std::false {};
+  struct is_domain : std::false_type {};
   
   template<typename T, std::size_t N>
-  struct is_domain<domain<T, N>> : std::true {};
+  struct is_domain<domain<T, N>> : std::true_type {};
   
   template<typename T>
   inline constexpr bool is_domain_v = is_domain<T>::value;
