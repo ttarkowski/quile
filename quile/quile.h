@@ -1202,6 +1202,59 @@ namespace quile {
       };
     return population<G>{G{f(g1, g0.data())}, G{f(g0, g1.data())}};
   }
+
+  ////////////////////////////////////////////////////
+  // Test functions for floating-point optimization //
+  ////////////////////////////////////////////////////
+  
+  namespace test_functions {
+    
+    template<std::floating_point T, std::size_t N>
+    using point = std::array<T, N>;
+
+    template<std::floating_point T, std::size_t N>
+    class test_function {
+    public:
+      using function = std::function<T(const point<T, N>&)>;
+      using domain_fn = std::function<domain<T, N>()>;
+      using point_fn = std::function<point<T, N>()>;
+      
+    public:
+      test_function(const std::string& name,
+                    const function& fn,
+                    const domain_fn& d,
+                    const point_fn& p_min)
+        : name_{name}, fn_{fn}, d_{d}, p_min_{p_min}
+      {}
+
+      std::string name() const { return name_; }
+      T operator()(const point<T, N>& p) const { return fn_(p); }
+      domain<T, N> function_domain() const { return d_(); }
+      point<T, N> p_min() const { return p_min_(); }
+      
+    private:
+      std::string name_;
+      function fn_;
+      domain_fn d_;
+      point_fn p_min_;
+    };
+    
+    // Implementation of test functions as reported in document with DOI number
+    // 10.1016/B978-0-12-405163-8.00008-9
+    
+    template<std::floating_point T>
+    const test_function<T, 2> Aluffi_Pentini
+      {"Aluffi-Pentini",
+       [](const point<T, 2>& p) {
+         return
+           ((.25 * p[0] * p[0] + .5 * p[0]) * p[0] + .1) * p[0]
+           + 0.5 * p[1] * p[1];
+       },
+       []() { return domain<T, 2>{range<T>{-10., 10.}, range<T>{-10., 10}}; },
+       []() { return point<T, 2>{-1.0465, 0.}; }
+      };
+
+  } // namespace test_functions
   
 } // namespace quile
 
