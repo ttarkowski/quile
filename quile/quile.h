@@ -1213,6 +1213,13 @@ namespace quile {
     using point = std::array<T, N>;
 
     template<std::floating_point T, std::size_t N>
+    point<T, N> uniform_point(T v) {
+      point<T, N> res{};
+      std::ranges::generate(res, [=]() -> T { return v; });
+      return res;
+    }
+    
+    template<std::floating_point T, std::size_t N>
     class test_function {
     public:
       using function = std::function<T(const point<T, N>&)>;
@@ -1239,20 +1246,114 @@ namespace quile {
       point_fn p_min_;
     };
     
-    // Implementation of test functions as reported in document with DOI number
-    // 10.1016/B978-0-12-405163-8.00008-9
-    
-    template<std::floating_point T>
-    const test_function<T, 2> Aluffi_Pentini
-      {"Aluffi-Pentini",
-       [](const point<T, 2>& p) {
-         return
-           ((.25 * p[0] * p[0] + .5 * p[0]) * p[0] + .1) * p[0]
-           + 0.5 * p[1] * p[1];
-       },
-       []() { return domain<T, 2>{range<T>{-10., 10.}, range<T>{-10., 10}}; },
-       []() { return point<T, 2>{-1.0465, 0.}; }
-      };
+    namespace unimodal {
+
+      namespace nonseparable {
+        
+        template<std::floating_point T>
+        const test_function<T, 2> Aluffi_Pentini
+          {"Aluffi-Pentini",
+           [](const point<T, 2>& p) {
+             return
+               ((.25 * p[0] * p[0] + .5 * p[0]) * p[0] + .1) * p[0]
+               + 0.5 * p[1] * p[1];
+           },
+           []() { return uniform_domain<T, 2>(range<T>{-10., 10.}); },
+           []() { return point<T, 2>{-1.0465, 0.}; }
+          };
+        
+        template<std::floating_point T>
+        const test_function<T, 2> Beale
+          {"Beale",
+           [](const point<T, 2>& p) {
+             return
+               std::pow(1.500 - p[0] - p[0] * p[1], 2.) +
+               std::pow(2.250 - p[0] - p[0] * p[1] * p[1], 2.) +
+               std::pow(2.625 - p[0] - p[0] * p[1] * p[1] * p[1], 2.);
+           },
+           []() { return uniform_domain<T, 2>(range<T>{-4.5, 4.5}); },
+           []() { return point<T, 2>{3., .5}; }
+          };
+        
+        template<std::floating_point T, std::size_t N>
+        const test_function<T, N> Brown
+          {"Brown",
+           [](const point<T, N>& p) {
+             T res = 0.;
+             for (std::size_t i = 0; i < N - 1; ++i) {
+               res +=
+                 std::pow(p[i    ] * p[i    ], p[i + 1] * p[i + 1] + 1.) +
+                 std::pow(p[i + 1] * p[i + 1], p[i    ] * p[i    ] + 1.);
+             }
+             return res;
+           },
+           []() { return uniform_domain<T, N>(range<T>{-1., 4.}); },
+           []() { return uniform_point<T, N>(0.); }
+          };
+        
+        template<std::floating_point T>
+        const test_function<T, 4> Colville
+          {"Colville",
+           [](const point<T, 4>& p) {
+             return 100. * std::pow(p[0] - p[1] * p[1], 2.)
+               + std::pow(1. - p[0], 2.)
+               + 90. * std::pow(p[3] - p[2] * p[2], 2.)
+               + std::pow(1. - p[2], 2.)
+               + 10.1 * std::pow(p[1] - 1., 2.)
+               + std::pow(p[3] - 1., 2.)
+               + 19.8 * (p[1] - 1.) * (p[3] - 1.);
+           },
+           []() { return uniform_domain<T, 4>(range<T>{-10., 10.}); },
+           []() { return uniform_point<T, 4>(1.); }
+          };
+        
+        template<std::floating_point T>
+        const test_function<T, 2> Matyas
+          {"Matyas",
+           [](const point<T, 2>& p) {
+             return .26 * (p[0] * p[0] + p[1] * p[1]) - .48 * p[0] * p[1];
+           },
+           []() { return uniform_domain<T, 2>(range<T>{-10., 10.}); },
+           []() { return uniform_point<T, 2>(0.); }
+          };
+        
+        template<std::floating_point T, std::size_t N>
+        const test_function<T, N> Rosenbrock
+          {"Rosenbrock",
+           [](const point<T, N>& p) {
+             T res = 0.;
+             for (std::size_t i = 0; i < N - 1; ++i) {
+               res +=
+                 100. * std::pow(p[i + 1] - p[i] * p[i], 2.) +
+                 std::pow(p[i] - 1., 2.);
+             }
+             return res;
+           },
+           []() { return uniform_domain<T>(range<T>{-30., 30.}); },
+           []() { return uniform_point<T, N>(1.); }
+          };
+        
+      } // namespace nonseparable
+
+      namespace separable {
+        
+        template<std::floating_point T>
+        const test_function<T, 2> Easom
+          {"Easom",
+           [](const point<T, 2>& p) {
+             return
+               - std::cos(p[0])
+               * std::cos(p[1])
+               * std::exp(- std::pow(p[0] - std::numbers::pi_v<T>, 2.)
+                          - std::pow(p[1] - std::numbers::pi_v<T>, 2.));
+           },
+           []() { return uniform_domain<T, 2>(range<T>{-100., 100}); },
+           []() { return uniform_point<T, 2>(std::numbers::pi_v<T>); }
+          };
+        
+      } // namespace separable
+
+    } // namespace unimodal
 
   } // namespace test_functions
   
