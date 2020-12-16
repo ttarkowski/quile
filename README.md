@@ -23,6 +23,7 @@ library origins from fictional language Neo-Quenya and means *color* as well.
 - Termination conditions: fixed number of iterations, based on maximum fitness
   improvement, fitness function treshold
 - Multiple thread calculations
+- Set of test functions for benchmark analysis of floating-point optimization
 
 ## Dependencies
 - Modern compiler with at least partial support of C++20 (library is known to
