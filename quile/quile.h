@@ -243,6 +243,16 @@ namespace quile {
   T random(const range<T>& r)
   { return uniform<T>(r.min(), r.max()); }
 
+  ////////////////////
+  // Simple algebra //
+  ////////////////////
+
+  template<typename T> requires std::floating_point<T> || std::integral<T>
+  T square(T x) { return x * x; }
+
+  template<typename T> requires std::floating_point<T> || std::integral<T>
+  T cube(T x) { return x * x * x; }
+
   ////////////
   // Domain //
   ////////////
@@ -276,6 +286,11 @@ namespace quile {
     domain<T, N> res{};
     std::generate_n(std::begin(res), N, [&]() { return r; });
     return res;
+  }
+
+  template<typename T, std::size_t N>
+  constexpr domain<T, N> uniform_domain(T lo, T hi) {
+    return uniform_domain<T, N>(range<T>{lo, hi});
   }
   
   template<typename T, std::size_t N>
@@ -387,7 +402,7 @@ namespace quile {
     static constexpr std::size_t size() { return N; }
     
     static constexpr const domain<type, size()> constraints()
-    { return uniform_domain<type, size()>(range<type>{M, M + N - 1}); }
+    { return uniform_domain<type, size()>(M, M + N - 1); }
     
     using chain_t = chain<type, size()>;
     
@@ -1211,7 +1226,15 @@ namespace quile {
     
     template<std::floating_point T, std::size_t N>
     using point = std::array<T, N>;
-
+    
+    template<std::floating_point T>
+    auto coordinates(const point<T, 2>& p)
+    { return std::tuple<T, T>{p[0], p[1]}; }
+    
+    template<std::floating_point T>
+    auto coordinates(const point<T, 3>& p)
+    { return std::tuple<T, T>{p[0], p[1], p[2]}; }
+    
     template<std::floating_point T, std::size_t N>
     point<T, N> uniform_point(T v) {
       point<T, N> res{};
@@ -1247,18 +1270,17 @@ namespace quile {
     };
     
     namespace unimodal {
-
+      
       namespace nonseparable {
         
         template<std::floating_point T>
         const test_function<T, 2> Aluffi_Pentini
           {"Aluffi-Pentini",
            [](const point<T, 2>& p) {
-             return
-               ((.25 * p[0] * p[0] + .5 * p[0]) * p[0] + .1) * p[0]
-               + 0.5 * p[1] * p[1];
+             const auto [x, y] = coordinates(p);
+             return ((.25 * x * x + .5 * x) * x + .1) * x + 0.5 * y * y;
            },
-           []() { return uniform_domain<T, 2>(range<T>{-10., 10.}); },
+           []() { return uniform_domain<T, 2>(-10., 10.); },
            []() { return point<T, 2>{-1.0465, 0.}; }
           };
         
@@ -1266,12 +1288,12 @@ namespace quile {
         const test_function<T, 2> Beale
           {"Beale",
            [](const point<T, 2>& p) {
-             return
-               std::pow(1.500 - p[0] - p[0] * p[1], 2.) +
-               std::pow(2.250 - p[0] - p[0] * p[1] * p[1], 2.) +
-               std::pow(2.625 - p[0] - p[0] * p[1] * p[1] * p[1], 2.);
+             const auto [x, y] = coordinates(p);
+             return square(1.500 - x - x * y)
+               + square(2.250 - x - x * y * y)
+               + square(2.625 - x - x * y * y * y);
            },
-           []() { return uniform_domain<T, 2>(range<T>{-4.5, 4.5}); },
+           []() { return uniform_domain<T, 2>(-4.5, 4.5); },
            []() { return point<T, 2>{3., .5}; }
           };
         
@@ -1282,12 +1304,12 @@ namespace quile {
              T res = 0.;
              for (std::size_t i = 0; i < N - 1; ++i) {
                res +=
-                 std::pow(p[i    ] * p[i    ], p[i + 1] * p[i + 1] + 1.) +
-                 std::pow(p[i + 1] * p[i + 1], p[i    ] * p[i    ] + 1.);
+                 std::pow(square(p[i]),     square(p[i + 1]) + 1.) +
+                 std::pow(square(p[i + 1]), square(p[i])     + 1.);
              }
              return res;
            },
-           []() { return uniform_domain<T, N>(range<T>{-1., 4.}); },
+           []() { return uniform_domain<T, N>(-1., 4.); },
            []() { return uniform_point<T, N>(0.); }
           };
         
@@ -1295,15 +1317,15 @@ namespace quile {
         const test_function<T, 4> Colville
           {"Colville",
            [](const point<T, 4>& p) {
-             return 100. * std::pow(p[0] - p[1] * p[1], 2.)
-               + std::pow(1. - p[0], 2.)
-               + 90. * std::pow(p[3] - p[2] * p[2], 2.)
-               + std::pow(1. - p[2], 2.)
-               + 10.1 * std::pow(p[1] - 1., 2.)
-               + std::pow(p[3] - 1., 2.)
+             return 100. * square(p[0] - square(p[1]))
+               + square(1. - p[0])
+               + 90. * square(p[3] - p[2] * p[2])
+               + square(1. - p[2])
+               + 10.1 * square(p[1] - 1.)
+               + square(p[3] - 1.)
                + 19.8 * (p[1] - 1.) * (p[3] - 1.);
            },
-           []() { return uniform_domain<T, 4>(range<T>{-10., 10.}); },
+           []() { return uniform_domain<T, 4>(-10., 10.); },
            []() { return uniform_point<T, 4>(1.); }
           };
         
@@ -1311,9 +1333,10 @@ namespace quile {
         const test_function<T, 2> Matyas
           {"Matyas",
            [](const point<T, 2>& p) {
-             return .26 * (p[0] * p[0] + p[1] * p[1]) - .48 * p[0] * p[1];
+             const auto [x, y] = coordinates(p);
+             return .26 * (x * x + y * y) - .48 * x * y;
            },
-           []() { return uniform_domain<T, 2>(range<T>{-10., 10.}); },
+           []() { return uniform_domain<T, 2>(-10., 10.); },
            []() { return uniform_point<T, 2>(0.); }
           };
         
@@ -1324,13 +1347,45 @@ namespace quile {
              T res = 0.;
              for (std::size_t i = 0; i < N - 1; ++i) {
                res +=
-                 100. * std::pow(p[i + 1] - p[i] * p[i], 2.) +
-                 std::pow(p[i] - 1., 2.);
+                 100. * square(p[i + 1] - square(p[i])) +
+                 square(p[i] - 1.);
              }
              return res;
            },
-           []() { return uniform_domain<T>(range<T>{-30., 30.}); },
+           []() { return uniform_domain<T, N>(-30., 30.); },
            []() { return uniform_point<T, N>(1.); }
+          };
+        
+        template<std::floating_point T, std::size_t N>
+        const test_function<T, N> Schwefel_1
+          {"Schwefel-1",
+           [](const point<T, N>& p) {
+             T res = 0.;
+             for (T sum = 0.; auto x : p) {
+               res += square(sum += x);
+             }
+             return res;
+           },
+           []() { return uniform_domain<T, N>(-100., 100.); },
+           []() { return uniform_point<T, N>(0.); }
+          };
+        
+        template<std::floating_point T, std::size_t N>
+        const test_function<T, N> Schwefel_2
+          {"Schwefel-2",
+           [](const point<T, N>& p) {
+             return
+               - std::transform_reduce(std::begin(p), std::end(p),
+                                       T{0.},
+                                       std::plus<T>{},
+                                       [](auto x) { return std::fabs(x); })
+               + std::transform_reduce(std::begin(p), std::end(p),
+                                       T{1.},
+                                       std::multiplies<T>{},
+                                       [](auto x) { return std::fabs(x); });
+           },
+           []() { return uniform_domain<T, N>(-10., 10.); },
+           []() { return uniform_point<T, N>(0.); }
           };
         
       } // namespace nonseparable
@@ -1341,19 +1396,229 @@ namespace quile {
         const test_function<T, 2> Easom
           {"Easom",
            [](const point<T, 2>& p) {
+             const auto [x, y] = coordinates(p);
              return
-               - std::cos(p[0])
-               * std::cos(p[1])
-               * std::exp(- std::pow(p[0] - std::numbers::pi_v<T>, 2.)
-                          - std::pow(p[1] - std::numbers::pi_v<T>, 2.));
+               - std::cos(x)
+               * std::cos(y)
+               * std::exp(- square(x - std::numbers::pi_v<T>)
+                          - square(y - std::numbers::pi_v<T>));
            },
-           []() { return uniform_domain<T, 2>(range<T>{-100., 100}); },
+           []() { return uniform_domain<T, 2>(-100., 100); },
            []() { return uniform_point<T, 2>(std::numbers::pi_v<T>); }
+          };
+
+        template<std::floating_point T, std::size_t N>
+        const test_function<T, N> step
+          {"step",
+           [](const point<T, N>& p) {
+             return
+               std::transform_reduce(std::begin(p), std::end(p),
+                                     T{0.},
+                                     std::plus<T>{},
+                                     [](auto x) {
+                                       return square(std::floor(x) + .5);
+                                     });
+           },
+           []() { return uniform_domain<T, N>(-100., 100.); },
+           []() { return uniform_point<T, N>(.5); }
+          };
+
+        template<std::floating_point T, std::size_t N>
+        const test_function<T, N> stepint
+          {"stepint",
+           [](const point<T, N>& p) {
+             return
+               std::transform_reduce(std::begin(p), std::end(p),
+                                     T{0.},
+                                     std::plus<T>{},
+                                     [](auto x) {
+                                       return std::floor(std::fabs(x));
+                                     });
+           },
+           []() { return uniform_domain<T, N>(-5.12, 5.12); },
+           []() { return uniform_point<T, N>(0.); }
+          };
+
+        template<std::floating_point T, std::size_t N>
+        const test_function<T, N> sphere
+          {"sphere",
+           [](const point<T, N>& p) {
+             return std::transform_reduce(std::begin(p), std::end(p),
+                                          T{0.}, std::plus<T>{}, square<T>);
+           },
+           []() { return uniform_domain<T, N>(0., 10.); },
+           []() { return uniform_point<T, N>(0.); }
           };
         
       } // namespace separable
 
     } // namespace unimodal
+
+    namespace multimodal {
+
+      namespace nonseparable {
+
+        template<std::floating_point T, std::size_t N>
+        const test_function<T, N> Ackley
+          {"Ackley",
+           [](const point<T, N>& p) {
+             T s0 = 0.;
+             T s1 = 0.;
+             for (auto x : p) {
+               s0 += square(x);
+               s1 += std::cos(2 * std::numbers::pi_v<T> * x);
+             }
+             return
+               -20. * std::exp(-.02 * std::sqrt(s0) / std::sqrt(N))
+               - std::exp(s1 / N)
+               + 20. + std::numbers::e_v<T>;
+           },
+           []() { return uniform_domain<T, N>(-35., 35.); },
+           []() { return uniform_point<T, N>(0.); }
+          };
+        
+        template<std::floating_point T>
+        const test_function<T, 2> Booth
+          {"Booth",
+           [](const point<T, 2>& p) {
+             const auto [x, y] = coordinates(p);
+             return square(x + 2. * y - 7.) + square(2. * x + y - 5.);
+           },
+           []() { return uniform_domain<T, 2>(-10., 10.); },
+           []() { return point<T, 2>{1., 3.}; }
+          };
+
+        template<std::floating_point T>
+        const test_function<T, 2> Bukin_2
+          {"Bukin-2",
+           [](const point<T, 2>& p) {
+             const auto [x, y] = coordinates(p);
+             return 100. * (y - .01 * square(x) + 1.) + .01 * square(x + 10.);
+           },
+           []() {
+             return domain<T, 2>{range<T>{-15., -5.}, range<T>{-3., 3.}};
+           },
+           []() { return point<T, 2>{-10., 0.}; }
+          };
+
+        template<std::floating_point T, std::size_t N>
+        const test_function<T, N> exponential
+          {"exponential",
+           [](const point<T, N>& p) {
+             return
+               -std::exp(-.5 *
+                         std::transform_reduce(std::begin(p), std::end(p),
+                                               T{0.},
+                                               std::plus<T>{}, square<T>));
+           },
+           []() { uniform_domain<T, N>(-1., 1.); },
+           []() { uniform_point<T, N>(0.); }
+          };
+
+        template<std::floating_point T>
+        const test_function<T, 2> Goldstein_Price
+          {"Goldstein-Price",
+           [](const point<T, 2>& p) {
+             const auto [x, y] = coordinates(p);
+             const auto [x2, y2] = std::tuple<T, T>{x * x, y * y};
+             const auto xy = x * y;
+             return
+               (1. +
+                square(x + y + 1.)
+                * (19. - 14. * x + 3. * x2 - 14. * y + 6. * xy + 3. * y2)) *
+               (30. +
+                square(2. * x - 3. * y)
+                * (18. - 32. * x + 12. * x2 + 48. * y - 36. * xy + 27. * y2));
+           },
+           []() { return uniform_domain<T, 2>(-2., 2.); },
+           []() { return point<T, 2>{0., -1.}; }
+          };
+
+        template<std::floating_point T>
+        const test_function<T, 2> Himmelblau
+          {"Himmelblau",
+           [](const point<T, 2>& p) {
+             const auto [x, y] = coordinates(p);
+             return square(x * x + y - 11.) + square(x + y * y - 7.);
+           },
+           []() { return uniform_domain<T, 2>(-5., 5.); },
+           []() { return point<T, 2>{3., 2.}; }
+          };
+
+        template<std::floating_point T>
+        const test_function<T, 2> Hosaki
+          {"Hosaki",
+           [](const point<T, 2>& p) {
+             const auto [x, y] = coordinates(p);
+             return (1. + x * (-8. + x * (7. + x * (-7. / 3. + x / 4.))))
+               * y * y * std::exp(-y);
+           },
+           []() { return uniform_domain<T, 2>(-10., 10.); },
+           []() { return point<T, 2>{4., 2.}; }
+          };
+
+        template<std::floating_point T>
+        const test_function<T, 2> Leon
+          {"Leon",
+           [](const point<T, 2>& p) {
+             const auto [x, y] = coordinates(p);
+             return 100. * square(y - x * x) + square(1. - x);
+           },
+           []() { return uniform_domain<T, 2>(-1.2, 1.2); },
+           []() { return point<T, 2>{1., 1.}; }
+          };
+
+        template<std::floating_point T>
+        const test_function<T, 2> Mexican_hat
+          {"Mexican hat",
+           [](const point<T, 2>& p) {
+             const auto [x, y] = coordinates(p);
+             const auto f
+               = [&, x, y]()
+                 { return .1 + std::sqrt(square(x - 4.) + square(y - 4.)); };
+             return -20. * std::sin(f()) / f();
+           },
+           []() { return uniform_domain<T, 2>(-10., 10.); },
+           []() { return uniform_point<T, 2>(4.); }
+          };
+
+        template<std::floating_point T>
+        const test_function<T, 4> Miele_Cantrell
+          {"Miele-Cantrell",
+           [](const point<T, 4>& p) {
+             return
+               std::pow(std::exp(-p[0]) - p[1], 4.)
+               + 100. * std::pow(p[1] - p[2], 6.)
+               + std::pow(std::tan(p[2] - p[3]), 4.)
+               + std::pow(p[0], 8.);
+           },
+           []() { return uniform_domain<T, 4>(-1., 1); },
+           []() { return point<T, 4>{0., 1., 1., 1.}; }
+          };
+        
+      }// namespace nonseparable
+      
+      namespace separable {
+
+        template<std::floating_point T, std::size_t N>
+        const test_function<T, N> Alpine
+          {"Alpine",
+           [](const point<T, N>& p) {
+             return std::
+               transform_reduce(std::begin(p), std::end(p),
+                                T{0.},
+                                std::plus<T>{},
+                                [](auto x) {
+                                  return std::fabs(x * std::sin(x) + .1 * x);
+                                });
+           },
+           []() { return uniform_domain<T, N>(-10., 10.); },
+           []() { return uniform_point<T, N>(0.); }
+          };
+        
+      } // namespace separable
+      
+    } // namespace multimodal
 
   } // namespace test_functions
   
