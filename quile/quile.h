@@ -243,16 +243,25 @@ namespace quile {
   T random(const range<T>& r)
   { return uniform<T>(r.min(), r.max()); }
 
-  ////////////////////
-  // Simple algebra //
-  ////////////////////
-
+  /////////////////////
+  // Some basic math //
+  /////////////////////
+  
   template<typename T> requires std::floating_point<T> || std::integral<T>
   T square(T x) { return x * x; }
 
   template<typename T> requires std::floating_point<T> || std::integral<T>
   T cube(T x) { return x * x * x; }
-
+  
+  template<std::floating_point T>
+  const pi = std::numbers::pi_v<T>;
+  
+  template<std::floating_point T>
+  const e = std::numbers::e_v<T>;
+  
+  template<std::floating_point T>
+  const ln2 = std::numbers::ln2_v<T>;
+  
   ////////////
   // Domain //
   ////////////
@@ -1398,13 +1407,11 @@ namespace quile {
            [](const point<T, 2>& p) {
              const auto [x, y] = coordinates(p);
              return
-               - std::cos(x)
-               * std::cos(y)
-               * std::exp(- square(x - std::numbers::pi_v<T>)
-                          - square(y - std::numbers::pi_v<T>));
+               - std::cos(x) * std::cos(y)
+               * std::exp(- square(x - pi<T>) - square(y - pi<T>));
            },
            []() { return uniform_domain<T, 2>(-100., 100); },
-           []() { return uniform_point<T, 2>(std::numbers::pi_v<T>); }
+           []() { return uniform_point<T, 2>(pi<T>); }
           };
 
         template<std::floating_point T, std::size_t N>
@@ -1466,12 +1473,12 @@ namespace quile {
              T s1 = 0.;
              for (auto x : p) {
                s0 += square(x);
-               s1 += std::cos(2 * std::numbers::pi_v<T> * x);
+               s1 += std::cos(2 * pi<T> * x);
              }
              return
                -20. * std::exp(-.02 * std::sqrt(s0) / std::sqrt(N))
                - std::exp(s1 / N)
-               + 20. + std::numbers::e_v<T>;
+               + 20. + e<T>;
            },
            []() { return uniform_domain<T, N>(-35., 35.); },
            []() { return uniform_point<T, N>(0.); }
