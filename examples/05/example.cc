@@ -1,3 +1,9 @@
+// Test functions for floating-point optimization
+// - representation: floating-point
+// - variation type: Gaussian mutation (fixed sigma), arithmetic recombination
+// - parents/surivor selection: roulette wheel selection
+// - termination condition: fitness function treshold/fixed number of iterations
+
 #include <cmath>
 #include <concepts>
 #include <iostream>
@@ -14,10 +20,34 @@ namespace {
   
   using type = double;
   const std::size_t dim = 2;
-
-  const test_function<double, 2> benchmark_functions[] =
+  
+  const test_function<double, dim> benchmark_functions[] =
     {
-     Aluffi_Pentini<type>
+     // Unimodal nonseparable
+     unimodal::nonseparable::Aluffi_Pentini<type>,
+     unimodal::nonseparable::Beale<type>,
+     unimodal::nonseparable::Brown<type, dim>,
+     unimodal::nonseparable::Matyas<type>,
+     unimodal::nonseparable::Rosenbrock<type, dim>,
+     unimodal::nonseparable::Schwefel_1<type, dim>,
+     unimodal::nonseparable::Schwefel_2<type, dim>,
+     // Unimodal separable
+     unimodal::separable::Easom<type>,
+     unimodal::separable::step<type, dim>,
+     unimodal::separable::stepint<type, dim>,
+     unimodal::separable::sphere<type, dim>,
+     // Multimodal nonseparable
+     multimodal::nonseparable::Ackley<type, dim>,
+     multimodal::nonseparable::Booth<type>,
+     multimodal::nonseparable::Bukin_2<type>,
+     multimodal::nonseparable::exponential<type, dim>,
+     multimodal::nonseparable::Goldstein_Price<type>,
+     multimodal::nonseparable::Himmelblau<type>,
+     multimodal::nonseparable::Hosaki<type>,
+     multimodal::nonseparable::Leon<type>,
+     multimodal::nonseparable::Mexican_hat<type>,
+     // Multimodal separable
+     multimodal::separable::Alpine<type, dim>
     };
   
   template<std::size_t I>
@@ -57,10 +87,11 @@ namespace {
 int main() {
   const std::size_t generation_sz = 100;
   const fitness eps = 1e-2;
-  const std::size_t max_generations = 100000;
+  const std::size_t max_generations = 200000;
   const std::size_t n = 5;
   static_loop<std::size_t, 0, std::size(benchmark_functions)>::
-    body([=](auto I) {
+    body([=](auto I)
+         {
            using G = benchmark_genotype<I>;
            const variation<G> v{Gaussian_mutation<G>(1e-2, 1. / dim),
                                 arithmetic_recombination<G>};
@@ -71,7 +102,7 @@ int main() {
              if (res) {
                std::cout << res << " " << std::flush;
              } else {
-               std::cout << "NA " << std::flush;
+               std::cout << "FAIL " << std::flush;
              }
            }
            std::cout << '\n';
