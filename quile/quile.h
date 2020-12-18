@@ -1518,8 +1518,8 @@ namespace quile {
                                                T{0.},
                                                std::plus<T>{}, square<T>));
            },
-           []() { uniform_domain<T, N>(-1., 1.); },
-           []() { uniform_point<T, N>(0.); }
+           []() { return uniform_domain<T, N>(-1., 1.); },
+           []() { return uniform_point<T, N>(0.); }
           };
 
         template<std::floating_point T>
