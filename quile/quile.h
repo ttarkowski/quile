@@ -254,13 +254,13 @@ namespace quile {
   T cube(T x) { return x * x * x; }
   
   template<std::floating_point T>
-  const pi = std::numbers::pi_v<T>;
+  const T pi = std::numbers::pi_v<T>;
   
   template<std::floating_point T>
-  const e = std::numbers::e_v<T>;
+  const T e = std::numbers::e_v<T>;
   
   template<std::floating_point T>
-  const ln2 = std::numbers::ln2_v<T>;
+  const T ln2 = std::numbers::ln2_v<T>;
   
   ////////////
   // Domain //
