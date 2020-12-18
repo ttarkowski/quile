@@ -557,6 +557,16 @@ namespace quile {
     return os;
   }
   
+  template<typename G> requires floating_point_chromosome<G>
+  std::ostream& operator<<(std::ostream& os, const G& g) {
+    const auto prec = std::numeric_limits<typename G::gene_t>::digits10;
+    for (std::size_t i = 0; i < G::size(); ++i) {
+      os << std::scientific << std::setprecision(prec)
+         << g.value(i) << (i + 1 < G::size()? " " : "");
+    }
+    return os;
+  }
+  
 } // namespace quile
 
 template<typename G> requires quile::chromosome<G>
