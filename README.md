@@ -70,3 +70,12 @@ Result: *PDF file showing chessboard with solution*
 Representation: *permutation*  
 Requires: *TeXLive with skak package and pdfcrop program*  
 Result: *PDF file showing chessboard with solution*
+
+## Benchmark analysis
+Example benchmark analysis program is located at examples/benchmark/ directory.
+It can be compiled and executed with following commands:
+    *g++ -Wall -Wextra -pedantic -O3 -std=c++20 -fconcepts -pthread -I../../
+    example.cc*
+    *./a.out*
+Please note that contrary to other examples there is no postprocessing procedure
+nor special requirements.
