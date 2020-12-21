@@ -90,7 +90,7 @@ examples/evenstar/ directory and requires additional software and data:
 
 The program can be compiled with example following comand:  
     *g++ -Wall -Wextra -pedantic -O3 -std=c++20 -fconcepts -pthread -I../../
-    main.cc src/*.cc -DFLAT=true -DCELL_ATOMS=10*
+    main.cc src/\*.cc -DFLAT=true -DCELL_ATOMS=10*
 Please note that -DFLAT parameter, describing whether nanowire is flat, can be
 either true or false and -DCELL_ATOMS, describing number of atoms in nanowire
 unit cell, can be integer value greater than 0. The program can be executed with
