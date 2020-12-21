@@ -79,3 +79,8 @@ It can be compiled and executed with following commands:
     *./a.out*  
 Please note that contrary to other examples there is no postprocessing procedure
 nor special requirements.
+
+## Known bugs
+- (Code readability) The code is autoformatted with specialized tool, but -
+unfortunately - not all new C++ features are supported with it and thus some
+code formatting bugs are present in main library file and/or examples.
