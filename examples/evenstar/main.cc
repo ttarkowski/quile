@@ -122,7 +122,7 @@ main()
 
   const std::size_t generation_sz{ 1000 };
   const std::size_t parents_sz{ 42 };
-  const auto tc = max_fitness_improvement_termination<G>(fd, 10, 0.05);
+  const auto tc = max_fitness_improvement_termination<G>(fd, 10, 0.005);
 
   const type sigma{ .02 };
   const variation<G> v{ Gaussian_mutation<G>(sigma, 1.),
