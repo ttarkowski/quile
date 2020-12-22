@@ -85,8 +85,9 @@ Evenstar is an example program from computational materials science domain and
 is devoted to crystal structure prediction of boron nanowires. It is located at
 examples/evenstar/ directory and requires additional software and data:  
 
-- Quantum ESPRESSO
-- B.pbe-n-kjpaw_psl.1.0.0.UPF pseudopotential file
+- Boost Graph Library (BGL) - compilation dependency
+- Quantum ESPRESSO - runtime dependency
+- B.pbe-n-kjpaw_psl.1.0.0.UPF pseudopotential file - runtime dependency
 
 The program can be compiled with example following comand:  
     *g++ -Wall -Wextra -pedantic -O3 -std=c++20 -fconcepts -pthread -I../../
