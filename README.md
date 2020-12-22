@@ -32,6 +32,9 @@ library origins from fictional language Neo-Quenya and means *color* as well.
 *Please note that code in examples/ directory might require some additional
 software.*
 
+## Tutorial and documentation
+Please see [Wiki](https://github.com/ttarkowski/quile/wiki).
+
 ## Examples
 The library is platform independent, but some postprocessing of example's data
 requires software specific for GNU/Linux. Hence, in order to follow the
