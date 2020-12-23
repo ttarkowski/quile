@@ -1118,6 +1118,9 @@ public:
     const auto cal = select_calculable(fs, true);
     const fitness min = *std::ranges::min_element(cal);
     const auto n = cal.size();
+    if (n == 0) {
+      throw std::invalid_argument{ "FPS bad arg." };
+    }
     const fitness delta = 1. / n;
     const fitness sum =
       std::accumulate(std::begin(cal), std::end(cal), fitness{ 0. }) - n * min +
