@@ -843,6 +843,7 @@ public:
 
   population<G> operator()(const G& g0, const G& g1) const
   {
+    QUILE_LOG("Variation: " << g0 << ", " << g1);
     population<G> res{};
     for (const auto& g : r_(g0, g1)) {
       res.push_back(m_(g).at(0));
@@ -917,6 +918,7 @@ evolution(const variation<G> v,
   generations<G> res{};
   const std::size_t generation_sz = first_generation.size();
   for (std::size_t i = 0; !tc(i, res); ++i) {
+    QUILE_LOG("Generation #" << i);
     const population<G> p{
       i == 0 ? first_generation
              : p2(generation_sz, res.back(), v(p1(parents_sz, res.back())))
