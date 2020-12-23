@@ -55,7 +55,7 @@
 #ifdef QUILE_ENABLE_LOGGING
 #define QUILE_LOG(x)                                                           \
   do {                                                                         \
-    std::cerr << "DEBUG: " << x << '\n';                                       \
+    std::cerr << "# Quile log: " << x << '\n';                                 \
   } while (0)
 #else
 #define QUILE_LOG(x)
