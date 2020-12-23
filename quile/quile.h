@@ -982,11 +982,12 @@ public:
 
   fitness operator()(const G& g) const
   {
-    QUILE_LOG("Fitness value for " << g);
     const auto it{ fitness_values_->find(g) };
-    return it != fitness_values_->end()
-             ? it->second
-             : ((*fitness_values_)[g] = function_(g));
+    const fitness res = it != fitness_values_->end()
+      ? it->second
+      : ((*fitness_values_)[g] = function_(g));
+    QUILE_LOG("Fitness value for [" << g << "]: " << res);
+    return res;
   }
 
   fitnesses operator()(const population<G>& p) const
