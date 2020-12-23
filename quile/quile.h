@@ -1209,6 +1209,7 @@ public:
 
   population<G> operator()(std::size_t lambda, const population<G>& p) const
   {
+    QUILE_LOG("Roulette wheel selection");
     const auto f = [&, c = cumulative_probabilities(spf_, p)]() -> G {
       return p.at(std::distance(
         c.begin(),
@@ -1232,6 +1233,7 @@ public:
 
   population<G> operator()(std::size_t lambda, const population<G>& p) const
   {
+    QUILE_LOG("Stochastic Universal Sampling");
     const auto a = cumulative_probabilities(spf_, p);
     auto r = uniform<double>(0., 1. / lambda);
 
