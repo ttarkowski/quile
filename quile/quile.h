@@ -983,10 +983,11 @@ public:
   fitness operator()(const G& g) const
   {
     const auto it{ fitness_values_->find(g) };
-    const fitness res = it != fitness_values_->end()
-                          ? it->second
-                          : ((*fitness_values_)[g] = function_(g));
-    QUILE_LOG("Fitness value for [" << g << "]: " << res);
+    const bool b = it != fitness_values_->end();
+    const fitness res = b ? it->second : ((*fitness_values_)[g] = function_(g));
+    QUILE_LOG("Fitness value for ["
+              << g << "]: " << res
+              << (b ? " (taken from database)" : " (calculated on demand)"));
     return res;
   }
 
