@@ -982,6 +982,7 @@ public:
 
   fitness operator()(const G& g) const
   {
+    QUILE_LOG("Fitness value for " << g);
     const auto it{ fitness_values_->find(g) };
     return it != fitness_values_->end()
              ? it->second
@@ -991,6 +992,7 @@ public:
   fitnesses operator()(const population<G>& p) const
   {
     if (thread_sz_ > 1 && p.size() > 1) {
+      QUILE_LOG("Fitness value calculations (multithreaded)");
       multithreaded_calculations(p);
     }
     fitnesses res{};
@@ -1171,6 +1173,7 @@ public:
 
   population<G> operator()(std::size_t lambda) const
   {
+    QUILE_LOG("Random population generation (multithreaded)");
     thread_pool tp{ thread_sz_ };
     std::vector<std::future<G>> v{};
     for (std::size_t i = 0; i < lambda; ++i) {
