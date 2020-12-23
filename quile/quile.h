@@ -992,10 +992,10 @@ public:
   fitnesses operator()(const population<G>& p) const
   {
     if (thread_sz_ > 1 && p.size() > 1) {
-      QUILE_LOG("Fitness value calculations (multithreaded)");
       multithreaded_calculations(p);
     }
     fitnesses res{};
+    QUILE_LOG("Fitness values for population of size " << p.size());
     std::ranges::transform(
       p, std::back_inserter(res), [this](const G& g) { return operator()(g); });
     return res;
@@ -1036,6 +1036,7 @@ private:
     thread_pool tp{ thread_sz_ };
     std::vector<std::future<type>> v{};
     for (const auto& x : uncalculated_fitnesses(p)) {
+      QUILE_LOG("Asynchronous fitness value calculations (multithreaded)");
       v.push_back(tp.async<type>(std::launch::async, [this, x]() {
         const fitness xf = this->function_(x);
         return type{ x, xf };
