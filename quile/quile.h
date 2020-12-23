@@ -52,7 +52,7 @@
 #include <utility>
 #include <vector>
 
-#ifdef ENABLE_LOGGING
+#ifdef QUILE_ENABLE_LOGGING
 #define LOG(x)                                                                 \
   do {                                                                         \
     std::cerr << "DEBUG: " << x << '\n';                                       \
