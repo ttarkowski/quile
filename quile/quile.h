@@ -52,6 +52,15 @@
 #include <utility>
 #include <vector>
 
+#ifdef ENABLE_LOGGING
+#define LOG(x)                                                                 \
+  do {                                                                         \
+    std::cerr << "DEBUG: " << x << '\n';                                       \
+  } while (0)
+#else
+#define LOG(x)
+#endif
+
 namespace quile {
 
 //////////////
