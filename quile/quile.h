@@ -53,12 +53,12 @@
 #include <vector>
 
 #ifdef QUILE_ENABLE_LOGGING
-#define LOG(x)                                                                 \
+#define QUILE_LOG(x)                                                           \
   do {                                                                         \
     std::cerr << "DEBUG: " << x << '\n';                                       \
   } while (0)
 #else
-#define LOG(x)
+#define QUILE_LOG(x)
 #endif
 
 namespace quile {
