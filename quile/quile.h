@@ -984,8 +984,8 @@ public:
   {
     const auto it{ fitness_values_->find(g) };
     const fitness res = it != fitness_values_->end()
-      ? it->second
-      : ((*fitness_values_)[g] = function_(g));
+                          ? it->second
+                          : ((*fitness_values_)[g] = function_(g));
     QUILE_LOG("Fitness value for [" << g << "]: " << res);
     return res;
   }
