@@ -135,7 +135,7 @@ main()
                             v, p0, p1, p2, tc, generation_sz, parents_sz)) {
     for (const auto& xx : x) {
       file << i << ' ' << xx << ' ' << std::scientific << std::setprecision(9)
-           << ff(xx) << ' ' << file_db<G>[xx] << '\n';
+           << fd(xx) << ' ' << file_db<G>[xx] << '\n';
     }
     ++i;
   }
