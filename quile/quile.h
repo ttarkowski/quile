@@ -1045,7 +1045,11 @@ private:
       }));
     }
     for (auto& x : v) {
-      fitness_values_->insert(x.get());
+      const auto p = x.get();
+      QUILE_LOG("Fitness value for ["
+                << p.first << "]: " << p.second
+                << " (calculated asynchronously on demand)");
+      fitness_values_->insert(p);
     }
   }
 
