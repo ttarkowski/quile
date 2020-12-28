@@ -36,7 +36,7 @@ struct pwx_position
 };
 
 inline double
-pwx_distance(const std::tuple<pwx_position, pwx_position> t)
+pwx_distance(const std::tuple<pwx_position, pwx_position>& t)
 {
   return std::get<0>(t).distance(std::get<1>(t));
 }
