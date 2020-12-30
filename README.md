@@ -43,8 +43,7 @@ instructions below, you will need GNU/Linux operating system.
 1. Directory change (please replace *nn* with example number)  
     *cd examples/nn*
 2. Code compilation  
-    *g++ -Wall -Wextra -pedantic -O3 -std=c++20 -fconcepts -pthread -I../../
-    example.cc*
+    *g++ -Wall -Wextra -pedantic -O3 -std=c++20 -pthread -I../../ example.cc*
 3. Program execution  
     *./a.out*
 4. Postprocessing (please see note below)  
@@ -77,8 +76,7 @@ Result: *PDF file showing chessboard with solution*
 ## Benchmark analysis
 Example benchmark analysis program is located at examples/benchmark/ directory.
 It can be compiled and executed with following commands:  
-    *g++ -Wall -Wextra -pedantic -O3 -std=c++20 -fconcepts -pthread -I../../
-    example.cc*  
+    *g++ -Wall -Wextra -pedantic -O3 -std=c++20 -pthread -I../../ example.cc*  
     *./a.out*  
 Please note that contrary to other examples there is no postprocessing procedure
 nor special requirements.
@@ -93,7 +91,7 @@ examples/evenstar/ directory and requires additional software and data:
 - B.pbe-n-kjpaw_psl.1.0.0.UPF pseudopotential file - runtime dependency
 
 The program can be compiled with example following comand:  
-    *g++ -Wall -Wextra -pedantic -O3 -std=c++20 -fconcepts -pthread -I../../
+    *g++ -Wall -Wextra -pedantic -O3 -std=c++20 -pthread -I../../
     main.cc src/\*.cc -DFLAT=true -DCELL_ATOMS=10*  
 Please note that -DFLAT parameter, describing whether nanowire is flat, can be
 either true or false and -DCELL_ATOMS, describing number of atoms in nanowire
