@@ -36,7 +36,7 @@ software.*
 Please see [tutorial.md](tutorial.md) file.
 
 ## Documentation
-(Under construction)
+Please see [documentation.md](documentation.md) file.
 
 ## Examples
 The library is platform independent, but some postprocessing of example's data
