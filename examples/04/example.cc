@@ -4,7 +4,7 @@
 // - representation: permutation for range [0, n - 1], n = 8
 // - variation type: swap, cut-and-crossfill recombination
 // - parents/surivor selection: stochastic universal sampling (SUS)
-// - termination condition: fitness function treshold
+// - termination condition: fitness function threshold
 
 #include <cassert>
 #include <cstddef>
@@ -76,7 +76,7 @@ main()
 
   const std::size_t generation_sz{ 20 };
   const std::size_t parents_sz{ 2 };
-  const auto tc = fitness_treshold_termination<G>(fd, 0., 0.01);
+  const auto tc = fitness_threshold_termination<G>(fd, 0., 0.01);
 
   const variation<G> v{ swap_mutation<G>, cut_n_crossfill<G> };
 

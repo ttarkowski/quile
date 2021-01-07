@@ -4,7 +4,7 @@
 // - representation: integer
 // - variation type: random reset, one-point crossover recombination
 // - parents/surivor selection: stochastic universal sampling (SUS)
-// - termination condition: fitness function treshold
+// - termination condition: fitness function threshold
 
 #include <cassert>
 #include <cstddef>
@@ -78,7 +78,7 @@ main()
 
   const std::size_t generation_sz{ 1000 };
   const std::size_t parents_sz{ 42 };
-  const auto tc = fitness_treshold_termination<G>(fd, 0., 0.01);
+  const auto tc = fitness_threshold_termination<G>(fd, 0., 0.01);
 
   const variation<G> v{ random_reset<G>(1. / n), one_point_xover<G> };
 

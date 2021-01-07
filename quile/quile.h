@@ -1352,12 +1352,12 @@ max_fitness_improvement_termination(const fitness_db<G>& ff,
 
 template<typename G>
 termination_condition_fn<G>
-fitness_treshold_termination(const fitness_db<G>& fd, fitness tr, fitness eps)
+fitness_threshold_termination(const fitness_db<G>& fd, fitness thr, fitness eps)
 {
   return [=](std::size_t, const generations<G>& gs) {
     return gs.empty() ? false
                       : std::ranges::any_of(gs.back(), [=, &fd](const G& g) {
-                          return std::fabs(fd(g) - tr) <= eps;
+                          return std::fabs(fd(g) - thr) <= eps;
                         });
   };
 }
