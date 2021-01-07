@@ -2,7 +2,8 @@
 // - representation: floating-point
 // - variation type: Gaussian mutation (fixed sigma), arithmetic recombination
 // - parents/surivor selection: roulette wheel selection
-// - termination condition: fitness function treshold/fixed number of iterations
+// - termination condition: fitness function threshold/fixed number of
+//   iterations
 
 #include <cmath>
 #include <concepts>
@@ -77,7 +78,7 @@ benchmark(const variation<benchmark_genotype<I>>& v,
   const auto p2 = adapter<G>(roulette_wheel_selection<G>{ fps });
   const std::size_t parents_sz{ 2 };
   const fitness tr = f(benchmark_functions[I].p_min());
-  const auto tc_1 = fitness_treshold_termination<G>(fd, tr, eps);
+  const auto tc_1 = fitness_threshold_termination<G>(fd, tr, eps);
   const auto tc_2 = max_iterations_termination<G>(max_generations);
   const auto tc = fn_or(tc_1, tc_2);
   evolution<G>(v, p0, p1, p2, tc, generation_sz, parents_sz, 1);
