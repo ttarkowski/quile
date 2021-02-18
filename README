@@ -23,8 +23,7 @@ Features
 • Limited set of variation operators:  Gaussian, swap and random reset mutation;
   arithmetic, one-point crossover and cut-and-crossfill recombination.
 • Selection probabilities calculations method: fitness proportional selection.
-• First generation can be generated  randomly using multiple thread calculations
-  or can be provided by the user.
+• First generation can be generated randomly or can be provided by the user.
 • Population selection  schemes: roulette wheel selection,  stochastic universal
   sampling (SUS), generational.
 • Fitness  function calculations:  database  of calculated  values, support  for
