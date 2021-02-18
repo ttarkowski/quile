@@ -73,7 +73,7 @@ benchmark(const variation<benchmark_genotype<I>>& v,
   const auto constraints = [](const G&) { return true; };
   const fitness_db<G> fd{ ff, constraints };
   const fitness_proportional_selection<G> fps{ fd };
-  const auto p0 = random_population<constraints, G>{};
+  const auto p0 = random_population<constraints, G>;
   const auto p1 = roulette_wheel_selection<G>{ fps };
   const auto p2 = adapter<G>(roulette_wheel_selection<G>{ fps });
   const std::size_t parents_sz{ 2 };

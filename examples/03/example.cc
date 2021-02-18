@@ -70,7 +70,7 @@ main()
   const fitness_proportional_selection<G> fps{ fd };
 
   // First generation creator
-  const auto p0 = random_population<constraints_satisfied<G>, G>{};
+  const auto p0 = random_population<constraints_satisfied<G>, G>;
   // Parents selection
   const auto p1 = stochastic_universal_sampling<G>{ fps };
   // Survivor selection

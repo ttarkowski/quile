@@ -271,9 +271,9 @@ random_from_uniform_distribution(T a, T b)
     return // Check whether b - a overflows [N4861, 26.6.8.2.2].
       a > 0. || b <= std::numeric_limits<T>::max() + a
         ? std::uniform_real_distribution<T>{ a, b }(generator) // [a, b)
-        : random_from_uniform_distribution(false, true)
-            ? random_from_uniform_distribution<T>(a, std::midpoint(a, b))
-            : random_from_uniform_distribution<T>(std::midpoint(a, b), b);
+      : random_from_uniform_distribution(false, true)
+        ? random_from_uniform_distribution<T>(a, std::midpoint(a, b))
+        : random_from_uniform_distribution<T>(std::midpoint(a, b), b);
   } else if constexpr (std::is_same_v<T, bool>) {
     return a == b ? a : std::bernoulli_distribution{ 0.5 }(generator);
   } else { // [a, b]
@@ -886,10 +886,10 @@ stochastic_recombination(const recombination_fn<G>& r, probability p)
 {
   return [=](const G& g0, const G& g1) {
     const auto tmp = r(g0, g1);
-    return success(p) ? tmp
-                      : tmp.size() == 2 ? population<G>{ g0, g1 }
-                                        : success(.5) ? population<G>{ g0 }
-                                                      : population<G>{ g1 };
+    return success(p)        ? tmp
+           : tmp.size() == 2 ? population<G>{ g0, g1 }
+           : success(.5)     ? population<G>{ g0 }
+                             : population<G>{ g1 };
   };
 }
 
@@ -1172,39 +1172,18 @@ adapter(const populate_1_fn<G>& fn)
 }
 
 template<auto C, typename G>
-requires genotype_constraints<decltype(C), G>&&
-  chromosome<G> class random_population
+requires genotype_constraints<decltype(C), G>&& chromosome<G> population<G>
+random_population(std::size_t lambda)
 {
-public:
-  random_population() = default;
-
-  explicit random_population(unsigned int thread_sz)
-    : thread_sz_{ thread_sz }
-  {}
-
-  population<G> operator()(std::size_t lambda) const
-  {
-    QUILE_LOG("Random population generation (multithreaded)");
-    thread_pool tp{ thread_sz_ };
-    std::vector<std::future<G>> v{};
-    for (std::size_t i = 0; i < lambda; ++i) {
-      v.push_back(
-        tp.async<G>(std::launch::async, [g = G{}, this]() mutable -> G {
-          while (!C(g.random_reset()))
-            ;
-          return g;
-        }));
-    }
-    population<G> res{};
-    for (auto& x : v) {
-      res.push_back(x.get());
-    }
-    return res;
+  population<G> res{};
+  auto g = G{};
+  for (std::size_t i = 0; i < lambda; ++i) {
+    while (!C(g.random_reset()))
+      ;
+    res.push_back(g);
   }
-
-private:
-  unsigned int thread_sz_ = std::thread::hardware_concurrency();
-};
+  return res;
+}
 
 template<typename G>
 requires chromosome<G> class roulette_wheel_selection

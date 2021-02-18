@@ -146,7 +146,7 @@ current generation and offspring.
 
 Creation of first generation will be performed randomly:
 
-  const auto p0 = random_population<constraints_satisfied<G>, G>{};
+  const auto p0 = random_population<constraints_satisfied<G>, G>;
 
 Again,  like  in  case  of  fd  object,  we'll  skip  for  now  the  meaning  of
 constraints_satisfied<G>.
@@ -203,7 +203,7 @@ The complete example is as follows:
       = [](const G& g) { return -square(g.value(0)); };
     const fitness_db<G> fd{ ff, constraints_satisfied<G> };
     const fitness_proportional_selection<G> fps{ fd };
-    const auto p0 = random_population<constraints_satisfied<G>, G>{};
+    const auto p0 = random_population<constraints_satisfied<G>, G>;
     const auto p1 = stochastic_universal_sampling<G>{ fps };
     const auto p2 = adapter<G>(stochastic_universal_sampling<G>{ fps });
     const std::size_t generation_sz{ 10 };
