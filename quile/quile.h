@@ -1455,14 +1455,14 @@ template<std::floating_point T, std::size_t N>
 using point = std::array<T, N>;
 
 template<std::floating_point T>
-auto
+std::tuple<T, T>
 coordinates(const point<T, 2>& p)
 {
   return std::tuple<T, T>{ p[0], p[1] };
 }
 
 template<std::floating_point T>
-auto
+std::tuple<T, T, T>
 coordinates(const point<T, 3>& p)
 {
   return std::tuple<T, T, T>{ p[0], p[1], p[2] };
