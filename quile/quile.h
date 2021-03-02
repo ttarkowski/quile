@@ -1465,7 +1465,7 @@ template<std::floating_point T>
 auto
 coordinates(const point<T, 3>& p)
 {
-  return std::tuple<T, T>{ p[0], p[1], p[2] };
+  return std::tuple<T, T, T>{ p[0], p[1], p[2] };
 }
 
 template<std::floating_point T, std::size_t N>
