@@ -1517,7 +1517,7 @@ const test_function<T, 2> Aluffi_Pentini{
   "Aluffi-Pentini",
   [](const point<T, 2>& p) {
     const auto [x, y] = coordinates(p);
-    return ((.25 * x * x + .5 * x) * x + .1) * x + 0.5 * y * y;
+    return ((.25 * x * x - .5) * x + .1) * x + 0.5 * y * y;
   },
   []() { return uniform_domain<T, 2>(-10., 10.); },
   []() {
