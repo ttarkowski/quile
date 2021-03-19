@@ -17,9 +17,11 @@ using type = double;
 const std::size_t dim = 2;
 
 // Function
-const auto f = [](type x, type y) -> fitness {
+fitness
+f(type x, type y)
+{
   return std::cos(0.25 * std::hypot(x, y)) + e<type>;
-};
+}
 
 // Domain
 const domain<type, dim> d{ range{ -10., +10. }, range{ -10., +10. } };

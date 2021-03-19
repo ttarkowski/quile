@@ -17,9 +17,11 @@ using type = double;
 const std::size_t dim = 1;
 
 // Function
-const auto f = [](type x) -> fitness {
+fitness
+f(type x)
+{
   return std::sin(2 * x) * std::exp(-0.05 * x * x) + pi<fitness>;
-};
+}
 
 // Domain
 const domain<type, dim> d{ range{ -10., +10. } };
