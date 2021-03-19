@@ -14,9 +14,8 @@
 
 using namespace quile;
 
-const std::size_t n = 8;
-
 using type = int;
+const std::size_t n = 8;
 
 // Function
 fitness

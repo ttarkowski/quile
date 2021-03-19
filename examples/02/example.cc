@@ -9,28 +9,25 @@
 #include <cmath>
 #include <cstddef>
 #include <fstream>
-#include <numbers>
 #include <quile/quile.h>
 
 using namespace quile;
 
 using type = double;
+const std::size_t dim = 2;
 
 // Function
 const auto f = [](type x, type y) -> fitness {
-  const auto r = [](type x, type y) -> type {
-    return std::sqrt(x * x + y * y);
-  };
-  return std::cos(0.25 * r(x, y)) + std::numbers::e_v<fitness>;
+  return std::cos(0.25 * std::hypot(x, y)) + e<type>;
 };
 
 // Domain
-const domain<type, 2> d{ range{ -10., +10. }, range{ -10., +10. } };
+const domain<type, dim> d{ range{ -10., +10. }, range{ -10., +10. } };
 
 int
 main()
 {
-  using G = genotype<g_floating_point<type, 2, &d>>;
+  using G = genotype<g_floating_point<type, dim, &d>>;
   const fitness_function<G> ff = [](const G& g) {
     return f(g.value(0), g.value(1));
   };
