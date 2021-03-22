@@ -51,11 +51,5 @@ main()
   const variation<G> v{ Gaussian_mutation<G>(sigma, 1.) };
 
   std::ofstream file{ "evolution.dat" };
-  for (std::size_t i = 0; const auto& x : evolution<G>(
-                            v, p0, p1, p2, tc, generation_sz, parents_sz)) {
-    for (const auto& xx : x) {
-      file << i << ' ' << xx << '\n';
-    }
-    ++i;
-  }
+  print(file, evolution<G>(v, p0, p1, p2, tc, generation_sz, parents_sz));
 }

@@ -1060,6 +1060,26 @@ private:
   std::shared_ptr<database> fitness_values_ = std::make_shared<database>();
 };
 
+template<typename G>
+requires chromosome<G> void
+print(std::ostream& os,
+      const generations<G>& gs,
+      const fitness_db<G>* fd = nullptr)
+{
+  for (std ::size_t i = 0; const auto& x : gs) {
+    const auto prec = std::numeric_limits<fitness>::digits10;
+    for (const auto& xx : x) {
+      if (fd) {
+        os << i << ' ' << xx << ' ' << std::scientific
+           << std::setprecision(prec) << (*fd)(xx) << '\n';
+      } else {
+        os << i << ' ' << xx << '\n';
+      }
+    }
+    ++i;
+  }
+}
+
 /////////////////////////////
 // Selection probabilities //
 /////////////////////////////
