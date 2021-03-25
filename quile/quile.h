@@ -584,7 +584,7 @@ requires chromosome_representation<R> class genotype
 public:
   using chain_t = chain<typename R::type, R::size()>;
   using const_iterator = typename chain_t::const_iterator;
-  using gene_t = R::type;
+  using gene_t = typename R::type;
   using genotype_t = R;
   static constexpr std::size_t size() { return R::size(); }
 
@@ -1828,7 +1828,7 @@ const test_function<T, 2> Mexican_hat{
   "Mexican hat",
   [](const point<T, 2>& p) {
     const auto [x, y] = coordinates(p);
-    const auto f = [&, x, y]() {
+    const auto f = [&, x = x, y = y]() {
       return .1 + std::sqrt(square(x - 4.) + square(y - 4.));
     };
     return -20. * std::sin(f()) / f();
