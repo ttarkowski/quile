@@ -1379,6 +1379,26 @@ Gaussian_mutation(typename G::gene_t sigma, probability p)
 }
 
 template<typename G>
+  requires floating_point_chromosome<G> &&
+  (G::size() % 2 == 0) auto self_adaptive_mutation(typename G::gene_t a0,
+                                                   typename G::gene_t a1)
+{
+  return [=, n = G::size() / 2, c = G::constraints()](const G& g) {
+    using type = typename G::gene_t;
+    const type p0 = normal(0., 1.) * a0 / std::sqrt(2 * n);
+    const type t1 = a1 / std::sqrt(2 * std::sqrt(n));
+    G res{};
+    for (std::size_t i = 0; i < n; ++i) {
+      const type sigma =
+        c[i + n].clamp(g.value(i + n) * std::exp(p0 + t1 * normal(0., 1.)));
+      res.value(i, c[i].clamp(g.value(i) + sigma * normal(0., 1.)));
+      res.value(i + n, sigma);
+    }
+    return population<G>{ g };
+  };
+}
+
+template<typename G>
 requires uniform_chromosome<G> population<G>
 swap_mutation(const G& g)
 {
