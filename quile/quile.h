@@ -518,7 +518,7 @@ struct g_binary
 
   using chain_t = chain<type, size()>;
 
-  static bool valid(const chain<type, size()>& c) { return true; }
+  static bool valid(const chain<type, size()>&) { return true; }
   static chain_t default_chain() { return chain_min(constraints()); }
 };
 
