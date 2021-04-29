@@ -426,6 +426,20 @@ uniform(const domain<T, N>& d)
 }
 
 template<typename T, std::size_t N>
+constexpr domain<T, 2 * N>
+self_adaptive_variation_domain(const domain<T, N>& d, T lo)
+{
+  const T s = .5;
+  domain<T, 2 * N> res{};
+  for (std::size_t i = 0; i < N; ++i) {
+    res[i] = d[i];
+    res[i + N] =
+      range{ lo, s * std::max(std::fabs(d[i].min()), std::fabs(d[i].max())) };
+  }
+  return res;
+}
+
+template<typename T, std::size_t N>
 using chain = std::array<T, N>;
 
 template<typename T, std::size_t N>
