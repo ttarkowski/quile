@@ -1373,8 +1373,8 @@ template<typename G>
 termination_condition_fn<G>
 fitness_threshold_termination(const fitness_db<G>& fd, fitness thr, fitness eps)
 {
-  return threshold_termination(
-    [=](const G& g) { return std::fabs(fd(g) - thr) <= eps; });
+  const auto f = [=](const G& g) { return std::fabs(fd(g) - thr) <= eps; };
+  return threshold_termination<G, decltype(f)>(f);
 }
 
 /////////////////////////////////////////////////
