@@ -1525,7 +1525,7 @@ distance(const point<T, N>& p0, const point<T, N>& p1)
 {
   T res = .0;
   for (std::size_t i = 0; i < N; ++i) {
-    res += square(p0[i] - p1[i])
+    res += square(p0[i] - p1[i]);
   }
   return std::sqrt(res);
 }
