@@ -1519,6 +1519,17 @@ namespace test_functions {
 template<std::floating_point T, std::size_t N>
 using point = std::array<T, N>;
 
+template<std::floating_point T, std::size_t N>
+T
+distance(const point<T, N>& p0, const point<T, N>& p1)
+{
+  T res = .0;
+  for (std::size_t i = 0; i < N; ++i) {
+    res += square(p0[i] - p1[i])
+  }
+  return std::sqrt(res);
+}
+
 template<std::floating_point T>
 std::tuple<T, T>
 coordinates(const point<T, 2>& p)
