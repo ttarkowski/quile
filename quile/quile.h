@@ -1360,16 +1360,21 @@ max_fitness_improvement_termination(const fitness_db<G>& ff,
   };
 }
 
+template<typename G, typename F>
+requires std::predicate<F, G> termination_condition_fn<G>
+threshold_termination(const fitness_db<G>& fd, const F& thr)
+{
+  return [=](std::size_t, const generations<G>& gs) {
+    return gs.empty() ? false : std::ranges::any_of(gs.back(), thr);
+  };
+}
+
 template<typename G>
 termination_condition_fn<G>
 fitness_threshold_termination(const fitness_db<G>& fd, fitness thr, fitness eps)
 {
-  return [=](std::size_t, const generations<G>& gs) {
-    return gs.empty() ? false
-                      : std::ranges::any_of(gs.back(), [=, &fd](const G& g) {
-                          return std::fabs(fd(g) - thr) <= eps;
-                        });
-  };
+  return threshold_termination(
+    fd, [=](const G& g) { return std::fabs(fd(g) - thr) <= eps; });
 }
 
 /////////////////////////////////////////////////
