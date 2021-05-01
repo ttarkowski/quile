@@ -1472,13 +1472,15 @@ arithmetic_recombination(const G& g0, const G& g1)
 
 template<typename G>
 requires floating_point_chromosome<G> population<G>
-single_arithmetic_recombination(G g0, G g1)
+single_arithmetic_recombination(const& G g0, const G& g1)
 {
+  G res0{ g0 };
+  G res1{ g1 };
   const auto cp = uniform<std::size_t>(0, G::size() - 1);
-  const auto mid = std::midpoint(g0.value(cp), g1.value(cp));
-  g0.value(cp, mid);
-  g1.value(cp, mid);
-  return population<G>{ g0, g1 };
+  const auto mid = std::midpoint(res0.value(cp), res1.value(cp));
+  res0.value(cp, mid);
+  res1.value(cp, mid);
+  return population<G>{ res0, res1 };
 }
 
 template<typename G>
