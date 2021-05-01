@@ -1472,7 +1472,7 @@ arithmetic_recombination(const G& g0, const G& g1)
 
 template<typename G>
 requires floating_point_chromosome<G> population<G>
-single_arithmetic_recombination(const& G g0, const G& g1)
+single_arithmetic_recombination(const G& g0, const G& g1)
 {
   G res0{ g0 };
   G res1{ g1 };
