@@ -256,7 +256,7 @@ random_N(T mean, T standard_deviation)
 
 template<typename T>
 T
-random_from_uniform_distribution(T a, T b)
+random_U(T a, T b)
 {
   auto& generator{ random_engine() };
   if constexpr (std::is_floating_point_v<T>) {
@@ -264,29 +264,14 @@ random_from_uniform_distribution(T a, T b)
     return // Check whether b - a overflows [N4861, 26.6.8.2.2].
       a > 0. || b <= std::numeric_limits<T>::max() + a
         ? std::uniform_real_distribution<T>{ a, b }(generator) // [a, b)
-      : random_from_uniform_distribution(false, true)
-        ? random_from_uniform_distribution<T>(a, std::midpoint(a, b))
-        : random_from_uniform_distribution<T>(std::midpoint(a, b), b);
+      : random_U(false, true) ? random_U<T>(a, std::midpoint(a, b))
+                              : random_U<T>(std::midpoint(a, b), b);
   } else if constexpr (std::is_same_v<T, bool>) {
     return a == b ? a : std::bernoulli_distribution{ 0.5 }(generator);
   } else { // [a, b]
     assert(a <= b);
     return std::uniform_int_distribution<T>{ a, b }(generator);
   }
-}
-
-template<typename T>
-T
-uniform(T a, T b)
-{
-  return random_from_uniform_distribution(a, b);
-}
-
-template<typename T>
-T
-random(const range<T>& r)
-{
-  return uniform<T>(r.min(), r.max());
 }
 
 /////////////////////
@@ -651,7 +636,7 @@ public:
   genotype& random_reset(std::size_t i)
   {
     const auto& c = constraints();
-    chain_[i] = uniform<gene_t>(c[i].min(), c[i].max());
+    chain_[i] = random_U<gene_t>(c[i].min(), c[i].max());
     return *this;
   }
 
@@ -1236,7 +1221,7 @@ public:
     const auto f = [&, c = cumulative_probabilities(spf_, p)]() -> G {
       return p.at(std::distance(
         c.begin(),
-        std::lower_bound(c.begin(), c.end(), uniform<double>(0., 1.))));
+        std::lower_bound(c.begin(), c.end(), random_U<double>(0., 1.))));
     };
     return detail::generate<G>(lambda, f);
   }
@@ -1259,7 +1244,7 @@ public:
   {
     QUILE_LOG("Stochastic Universal Sampling");
     const auto a = cumulative_probabilities(spf_, p);
-    auto r = uniform<double>(0., 1. / lambda);
+    auto r = random_U<double>(0., 1. / lambda);
 
     population<G> res{};
     for (std::size_t i = 0, j = 0; j < lambda; ++i) {
@@ -1431,8 +1416,8 @@ swap_mutation(const G& g)
 {
   const std::size_t n = G::size();
   auto d = g.data();
-  std::swap(d[uniform<std::size_t>(0, n - 1)],
-            d[uniform<std::size_t>(0, n - 1)]);
+  std::swap(d[random_U<std::size_t>(0, n - 1)],
+            d[random_U<std::size_t>(0, n - 1)]);
   return population<G>{ G{ d } };
 }
 
@@ -1486,7 +1471,7 @@ single_arithmetic_recombination(const G& g0, const G& g1)
 {
   G res0{ g0 };
   G res1{ g1 };
-  const auto cp = uniform<std::size_t>(0, G::size() - 1);
+  const auto cp = random_U<std::size_t>(0, G::size() - 1);
   const auto mid = std::midpoint(res0.value(cp), res1.value(cp));
   res0.value(cp, mid);
   res1.value(cp, mid);
@@ -1502,7 +1487,7 @@ requires floating_point_chromosome<G> || integer_chromosome<G> ||
   auto d0 = g0.data();
   auto d1 = g1.data();
   const std::size_t n = G::size();
-  const auto cp = uniform<std::size_t>(0, n - 1);
+  const auto cp = random_U<std::size_t>(0, n - 1);
   for (std::size_t i = cp; i < n; ++i) {
     std::swap(d0[i], d1[i]);
   }
@@ -1513,8 +1498,8 @@ template<typename G>
 requires permutation_chromosome<G> population<G>
 cut_n_crossfill(const G& g0, const G& g1)
 {
-  const auto f = [cp = uniform<std::size_t>(1, G::size() - 1)](const G& g,
-                                                               auto d) {
+  const auto f = [cp = random_U<std::size_t>(1, G::size() - 1)](const G& g,
+                                                                auto d) {
     auto it = std::begin(d);
     std::advance(it, cp);
     for (auto x : g) {
