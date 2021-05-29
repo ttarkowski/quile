@@ -248,17 +248,10 @@ success(probability success_probability)
 
 template<std::floating_point T>
 T
-random_from_normal_distribution(T mean, T standard_deviation)
+random_N(T mean, T standard_deviation)
 {
   auto& generator{ random_engine() };
   return std::normal_distribution<T>{ mean, standard_deviation }(generator);
-}
-
-template<std::floating_point T>
-T
-normal(T mean, T standard_deviation)
-{
-  return random_from_normal_distribution<T>(mean, standard_deviation);
 }
 
 template<typename T>
@@ -301,15 +294,15 @@ random(const range<T>& r)
 /////////////////////
 
 template<typename T>
-  requires std::floating_point<T> || std::integral<T> T
-                                     square(T x)
+requires std::floating_point<T> || std::integral<T> T
+square(T x)
 {
   return x * x;
 }
 
 template<typename T>
-  requires std::floating_point<T> || std::integral<T> T
-                                     cube(T x)
+requires std::floating_point<T> || std::integral<T> T
+cube(T x)
 {
   return x * x * x;
 }
@@ -456,7 +449,8 @@ chain_min(const domain<T, N>& d)
 //////////////
 
 template<typename T, std::size_t N, const domain<T, N>* D>
-requires std::floating_point<T> struct g_floating_point
+requires std::floating_point<T>
+struct g_floating_point
 {
   static_assert(D != nullptr);
   static_assert(N > 0);
@@ -488,7 +482,7 @@ template<typename T>
 concept floating_point_representation = is_g_floating_point_v<T>;
 
 template<typename T, std::size_t N, const domain<T, N>* D>
-  requires std::integral<T> && (!std::is_same_v<T, bool>)struct g_integer
+requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_integer
 {
   static_assert(D != nullptr);
   static_assert(N > 0);
@@ -551,7 +545,7 @@ template<typename T>
 concept binary_representation = is_g_binary_v<T>;
 
 template<typename T, std::size_t N, T M>
-  requires std::integral<T> && (!std::is_same_v<T, bool>)struct g_permutation
+requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_permutation
 {
   using type = T;
   static constexpr std::size_t size() { return N; }
@@ -593,7 +587,8 @@ concept chromosome_representation =
   binary_representation<T> || permutation_representation<T>;
 
 template<typename R>
-requires chromosome_representation<R> class genotype
+requires chromosome_representation<R>
+class genotype
 {
 public:
   using chain_t = chain<typename R::type, R::size()>;
@@ -687,29 +682,29 @@ concept chromosome = is_genotype_v<G>;
 
 template<typename G>
 concept floating_point_chromosome =
-  chromosome<G>&& floating_point_representation<typename G::genotype_t>;
+  chromosome<G> && floating_point_representation<typename G::genotype_t>;
 
 template<typename G>
 concept integer_chromosome =
-  chromosome<G>&& integer_representation<typename G::genotype_t>;
+  chromosome<G> && integer_representation<typename G::genotype_t>;
 
 template<typename G>
 concept binary_chromosome =
-  chromosome<G>&& binary_representation<typename G::genotype_t>;
+  chromosome<G> && binary_representation<typename G::genotype_t>;
 
 template<typename G>
 concept permutation_chromosome =
-  chromosome<G>&& permutation_representation<typename G::genotype_t>;
+  chromosome<G> && permutation_representation<typename G::genotype_t>;
 
 template<typename G>
-concept uniform_chromosome = chromosome<G>&& G::uniform_domain;
+concept uniform_chromosome = chromosome<G> && G::uniform_domain;
 
 template<typename F, typename G>
-concept genotype_constraints = std::predicate<F, G>&& chromosome<G>;
+concept genotype_constraints = std::predicate<F, G> && chromosome<G>;
 
 template<typename G>
-requires chromosome<G> const auto constraints_satisfied =
-  [](const G&) { return true; };
+requires chromosome<G>
+const auto constraints_satisfied = [](const G&) { return true; };
 
 template<typename G>
 requires chromosome<G> std::ostream&
@@ -736,7 +731,8 @@ operator<<(std::ostream& os, const G& g)
 } // namespace quile
 
 template<typename G>
-requires quile::chromosome<G> struct std::hash<G>
+requires quile::chromosome<G>
+struct std::hash<G>
 {
   std::size_t operator()(const G& g) const noexcept
   {
@@ -756,7 +752,8 @@ namespace quile {
 ////////////////
 
 template<typename G>
-requires chromosome<G> using population = std::vector<G>;
+requires chromosome<G>
+using population = std::vector<G>;
 
 template<typename T>
 struct is_population : std::false_type
@@ -775,19 +772,22 @@ concept genetic_pool = is_population_v<G>;
 // Population generators/selectors
 // - first generation creator
 template<typename G>
-requires chromosome<G> using populate_0_fn =
-  std::function<population<G>(std::size_t)>;
+requires chromosome<G>
+using populate_0_fn = std::function<population<G>(std::size_t)>;
 // - parents selection
 template<typename G>
-requires chromosome<G> using populate_1_fn =
+requires chromosome<G>
+using populate_1_fn =
   std::function<population<G>(std::size_t, const population<G>&)>;
 // - survivor selection
 template<typename G>
-requires chromosome<G> using populate_2_fn = std::function<
+requires chromosome<G>
+using populate_2_fn = std::function<
   population<G>(std::size_t, const population<G>&, const population<G>&)>;
 
 template<typename G>
-requires chromosome<G> using generations = std::deque<population<G>>;
+requires chromosome<G>
+using generations = std::deque<population<G>>;
 
 //////////////////////////////
 // Mutation & recombination //
@@ -798,28 +798,26 @@ concept mutation = requires(M m, G g)
 {
   {
     m(g)
-  }
-  ->std::convertible_to<population<G>>;
+    } -> std::convertible_to<population<G>>;
 }
 &&chromosome<G>;
 
 template<typename G>
-requires chromosome<G> using mutation_fn =
-  std::function<population<G>(const G&)>;
+requires chromosome<G>
+using mutation_fn = std::function<population<G>(const G&)>;
 
 template<typename R, typename G>
 concept recombination = requires(R r, G g)
 {
   {
     r(g, g)
-  }
-  ->std::convertible_to<population<G>>;
+    } -> std::convertible_to<population<G>>;
 }
 &&chromosome<G>;
 
 template<typename G>
-requires chromosome<G> using recombination_fn =
-  std::function<population<G>(const G&, const G&)>;
+requires chromosome<G>
+using recombination_fn = std::function<population<G>(const G&, const G&)>;
 
 template<typename G>
 requires chromosome<G> population<G>
@@ -836,7 +834,8 @@ binary_identity(const G& g0, const G& g1)
 }
 
 template<typename G>
-requires chromosome<G> class variation
+requires chromosome<G>
+class variation
 {
 public:
   variation(const mutation_fn<G>& m, const recombination_fn<G>& r)
@@ -888,14 +887,16 @@ private:
 };
 
 template<typename G>
-requires chromosome<G> auto
+requires chromosome<G>
+auto
 stochastic_mutation(const mutation_fn<G>& m, probability p)
 {
   return [=](const G& g) { return success(p) ? m(g) : population<G>{ g }; };
 }
 
 template<typename G>
-requires chromosome<G> auto
+requires chromosome<G>
+auto
 stochastic_recombination(const recombination_fn<G>& r, probability p)
 {
   return [=](const G& g0, const G& g1) {
@@ -915,7 +916,8 @@ template<typename F, typename G>
 concept termination_condition = std::predicate<F, std::size_t, generations<G>>;
 
 template<typename G>
-requires chromosome<G> using termination_condition_fn =
+requires chromosome<G>
+using termination_condition_fn =
   std::function<bool(std::size_t, const generations<G>&)>;
 
 // TODO: Is there any way to reduce number of arguments of this function
@@ -969,13 +971,14 @@ using fitness = double;
 using fitnesses = std::vector<fitness>;
 
 template<typename G>
-requires chromosome<G> using fitness_function =
-  std::function<fitness(const G&)>;
+requires chromosome<G>
+using fitness_function = std::function<fitness(const G&)>;
 
 const fitness incalculable = -std::numeric_limits<fitness>::infinity();
 
 template<typename G>
-requires chromosome<G> class fitness_db
+requires chromosome<G>
+class fitness_db
 {
 private:
   using database = std::unordered_map<G, fitness>;
@@ -1075,7 +1078,8 @@ private:
 };
 
 template<typename G>
-requires chromosome<G> void
+requires chromosome<G>
+void
 print(std::ostream& os,
       const generations<G>& gs,
       const fitness_db<G>* fd = nullptr)
@@ -1101,7 +1105,8 @@ print(std::ostream& os,
 using selection_probabilities = std::vector<probability>;
 
 template<typename G>
-requires chromosome<G> using selection_probabilities_fn =
+requires chromosome<G>
+using selection_probabilities_fn =
   std::function<selection_probabilities(const population<G>&)>;
 
 template<typename G>
@@ -1203,7 +1208,7 @@ adapter(const populate_1_fn<G>& fn)
 }
 
 template<auto C, typename G>
-requires genotype_constraints<decltype(C), G>&& chromosome<G> population<G>
+requires genotype_constraints<decltype(C), G> && chromosome<G> population<G>
 random_population(std::size_t lambda)
 {
   population<G> res{};
@@ -1217,7 +1222,8 @@ random_population(std::size_t lambda)
 }
 
 template<typename G>
-requires chromosome<G> class roulette_wheel_selection
+requires chromosome<G>
+class roulette_wheel_selection
 {
 public:
   explicit roulette_wheel_selection(const selection_probabilities_fn<G>& spf)
@@ -1240,7 +1246,8 @@ private:
 };
 
 template<typename G>
-requires chromosome<G> class stochastic_universal_sampling
+requires chromosome<G>
+class stochastic_universal_sampling
 {
 public:
   explicit stochastic_universal_sampling(
@@ -1361,7 +1368,7 @@ max_fitness_improvement_termination(const fitness_db<G>& ff,
 }
 
 template<typename G, typename F>
-requires chromosome<G>&& std::predicate<F, G> termination_condition_fn<G>
+requires chromosome<G> && std::predicate<F, G> termination_condition_fn<G>
 threshold_termination(const F& thr)
 {
   return [=](std::size_t, const generations<G>& gs) {
@@ -1382,7 +1389,8 @@ fitness_threshold_termination(const fitness_db<G>& fd, fitness thr, fitness eps)
 /////////////////////////////////////////////////
 
 template<typename G>
-requires floating_point_chromosome<G> auto
+requires floating_point_chromosome<G>
+auto
 Gaussian_mutation(typename G::gene_t sigma, probability p)
 {
   return [=](const G& g) -> population<G> {
@@ -1390,7 +1398,7 @@ Gaussian_mutation(typename G::gene_t sigma, probability p)
     const auto c = G::constraints();
     for (std::size_t i = 0; i < G::size(); ++i) {
       if (success(p)) {
-        res.value(i, c[i].clamp(g.value(i) + sigma * normal(0., 1.)));
+        res.value(i, c[i].clamp(g.value(i) + sigma * random_N(0., 1.)));
       }
     }
     return population<G>{ res };
@@ -1398,19 +1406,19 @@ Gaussian_mutation(typename G::gene_t sigma, probability p)
 }
 
 template<typename G>
-  requires floating_point_chromosome<G> &&
+requires floating_point_chromosome<G> &&
   (G::size() % 2 == 0) auto self_adaptive_mutation(typename G::gene_t a0,
                                                    typename G::gene_t a1)
 {
   return [=, n = G::size() / 2, c = G::constraints()](const G& g) {
     using type = typename G::gene_t;
-    const type p0 = normal(0., 1.) * a0 / std::sqrt(2 * n);
+    const type p0 = random_N(0., 1.) * a0 / std::sqrt(2 * n);
     const type t1 = a1 / std::sqrt(2 * std::sqrt(n));
     G res{};
     for (std::size_t i = 0; i < n; ++i) {
       const type sigma =
-        c[i + n].clamp(g.value(i + n) * std::exp(p0 + t1 * normal(0., 1.)));
-      res.value(i, c[i].clamp(g.value(i) + sigma * normal(0., 1.)));
+        c[i + n].clamp(g.value(i + n) * std::exp(p0 + t1 * random_N(0., 1.)));
+      res.value(i, c[i].clamp(g.value(i) + sigma * random_N(0., 1.)));
       res.value(i + n, sigma);
     }
     return population<G>{ g };
@@ -1429,9 +1437,10 @@ swap_mutation(const G& g)
 }
 
 template<typename G>
-  requires floating_point_chromosome<G> || integer_chromosome<G> ||
-  binary_chromosome<G> auto
-  random_reset(probability p)
+requires floating_point_chromosome<G> || integer_chromosome<G> ||
+  binary_chromosome<G>
+auto
+random_reset(probability p)
 {
   return [=](const G& g) -> population<G> {
     G res{ g };
@@ -1445,7 +1454,8 @@ template<typename G>
 }
 
 template<typename G>
-requires binary_chromosome<G> auto
+requires binary_chromosome<G>
+auto
 bit_flipping(probability p)
 {
   return [=](const G& g) -> population<G> {
@@ -1484,9 +1494,10 @@ single_arithmetic_recombination(const G& g0, const G& g1)
 }
 
 template<typename G>
-  requires floating_point_chromosome<G> || integer_chromosome<G> ||
-  binary_chromosome<G> population<G>
-  one_point_xover(const G& g0, const G& g1)
+requires floating_point_chromosome<G> || integer_chromosome<G> ||
+  binary_chromosome<G>
+    population<G>
+    one_point_xover(const G& g0, const G& g1)
 {
   auto d0 = g0.data();
   auto d1 = g1.data();
@@ -1521,395 +1532,393 @@ cut_n_crossfill(const G& g0, const G& g1)
 // Test functions for floating-point optimization //
 ////////////////////////////////////////////////////
 
-namespace test_functions {
-
-template<std::floating_point T, std::size_t N>
-using point = std::array<T, N>;
-
-template<std::floating_point T, std::size_t N>
-T
-distance(const point<T, N>& p0, const point<T, N>& p1)
+namespace test_functions
 {
-  T res = .0;
-  for (std::size_t i = 0; i < N; ++i) {
-    res += square(p0[i] - p1[i]);
-  }
-  return std::sqrt(res);
-}
 
-template<std::floating_point T>
-std::tuple<T, T>
-coordinates(const point<T, 2>& p)
-{
-  return std::tuple<T, T>{ p[0], p[1] };
-}
+  template<std::floating_point T, std::size_t N>
+  using point = std::array<T, N>;
 
-template<std::floating_point T>
-std::tuple<T, T, T>
-coordinates(const point<T, 3>& p)
-{
-  return std::tuple<T, T, T>{ p[0], p[1], p[2] };
-}
-
-template<std::floating_point T, std::size_t N>
-point<T, N>
-uniform_point(T v)
-{
-  point<T, N> res{};
-  std::ranges::generate(res, [=]() -> T { return v; });
-  return res;
-}
-
-template<std::floating_point T, std::size_t N>
-class test_function
-{
-public:
-  using function = std::function<T(const point<T, N>&)>;
-  using domain_fn = std::function<domain<T, N>()>;
-  using point_fn = std::function<point<T, N>()>;
-
-public:
-  test_function(const std::string& name,
-                const function& fn,
-                const domain_fn& d,
-                const point_fn& p_min)
-    : name_{ name }
-    , fn_{ fn }
-    , d_{ d }
-    , p_min_{ p_min }
-  {}
-
-  std::string name() const { return name_; }
-  T operator()(const point<T, N>& p) const { return fn_(p); }
-  domain<T, N> function_domain() const { return d_(); }
-  point<T, N> p_min() const { return p_min_(); }
-
-private:
-  std::string name_;
-  function fn_;
-  domain_fn d_;
-  point_fn p_min_;
-};
-
-template<std::floating_point T, std::size_t N>
-const test_function<T, N> Ackley{
-  "Ackley",
-  [](const point<T, N>& p) {
-    T s0 = 0.;
-    T s1 = 0.;
-    for (auto x : p) {
-      s0 += square(x);
-      s1 += std::cos(2 * pi<T> * x);
+  template<std::floating_point T, std::size_t N>
+  T distance(const point<T, N>& p0, const point<T, N>& p1)
+  {
+    T res = .0;
+    for (std::size_t i = 0; i < N; ++i) {
+      res += square(p0[i] - p1[i]);
     }
-    return -20. * std::exp(-.02 * std::sqrt(s0) / std::sqrt(N)) -
-           std::exp(s1 / N) + 20. + e<T>;
-  },
-  []() { return uniform_domain<T, N>(-35., 35.); },
-  []() { return uniform_point<T, N>(0.); }
-};
-
-template<std::floating_point T, std::size_t N>
-const test_function<T, N> Alpine{
-  "Alpine",
-  [](const point<T, N>& p) {
-    return std::transform_reduce(
-      std::begin(p), std::end(p), T{ 0. }, std::plus<T>{}, [](auto x) {
-        return std::fabs(x * std::sin(x) + .1 * x);
-      });
-  },
-  []() { return uniform_domain<T, N>(-10., 10.); },
-  []() { return uniform_point<T, N>(0.); }
-};
-
-template<std::floating_point T>
-const test_function<T, 2> Aluffi_Pentini{
-  "Aluffi-Pentini",
-  [](const point<T, 2>& p) {
-    const auto [x, y] = coordinates(p);
-    return ((.25 * x * x - .5) * x + .1) * x + 0.5 * y * y;
-  },
-  []() { return uniform_domain<T, 2>(-10., 10.); },
-  []() {
-    return point<T, 2>{ -1.0465, 0. };
+    return std::sqrt(res);
   }
-};
 
-template<std::floating_point T>
-const test_function<T, 2> Beale{ "Beale",
-                                 [](const point<T, 2>& p) {
-                                   const auto [x, y] = coordinates(p);
-                                   return square(1.500 - x - x * y) +
-                                          square(2.250 - x - x * y * y) +
-                                          square(2.625 - x - x * y * y * y);
-                                 },
-                                 []() {
-                                   return uniform_domain<T, 2>(-4.5, 4.5);
-                                 },
-                                 []() {
-                                   return point<T, 2>{ 3., .5 };
-                                 } };
-
-template<std::floating_point T>
-const test_function<T, 2> Booth{
-  "Booth",
-  [](const point<T, 2>& p) {
-    const auto [x, y] = coordinates(p);
-    return square(x + 2. * y - 7.) + square(2. * x + y - 5.);
-  },
-  []() { return uniform_domain<T, 2>(-10., 10.); },
-  []() {
-    return point<T, 2>{ 1., 3. };
+  template<std::floating_point T>
+  std::tuple<T, T> coordinates(const point<T, 2>& p)
+  {
+    return std::tuple<T, T>{ p[0], p[1] };
   }
-};
 
-template<std::floating_point T, std::size_t N>
-const test_function<T, N> Brown{ "Brown",
-                                 [](const point<T, N>& p) {
-                                   T res = 0.;
-                                   for (std::size_t i = 0; i < N - 1; ++i) {
-                                     res += std::pow(square(p[i]),
-                                                     square(p[i + 1]) + 1.) +
-                                            std::pow(square(p[i + 1]),
-                                                     square(p[i]) + 1.);
-                                   }
-                                   return res;
-                                 },
-                                 []() { return uniform_domain<T, N>(-1., 4.); },
-                                 []() { return uniform_point<T, N>(0.); } };
-
-template<std::floating_point T>
-const test_function<T, 2> Bukin{
-  "Bukin",
-  [](const point<T, 2>& p) {
-    const auto [x, y] = coordinates(p);
-    return 100. * (y - .01 * square(x) + 1.) + .01 * square(x + 10.);
-  },
-  []() {
-    return domain<T, 2>{ range<T>{ -15., -5. }, range<T>{ -3., 3. } };
-  },
-  []() {
-    return point<T, 2>{ -10., 0. };
+  template<std::floating_point T>
+  std::tuple<T, T, T> coordinates(const point<T, 3>& p)
+  {
+    return std::tuple<T, T, T>{ p[0], p[1], p[2] };
   }
-};
 
-template<std::floating_point T>
-const test_function<T, 4> Colville{
-  "Colville",
-  [](const point<T, 4>& p) {
-    return 100. * square(p[0] - square(p[1])) + square(1. - p[0]) +
-           90. * square(p[3] - p[2] * p[2]) + square(1. - p[2]) +
-           10.1 * square(p[1] - 1.) + square(p[3] - 1.) +
-           19.8 * (p[1] - 1.) * (p[3] - 1.);
-  },
-  []() { return uniform_domain<T, 4>(-10., 10.); },
-  []() { return uniform_point<T, 4>(1.); }
-};
-
-template<std::floating_point T>
-const test_function<T, 2> Easom{
-  "Easom",
-  [](const point<T, 2>& p) {
-    const auto [x, y] = coordinates(p);
-    return -std::cos(x) * std::cos(y) *
-           std::exp(-square(x - pi<T>) - square(y - pi<T>));
-  },
-  []() { return uniform_domain<T, 2>(-100., 100); },
-  []() { return uniform_point<T, 2>(pi<T>); }
-};
-
-template<std::floating_point T, std::size_t N>
-const test_function<T, N> exponential{
-  "exponential",
-  [](const point<T, N>& p) {
-    return -std::exp(
-      -.5 * std::transform_reduce(
-              std::begin(p), std::end(p), T{ 0. }, std::plus<T>{}, square<T>));
-  },
-  []() { return uniform_domain<T, N>(-1., 1.); },
-  []() { return uniform_point<T, N>(0.); }
-};
-
-template<std::floating_point T>
-const test_function<T, 2> Goldstein_Price{
-  "Goldstein-Price",
-  [](const point<T, 2>& p) {
-    const auto [x, y] = coordinates(p);
-    const auto [x2, y2] = std::tuple<T, T>{ x * x, y * y };
-    const auto xy = x * y;
-    return (1. + square(x + y + 1.) *
-                   (19. - 14. * x + 3. * x2 - 14. * y + 6. * xy + 3. * y2)) *
-           (30. + square(2. * x - 3. * y) *
-                    (18. - 32. * x + 12. * x2 + 48. * y - 36. * xy + 27. * y2));
-  },
-  []() { return uniform_domain<T, 2>(-2., 2.); },
-  []() {
-    return point<T, 2>{ 0., -1. };
-  }
-};
-
-template<std::floating_point T>
-const test_function<T, 2> Himmelblau{
-  "Himmelblau",
-  [](const point<T, 2>& p) {
-    const auto [x, y] = coordinates(p);
-    return square(x * x + y - 11.) + square(x + y * y - 7.);
-  },
-  []() { return uniform_domain<T, 2>(-5., 5.); },
-  []() {
-    return point<T, 2>{ 3., 2. };
-  }
-};
-
-template<std::floating_point T>
-const test_function<T, 2> Hosaki{
-  "Hosaki",
-  [](const point<T, 2>& p) {
-    const auto [x, y] = coordinates(p);
-    return (1. + x * (-8. + x * (7. + x * (-7. / 3. + x / 4.)))) * y * y *
-           std::exp(-y);
-  },
-  []() { return uniform_domain<T, 2>(-10., 10.); },
-  []() {
-    return point<T, 2>{ 4., 2. };
-  }
-};
-
-template<std::floating_point T>
-const test_function<T, 2> Leon{
-  "Leon",
-  [](const point<T, 2>& p) {
-    const auto [x, y] = coordinates(p);
-    return 100. * square(y - x * x) + square(1. - x);
-  },
-  []() { return uniform_domain<T, 2>(-1.2, 1.2); },
-  []() {
-    return point<T, 2>{ 1., 1. };
-  }
-};
-
-template<std::floating_point T>
-const test_function<T, 2> Matyas{ "Matyas",
-                                  [](const point<T, 2>& p) {
-                                    const auto [x, y] = coordinates(p);
-                                    return .26 * (x * x + y * y) - .48 * x * y;
-                                  },
-                                  []() {
-                                    return uniform_domain<T, 2>(-10., 10.);
-                                  },
-                                  []() { return uniform_point<T, 2>(0.); } };
-
-template<std::floating_point T>
-const test_function<T, 2> Mexican_hat{
-  "Mexican hat",
-  [](const point<T, 2>& p) {
-    const auto [x, y] = coordinates(p);
-    const auto f = [&, x = x, y = y]() {
-      return .1 + std::sqrt(square(x - 4.) + square(y - 4.));
-    };
-    return -20. * std::sin(f()) / f();
-  },
-  []() { return uniform_domain<T, 2>(-10., 10.); },
-  []() { return uniform_point<T, 2>(4.); }
-};
-
-template<std::floating_point T>
-const test_function<T, 4> Miele_Cantrell{
-  "Miele-Cantrell",
-  [](const point<T, 4>& p) {
-    return std::pow(std::exp(-p[0]) - p[1], 4.) +
-           100. * std::pow(p[1] - p[2], 6.) +
-           std::pow(std::tan(p[2] - p[3]), 4.) + std::pow(p[0], 8.);
-  },
-  []() { return uniform_domain<T, 4>(-1., 1); },
-  []() {
-    return point<T, 4>{ 0., 1., 1., 1. };
-  }
-};
-
-template<std::floating_point T, std::size_t N>
-const test_function<T, N> Rosenbrock{
-  "Rosenbrock",
-  [](const point<T, N>& p) {
-    T res = 0.;
-    for (std::size_t i = 0; i < N - 1; ++i) {
-      res += 100. * square(p[i + 1] - square(p[i])) + square(p[i] - 1.);
-    }
+  template<std::floating_point T, std::size_t N>
+  point<T, N> uniform_point(T v)
+  {
+    point<T, N> res{};
+    std::ranges::generate(res, [=]() -> T { return v; });
     return res;
-  },
-  []() { return uniform_domain<T, N>(-30., 30.); },
-  []() { return uniform_point<T, N>(1.); }
-};
+  }
 
-template<std::floating_point T, std::size_t N>
-const test_function<T, N> Schwefel_1{
-  "Schwefel-1",
-  [](const point<T, N>& p) {
-    T res = 0.;
-    for (T sum = 0.; auto x : p) {
-      res += square(sum += x);
+  template<std::floating_point T, std::size_t N>
+  class test_function
+  {
+  public:
+    using function = std::function<T(const point<T, N>&)>;
+    using domain_fn = std::function<domain<T, N>()>;
+    using point_fn = std::function<point<T, N>()>;
+
+  public:
+    test_function(const std::string& name,
+                  const function& fn,
+                  const domain_fn& d,
+                  const point_fn& p_min)
+      : name_{ name }
+      , fn_{ fn }
+      , d_{ d }
+      , p_min_{ p_min }
+    {}
+
+    std::string name() const { return name_; }
+    T operator()(const point<T, N>& p) const { return fn_(p); }
+    domain<T, N> function_domain() const { return d_(); }
+    point<T, N> p_min() const { return p_min_(); }
+
+  private:
+    std::string name_;
+    function fn_;
+    domain_fn d_;
+    point_fn p_min_;
+  };
+
+  template<std::floating_point T, std::size_t N>
+  const test_function<T, N> Ackley{
+    "Ackley",
+    [](const point<T, N>& p) {
+      T s0 = 0.;
+      T s1 = 0.;
+      for (auto x : p) {
+        s0 += square(x);
+        s1 += std::cos(2 * pi<T> * x);
+      }
+      return -20. * std::exp(-.02 * std::sqrt(s0) / std::sqrt(N)) -
+             std::exp(s1 / N) + 20. + e<T>;
+    },
+    []() { return uniform_domain<T, N>(-35., 35.); },
+    []() { return uniform_point<T, N>(0.); }
+  };
+
+  template<std::floating_point T, std::size_t N>
+  const test_function<T, N> Alpine{
+    "Alpine",
+    [](const point<T, N>& p) {
+      return std::transform_reduce(
+        std::begin(p), std::end(p), T{ 0. }, std::plus<T>{}, [](auto x) {
+          return std::fabs(x * std::sin(x) + .1 * x);
+        });
+    },
+    []() { return uniform_domain<T, N>(-10., 10.); },
+    []() { return uniform_point<T, N>(0.); }
+  };
+
+  template<std::floating_point T>
+  const test_function<T, 2> Aluffi_Pentini{
+    "Aluffi-Pentini",
+    [](const point<T, 2>& p) {
+      const auto [x, y] = coordinates(p);
+      return ((.25 * x * x - .5) * x + .1) * x + 0.5 * y * y;
+    },
+    []() { return uniform_domain<T, 2>(-10., 10.); },
+    []() {
+      return point<T, 2>{ -1.0465, 0. };
     }
-    return res;
-  },
-  []() { return uniform_domain<T, N>(-100., 100.); },
-  []() { return uniform_point<T, N>(0.); }
-};
+  };
 
-template<std::floating_point T, std::size_t N>
-const test_function<T, N> Schwefel_2{
-  "Schwefel-2",
-  [](const point<T, N>& p) {
-    return -std::transform_reduce(std::begin(p),
-                                  std::end(p),
-                                  T{ 0. },
-                                  std::plus<T>{},
-                                  [](auto x) { return std::fabs(x); }) +
-           std::transform_reduce(std::begin(p),
-                                 std::end(p),
-                                 T{ 1. },
-                                 std::multiplies<T>{},
-                                 [](auto x) { return std::fabs(x); });
-  },
-  []() { return uniform_domain<T, N>(-10., 10.); },
-  []() { return uniform_point<T, N>(0.); }
-};
+  template<std::floating_point T>
+  const test_function<T, 2> Beale{ "Beale",
+                                   [](const point<T, 2>& p) {
+                                     const auto [x, y] = coordinates(p);
+                                     return square(1.500 - x - x * y) +
+                                            square(2.250 - x - x * y * y) +
+                                            square(2.625 - x - x * y * y * y);
+                                   },
+                                   []() {
+                                     return uniform_domain<T, 2>(-4.5, 4.5);
+                                   },
+                                   []() {
+                                     return point<T, 2>{ 3., .5 };
+                                   } };
 
-template<std::floating_point T, std::size_t N>
-const test_function<T, N> sphere{
-  "sphere",
-  [](const point<T, N>& p) {
-    return std::transform_reduce(
-      std::begin(p), std::end(p), T{ 0. }, std::plus<T>{}, square<T>);
-  },
-  []() { return uniform_domain<T, N>(0., 10.); },
-  []() { return uniform_point<T, N>(0.); }
-};
+  template<std::floating_point T>
+  const test_function<T, 2> Booth{
+    "Booth",
+    [](const point<T, 2>& p) {
+      const auto [x, y] = coordinates(p);
+      return square(x + 2. * y - 7.) + square(2. * x + y - 5.);
+    },
+    []() { return uniform_domain<T, 2>(-10., 10.); },
+    []() {
+      return point<T, 2>{ 1., 3. };
+    }
+  };
 
-template<std::floating_point T, std::size_t N>
-const test_function<T, N> step{
-  "step",
-  [](const point<T, N>& p) {
-    return std::transform_reduce(
-      std::begin(p), std::end(p), T{ 0. }, std::plus<T>{}, [](auto x) {
-        return square(std::floor(x) + .5);
-      });
-  },
-  []() { return uniform_domain<T, N>(-100., 100.); },
-  []() { return uniform_point<T, N>(.5); }
-};
+  template<std::floating_point T, std::size_t N>
+  const test_function<T, N> Brown{
+    "Brown",
+    [](const point<T, N>& p) {
+      T res = 0.;
+      for (std::size_t i = 0; i < N - 1; ++i) {
+        res += std::pow(square(p[i]), square(p[i + 1]) + 1.) +
+               std::pow(square(p[i + 1]), square(p[i]) + 1.);
+      }
+      return res;
+    },
+    []() { return uniform_domain<T, N>(-1., 4.); },
+    []() { return uniform_point<T, N>(0.); }
+  };
 
-template<std::floating_point T, std::size_t N>
-const test_function<T, N> stepint{
-  "stepint",
-  [](const point<T, N>& p) {
-    return 25. +
-           std::transform_reduce(
-             std::begin(p), std::end(p), T{ 0. }, std::plus<T>{}, [](auto x) {
-               return std::floor(std::fabs(x));
-             });
-  },
-  []() { return uniform_domain<T, N>(-5.12, 5.12); },
-  []() { return uniform_point<T, N>(0.); }
-};
+  template<std::floating_point T>
+  const test_function<T, 2> Bukin{
+    "Bukin",
+    [](const point<T, 2>& p) {
+      const auto [x, y] = coordinates(p);
+      return 100. * (y - .01 * square(x) + 1.) + .01 * square(x + 10.);
+    },
+    []() {
+      return domain<T, 2>{ range<T>{ -15., -5. }, range<T>{ -3., 3. } };
+    },
+    []() {
+      return point<T, 2>{ -10., 0. };
+    }
+  };
+
+  template<std::floating_point T>
+  const test_function<T, 4> Colville{
+    "Colville",
+    [](const point<T, 4>& p) {
+      return 100. * square(p[0] - square(p[1])) + square(1. - p[0]) +
+             90. * square(p[3] - p[2] * p[2]) + square(1. - p[2]) +
+             10.1 * square(p[1] - 1.) + square(p[3] - 1.) +
+             19.8 * (p[1] - 1.) * (p[3] - 1.);
+    },
+    []() { return uniform_domain<T, 4>(-10., 10.); },
+    []() { return uniform_point<T, 4>(1.); }
+  };
+
+  template<std::floating_point T>
+  const test_function<T, 2> Easom{
+    "Easom",
+    [](const point<T, 2>& p) {
+      const auto [x, y] = coordinates(p);
+      return -std::cos(x) * std::cos(y) *
+             std::exp(-square(x - pi<T>) - square(y - pi<T>));
+    },
+    []() { return uniform_domain<T, 2>(-100., 100); },
+    []() { return uniform_point<T, 2>(pi<T>); }
+  };
+
+  template<std::floating_point T, std::size_t N>
+  const test_function<T, N> exponential{
+    "exponential",
+    [](const point<T, N>& p) {
+      return -std::exp(
+        -.5 *
+        std::transform_reduce(
+          std::begin(p), std::end(p), T{ 0. }, std::plus<T>{}, square<T>));
+    },
+    []() { return uniform_domain<T, N>(-1., 1.); },
+    []() { return uniform_point<T, N>(0.); }
+  };
+
+  template<std::floating_point T>
+  const test_function<T, 2> Goldstein_Price{
+    "Goldstein-Price",
+    [](const point<T, 2>& p) {
+      const auto [x, y] = coordinates(p);
+      const auto [x2, y2] = std::tuple<T, T>{ x * x, y * y };
+      const auto xy = x * y;
+      return (1. + square(x + y + 1.) *
+                     (19. - 14. * x + 3. * x2 - 14. * y + 6. * xy + 3. * y2)) *
+             (30. + square(2. * x - 3. * y) * (18. - 32. * x + 12. * x2 +
+                                               48. * y - 36. * xy + 27. * y2));
+    },
+    []() { return uniform_domain<T, 2>(-2., 2.); },
+    []() {
+      return point<T, 2>{ 0., -1. };
+    }
+  };
+
+  template<std::floating_point T>
+  const test_function<T, 2> Himmelblau{
+    "Himmelblau",
+    [](const point<T, 2>& p) {
+      const auto [x, y] = coordinates(p);
+      return square(x * x + y - 11.) + square(x + y * y - 7.);
+    },
+    []() { return uniform_domain<T, 2>(-5., 5.); },
+    []() {
+      return point<T, 2>{ 3., 2. };
+    }
+  };
+
+  template<std::floating_point T>
+  const test_function<T, 2> Hosaki{
+    "Hosaki",
+    [](const point<T, 2>& p) {
+      const auto [x, y] = coordinates(p);
+      return (1. + x * (-8. + x * (7. + x * (-7. / 3. + x / 4.)))) * y * y *
+             std::exp(-y);
+    },
+    []() { return uniform_domain<T, 2>(-10., 10.); },
+    []() {
+      return point<T, 2>{ 4., 2. };
+    }
+  };
+
+  template<std::floating_point T>
+  const test_function<T, 2> Leon{
+    "Leon",
+    [](const point<T, 2>& p) {
+      const auto [x, y] = coordinates(p);
+      return 100. * square(y - x * x) + square(1. - x);
+    },
+    []() { return uniform_domain<T, 2>(-1.2, 1.2); },
+    []() {
+      return point<T, 2>{ 1., 1. };
+    }
+  };
+
+  template<std::floating_point T>
+  const test_function<T, 2> Matyas{
+    "Matyas",
+    [](const point<T, 2>& p) {
+      const auto [x, y] = coordinates(p);
+      return .26 * (x * x + y * y) - .48 * x * y;
+    },
+    []() { return uniform_domain<T, 2>(-10., 10.); },
+    []() { return uniform_point<T, 2>(0.); }
+  };
+
+  template<std::floating_point T>
+  const test_function<T, 2> Mexican_hat{
+    "Mexican hat",
+    [](const point<T, 2>& p) {
+      const auto [x, y] = coordinates(p);
+      const auto f = [&, x = x, y = y]() {
+        return .1 + std::sqrt(square(x - 4.) + square(y - 4.));
+      };
+      return -20. * std::sin(f()) / f();
+    },
+    []() { return uniform_domain<T, 2>(-10., 10.); },
+    []() { return uniform_point<T, 2>(4.); }
+  };
+
+  template<std::floating_point T>
+  const test_function<T, 4> Miele_Cantrell{
+    "Miele-Cantrell",
+    [](const point<T, 4>& p) {
+      return std::pow(std::exp(-p[0]) - p[1], 4.) +
+             100. * std::pow(p[1] - p[2], 6.) +
+             std::pow(std::tan(p[2] - p[3]), 4.) + std::pow(p[0], 8.);
+    },
+    []() { return uniform_domain<T, 4>(-1., 1); },
+    []() {
+      return point<T, 4>{ 0., 1., 1., 1. };
+    }
+  };
+
+  template<std::floating_point T, std::size_t N>
+  const test_function<T, N> Rosenbrock{
+    "Rosenbrock",
+    [](const point<T, N>& p) {
+      T res = 0.;
+      for (std::size_t i = 0; i < N - 1; ++i) {
+        res += 100. * square(p[i + 1] - square(p[i])) + square(p[i] - 1.);
+      }
+      return res;
+    },
+    []() { return uniform_domain<T, N>(-30., 30.); },
+    []() { return uniform_point<T, N>(1.); }
+  };
+
+  template<std::floating_point T, std::size_t N>
+  const test_function<T, N> Schwefel_1{
+    "Schwefel-1",
+    [](const point<T, N>& p) {
+      T res = 0.;
+      for (T sum = 0.; auto x : p) {
+        res += square(sum += x);
+      }
+      return res;
+    },
+    []() { return uniform_domain<T, N>(-100., 100.); },
+    []() { return uniform_point<T, N>(0.); }
+  };
+
+  template<std::floating_point T, std::size_t N>
+  const test_function<T, N> Schwefel_2{
+    "Schwefel-2",
+    [](const point<T, N>& p) {
+      return -std::transform_reduce(std::begin(p),
+                                    std::end(p),
+                                    T{ 0. },
+                                    std::plus<T>{},
+                                    [](auto x) { return std::fabs(x); }) +
+             std::transform_reduce(std::begin(p),
+                                   std::end(p),
+                                   T{ 1. },
+                                   std::multiplies<T>{},
+                                   [](auto x) { return std::fabs(x); });
+    },
+    []() { return uniform_domain<T, N>(-10., 10.); },
+    []() { return uniform_point<T, N>(0.); }
+  };
+
+  template<std::floating_point T, std::size_t N>
+  const test_function<T, N> sphere{
+    "sphere",
+    [](const point<T, N>& p) {
+      return std::transform_reduce(
+        std::begin(p), std::end(p), T{ 0. }, std::plus<T>{}, square<T>);
+    },
+    []() { return uniform_domain<T, N>(0., 10.); },
+    []() { return uniform_point<T, N>(0.); }
+  };
+
+  template<std::floating_point T, std::size_t N>
+  const test_function<T, N> step{
+    "step",
+    [](const point<T, N>& p) {
+      return std::transform_reduce(
+        std::begin(p), std::end(p), T{ 0. }, std::plus<T>{}, [](auto x) {
+          return square(std::floor(x) + .5);
+        });
+    },
+    []() { return uniform_domain<T, N>(-100., 100.); },
+    []() { return uniform_point<T, N>(.5); }
+  };
+
+  template<std::floating_point T, std::size_t N>
+  const test_function<T, N> stepint{
+    "stepint",
+    [](const point<T, N>& p) {
+      return 25. +
+             std::transform_reduce(
+               std::begin(p), std::end(p), T{ 0. }, std::plus<T>{}, [](auto x) {
+                 return std::floor(std::fabs(x));
+               });
+    },
+    []() { return uniform_domain<T, N>(-5.12, 5.12); },
+    []() { return uniform_point<T, N>(0.); }
+  };
 
 } // namespace test_functions
 
