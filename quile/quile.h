@@ -260,12 +260,11 @@ random_U(T a, T b)
 {
   auto& generator{ random_engine() };
   if constexpr (std::is_floating_point_v<T>) {
+    // Note about possible overflow: [N4861, 26.6.8.2.2].
     assert(a < b);
-    return // Check whether b - a overflows [N4861, 26.6.8.2.2].
-      a > 0. || b <= std::numeric_limits<T>::max() + a
-        ? std::uniform_real_distribution<T>{ a, b }(generator) // [a, b)
-      : random_U(false, true) ? random_U<T>(a, std::midpoint(a, b))
-                              : random_U<T>(std::midpoint(a, b), b);
+    return std::uniform_real_distribution<T>{
+      a, std::nextafter(b, std::numeric_limits<T>::max())
+    }(generator); // [a, b]
   } else if constexpr (std::is_same_v<T, bool>) {
     return a == b ? a : std::bernoulli_distribution{ 0.5 }(generator);
   } else { // [a, b]
