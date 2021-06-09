@@ -27,20 +27,37 @@ using namespace evenstar;
 
 namespace {
 
-template<typename G>
-requires floating_point_chromosome<G> std::unordered_map<G, std::string> file_db
-{};
-
-std::mutex file_db_mutex{};
-
-template<typename G>
-requires floating_point_chromosome<G>
-void
-update_file_db(const G& g, const std::string& filename)
+template<typename Key, typename T>
+class thread_safe_unordered_map
 {
-  const std::lock_guard<std::mutex> lg{ file_db_mutex };
-  file_db<G>[g] = filename;
-}
+private:
+  using map_t = std::unordered_map<Key, T>;
+  static std::mutex mtx;
+
+public:
+  using iterator = typename map_t::iterator;
+  using value_type = typename map_t::value_type;
+
+public:
+  thread_safe_unordered_map() = default;
+
+  void insert_or_modify(const Key& key, const T& t)
+  {
+    const std::lock_guard<std::mutex> lg{ mtx };
+    m_[key] = t;
+  }
+
+  const T& at(const Key& key) const { return m_.at(key); }
+
+private:
+  map_t m_;
+};
+
+template<typename Key, typename T>
+std::mutex thread_safe_unordered_map<Key, T>::mtx{};
+
+template<typename G>
+thread_safe_unordered_map<G, std::string> file_db{};
 
 template<typename G>
 requires floating_point_chromosome<G>
@@ -51,7 +68,7 @@ input_file(const std::string& filename,
            bool flat)
 {
   const int k_points = 8;
-  update_file_db<G>(g, filename);
+  file_db<G>.insert_or_modify(g, filename);
   std::ofstream file{ filename };
   const auto [p, h] = geometry<G>(g, atom.symbol, flat);
   const auto max_x = std::ranges::max_element(p, {}, &pwx_position::x)->x;
@@ -119,7 +136,7 @@ main()
                             v, p0, p1, p2, tc, generation_sz, parents_sz)) {
     for (const auto& xx : x) {
       file << i << ' ' << xx << ' ' << std::scientific << std::setprecision(9)
-           << fd(xx) << ' ' << file_db<G>[xx] << '\n';
+           << fd(xx) << ' ' << file_db<G>.at(xx) << '\n';
     }
     ++i;
   }
