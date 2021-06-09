@@ -1,4 +1,0 @@
-#ifndef EVENSTAR_SRC_PWX_H
-#define EVENSTAR_SRC_PWX_H
-
-#endif // EVENSTAR_SRC_PWX_H
