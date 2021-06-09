@@ -1,9 +1,9 @@
 #include "nanowire.h"
-#include "pwx.h"
+#include "../../common/pwx.h"
 #include <algorithm>
 #include <iterator>
 
-evenstar::pwx_positions
+pwx_positions
 evenstar::adjust_positions(const pwx_positions& ps)
 {
   pwx_positions res{};

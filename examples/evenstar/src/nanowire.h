@@ -1,7 +1,7 @@
 #ifndef EVENSTAR_SRC_NANOWIRE_H
 #define EVENSTAR_SRC_NANOWIRE_H
 
-#include "pwx.h"
+#include "../../common/pwx.h"
 #include <algorithm>
 #include <boost/graph/adjacency_matrix.hpp>
 #include <boost/graph/connected_components.hpp>
@@ -18,7 +18,8 @@
 namespace evenstar {
 
 template<typename G>
-requires quile::floating_point_chromosome<G> constexpr std::size_t
+requires quile::floating_point_chromosome<G>
+constexpr std::size_t
 number_of_atoms(bool flat)
 {
   return flat ? (1 + G::size()) / 2 : 1 + G::size() / 3;
@@ -74,8 +75,8 @@ domain_buckled(const quile::range<T>& bond)
 } // namespace detail
 
 template<std::floating_point T, std::size_t N_A, bool Flat>
-requires(N_A > 0) quile::domain<T, genotype_size<N_A>(Flat)> construct_domain(
-  const quile::range<T>& bond)
+requires(N_A > 0) quile::domain < T, genotype_size<N_A>(Flat)
+> construct_domain(const quile::range<T>& bond)
 {
   if constexpr (Flat) {
     return detail::domain_flat<T, N_A>(bond);

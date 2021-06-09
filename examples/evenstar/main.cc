@@ -4,9 +4,9 @@
 // - parents/surivor selection: stochastic universal sampling (SUS)
 // - termination condition: based on maximum fitness improvement
 
+#include "../common/pwx.h"
 #include "../common/system.h"
 #include "src/nanowire.h"
-#include "src/pwx.h"
 #include <algorithm>
 #include <cassert>
 #include <cctype>
@@ -50,18 +50,19 @@ input_file(const std::string& filename,
            const pwx_atom& atom,
            bool flat)
 {
+  const int k_points = 8;
   update_file_db<G>(g, filename);
   std::ofstream file{ filename };
   const auto [p, h] = geometry<G>(g, atom.symbol, flat);
   const auto max_x = std::ranges::max_element(p, {}, &pwx_position::x)->x;
   const auto max_y = std::ranges::max_element(p, {}, &pwx_position::y)->y;
   const typename G::gene_t free_space = 10.;
-  file << pwx_control(filename)
-       << pwx_system(number_of_atoms<G>(flat), 1, 0., 1.e-2, 6.e+1)
+  file << pwx_control("scf", filename)
+       << pwx_system(0, number_of_atoms<G>(flat), 1, 0., 1.e-2, 6.e+1)
        << pwx_electrons(100, 7.e-1)
        << pwx_cell_parameters_diag(max_x + free_space, max_y + free_space, h)
        << pwx_atomic_species({ atom }) << pwx_atomic_positions(p)
-       << pwx_k_points(8);
+       << pwx_k_points(1, 1, k_points, 0, 0, 1);
 }
 
 using type = double;
