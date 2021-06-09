@@ -8,16 +8,11 @@
 #include "src/nanowire.h"
 #include "src/pwx.h"
 #include <algorithm>
-#include <boost/asio/io_context.hpp>
-#include <boost/process/async.hpp>
-#include <boost/process/child.hpp>
-#include <boost/process/io.hpp>
 #include <cassert>
 #include <cctype>
 #include <concepts>
 #include <cstddef>
 #include <fstream>
-#include <future>
 #include <iomanip>
 #include <ios>
 #include <mutex>
@@ -25,7 +20,6 @@
 #include <sstream>
 #include <stdexcept>
 #include <string>
-#include <tuple>
 #include <unordered_map>
 
 using namespace quile;
