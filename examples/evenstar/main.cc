@@ -4,6 +4,7 @@
 // - parents/surivor selection: stochastic universal sampling (SUS)
 // - termination condition: based on maximum fitness improvement
 
+#include "../common/system.h"
 #include "src/nanowire.h"
 #include "src/pwx.h"
 #include <algorithm>
@@ -32,29 +33,15 @@ using namespace evenstar;
 
 namespace {
 
-std::tuple<std::string, std::string>
-execute(const std::string& command)
-{
-  boost::asio::io_context ioc{};
-  std::future<std::string> out{};
-  std::future<std::string> err{};
-  boost::process::child c{ command.c_str(),
-                           boost::process::std_in.close(),
-                           boost::process::std_out > out,
-                           boost::process::std_err > err,
-                           ioc };
-  ioc.run();
-  return std::tuple<std::string, std::string>{ out.get(), err.get() };
-}
-
 template<typename G>
-requires floating_point_chromosome<G> std::unordered_map<G, std::string>
-  file_db{};
+requires floating_point_chromosome<G> std::unordered_map<G, std::string> file_db
+{};
 
 std::mutex file_db_mutex{};
 
 template<typename G>
-requires floating_point_chromosome<G> void
+requires floating_point_chromosome<G>
+void
 update_file_db(const G& g, const std::string& filename)
 {
   const std::lock_guard<std::mutex> lg{ file_db_mutex };
@@ -62,7 +49,8 @@ update_file_db(const G& g, const std::string& filename)
 }
 
 template<typename G>
-requires floating_point_chromosome<G> void
+requires floating_point_chromosome<G>
+void
 input_file(const std::string& filename,
            const G& g,
            const pwx_atom& atom,
@@ -95,8 +83,9 @@ using G = genotype<g_floating_point<type, std::size(d), &d>>;
 int
 main()
 {
-  const auto
-    cs = [=]<typename G> requires floating_point_chromosome<G>(const G& g)->bool
+  const auto cs = [=]<typename G>
+  requires floating_point_chromosome<G>(const G& g)
+  ->bool
   {
     const auto ps = geometry_pbc<G>(g, atom.symbol, flat);
     return atoms_not_too_close(ps, bond_range.min()) &&
