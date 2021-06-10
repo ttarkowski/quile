@@ -55,12 +55,10 @@ const pwx_atom atom{ "B", 10.811, "B.pbe-n-kjpaw_psl.1.0.0.UPF" };
 const auto d = construct_domain<type, cell_atoms, flat>(bond_range);
 using G = genotype<g_floating_point<type, std::size(d), &d>>;
 
-}
-
-int
-main()
+auto
+nanowire_condition()
 {
-  const auto cs = [=]<typename G>
+  return [=]<typename G>
   requires floating_point_chromosome<G>(const G& g)
   ->bool
   {
@@ -68,7 +66,14 @@ main()
     return atoms_not_too_close(ps, bond_range.min()) &&
            all_atoms_connected(ps, bond_range.max());
   };
+}
 
+}
+
+int
+main()
+{
+  const auto q = nanowire_condition();
   const auto ff = []<floating_point_chromosome G>(const G& g) -> fitness {
     const std::string input_filename{ pwx_unique_filename() };
     input_file<G>(input_filename, g, atom, flat);
@@ -76,10 +81,10 @@ main()
     return o == "Calculations failed.\n" ? incalculable : -std::stod(o);
   };
 
-  const fitness_db<G> fd{ ff, cs };
+  const fitness_db<G> fd{ ff, q };
   const fitness_proportional_selection<G> fps{ fd };
 
-  const auto p0 = random_population<cs, G>;
+  const auto p0 = random_population<q, G>;
   const auto p1 = stochastic_universal_sampling<G>{ fps };
   const auto p2 = adapter<G>(stochastic_universal_sampling<G>{ fps });
 
