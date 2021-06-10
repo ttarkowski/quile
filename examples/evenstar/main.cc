@@ -9,16 +9,11 @@
 #include "../common/ts_unordered_map.h"
 #include "src/nanowire.h"
 #include <algorithm>
-#include <cassert>
-#include <cctype>
-#include <concepts>
 #include <cstddef>
 #include <fstream>
 #include <iomanip>
 #include <ios>
 #include <quile/quile.h>
-#include <sstream>
-#include <stdexcept>
 #include <string>
 
 using namespace quile;
@@ -84,11 +79,8 @@ main()
   const fitness_db<G> fd{ ff, cs };
   const fitness_proportional_selection<G> fps{ fd };
 
-  // First generation creator
   const auto p0 = random_population<cs, G>;
-  // Parents selection
   const auto p1 = stochastic_universal_sampling<G>{ fps };
-  // Survivor selection
   const auto p2 = adapter<G>(stochastic_universal_sampling<G>{ fps });
 
   const std::size_t generation_sz{ 1000 };
