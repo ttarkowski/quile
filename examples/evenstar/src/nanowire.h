@@ -90,10 +90,11 @@ namespace detail {
 // Mystic Rose is a complete graph with vertices placed on the points of
 // a regular polygon. This function returns edges needed to construct this
 // graph, e.g. for (0, 1, 2) it returns ((0, 1), (0, 2), (1, 2)).
-template<typename T, template<typename> typename C>
-std::vector<std::tuple<T, T>>
-mystic_rose_edges(const C<T>& c)
+template<typename C>
+std::vector<std::tuple<typename C::value_type, typename C::value_type>>
+mystic_rose_edges(const C& c)
 {
+  using T = typename C::value_type;
   std::vector<std::tuple<T, T>> res{};
   for (std::size_t i = 0; const auto& x : c) {
     for (const auto& y : c | std::views::drop(++i)) {
