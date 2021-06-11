@@ -9,7 +9,7 @@ error_msg="Calculations failed."
 pw.x < $1 >& ${1}.out
 
 # Cleanup
-rm -rf results-${1}/
+rm -rf results_${1}/
 
 # Error message and exit in case of some calculations problems
 stop=`cat ${1}.out | grep "STOP" | wc -l`
