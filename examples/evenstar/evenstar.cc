@@ -24,13 +24,18 @@ namespace {
 template<typename G>
 thread_safe_unordered_map<G, std::string> file_db{};
 
+using type = double;
+const bool flat = FLAT;
+const std::size_t cell_atoms = CELL_ATOMS;
+const range<type> bond_range{ 1.54, 2.10 }; // Angstrom
+const pwx_atom atom{ "B", 10.811, "B.pbe-n-kjpaw_psl.1.0.0.UPF" };
+const auto d = construct_domain<type, cell_atoms, flat>(bond_range);
+using G = genotype<g_floating_point<type, std::size(d), &d>>;
+
 template<typename G>
 requires floating_point_chromosome<G>
 void
-input_file(const std::string& filename,
-           const G& g,
-           const pwx_atom& atom,
-           bool flat)
+input_file(const std::string& filename, const G& g)
 {
   const int k_points = 8;
   file_db<G>.insert_or_modify(g, filename);
@@ -46,14 +51,6 @@ input_file(const std::string& filename,
        << pwx_atomic_species({ atom }) << pwx_atomic_positions(p)
        << pwx_k_points(1, 1, k_points, 0, 0, 1);
 }
-
-using type = double;
-const bool flat = FLAT;
-const std::size_t cell_atoms = CELL_ATOMS;
-const range<type> bond_range{ 1.54, 2.10 }; // Angstrom
-const pwx_atom atom{ "B", 10.811, "B.pbe-n-kjpaw_psl.1.0.0.UPF" };
-const auto d = construct_domain<type, cell_atoms, flat>(bond_range);
-using G = genotype<g_floating_point<type, std::size(d), &d>>;
 
 template<quile::floating_point_chromosome G>
 bool
@@ -71,7 +68,7 @@ main()
 {
   const auto ff = []<floating_point_chromosome G>(const G& g) -> fitness {
     const std::string input_filename{ pwx_unique_filename() };
-    input_file<G>(input_filename, g, atom, flat);
+    input_file<G>(input_filename, g);
     const auto [o, e] = execute("/bin/bash calc.sh " + input_filename);
     return o == "Calculations failed.\n" ? incalculable : -std::stod(o);
   };
