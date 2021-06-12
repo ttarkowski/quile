@@ -64,7 +64,10 @@ std::string
 pwx_electrons(int electron_maxstep, double mixing_beta);
 
 std::string
-pwx_cell_parameters_triangle_60deg(double a, std::size_t m, std::size_t n);
+pwx_cell_parameters_triangle_60deg(double a,
+                                   std::size_t m,
+                                   std::size_t n,
+                                   double z);
 
 std::string
 pwx_cell_parameters_diag(double x, double y, double z);
