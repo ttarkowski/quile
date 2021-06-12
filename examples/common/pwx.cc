@@ -1,5 +1,6 @@
 #include "pwx.h"
 #include <atomic>
+#include <cstddef>
 #include <iomanip>
 #include <ios>
 #include <sstream>
@@ -65,6 +66,22 @@ pwx_electrons(int electron_maxstep, double mixing_beta)
       << "electron_maxstep = " << electron_maxstep << "\n"
       << "mixing_beta = " << pwx_scientific(mixing_beta) << "\n"
       << "/\n";
+  return oss.str();
+}
+
+std::string
+pwx_cell_parameters_triangle_60deg(double a,
+                                   std::size_t m,
+                                   std::size_t n,
+                                   double z)
+{
+  std::ostringstream oss{};
+  oss << "CELL_PARAMETERS angstrom\n"
+      << pwx_fixed(a * m) << " " << pwx_fixed(0) << " " << pwx_fixed(0) << "\n"
+      << pwx_fixed(a * n / 2.) << " " << pwx_fixed(a * n * std::sqrt(3) / 2.)
+      << " " << pwx_fixed(0) << "\n"
+      << pwx_fixed(0) << " " << pwx_fixed(0) << " " << pwx_fixed(z) << "\n"
+      << "\n";
   return oss.str();
 }
 
