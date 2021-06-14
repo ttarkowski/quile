@@ -9,6 +9,7 @@
 #include "../common/ts_unordered_map.h"
 #include "src/nanowire.h"
 #include <algorithm>
+#include <cassert>
 #include <cstddef>
 #include <fstream>
 #include <iomanip>
@@ -50,6 +51,7 @@ input_file(const std::string& filename, const G& g)
        << pwx_cell_parameters_diag(max_x + free_space, max_y + free_space, h)
        << pwx_atomic_species({ atom }) << pwx_atomic_positions(p)
        << pwx_k_points(1, 1, k_points, 0, 0, 1);
+  assert(number_of_atoms<G>(flat) == p.size());
 }
 
 template<quile::floating_point_chromosome G>
