@@ -1189,6 +1189,13 @@ rank(It first, It last, Compare comp = {})
   return res;
 }
 
+template<typename T, typename U>
+T
+id(U u)
+{
+  return u;
+}
+
 } // namespace detail
 
 inline auto
@@ -1196,7 +1203,10 @@ linear_ranking_selection(double s)
 {
   return [s](std::size_t mu, std::size_t j) -> probability {
     assert(mu > 0 && 1. < s && s <= 2. && j < mu);
-    return mu == 1 ? 1. : (2 - s) / mu + 2 * j * (s - 1) / (mu * (mu - 1));
+    const auto id = detail::id<probability, std::size_t>;
+    return mu == 1
+             ? 1.
+             : (2 - s) / id(mu) + 2 * id(j) * (s - 1) / (id(mu) * (id(mu) - 1));
   };
 }
 
@@ -1205,9 +1215,11 @@ exponential_ranking_selection(std::size_t mu, std::size_t j)
 {
   assert(mu > 0 && j < mu);
   const auto e = std::numbers::e_v<probability>;
+  const auto id = detail::id<probability, std::size_t>;
+  // Consider difference between -id(mu) and -mu for std::size_t mu.
   return mu == 1 ? 1.
-                 : (1. - std::exp(-j)) * (1. - e) /
-                     (mu * (1. - e) + e - std::exp(1. - mu));
+                 : (1. - std::exp(-id(j))) * (1. - e) /
+                     (id(mu) * (1. - e) + e - std::exp(1 - id(mu)));
 }
 
 template<typename G>
