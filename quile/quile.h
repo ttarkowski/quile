@@ -1163,6 +1163,90 @@ private:
   const fitness_db<G> ff_;
 };
 
+namespace detail {
+
+template<typename It>
+It
+advance_cpy(It it, std::size_t n)
+{
+  std::advance(it, n);
+  return it;
+}
+
+template<typename It, typename Compare = std::less<>>
+std::vector<std::size_t>
+rank(It first, It last, Compare comp = {})
+{
+  std::vector<std::size_t> v(std::distance(first, last), 0);
+  std::ranges::generate(v, [i = std::size_t{ 0 }]() mutable { return i++; });
+  std::ranges::stable_sort(v, [first, &comp](auto a, auto b) {
+    return comp(*advance_cpy(first, a), *advance_cpy(first, b));
+  });
+  std::vector<std::size_t> res(v.size(), 0);
+  for (std::size_t i = 0; auto x : v) {
+    res.at(x) = i++;
+  }
+  return res;
+}
+
+} // namespace detail
+
+inline auto
+linear_ranking_selection(double s)
+{
+  return [s](std::size_t mu, std::size_t j) -> probability {
+    assert(mu > 0 && 1. < s && s <= 2. && j < mu);
+    return mu == 1 ? 1. : (2 - s) / mu + 2 * j * (s - 1) / (mu * (mu - 1));
+  };
+}
+
+inline probability
+exponential_ranking_selection(std::size_t mu, std::size_t j)
+{
+  assert(mu > 0 && j < mu);
+  const auto e = std::numbers::e_v<probability>;
+  return mu == 1 ? 1.
+                 : (1. - std::exp(-j)) * (1. - e) /
+                     (mu * (1. - e) + e - std::exp(1. - mu));
+}
+
+template<typename G>
+class ranking_selection
+{
+private:
+  using probability_fn = std::function<probability(std::size_t, std::size_t)>;
+
+public:
+  explicit ranking_selection(const fitness_db<G>& ff, const probability_fn& pf)
+    : ff_{ ff }
+    , pf_{ pf }
+  {}
+
+  // RS with workarounds for populations containing genotypes which fitnesses
+  // cannot be calculated. Please note that there should be at least one
+  // genotype, which fitness can be calculated.
+  selection_probabilities operator()(const population<G>& p) const
+  {
+    const fitnesses fs{ ff_(p) };
+    auto r = detail::rank(
+      std::begin(p), std::end(p), [&](const auto& a, const auto& b) {
+        return ff_(a) < ff_(b);
+      });
+    const auto mu = select_calculable(fs, true).size();
+    const auto nq = p.size() - mu;
+    std::ranges::transform(r, std::begin(r), [=](auto x) { return x - nq; });
+    selection_probabilities res{};
+    std::ranges::transform(r, std::back_inserter(res), [=, this](auto j) {
+      return j < 0 ? 0. : pf_(mu, j);
+    });
+    return res;
+  }
+
+private:
+  const fitness_db<G> ff_;
+  const probability_fn pf_;
+};
+
 ////////////////////////////
 // Generators & selectors //
 ////////////////////////////
