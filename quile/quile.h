@@ -1229,7 +1229,7 @@ private:
   using probability_fn = std::function<probability(std::size_t, std::size_t)>;
 
 public:
-  explicit ranking_selection(const fitness_db<G>& ff, const probability_fn& pf)
+  ranking_selection(const fitness_db<G>& ff, const probability_fn& pf)
     : ff_{ ff }
     , pf_{ pf }
   {}
