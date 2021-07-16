@@ -1718,7 +1718,15 @@ namespace test_functions
     },
     []() { return uniform_domain<T, 2>(-10., 10.); },
     []() {
-      return point<T, 2>{ -1.0465, 0. };
+      return point<T, 2>{
+        [q = 0.1](int k) -> T {
+          return 2. * std::sqrt(3.) *
+                 std::cos(std::acos(-3. * std::sqrt(3.) * q / 2.) / 3. -
+                          2. * std::numbers::pi_v<T> * k / 3.) /
+                 3.;
+        }(2),
+        0.
+      };
     }
   };
 
