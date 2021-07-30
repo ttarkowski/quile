@@ -1731,21 +1731,6 @@ namespace test_functions
   };
 
   template<std::floating_point T>
-  const test_function<T, 2> Beale{ "Beale",
-                                   [](const point<T, 2>& p) {
-                                     const auto [x, y] = coordinates(p);
-                                     return square(1.500 - x - x * y) +
-                                            square(2.250 - x - x * y * y) +
-                                            square(2.625 - x - x * y * y * y);
-                                   },
-                                   []() {
-                                     return uniform_domain<T, 2>(-4.5, 4.5);
-                                   },
-                                   []() {
-                                     return point<T, 2>{ 3., .5 };
-                                   } };
-
-  template<std::floating_point T>
   const test_function<T, 2> Booth{
     "Booth",
     [](const point<T, 2>& p) {
@@ -1771,21 +1756,6 @@ namespace test_functions
     },
     []() { return uniform_domain<T, N>(-1., 4.); },
     []() { return uniform_point<T, N>(0.); }
-  };
-
-  template<std::floating_point T>
-  const test_function<T, 2> Bukin{
-    "Bukin",
-    [](const point<T, 2>& p) {
-      const auto [x, y] = coordinates(p);
-      return 100. * (y - .01 * square(x) + 1.) + .01 * square(x + 10.);
-    },
-    []() {
-      return domain<T, 2>{ range<T>{ -15., -5. }, range<T>{ -3., 3. } };
-    },
-    []() {
-      return point<T, 2>{ -10., 0. };
-    }
   };
 
   template<std::floating_point T>
