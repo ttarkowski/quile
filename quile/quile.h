@@ -1981,33 +1981,6 @@ namespace test_functions
     []() { return uniform_point<T, N>(0.); }
   };
 
-  template<std::floating_point T, std::size_t N>
-  const test_function<T, N> step{
-    "step",
-    [](const point<T, N>& p) {
-      return std::transform_reduce(
-        std::begin(p), std::end(p), T{ 0. }, std::plus<T>{}, [](auto x) {
-          return square(std::floor(x) + .5);
-        });
-    },
-    []() { return uniform_domain<T, N>(-100., 100.); },
-    []() { return uniform_point<T, N>(.5); }
-  };
-
-  template<std::floating_point T, std::size_t N>
-  const test_function<T, N> stepint{
-    "stepint",
-    [](const point<T, N>& p) {
-      return 25. +
-             std::transform_reduce(
-               std::begin(p), std::end(p), T{ 0. }, std::plus<T>{}, [](auto x) {
-                 return std::floor(std::fabs(x));
-               });
-    },
-    []() { return uniform_domain<T, N>(-5.12, 5.12); },
-    []() { return uniform_point<T, N>(0.); }
-  };
-
 } // namespace test_functions
 
 } // namespace quile
