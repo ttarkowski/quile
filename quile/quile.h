@@ -1908,8 +1908,8 @@ namespace test_functions
   };
 
   template<std::floating_point T, std::size_t N>
-  const test_function<T, N> Schwefel_1{
-    "Schwefel-1",
+  const test_function<T, N> Schwefel{
+    "Schwefel",
     [](const point<T, N>& p) {
       T res = 0.;
       for (T sum = 0.; auto x : p) {
@@ -1918,25 +1918,6 @@ namespace test_functions
       return res;
     },
     []() { return uniform_domain<T, N>(-100., 100.); },
-    []() { return uniform_point<T, N>(0.); }
-  };
-
-  template<std::floating_point T, std::size_t N>
-  const test_function<T, N> Schwefel_2{
-    "Schwefel-2",
-    [](const point<T, N>& p) {
-      return -std::transform_reduce(std::begin(p),
-                                    std::end(p),
-                                    T{ 0. },
-                                    std::plus<T>{},
-                                    [](auto x) { return std::fabs(x); }) +
-             std::transform_reduce(std::begin(p),
-                                   std::end(p),
-                                   T{ 1. },
-                                   std::multiplies<T>{},
-                                   [](auto x) { return std::fabs(x); });
-    },
-    []() { return uniform_domain<T, N>(-10., 10.); },
     []() { return uniform_point<T, N>(0.); }
   };
 
