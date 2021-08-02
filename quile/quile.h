@@ -1815,19 +1815,6 @@ namespace test_functions
   };
 
   template<std::floating_point T>
-  const test_function<T, 2> Himmelblau{
-    "Himmelblau",
-    [](const point<T, 2>& p) {
-      const auto [x, y] = coordinates(p);
-      return square(x * x + y - 11.) + square(x + y * y - 7.);
-    },
-    []() { return uniform_domain<T, 2>(-5., 5.); },
-    []() {
-      return point<T, 2>{ 3., 2. };
-    }
-  };
-
-  template<std::floating_point T>
   const test_function<T, 2> Hosaki{
     "Hosaki",
     [](const point<T, 2>& p) {
