@@ -1743,21 +1743,6 @@ namespace test_functions
     }
   };
 
-  template<std::floating_point T, std::size_t N>
-  const test_function<T, N> Brown{
-    "Brown",
-    [](const point<T, N>& p) {
-      T res = 0.;
-      for (std::size_t i = 0; i < N - 1; ++i) {
-        res += std::pow(square(p[i]), square(p[i + 1]) + 1.) +
-               std::pow(square(p[i + 1]), square(p[i]) + 1.);
-      }
-      return res;
-    },
-    []() { return uniform_domain<T, N>(-1., 4.); },
-    []() { return uniform_point<T, N>(0.); }
-  };
-
   template<std::floating_point T>
   const test_function<T, 4> Colville{
     "Colville",
