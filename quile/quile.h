@@ -1447,6 +1447,25 @@ max_fitness_improvement_termination(const fitness_db<G>& ff,
   };
 }
 
+template<typename G>
+termination_condition_fn<G>
+max_fitness_improvement_termination_2(const fitness_db<G>& ff,
+                                      std::size_t n,
+                                      fitness delta)
+{
+  return [=]([[maybe_unused]] std::size_t i, const generations<G>& gs) {
+    assert(i == gs.size() && delta >= .0);
+    if (gs.size() <= n) {
+      return false;
+    } else {
+      const fitnesses fs{ max(gs, ff) };
+      const fitness max_0 = *std::max_element(fs.begin(), fs.end() - n);
+      const fitness max_1 = *std::max_element(fs.end() - n, fs.end());
+      return max_1 <= max_0 + delta;
+    }
+  };
+}
+
 template<typename G, typename F>
 requires chromosome<G> && std::predicate<F, G> termination_condition_fn<G>
 threshold_termination(const F& thr)
