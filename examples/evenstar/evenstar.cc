@@ -1,6 +1,6 @@
 // Crystal structure prediction of boron nanowires
 // - representation: floating-point
-// - variation type: Gaussian mutation (fixed sigma), arithmetic recombination
+// - variation type: random-reset mutation, single arithmetic recombination
 // - parents/surivor selection: stochastic universal sampling (SUS)
 // - termination condition: based on maximum fitness improvement
 
@@ -63,6 +63,15 @@ nanowire_condition(const G& g)
          all_atoms_connected(ps, bond_range.max());
 }
 
+double
+convert_to_Ry(double energy_in_eV)
+{
+  // Rydberg constant times hc =    13.605 693 122 994 eV
+  //                             +/- 0.000 000 000 026 eV
+  const double hcR{ 13.605693122994 };
+  return energy_in_eV / hcR; // result in Ry
+}
+
 }
 
 int
@@ -76,21 +85,20 @@ main()
   };
 
   const fitness_db<G> fd{ ff, nanowire_condition<G> };
-  const fitness_proportional_selection<G> fps{ fd };
+  const ranking_selection<G> rs{ fd, linear_ranking_selection(2.) };
 
   const auto p0 = random_population<nanowire_condition<G>, G>;
-  const auto p1 = stochastic_universal_sampling<G>{ fps };
-  const auto p2 = adapter<G>(stochastic_universal_sampling<G>{ fps });
+  const auto p1 = stochastic_universal_sampling<G>{ rs };
+  const auto p2 = adapter<G>(stochastic_universal_sampling<G>{ rs });
 
-  const std::size_t generation_sz{ 1000 };
-  const std::size_t parents_sz{ 42 };
-  const auto tc_1 = max_fitness_improvement_termination<G>(fd, 10, 0.05);
-  const auto tc_2 = max_iterations_termination<G>(1000);
-  const auto tc = fn_or(tc_1, tc_2);
+  const std::size_t generation_sz{ 100 };
+  const std::size_t parents_sz{ 64 };
+  const fitness dE{ convert_to_Ry(1e-3) * cell_atoms };   // 1 meV / atom
+  const auto tc = max_fitness_improvement_termination_2<G>(fd, 10, dE);
 
-  const type sigma{ .02 };
-  const variation<G> v{ Gaussian_mutation<G>(sigma, 1.),
-                        arithmetic_recombination<G> };
+  const mutation_fn<G> mutation{ random_reset<G>(1. / d.size()) };
+  const recombination_fn<G> recombination{ single_arithmetic_recombination<G> };
+  const variation<G> v{ stochastic_mutation<G>(m, .5), r };
 
   std::ofstream file{ "evolution.dat" };
   for (std::size_t i = 0; const auto& x : evolution<G>(
