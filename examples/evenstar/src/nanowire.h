@@ -115,19 +115,6 @@ atoms_not_too_close(const pwx_positions& ps, T min_distance)
   });
 }
 
-// This function template checks if every atom has at least one neighbor.
-template<std::floating_point T>
-bool
-atoms_not_alone(const pwx_positions& ps, T max_distance)
-{
-  return std::ranges::all_of(ps, [&ps, max_distance](const auto& x) {
-    return std::ranges::any_of(ps | std::views::filter(x.different()),
-                               [&x, max_distance](const auto& y) {
-                                 return x.distance(y) <= max_distance;
-                               });
-  });
-}
-
 // This function template checks if all atoms are connected, i.e. form a wire.
 template<std::floating_point T>
 bool
