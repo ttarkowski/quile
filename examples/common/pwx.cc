@@ -6,6 +6,18 @@
 #include <sstream>
 #include <string>
 
+double
+pwx_distance_pbc(const std::tuple<pwx_position, pwx_position>& t,
+                 double x, double y, double z)
+{
+  pwx_position p{ std::get<1>(t) };
+  p.x += x;
+  p.y += y;
+  p.z += z;
+  return std::get<0>(t).distance(p);
+}
+
+
 std::string
 pwx_fixed(double d)
 {

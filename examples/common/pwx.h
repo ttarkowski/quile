@@ -39,6 +39,10 @@ pwx_distance(const std::tuple<pwx_position, pwx_position>& t)
   return std::get<0>(t).distance(std::get<1>(t));
 }
 
+double
+pwx_distance_pbc(const std::tuple<pwx_position, pwx_position>& t,
+		 double x, double y, double z);
+
 using pwx_atoms = std::vector<pwx_atom>;
 
 using pwx_positions = std::vector<pwx_position>;
