@@ -58,9 +58,9 @@ template<quile::floating_point_chromosome G>
 bool
 nanowire_condition(const G& g)
 {
-  const auto ps = geometry_pbc<G>(g, atom.symbol, flat);
-  return atoms_not_too_close(ps, bond_range.min()) &&
-         all_atoms_connected(ps, bond_range.max());
+  const auto [ps, h] = geometry<G>(g, atom.symbol, flat);
+  return atoms_not_too_close_pbc(ps, h, bond_range.min()) &&
+         all_atoms_connected_pbc(ps, h, bond_range.max());
 }
 
 double
