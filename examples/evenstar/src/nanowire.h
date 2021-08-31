@@ -108,18 +108,29 @@ mystic_rose_edges(const C& c)
 // This function template checks if all atoms are separated from each other.
 template<std::floating_point T>
 bool
-atoms_not_too_close(const pwx_positions& ps, T min_distance)
+atoms_not_too_close_pbc(const pwx_positions& ps, T h, T min_distance)
 {
-  return std::ranges::all_of(detail::mystic_rose_edges(ps), [=](const auto& t) {
-    return pwx_distance(t) > min_distance;
-  });
+  return std::ranges::all_of(
+           detail::mystic_rose_edges(ps),
+           [=](const auto& t) { return pwx_distance(t) >= min_distance; }) &&
+         std::ranges::all_of(detail::mystic_rose_edges(ps),
+                             [=](const auto& t) {
+                               return pwx_distance_pbc(t, 0., 0., h) >=
+                                      min_distance;
+                             }) &&
+         (h >= min_distance);
 }
 
 // This function template checks if all atoms are connected, i.e. form a wire.
 template<std::floating_point T>
 bool
-all_atoms_connected(const pwx_positions& ps, T max_distance)
+all_atoms_connected_pbc(pwx_positions ps, T h, T max_distance)
 {
+  const std::size_t n{ ps.size() };
+  for (std::size_t i = 0; i < n; ++i) {
+    ps.push_back(pwx_position{ ps[i].symbol, ps[i].x, ps[i].y, ps[i].z + h });
+  }
+  assert(ps.size() == 2 * n);
   boost::adjacency_matrix<boost::undirectedS> g{ ps.size() };
   std::vector<std::size_t> v(ps.size()); // Do not use {...} here!
   std::iota(v.begin(), v.end(), 0);
@@ -196,15 +207,6 @@ geometry(const G& g, const std::string& atom_symbol, bool flat)
 {
   return flat ? detail::geometry_flat<G>(g, atom_symbol)
               : detail::geometry_buckled<G>(g, atom_symbol);
-}
-
-template<typename G>
-requires quile::floating_point_chromosome<G> pwx_positions
-geometry_pbc(const G& g, const std::string& atom_symbol, bool flat)
-{
-  auto [ps, h] = geometry<G>(g, atom_symbol, flat);
-  ps.push_back(pwx_position{ ps[0].symbol, ps[0].x, ps[0].y, ps[0].z + h });
-  return ps;
 }
 
 } // namespace evenstar
