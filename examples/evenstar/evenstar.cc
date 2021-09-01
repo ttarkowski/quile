@@ -96,8 +96,8 @@ main()
   const fitness dE{ convert_to_Ry(1e-3) * cell_atoms };   // 1 meV / atom
   const auto tc = max_fitness_improvement_termination_2<G>(fd, 10, dE);
 
-  const mutation_fn<G> mutation{ random_reset<G>(1. / d.size()) };
-  const recombination_fn<G> recombination{ single_arithmetic_recombination<G> };
+  const mutation_fn<G> m{ random_reset<G>(1. / d.size()) };
+  const recombination_fn<G> r{ single_arithmetic_recombination<G> };
   const variation<G> v{ stochastic_mutation<G>(m, .5), r };
 
   std::ofstream file{ "evolution.dat" };
