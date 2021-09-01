@@ -1246,10 +1246,9 @@ public:
       });
     const auto mu = select_calculable(fs, true).size();
     const auto nq = p.size() - mu;
-    std::ranges::transform(r, std::begin(r), [=](auto x) { return x - nq; });
     selection_probabilities res{};
     std::ranges::transform(r, std::back_inserter(res), [=, this](auto j) {
-      return j < 0 ? 0. : pf_(mu, j);
+      return j < nq ? 0. : pf_(mu, j - nq);
     });
     return res;
   }
