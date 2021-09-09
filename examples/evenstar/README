@@ -6,7 +6,7 @@ nanowires. It requires additional software and data:
 • Quantum ESPRESSO — runtime dependency
 • B.pbe-n-kjpaw_psl.1.0.0.UPF pseudopotential — runtime dependency
 
-The program can be compiled with following example comand:
+The program can be compiled with following example command:
 
   g++ -Wall -Wextra -pedantic -O3 -std=c++20 -pthread -I../../ \
     evenstar.cc src/*.cc -DFLAT=true -DCELL_ATOMS=5 -o evenstar
