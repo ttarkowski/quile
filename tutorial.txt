@@ -1,6 +1,8 @@
 Tutorial
 ========
 
+[This document might be slightly outdated.]
+
 This tutorial is aimed  at the first-time Quilë library users  who would like to
 understand library  basics. In order to  follow this tutorial you'll  need C++20
 compiler, e.g.  GCC 10.2.0 or later,  and Git revision control  system. Examples
