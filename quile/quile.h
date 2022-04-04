@@ -45,6 +45,7 @@
 #include <numbers>
 #include <numeric>
 #include <random>
+#include <ranges>
 #include <stdexcept>
 #include <thread>
 #include <tuple>
