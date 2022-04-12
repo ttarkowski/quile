@@ -257,6 +257,10 @@ private:
  * `callable` specifies that `F` is convertible to the callable object type,
  * which accepts arguments of types `Args...` and returns value of type `R`.
  *
+ * \tparam F Type convertible to the callable object type.
+ * \tparam R Return type.
+ * \tparam Args Argument type.
+ *
  * Example:
  * \include callable.cc
  *
