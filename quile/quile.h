@@ -185,13 +185,33 @@ fn_or(const auto&... fs)
 // Thread pool //
 /////////////////
 
+/**
+ * thread_pool implements modified thread pool design pattern.
+ */
 class thread_pool
 {
 public:
+  /**
+   * `thread_pool` constructor.
+   * @param sz Number of threads for concurrent calculations.
+   */
   explicit thread_pool(std::size_t sz)
     : free_threads_{ sz }
   {}
 
+  /**
+   * `thread_pool::async` asynchronically executes callable object `f`
+   * postponing start of `f` until number of concurrently executing threads in
+   * pool drops below number `sz`, described in constructor.
+   * @param policy Lauch policy (see `std::launch` documentation).
+   * @param f Callable object to be concurrently executed.
+   *
+   * Example:
+   * \include thread_pool.cc
+   *
+   * Result: (might be different due to concurrent execution)
+   * \verbinclude thread_pool.out
+   */
   template<typename T>
   std::future<T> async(std::launch policy, const std::function<T()>& f)
   {
