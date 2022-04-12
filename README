@@ -8,6 +8,8 @@ and means “color”.
 
 List of contents:
 
+  doc/          Documentation.
+
   examples/
     benchmark/  Benchmark programs and benchmark results.
     common/     Common files.
