@@ -382,7 +382,7 @@ public:
    *
    * @param r Range to be compared with `*this`.
    * @return Ordering (cf. `std::strong_ordering`, `std::weak_ordering`,
-   * `std::partial_ordering`.
+   * `std::partial_ordering`).
    */
   auto operator<=>(const range<T>& r) const = default;
 
