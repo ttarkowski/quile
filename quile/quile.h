@@ -435,6 +435,10 @@ iota(T t)
 // Random numbers //
 ////////////////////
 
+/**
+ * `probability` type represents probability values, i.e. numbers from \f$[0,
+ * 1]_{\mathbb{R}}\f$ interval.
+ */
 using probability = double;
 
 inline std::mt19937&
