@@ -253,6 +253,16 @@ private:
 // Callable concept //
 //////////////////////
 
+/**
+ * `callable` specifies that `F` is convertible to the callable object type,
+ * which accepts arguments of types `Args...` and returns value of type `R`.
+ *
+ * Example:
+ * \include callable.cc
+ *
+ * Result: (might be empty)
+ * \verbinclude callable.out
+ */
 template<typename F, typename R, typename... Args>
 concept callable = std::convertible_to<std::invoke_result_t<F, Args...>, R>;
 
