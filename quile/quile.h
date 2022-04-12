@@ -470,6 +470,15 @@ success(probability success_probability)
   return std::bernoulli_distribution{ success_probability }(random_engine());
 }
 
+/**
+ * `random_N` returns random number from normal distribution with mean `mean`
+ * and standard deviation `standard_deviation`.
+ *
+ * \tparam T Result type (floating-point).
+ * @param mean Mean of normal distribution.
+ * @param standard_deviation Standard deviation of normal distribution.
+ * @return Number drawn from normal distribution.
+ */
 template<std::floating_point T>
 T
 random_N(T mean, T standard_deviation)
