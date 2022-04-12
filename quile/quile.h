@@ -441,6 +441,12 @@ iota(T t)
  */
 using probability = double;
 
+/**
+ * `random_engine` returns pseudo-random number generator engine based on
+ * Mersenne Twister.
+ * @return Reference to static object with Mersenne Twister engine
+ * `std::mt19937` initialized with `std::random_device{}()`.
+ */
 inline std::mt19937&
 random_engine()
 {
