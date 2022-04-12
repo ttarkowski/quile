@@ -487,13 +487,26 @@ random_N(T mean, T standard_deviation)
   return std::normal_distribution<T>{ mean, standard_deviation }(generator);
 }
 
+/**
+ * `random_U` returns random number from uniform distribution:
+ *   - from interval \f$[a, b]_{\mathbb{R}}\f$ for floating-point type `T`
+ *   - from set \f$\{a, b\}\f$ for Boolean type `T`
+ *   - from interval \f$[a, b]_{\mathbb{Z}}\f$ for integer type `T`
+ *
+ * \tparam T Return type.
+ * @param a Parameter describing aforementioned interval or set.
+ * @param b Parameter describing aforementioned interval or set.
+ * @return Value drawn from uniform distribution.
+ *
+ * \note For floating-point types overflow may occur for `std::nextafter(b,
+ * std::numeric_limits<T>::max()) - a` (cf. N4861, 26.6.8.2.2).
+ */
 template<typename T>
 T
 random_U(T a, T b)
 {
   auto& generator{ random_engine() };
   if constexpr (std::is_floating_point_v<T>) {
-    // Note about possible overflow: [N4861, 26.6.8.2.2].
     assert(a < b);
     return std::uniform_real_distribution<T>{
       a, std::nextafter(b, std::numeric_limits<T>::max())
