@@ -274,10 +274,25 @@ concept callable = std::convertible_to<std::invoke_result_t<F, Args...>, R>;
 // Range //
 ///////////
 
+/**
+ * `range` represents subrange (closed interval) of type `T`.
+ *
+ * \tparam T Base type.
+ */
 template<typename T>
 class range
 {
 public:
+  /**
+   * `range` constructor creates object representing closed interval \f$[{\rm
+   * min}, {\rm max}]_{\rm T}\f$.
+   *
+   * @param min Range infimum.
+   * @param max Range supremum.
+   *
+   * \throws std::invalid_argument Exception is raised if `min` is greater than
+   * `max`.
+   */
   constexpr range(T min, T max)
     : min_{ min }
     , max_{ max }
@@ -287,6 +302,13 @@ public:
     }
   }
 
+  /**
+   * `range` constructor creates object representing full (closed) range for
+   * type `T`.
+   *
+   * \note This constructor is available for types possesing
+   * `std::numeric_limits` specialization.
+   */
   template<typename U = T,
            typename = std::enable_if_t<std::numeric_limits<U>::is_specialized>>
   constexpr range()
@@ -297,9 +319,28 @@ public:
   constexpr range(range&&) = default;
   range& operator=(const range&) = default;
   range& operator=(range&&) = default;
+
+  /**
+   * `range::min` returns range infimum.
+   *
+   * @return Range infimum, i.e. left endpoint.
+   */
   T min() const { return min_; }
+
+  /**
+   * `range::max` returns range supremum.
+   *
+   * @return Range supremum, i.e. right endpoint.
+   */
   T max() const { return max_; }
 
+  /**
+   * `range::midpoint` returns midpoint of interval represented by range.
+   *
+   * @return Range midpoint.
+   *
+   * \note This method is disabled for ranges of type `bool`.
+   */
   template<typename U = T,
            typename = std::enable_if_t<!std::is_same_v<U, bool>>>
   T midpoint() const
@@ -307,6 +348,14 @@ public:
     return std::midpoint(min_, max_);
   }
 
+  /**
+   * `range::clamp` returns left endpoint if `t` compares less than left
+   * endpoint; otherwise returns right endpoint if right endpoint compares less
+   * than `t`; otherwise returns `t`.
+   *
+   * @param t Value to be clamped.
+   * @return Value clamped to the range.
+   */
   template<typename U = T,
            typename = std::enable_if_t<!std::is_same_v<U, bool>>>
   T clamp(T t) const
@@ -314,7 +363,23 @@ public:
     return std::clamp(t, min_, max_);
   }
 
+  /**
+   * `range::contains` checks if its argument is contained within interval
+   * represented by the range.
+   *
+   * @param t Argument to be checked.
+   * @return Boolean value of check.
+   */
   bool contains(T t) const { return t >= min_ && t <= max_; }
+
+  /**
+   * `range::operator<=>` performs default lexicographical comparison with use
+   * of left and right endpoints.
+   *
+   * @param r Range to be compare with `*this`.
+   * @return Ordering (cf. `std::strong_ordering`, `std::weak_ordering`,
+   * `std::partial_ordering`.
+   */
   auto operator<=>(const range<T>& r) const = default;
 
 private:
