@@ -380,7 +380,7 @@ public:
    * `range::operator<=>` performs default lexicographical comparison with use
    * of left and right endpoints.
    *
-   * @param r Range to be compare with `*this`.
+   * @param r Range to be compared with `*this`.
    * @return Ordering (cf. `std::strong_ordering`, `std::weak_ordering`,
    * `std::partial_ordering`.
    */
