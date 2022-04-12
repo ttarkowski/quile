@@ -54,6 +54,39 @@
 #include <utility>
 #include <vector>
 
+/**
+ * \file
+ * `quile/quile.h` is one and only file of the library implementation.
+ *
+ * Please include `quile/quile.h` header using the code `#include
+ * <quile/quile.h>` and compiling your program with apropriate include flag,
+ * e.g. `-I/home/user/repos/quile` for GCC and Clang compilers.
+ *
+ * Example compilation command: `g++ -std=c++20 -DNDEBUG -O3 -Wall -Wextra
+ * -pedantic -I/home/user/repos/quile -pthread program.cc`.
+ *
+ * Please remove `-DNDEBUG` to enable assertions.
+ *
+ * Please add `-DQUILE_ENABLE_LOGGING` to enable logging.
+ *
+ * Clang compilation command is similar: please change `g++` to `clang++`.
+ */
+
+/**
+ * \def QUILE_LOG(x)
+ * `QUILE_LOG(x)` macro prints diagnostic information.
+ *
+ * `QUILE_LOG(x)` macro prints diagnostic information to the standard error
+ * stream `std::cerr` provided that `QUILE_ENABLE_LOGGING` token is defined.
+ * Otherwise it has no effect.
+ *
+ * Example:
+ * \include QUILE_LOG.cc
+ *
+ * Result:
+ * \verbinclude QUILE_LOG.out
+ */
+
 #ifdef QUILE_ENABLE_LOGGING
 #define QUILE_LOG(x)                                                           \
   do {                                                                         \
@@ -69,9 +102,30 @@ namespace quile {
 // TMP loop //
 //////////////
 
+/**
+ * `static_loop` is a `for`-loop replacement with loop index usable at compile
+ * time.
+ *
+ * \tparam T Loop index type.
+ * \tparam I First index value (inclusive).
+ * \tparam N Last index value (exclusive).
+ */
 template<std::integral T, T I, T N>
 struct static_loop
 {
+  /**
+   * `static_loop::body` performs `f` in a loop iterating from `I` (inclusively)
+   * to `N` (exclusively), i.e. it replaces the loop of form `for (T i = I; i <
+   * N; ++i) { f(i); }`.
+   * @param f  Callable object to be invoked in loop. It must accept argument of
+   * type convertible from `T`, being the value of current loop index.
+   *
+   * Example:
+   * \include static_loop.cc
+   *
+   * Result:
+   * \verbinclude static_loop.out
+   */
   static void body(auto&&) {}
 };
 
