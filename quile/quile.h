@@ -411,6 +411,15 @@ operator<<(std::ostream& os, const range<T>& r)
   return (os << '[' << r.min() << ", " << r.max() << ']');
 }
 
+/**
+ * `iota` returns `std::array` container filled with arithmetic sequence of
+ * length `N`, with difference of 1 and starting from value `t`.
+ *
+ * \tparam T Number type.
+ * \tparam N Returned container size.
+ * @param t Starting value.
+ * @return `std::array<T, N>` with consecutive numbers starting from value `t`.
+ */
 template<typename T, std::size_t N>
 std::array<T, N>
 iota(T t)
