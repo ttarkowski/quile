@@ -143,6 +143,19 @@ requires(I < N) struct static_loop<T, I, N>
 // Functional logical operators //
 //////////////////////////////////
 
+/**
+ * `fn_and` is an higher-order function returning conjunction of its arguments.
+ * @param fs Callable object returning Boolean value.
+ *
+ * Example:
+ * \include fn_and.cc
+ *
+ * Result: (might be empty)
+ * \verbinclude fn_and.out
+ *
+ * \note `fn_and` can be useful to describe complex genetic algorithm
+ * termination conditions.
+ */
 auto
 fn_and(const auto&... fs)
 {
