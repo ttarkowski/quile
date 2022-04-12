@@ -9,6 +9,7 @@ and means “color”.
 List of contents:
 
   doc/          Documentation.
+    examples/   Short examples of the library features use.
 
   examples/
     benchmark/  Benchmark programs and benchmark results.
