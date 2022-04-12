@@ -327,21 +327,26 @@ public:
   /**
    * `range::min` returns range infimum.
    *
-   * @return Range infimum, i.e. left endpoint.
+   * @return Range infimum, i.e. left endpoint of interval \f$[{\rm min}, {\rm
+   * max}]_{\rm T}\f$ (`min` value) corresponding to the range.
    */
   T min() const { return min_; }
 
   /**
    * `range::max` returns range supremum.
    *
-   * @return Range supremum, i.e. right endpoint.
+   * @return Range supremum, i.e. right endpoint of interval \f$[{\rm min}, {\rm
+   * max}]_{\rm T}\f$ (`max` value) corresponding to the range.
    */
   T max() const { return max_; }
 
   /**
    * `range::midpoint` returns midpoint of interval represented by range.
    *
-   * @return Range midpoint.
+   * @return Range midpoint, i.e. center of interval \f$[{\rm min}, {\rm
+   * max}]_{\rm T}\f$ (arithmetic mean of `min` and `max` values) corresponding
+   * to the range. If `T` is of integer type and the sum of `min` and `max` is
+   * odd, the result is rounded towards `min`.
    *
    * \note This method is disabled for ranges of type `bool`.
    */
@@ -369,10 +374,11 @@ public:
 
   /**
    * `range::contains` checks if its argument is contained within interval
-   * represented by the range.
+   * \f$[{\rm min}, {\rm max}]_{\rm T}\f$ represented by the range.
    *
    * @param t Argument to be checked.
-   * @return Boolean value of check.
+   * @return Boolean value of check: `true` if `t` is in \f$[{\rm min}, {\rm
+   * max}]_{\rm T}\f$ interval and `false` otherwise.
    */
   bool contains(T t) const { return t >= min_ && t <= max_; }
 
