@@ -397,6 +397,13 @@ private:
   T max_;
 };
 
+/**
+ * `operator<<` prints range to the stream.
+ *
+ * @param os Stream to use.
+ * @param r Range to be printed.
+ * @return Reference to the `os` stream.
+ */
 template<typename T>
 std::ostream&
 operator<<(std::ostream& os, const range<T>& r)
