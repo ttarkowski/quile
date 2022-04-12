@@ -162,6 +162,19 @@ fn_and(const auto&... fs)
   return [=]<typename... Xs>(const Xs&... xs) { return (fs(xs...) && ...); };
 }
 
+/**
+ * `fn_or` is an higher-order function returning disjunction of its arguments.
+ * @param fs Callable object returning Boolean value.
+ *
+ * Example:
+ * \include fn_or.cc
+ *
+ * Result: (might be empty)
+ * \verbinclude fn_or.out
+ *
+ * \note `fn_or` can be useful to describe complex genetic algorithm
+ * termination conditions.
+ */
 auto
 fn_or(const auto&... fs)
 {
