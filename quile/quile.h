@@ -537,6 +537,13 @@ square(T x)
   return x * x;
 }
 
+/**
+ * `cube` returns thirdd power of its argument.
+ *
+ * \tparam T Argument and return type (floating-point or integer type).
+ * \param x Argument to be raised to the third power.
+ * \return Argument raised to the third power, i.e. \f$x^3\f$.
+ */
 template<typename T>
 requires std::floating_point<T> || std::integral<T> T
 cube(T x)
