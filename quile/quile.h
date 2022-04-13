@@ -910,6 +910,10 @@ template<typename T, std::size_t N, const domain<T, N>* D>
 struct is_g_floating_point<g_floating_point<T, N, D>> : std::true_type
 {};
 
+/**
+ * `is_g_floating_point_v` is helper variable template for
+ * `is_g_floating_point`.
+ */
 template<typename T>
 inline constexpr bool is_g_floating_point_v = is_g_floating_point<T>::value;
 
