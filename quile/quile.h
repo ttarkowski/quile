@@ -820,6 +820,15 @@ self_adaptive_variation_domain(const domain<T, N>& d, T lo)
 template<typename T, std::size_t N>
 using chain = std::array<T, N>;
 
+/**
+ * `chain_min` returns object of type `chain` filled at each `i` position with
+ * `d[i].min()` value.
+ *
+ * \tparam T Chain base type.
+ * \tparam N Chain length.
+ * @param d Domain.
+ * @return Chain based on `d`.
+ */
 template<typename T, std::size_t N>
 chain<T, N>
 chain_min(const domain<T, N>& d)
