@@ -1161,6 +1161,11 @@ inline constexpr bool is_g_permutation_v = is_g_permutation<T>::value;
 template<typename T>
 concept permutation_representation = is_g_permutation_v<T>;
 
+/**
+ * `chromosome_representation` specifies that `T` is some specialization of
+ * one of allowed representations, i.e. `g_floating_point`, `g_integer`,
+ * `g_binary` or `g_permutation`.
+ */
 template<typename T>
 concept chromosome_representation =
   floating_point_representation<T> || integer_representation<T> ||
