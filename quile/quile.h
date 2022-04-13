@@ -684,6 +684,13 @@ polar2cart(T r, T phi)
 // Domain //
 ////////////
 
+/**
+ * `domain` is a type representing domain in form of N-dimensional
+ * parallelepiped.
+ *
+ * \tparam T Base type.
+ * \tparam N Domain dimension.
+ */
 template<typename T, std::size_t N>
 using domain = std::array<range<T>, N>;
 
