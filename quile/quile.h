@@ -523,6 +523,13 @@ random_U(T a, T b)
 // Some basic math //
 /////////////////////
 
+/**
+ * `square` returns second power of its argument.
+ *
+ * \tparam T Argument and return type (floating-point or integer type).
+ * \param x Argument to be raised to the second power.
+ * \return Argument raised to the second power, i.e. \f$x^2\f$.
+ */
 template<typename T>
 requires std::floating_point<T> || std::integral<T> T
 square(T x)
