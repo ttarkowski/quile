@@ -715,6 +715,9 @@ struct is_domain<domain<T, N>> : std::true_type
 template<typename T>
 inline constexpr bool is_domain_v = is_domain<T>::value;
 
+/**
+ * `set_of_departure` specifies that `T` is some specialization of `domain`.
+ */
 template<typename T>
 concept set_of_departure = is_domain_v<T>;
 
