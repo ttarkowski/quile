@@ -623,6 +623,18 @@ cart2spher(T x, T y, T z)
   };
 }
 
+/**
+ * `spher2cart` changes coordinate system from spherical to Cartesian.
+ *
+ * \tparam T Argument type and base for return type (floating-point).
+ * @param r \f$r\f$ coordinate in spherical coordinate system.
+ * @param theta \f$\theta\f$ coordinate in spherical coordinate system.
+ * @param phi \f$\phi\f$ coordinate in spherical coordinate system.
+ * @return Tuple consisting of coordinates of \f$(x, y, z)\f$ point in
+ * Cartesian coordinate system.
+ *
+ * \note \f$\theta \in [0, \pi]\f$, \f$\phi \in [0, 2\pi )\f$.
+ */
 template<std::floating_point T>
 std::tuple<T, T, T>
 spher2cart(T r, T theta, T phi)
