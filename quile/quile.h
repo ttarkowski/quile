@@ -560,7 +560,7 @@ template<std::floating_point T>
 const T pi = std::numbers::pi_v<T>;
 
 /**
- * `e` is an approximation of \f$\e\f$ number.
+ * `e` is an approximation of \f$e\f$ number.
  *
  * \tparam T Floating-point type.
  */
