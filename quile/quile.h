@@ -989,6 +989,9 @@ template<typename T, std::size_t N, const domain<T, N>* D>
 struct is_g_integer<g_integer<T, N, D>> : std::true_type
 {};
 
+/**
+ * `is_g_integer_v` is helper variable template for `is_g_integer`.
+ */
 template<typename T>
 inline constexpr bool is_g_integer_v = is_g_integer<T>::value;
 
