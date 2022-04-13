@@ -894,10 +894,18 @@ struct g_floating_point
   static chain_t default_chain() { return chain_min(constraints()); }
 };
 
+/**
+ * If `T` is some specialization of `g_floating_point` then
+ * `is_g_floating_point` provides member constant value equal to true. Otherwise
+ * value is false.
+ */
 template<typename T>
 struct is_g_floating_point : std::false_type
 {};
 
+/**
+ * Please see documentation for `is_g_floating_point<T>`.
+ */
 template<typename T, std::size_t N, const domain<T, N>* D>
 struct is_g_floating_point<g_floating_point<T, N, D>> : std::true_type
 {};
