@@ -1154,6 +1154,10 @@ struct is_g_permutation<g_permutation<T, N, M>> : std::true_type
 template<typename T>
 inline constexpr bool is_g_permutation_v = is_g_permutation<T>::value;
 
+/**
+ * `permutation_representation` specifies that `T` is some specialization of
+ * `g_permutation`.
+ */
 template<typename T>
 concept permutation_representation = is_g_permutation_v<T>;
 
