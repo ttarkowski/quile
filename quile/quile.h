@@ -709,6 +709,9 @@ template<typename T, std::size_t N>
 struct is_domain<domain<T, N>> : std::true_type
 {};
 
+/**
+ * `is_domain_v` is helper variable template for `is_domain`.
+ */
 template<typename T>
 inline constexpr bool is_domain_v = is_domain<T>::value;
 
