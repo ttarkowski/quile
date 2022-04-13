@@ -575,8 +575,21 @@ const T e = std::numbers::e_v<T>;
 template<std::floating_point T>
 const T ln2 = std::numbers::ln2_v<T>;
 
+/**
+ * `detail` contains library implementation details and is not inteded for use
+ * by library end-user.
+ */
 namespace detail {
 
+/**
+ * `detail::angle` returns angle \f$\phi\f$ in polar coordinate system.
+ *
+ * \tparam T Argument and return type (floating-point).
+ * @param x \f$x\f$ coordinate in Cartesian coordinate system.
+ * @param y \f$y\f$ coordinate in Cartesian coordinate system.
+ * @return \f$\phi\f$ coordinate in polar coordinate system corresponding to
+ * \f$(x, y)\f$ point.
+ */
 template<std::floating_point T>
 T
 angle(T x, T y)
