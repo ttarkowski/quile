@@ -1049,10 +1049,17 @@ struct g_binary
   static chain_t default_chain() { return chain_min(constraints()); }
 };
 
+/**
+ * If `T` is some specialization of `g_binary` then `is_g_binary` provides
+ * member constant value equal to true. Otherwise value is false.
+ */
 template<typename T>
 struct is_g_binary : std::false_type
 {};
 
+/**
+ * Please see documentation for `is_g_binary<T>`.
+ */
 template<std::size_t N>
 struct is_g_binary<g_binary<N>> : std::true_type
 {};
