@@ -772,6 +772,14 @@ uniform_domain(T lo, T hi)
   return uniform_domain<T, N>(range<T>{ lo, hi });
 }
 
+/**
+ * `uniform` checks whether domain is of form of hypercube.
+ *
+ * \tparam T Domain base type.
+ * \tparam N Domain dimensionality.
+ * @param d Domain to be checked.
+ * @return Boolean value of check result.
+ */
 template<typename T, std::size_t N>
 constexpr bool
 uniform(const domain<T, N>& d)
