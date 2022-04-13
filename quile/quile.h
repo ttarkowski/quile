@@ -1148,6 +1148,9 @@ template<typename T, std::size_t N, T M>
 struct is_g_permutation<g_permutation<T, N, M>> : std::true_type
 {};
 
+/**
+ * `is_g_permutation_v` is helper variable template for `is_g_permutation`.
+ */
 template<typename T>
 inline constexpr bool is_g_permutation_v = is_g_permutation<T>::value;
 
