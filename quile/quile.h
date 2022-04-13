@@ -1133,10 +1133,17 @@ requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_permutation
   static chain_t default_chain() { return iota<type, size()>(M); }
 };
 
+/**
+ * If `T` is some specialization of `g_permutation` then `is_g_permutation`
+ * provides member constant value equal to true. Otherwise value is false.
+ */
 template<typename T>
 struct is_g_permutation : std::false_type
 {};
 
+/**
+ * Please see documentation for `is_g_permutation<T>`.
+ */
 template<typename T, std::size_t N, T M>
 struct is_g_permutation<g_permutation<T, N, M>> : std::true_type
 {};
