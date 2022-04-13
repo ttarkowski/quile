@@ -600,6 +600,18 @@ angle(T x, T y)
 
 } // namespace detail
 
+/**
+ * `cart2spher` changes coordinate system from Cartesian to spherical.
+ *
+ * \tparam T Argument and base for return type (floating-point).
+ * @param x \f$x\f$ coordinate in Cartesian coordinate system.
+ * @param y \f$y\f$ coordinate in Cartesian coordinate system.
+ * @param z \f$y\f$ coordinate in Cartesian coordinate system.
+ * @return Tuple consisting of coordinates of \f$(r, \theta , \phi)\f$ point in
+ * spherical coordinate system.
+ *
+ * \note \f$\theta \in [0, \pi]\f$, \f$\phi \in [0, 2\pi )\f$.
+ */
 template<std::floating_point T>
 std::tuple<T, T, T>
 cart2spher(T x, T y, T z)
