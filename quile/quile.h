@@ -814,6 +814,9 @@ self_adaptive_variation_domain(const domain<T, N>& d, T lo)
   return res;
 }
 
+/**
+ * `chain` represents genetic chain.
+ */
 template<typename T, std::size_t N>
 using chain = std::array<T, N>;
 
