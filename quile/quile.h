@@ -742,6 +742,15 @@ contains(const domain<T, N>& d, const std::array<T, N>& p)
   return res;
 }
 
+/**
+ * `uniform_domain` creates domain, where constraints on each direction are
+ * identical, i.e. domain is of form of hypercube.
+ *
+ * \tparam T Domain base type.
+ * \tparam N Domain dimensionality.
+ * @param r Interval for hypercube construction.
+ * @return `N`-dimensional hypercube with edge of `r`.
+ */
 template<typename T, std::size_t N>
 constexpr domain<T, N>
 uniform_domain(const range<T>& r)
@@ -751,6 +760,11 @@ uniform_domain(const range<T>& r)
   return res;
 }
 
+/**
+ * `uniform_domain<T, N>(lo, hi)` is equivalent to `uniform_domain<T,
+ * N>(range<T>{ lo, hi})` call. Please see documentation for `uniform_domain`
+ * for argument of type `range`.
+ */
 template<typename T, std::size_t N>
 constexpr domain<T, N>
 uniform_domain(T lo, T hi)
