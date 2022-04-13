@@ -559,6 +559,11 @@ cube(T x)
 template<std::floating_point T>
 const T pi = std::numbers::pi_v<T>;
 
+/**
+ * `e` is an approximation of \f$\e\f$ number.
+ *
+ * \tparam T Floating-point type.
+ */
 template<std::floating_point T>
 const T e = std::numbers::e_v<T>;
 
