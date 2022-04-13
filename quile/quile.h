@@ -603,7 +603,7 @@ angle(T x, T y)
 /**
  * `cart2spher` changes coordinate system from Cartesian to spherical.
  *
- * \tparam T Argument and base for return type (floating-point).
+ * \tparam T Argument type and base for return type (floating-point).
  * @param x \f$x\f$ coordinate in Cartesian coordinate system.
  * @param y \f$y\f$ coordinate in Cartesian coordinate system.
  * @param z \f$y\f$ coordinate in Cartesian coordinate system.
