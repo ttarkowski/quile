@@ -788,6 +788,18 @@ uniform(const domain<T, N>& d)
   return std::ranges::all_of(d, [&](const auto& x) { return x0 == x; });
 }
 
+/**
+ * `self_adaptive_variation_domain` creates domain for self-adaptive mutation
+ * based on domain for ordinary variation.
+ *
+ * \tparam T Domain base type.
+ * \tparam N Domain dimensionality.
+ * @param d Domain to use.
+ * @param lo Minimum value for \f$\sigma_i\f$ on each direction.
+ * @return Domain with dimensionality of `2 * N`, where first part is equal to
+ * `d` and the second one consits of ranges of form `range{ lo, 0.5 *
+ * std::max(std::fabs(d[i].min()), std::fabs(d[i].max())) }`.
+ */
 template<typename T, std::size_t N>
 constexpr domain<T, 2 * N>
 self_adaptive_variation_domain(const domain<T, N>& d, T lo)
