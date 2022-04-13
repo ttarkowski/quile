@@ -1077,12 +1077,32 @@ inline constexpr bool is_g_binary_v = is_g_binary<T>::value;
 template<typename T>
 concept binary_representation = is_g_binary_v<T>;
 
+/**
+ * `g_permutation` specifies that `genotype` has permutation representation.
+ *
+ * \tparam T Integer type of representation (excluding Boolean).
+ * \tparam N Genotype length.
+ * \tparam M The lowest permuted number.
+ *
+ * \note Numbers from \f$\{M, \dots , M + N - 1\}\f$ set are permuted.
+ */
 template<typename T, std::size_t N, T M>
 requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_permutation
 {
   using type = T;
+
+  /**
+   * `size` returns domain size, i.e. `N`.
+   *
+   * @return Genotype length (domain size).
+   */
   static constexpr std::size_t size() { return N; }
 
+  /**
+   * `constraints` returns domain, i.e. \f$\{M, \dots , M + N - 1\}^N\f$.
+   *
+   * @return Domain.
+   */
   static constexpr const domain<type, size()> constraints()
   {
     return uniform_domain<type, size()>(M, M + N - 1);
@@ -1090,6 +1110,14 @@ requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_permutation
 
   using chain_t = chain<type, size()>;
 
+  /**
+   * `valid` checks whether `c` belongs to the domain (incl. check of the
+   * permutation condition) and returns `true` in that case. Otherwise returns
+   * `false`.
+   *
+   * @param c Chain to be checked.
+   * @return Boolean value of check result.
+   */
   static bool valid(const chain<type, size()>& c)
   {
     const auto i = iota<type, size()>(M);
@@ -1097,6 +1125,11 @@ requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_permutation
            std::is_permutation(std::begin(c), std::end(c), std::begin(i));
   }
 
+  /**
+   * `default_chain` returns chain filled in default way.
+   *
+   * @return Default chain.
+   */
   static chain_t default_chain() { return iota<type, size()>(M); }
 };
 
