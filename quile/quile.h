@@ -694,10 +694,17 @@ polar2cart(T r, T phi)
 template<typename T, std::size_t N>
 using domain = std::array<range<T>, N>;
 
+/**
+ * If `T` is of type `domain` then `is_domain` provides member constant `value`
+ * equal to `true`. Otherwise `value` is `false`.
+ */
 template<typename T>
 struct is_domain : std::false_type
 {};
 
+/**
+ * Please see documentation for `is_domain<T>`.
+ */
 template<typename T, std::size_t N>
 struct is_domain<domain<T, N>> : std::true_type
 {};
