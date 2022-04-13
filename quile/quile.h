@@ -924,21 +924,53 @@ inline constexpr bool is_g_floating_point_v = is_g_floating_point<T>::value;
 template<typename T>
 concept floating_point_representation = is_g_floating_point_v<T>;
 
+/**
+ * `g_integer` specifies that `genotype` has integer representation.
+ *
+ * \tparam T Integer type of representation.
+ * \tparam N Genotype length.
+ * \tparam D Pointer to the genotype domain.
+ */
 template<typename T, std::size_t N, const domain<T, N>* D>
 requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_integer
 {
   static_assert(D != nullptr);
   static_assert(N > 0);
   using type = T;
+
+  /**
+   * `size` returns domain size, i.e. `N`.
+   *
+   * @return Genotype length (domain size).
+   */
   static constexpr std::size_t size() { return N; }
+
+  /**
+   * `constraints` returns domain, i.e. `*D`.
+   *
+   * @return Domain.
+   */
   static constexpr const domain<type, size()>& constraints() { return *D; }
+
   using chain_t = chain<type, size()>;
 
+  /**
+   * `valid` checks whether `c` belongs to the domain and returns `true` in that
+   * case. Otherwise returns `false`.
+   *
+   * @param c Chain to be checked.
+   * @return Boolean value of check result.
+   */
   static bool valid(const chain<type, size()>& c)
   {
     return contains(constraints(), c);
   }
 
+  /**
+   * `default_chain` returns chain filled in default way.
+   *
+   * @return Default chain.
+   */
   static chain_t default_chain() { return chain_min(constraints()); }
 };
 
