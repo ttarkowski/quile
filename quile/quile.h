@@ -1002,12 +1002,29 @@ inline constexpr bool is_g_integer_v = is_g_integer<T>::value;
 template<typename T>
 concept integer_representation = is_g_integer_v<T>;
 
+/**
+ * `g_binary` specifies that `genotype` has binary representation.
+ *
+ * \tparam N Genotype length.
+ */
 template<std::size_t N>
 struct g_binary
 {
   static_assert(N > 0);
   using type = bool;
+
+  /**
+   * `size` returns domain size, i.e. `N`.
+   *
+   * @return Genotype length (domain size).
+   */
   static constexpr std::size_t size() { return N; }
+
+  /**
+   * `constraints` returns domain, i.e. \f$\{0, 1\}^N\f$.
+   *
+   * @return Domain.
+   */
   static constexpr const domain<type, size()> constraints()
   {
     return domain<type, size()>{};
@@ -1015,7 +1032,20 @@ struct g_binary
 
   using chain_t = chain<type, size()>;
 
+  /**
+   * `valid` checks whether its argument belongs to the domain.
+   *
+   * @return Boolean value of check result.
+   *
+   * \note Result is equal to `true` by definition.
+   */
   static bool valid(const chain<type, size()>&) { return true; }
+
+  /**
+   * `default_chain` returns chain filled in default way.
+   *
+   * @return Default chain.
+   */
   static chain_t default_chain() { return chain_min(constraints()); }
 };
 
