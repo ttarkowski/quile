@@ -917,6 +917,10 @@ struct is_g_floating_point<g_floating_point<T, N, D>> : std::true_type
 template<typename T>
 inline constexpr bool is_g_floating_point_v = is_g_floating_point<T>::value;
 
+/**
+ * `floating_point_representation` specifies that `T` is some specialization of
+ * `g_floating_point`.
+ */
 template<typename T>
 concept floating_point_representation = is_g_floating_point_v<T>;
 
