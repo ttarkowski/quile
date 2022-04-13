@@ -644,6 +644,17 @@ spher2cart(T r, T theta, T phi)
                               r * std::cos(theta) };
 }
 
+/**
+ * `cart2polar` changes coordinate system from Cartesian to polar.
+ *
+ * \tparam T Argument type and base for return type (floating-point).
+ * @param x \f$x\f$ coordinate in Cartesian coordinate system.
+ * @param y \f$y\f$ coordinate in Cartesian coordinate system.
+ * @return Tuple consisting of coordinates of \f$(r, \phi)\f$ point in polar
+ * coordinate system.
+ *
+ * \note \f$\phi \in [0, 2\pi )\f$.
+ */
 template<std::floating_point T>
 std::tuple<T, T>
 cart2polar(T x, T y)
