@@ -662,6 +662,17 @@ cart2polar(T x, T y)
   return std::tuple<T, T>{ std::hypot(x, y), detail::angle(x, y) };
 }
 
+/**
+ * `polar2cart` changes coordinate system from polar to Cartesian.
+ *
+ * \tparam T Argument type and base for return type (floating-point).
+ * @param r \f$r\f$ coordinate in polar coordinate system.
+ * @param phi \f$\phi\f$ coordinate in polar coordinate system.
+ * @return Tuple consisting of coordinates of \f$(x, y)\f$ point in Cartesian
+ * coordinate system.
+ *
+ * \note \f$\phi \in [0, 2\pi )\f$.
+ */
 template<std::floating_point T>
 std::tuple<T, T>
 polar2cart(T r, T phi)
