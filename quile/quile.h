@@ -1070,6 +1070,10 @@ struct is_g_binary<g_binary<N>> : std::true_type
 template<typename T>
 inline constexpr bool is_g_binary_v = is_g_binary<T>::value;
 
+/**
+ * `binary_representation` specifies that `T` is some specialization of
+ * `g_binary`.
+ */
 template<typename T>
 concept binary_representation = is_g_binary_v<T>;
 
