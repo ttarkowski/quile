@@ -567,6 +567,11 @@ const T pi = std::numbers::pi_v<T>;
 template<std::floating_point T>
 const T e = std::numbers::e_v<T>;
 
+/**
+ * `ln2` is an approximation of \f$\ln 2\f$ number.
+ *
+ * \tparam T Floating-point type.
+ */
 template<std::floating_point T>
 const T ln2 = std::numbers::ln2_v<T>;
 
