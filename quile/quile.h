@@ -1064,6 +1064,9 @@ template<std::size_t N>
 struct is_g_binary<g_binary<N>> : std::true_type
 {};
 
+/**
+ * `is_g_binary_v` is helper variable template for `is_g_binary`.
+ */
 template<typename T>
 inline constexpr bool is_g_binary_v = is_g_binary<T>::value;
 
