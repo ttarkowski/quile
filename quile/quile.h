@@ -551,6 +551,11 @@ cube(T x)
   return x * x * x;
 }
 
+/**
+ * `pi` is an approximation of \f$\pi\f$ number.
+ *
+ * \tparam T Floating-point type.
+ */
 template<std::floating_point T>
 const T pi = std::numbers::pi_v<T>;
 
