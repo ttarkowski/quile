@@ -721,6 +721,16 @@ inline constexpr bool is_domain_v = is_domain<T>::value;
 template<typename T>
 concept set_of_departure = is_domain_v<T>;
 
+/**
+ * `contains` checks if argument `p` is within domain `d` and returns `true` in
+ * that case. Otherwise it returns `false`.
+ *
+ * \tparam T Domain base type.
+ * \tparam N Domain dimensionality.
+ * @param d Domain.
+ * @param p Point to be checked.
+ * @return Boolean value describing whether point `p` is within domain `d`.
+ */
 template<typename T, std::size_t N>
 bool
 contains(const domain<T, N>& d, const std::array<T, N>& p)
