@@ -995,6 +995,10 @@ struct is_g_integer<g_integer<T, N, D>> : std::true_type
 template<typename T>
 inline constexpr bool is_g_integer_v = is_g_integer<T>::value;
 
+/**
+ * `integer_representation` specifies that `T` is some specialization of
+ * `g_integer`.
+ */
 template<typename T>
 concept integer_representation = is_g_integer_v<T>;
 
