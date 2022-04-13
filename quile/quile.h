@@ -974,10 +974,17 @@ requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_integer
   static chain_t default_chain() { return chain_min(constraints()); }
 };
 
+/**
+ * If `T` is some specialization of `g_integer` then `is_g_integer` provides
+ * member constant value equal to true. Otherwise value is false.
+ */
 template<typename T>
 struct is_g_integer : std::false_type
 {};
 
+/**
+ * Please see documentation for `is_g_integer<T>`.
+ */
 template<typename T, std::size_t N, const domain<T, N>* D>
 struct is_g_integer<g_integer<T, N, D>> : std::true_type
 {};
