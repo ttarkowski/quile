@@ -842,6 +842,14 @@ chain_min(const domain<T, N>& d)
 // Genotype //
 //////////////
 
+/**
+ * `g_floating_point` specifies that `genotype` has floating-point
+ * representation.
+ *
+ * \tparam T Floating-point type of representation.
+ * \tparam N Genotype length.
+ * \tparam D Pointer to the genotype domain.
+ */
 template<typename T, std::size_t N, const domain<T, N>* D>
 requires std::floating_point<T>
 struct g_floating_point
@@ -849,15 +857,40 @@ struct g_floating_point
   static_assert(D != nullptr);
   static_assert(N > 0);
   using type = T;
+
+  /**
+   * `size` returns domain size, i.e. `N`.
+   *
+   * @return Genotype length (domain size).
+   */
   static constexpr std::size_t size() { return N; }
+
+  /**
+   * `constraints` returns domain, i.e. `*D`.
+   *
+   * @return Domain.
+   */
   static constexpr const domain<type, size()>& constraints() { return *D; }
+
   using chain_t = chain<type, size()>;
 
+  /**
+   * `valid` checks whether `c` belongs to the domain and returns `true` in that
+   * case. Otherwise returns `false`.
+   *
+   * @param c Chain to be checked.
+   * @return Boolean value of check result.
+   */
   static bool valid(const chain<type, size()>& c)
   {
     return contains(constraints(), c);
   }
 
+  /**
+   * `default_chain` returns chain filled in default way.
+   *
+   * @return Default chain.
+   */
   static chain_t default_chain() { return chain_min(constraints()); }
 };
 
