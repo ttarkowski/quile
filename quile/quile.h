@@ -1822,6 +1822,10 @@ stochastic_recombination(const recombination_fn<G>& r, probability p)
 // Evolution //
 ///////////////
 
+/**
+ * `termination_condition` specifies that `F` is some predicate that states when
+ * evolution should be finished.
+ */
 template<typename F, typename G>
 concept termination_condition = std::predicate<F, std::size_t, generations<G>>;
 
