@@ -1592,6 +1592,13 @@ requires chromosome<G>
 using populate_2_fn = std::function<
   population<G>(std::size_t, const population<G>&, const population<G>&)>;
 
+/**
+ * `generations` is a sequence of populations.
+ *
+ * \note For memory optimization purpose the `std::deque` was chosen instead of
+ * `std::vector`---this implementation allows for erasing of the oldest
+ * generation.
+ */
 template<typename G>
 requires chromosome<G>
 using generations = std::deque<population<G>>;
