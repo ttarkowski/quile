@@ -1624,6 +1624,10 @@ template<typename G>
 requires chromosome<G>
 using mutation_fn = std::function<population<G>(const G&)>;
 
+/**
+ * `recombination` specifies that `M` instance applied to two objects of type
+ * `genotype` returns object convertible to `population`.
+ */
 template<typename R, typename G>
 concept recombination = requires(R r, G g)
 {
