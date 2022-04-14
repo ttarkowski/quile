@@ -2350,6 +2350,14 @@ rank(It first, It last, Compare comp = {})
   return res;
 }
 
+/**
+ * `detail::id` performs identity operation between types.
+ *
+ * \tparam T Destination type.
+ * \tparam U Source type.
+ * @param u Argument.
+ * @return Argument after transformation to destination type.
+ */
 template<typename T, typename U>
 T
 id(U u)
