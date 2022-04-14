@@ -1438,6 +1438,22 @@ concept permutation_chromosome =
 template<typename G>
 concept uniform_chromosome = chromosome<G> && G::uniform_domain;
 
+/**
+ * `genotype_constraints` specifies that `F` is some predicate that states which
+ * genotypes are proper.
+ *
+ * \note Genotype \f$g \in X_0 \times \dots \times X_{c-1} = \prod_{i=0}^{c-1}
+ * X_i\f$, where \f$X_i\f$ is equal to \f$\mathbb{B} = \{{\rm false}, {\rm
+ * true}\}\f$ or is bounded subset of set of real numbers \f$\mathbb{R}\f$ or
+ * integer numbers \f$\mathbb{Z}\f$.
+ *
+ * \note Proper genotype \f$g \in G = \{(x_0, \dots , x_{c-1}) \in
+ * \prod_{i=0}^{c-1} X_i \mid Q(x_0, \dots , x_{c-1}) \}\f$, where \f$Q\f$ is
+ * predicate stating which genotype is proper.
+ *
+ * \note Set defined with use of predicate is called \em extension \em of \em
+ * predicate.
+ */
 template<typename F, typename G>
 concept genotype_constraints = std::predicate<F, G> && chromosome<G>;
 
