@@ -1924,6 +1924,12 @@ using fitness = double;
  */
 using fitnesses = std::vector<fitness>;
 
+/**
+ * `fitness_function` describes how fit genotype is.
+ *
+ * \note From implementation point of view the `fitness_function` should be
+ * thread-safe.
+ */
 template<typename G>
 requires chromosome<G>
 using fitness_function = std::function<fitness(const G&)>;
