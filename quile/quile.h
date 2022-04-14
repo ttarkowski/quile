@@ -2323,6 +2323,17 @@ advance_cpy(It it, std::size_t n)
   return it;
 }
 
+/**
+ * `detail::rank` returns ranking position of element in range after stable
+ * sort.
+ *
+ * \tparam It Iterator type.
+ * \tparam Compare Type of comparison mechanism.
+ * @param firt Range begin.
+ * @param last Range end.
+ * @param comp Comparison function object.
+ * @return Sequence container with ranking positions.
+ */
 template<typename It, typename Compare = std::less<>>
 std::vector<std::size_t>
 rank(It first, It last, Compare comp = {})
