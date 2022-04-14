@@ -1171,6 +1171,12 @@ concept chromosome_representation =
   floating_point_representation<T> || integer_representation<T> ||
   binary_representation<T> || permutation_representation<T>;
 
+/**
+ * `genotype` is central type of the library---it allows genotype creation and
+ * manipulation.
+ *
+ * \tparam R Type satisfying `chromosome_representation` concept.
+ */
 template<typename R>
 requires chromosome_representation<R>
 class genotype
@@ -1180,21 +1186,58 @@ public:
   using const_iterator = typename chain_t::const_iterator;
   using gene_t = typename R::type;
   using genotype_t = R;
+
+  /**
+   * `genotype::size` returns domain size.
+   *
+   * @return Genotype length (domain size).
+   */
   static constexpr std::size_t size() { return R::size(); }
 
+  /**
+   * `genotype::constraints` returns domain.
+   *
+   * @return Domain.
+   */
   static constexpr const domain<gene_t, size()> constraints()
   {
     return R::constraints();
   }
 
+  /**
+   * `genotype::uniform_domain` states whether `genotype` domain is uniform,
+   * i.e. its domain is of form \f$X_0^N\f$.
+   */
   static constexpr bool uniform_domain = uniform(constraints());
+
+  /**
+   * `genotype::valid` checks whether `c` belongs to the domain and returns
+   * `true` in that case. Otherwise returns `false`.
+   *
+   * @param c Chain to be checked.
+   * @return Boolean value of check result.
+   */
   static bool valid(const chain_t& c) { return R::valid(c); }
 
 public:
+  /**
+   * `genotype::genotype` constructor creates object initialized with default
+   * genetic chain.
+   */
   genotype()
     : chain_{ R::default_chain() }
   {}
 
+  /**
+   * `genotype::genotype` constructor creates object initialized with genetic
+   * chain passed as its argument.
+   *
+   * @param c Genetic chain to be used for initialization.
+   *
+   * \throws std::invalid_argument Exception is raised if `c` does not belong to
+   * the domain or it does not fulfill condition of given representation (cf.
+   * permutation condition).
+   */
   explicit genotype(const chain_t& c)
     : chain_{ c }
   {
@@ -1208,8 +1251,26 @@ public:
   genotype& operator=(const genotype&) = default;
   genotype& operator=(genotype&&) = default;
 
+  /**
+   * `genotype::value` returns gene value at \em locus i.
+   *
+   * @param i Gene \em locus.
+   * @return Gene value.
+   */
   gene_t value(std::size_t i) const { return chain_[i]; }
 
+  /**
+   * `genotype::value` changes gene value to `v` at \em locus `i`.
+   *
+   * @param i Gene \em locus.
+   * @param v New gene value.
+   * @return Reference to `*this`.
+   *
+   * \throws std::invalid_argument Exception is raised if new gene value is
+   * outside permitted interval for given \em locus `i`.
+   *
+   * \note This method is not available for permutation representation.
+   */
   template<typename = std::enable_if_t<!permutation_representation<R>>>
   genotype& value(std::size_t i, gene_t v)
   {
@@ -1220,6 +1281,15 @@ public:
     return *this;
   }
 
+  /**
+   * `genotype::random_reset` changes each gene value randomly using uniform
+   * random distribution with intervals defined by domain.
+   *
+   * @return Reference to `*this`.
+   *
+   * \note This overload is also available for permutation representation and
+   * draws new permutation in that case.
+   */
   genotype& random_reset()
   {
     if constexpr (permutation_representation<R>) {
@@ -1232,6 +1302,15 @@ public:
     return *this;
   }
 
+  /**
+   * `genotype::random_reset` changes gene at \em locus `i` value randomly using
+   * uniform random distribution with interval defined by domain.
+   *
+   * @param i Gene \em locus.
+   * @return Reference to `*this`.
+   *
+   * \note This overload is not available for permutation representation.
+   */
   template<typename = std::enable_if_t<!permutation_representation<R>>>
   genotype& random_reset(std::size_t i)
   {
@@ -1240,11 +1319,53 @@ public:
     return *this;
   }
 
+  /**
+   * `range::operator<=>` performs default lexicographical comparison with use
+   * of genotypes' genetic chain.
+   *
+   * @param g Genotype to be compared with `*this`.
+   * @return Ordering (cf. `std::strong_ordering`, `std::weak_ordering`,
+   * `std::partial_ordering`).
+   *
+   * \note Comparisons of genotypes with floating-point representation does not
+   * include tolerance.
+   */
   auto operator<=>(const genotype& g) const { return chain_ <=> g.chain_; }
+
+  /**
+   * `range::operator==` performs comparison with use of genotypes' genetic
+   * chain.
+   *
+   * @param g Genotype to be compared with `*this`.
+   * @return Boolean value `true` if chains are equal and false, otherwise.
+   *
+   * \note Comparisons of genotypes with floating-point representation does not
+   * include tolerance.
+   */
   bool operator==(const genotype& g) const { return chain_ == g.chain_; }
 
+  /**
+   * `genotype::data` returns constant reference to the underlying genetic
+   * chain.
+   *
+   * @return Constant reference to the genetic chain.
+   */
   const chain_t& data() const { return chain_; }
+
+  /**
+   * `genotype::begin` returns constant iterator to the begin of genetic chain.
+   *
+   * @return Constant iterator to the begin of genetic chain.
+   */
   const_iterator begin() const { return chain_.begin(); }
+
+  /**
+   * `genotype::begin` returns constant iterator to the end of genetic chain.
+   *
+   * @return Constant iterator to the end of genetic chain.
+   *
+   * \note The word \em end means past-the-last element.
+   */
   const_iterator end() const { return chain_.end(); }
 
 private:
