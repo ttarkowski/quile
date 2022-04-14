@@ -1829,6 +1829,10 @@ stochastic_recombination(const recombination_fn<G>& r, probability p)
 template<typename F, typename G>
 concept termination_condition = std::predicate<F, std::size_t, generations<G>>;
 
+/**
+ * `termination_condition_fn` is a callable object which states when evolution
+ * should be finished.
+ */
 template<typename G>
 requires chromosome<G>
 using termination_condition_fn =
