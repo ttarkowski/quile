@@ -2367,6 +2367,13 @@ id(U u)
 
 } // namespace detail
 
+/**
+ * `linear_ranking_selection` creates linear pressure mechanism for ranking
+ * selection.
+ *
+ * @param s So-called \em s parameter.
+ * @return Linear pressure mechanism.
+ */
 inline auto
 linear_ranking_selection(double s)
 {
