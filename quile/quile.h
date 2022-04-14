@@ -1557,6 +1557,9 @@ template<typename G>
 struct is_population<population<G>> : std::true_type
 {};
 
+/**
+ * `is_population_v` is helper variable template for `is_population`.
+ */
 template<typename G>
 inline constexpr bool is_population_v = is_population<G>::value;
 
