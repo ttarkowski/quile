@@ -1607,6 +1607,10 @@ using generations = std::deque<population<G>>;
 // Mutation & recombination //
 //////////////////////////////
 
+/**
+ * `mutation` specifies that `M` instance applied to `genotype` returns
+ * object convertible to `population`.
+ */
 template<typename M, typename G>
 concept mutation = requires(M m, G g)
 {
