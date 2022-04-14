@@ -1914,7 +1914,11 @@ evolution(const variation<G>& v,
 // Fitness function //
 //////////////////////
 
+/**
+ * `fitness` is a fitness function value type.
+ */
 using fitness = double;
+
 using fitnesses = std::vector<fitness>;
 
 template<typename G>
