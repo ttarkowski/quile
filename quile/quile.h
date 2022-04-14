@@ -2154,6 +2154,10 @@ print(std::ostream& os,
 // Selection probabilities //
 /////////////////////////////
 
+/**
+ * `selection_probabilities` is a sequential container intended for keeping
+ * selection probabilities values.
+ */
 using selection_probabilities = std::vector<probability>;
 
 template<typename G>
