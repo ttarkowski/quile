@@ -1464,6 +1464,13 @@ template<typename G>
 requires chromosome<G>
 const auto constraints_satisfied = [](const G&) { return true; };
 
+/**
+ * `operator<<` prints genotype to the stream.
+ *
+ * @param os Stream to use.
+ * @param g Genotype to be printed.
+ * @return Reference to the `os` stream.
+ */
 template<typename G>
 requires chromosome<G> std::ostream&
 operator<<(std::ostream& os, const G& g)
@@ -1474,6 +1481,15 @@ operator<<(std::ostream& os, const G& g)
   return os;
 }
 
+/**
+ * `operator<<` prints genotype to the stream.
+ *
+ * @param os Stream to use.
+ * @param g Genotype to be printed.
+ * @return Reference to the `os` stream.
+ *
+ * \note This overload is dedicated for floating-point genotypes.
+ */
 template<typename G>
 requires floating_point_chromosome<G> std::ostream&
 operator<<(std::ostream& os, const G& g)
