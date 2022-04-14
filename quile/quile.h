@@ -2402,6 +2402,13 @@ exponential_ranking_selection(std::size_t mu, std::size_t j)
                      (id(mu) * (1. - e) + e - std::exp(1 - id(mu)));
 }
 
+/**
+ * `ranking_selection` is ranking selection (RS) mechanism.
+ *
+ * \note This implementation has workarounds for populations containing
+ * genotypes which fitnesses cannot be calculated. Please note that there should
+ * be at least one genotype, which fitness can be calculated.
+ */
 template<typename G>
 class ranking_selection
 {
@@ -2409,14 +2416,27 @@ private:
   using probability_fn = std::function<probability(std::size_t, std::size_t)>;
 
 public:
+  /**
+   * `ranking_selection::ranking_selection` constructor creates RS.
+   *
+   * @param ff Fitness function database intermediary object.
+   * @param pf Selection pressure mechanism (linear or exponential).
+   */
   ranking_selection(const fitness_db<G>& ff, const probability_fn& pf)
     : ff_{ ff }
     , pf_{ pf }
   {}
 
-  // RS with workarounds for populations containing genotypes which fitnesses
-  // cannot be calculated. Please note that there should be at least one
-  // genotype, which fitness can be calculated.
+  /**
+   * `ranking_selection::operator()` returns selection probabilities for
+   * population `p`.
+   *
+   * @param p Population.
+   * @return RS selection probabilities for population `p`.
+   *
+   * \throws std::runtime_error Exception is raised if fitness function
+   * evaluates to `incalculable` for all genotypes from `p`.
+   */
   selection_probabilities operator()(const population<G>& p) const
   {
     const fitnesses fs{ ff_(p) };
