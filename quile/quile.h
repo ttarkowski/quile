@@ -1457,6 +1457,9 @@ concept uniform_chromosome = chromosome<G> && G::uniform_domain;
 template<typename F, typename G>
 concept genotype_constraints = std::predicate<F, G> && chromosome<G>;
 
+/**
+ * `constraints_satisfied` is predicate stating that all genotypes are proper.
+ */
 template<typename G>
 requires chromosome<G>
 const auto constraints_satisfied = [](const G&) { return true; };
