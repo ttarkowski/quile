@@ -1795,6 +1795,15 @@ stochastic_mutation(const mutation_fn<G>& m, probability p)
   return [=](const G& g) { return success(p) ? m(g) : population<G>{ g }; };
 }
 
+/**
+ * `stochastic_recombination` creates stochastic recombination consisting of `r`
+ * applied with probability `p`.
+ *
+ * \tparam G Some `genotype` specialization.
+ * @param r Recombination.
+ * @param p Probability.
+ * @return Stochastic recombination.
+ */
 template<typename G>
 requires chromosome<G>
 auto
