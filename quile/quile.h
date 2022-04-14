@@ -1641,6 +1641,10 @@ concept recombination = requires(R r, G g)
 }
 &&chromosome<G>;
 
+/**
+ * `recombination_fn` is a callable object which can be invoked on two objects
+ * of type `genotype` and returns `population`.
+ */
 template<typename G>
 requires chromosome<G>
 using recombination_fn = std::function<population<G>(const G&, const G&)>;
