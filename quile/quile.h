@@ -2248,19 +2248,42 @@ select_calculable(const fitnesses& fs, bool require_nonempty_result = false)
   return select_different_than(fs, incalculable, require_nonempty_result);
 }
 
+/**
+ * `fitness_proportional_selection` is fitness proportional selection (a.k.a.
+ * fitness \em proportionate selection) with windowing procedure (FPS).
+ *
+ * \tparam G Some `genotype` specialization.
+ *
+ * \note This implementation has workarounds for population of equally fit
+ * genotypes and populations containing genotypes which fitnesses cannot be
+ * calculated. Please note that there should be at least one genotype, which
+ * fitness can be calculated.
+ */
 template<typename G>
 class fitness_proportional_selection
 {
 public:
+  /**
+   * `fitness_proportional_selection::fitness_proportional_selection`
+   * constructor creates FPS mechanism for database represented by intermediary
+   * object `ff`.
+   *
+   * @param ff Fitness database intermediary object.
+   */
   explicit fitness_proportional_selection(const fitness_db<G>& ff)
     : ff_{ ff }
   {}
 
-  // FPS with windowing with workarounds for:
-  // a) population of equally fit genotypes and
-  // b) populations containing genotypes which fitnesses cannot be calculated
-  // Please note that in b) case, there should be at least one genotype,
-  // which fitness can be calculated.
+  /**
+   * `fitness_proportional_selection::operator()` returns selection
+   * probabilities for population `p`.
+   *
+   * @param p Population.
+   * @return FPS selection probabilities for population `p`.
+   *
+   * \throws std::runtime_error Exception is raised if fitness function
+   * evaluates to `incalculable` for all genotypes from `p`.
+   */
   selection_probabilities operator()(const population<G>& p) const
   {
     const fitnesses fs{ ff_(p) };
