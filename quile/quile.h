@@ -1663,6 +1663,14 @@ unary_identity(const G& g)
   return population<G>{ g };
 }
 
+/**
+ * `binary_identity` is an identity recombination.
+ *
+ * \tparam G Some `genotype` specialization.
+ * @param g0 Genotype (first parent).
+ * @param g1 Genotype (second parent)
+ * @return Population consisting of `g0` and `g1`.
+ */
 template<typename G>
 requires chromosome<G> population<G>
 binary_identity(const G& g0, const G& g1)
