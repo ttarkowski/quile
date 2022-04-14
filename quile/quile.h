@@ -1387,6 +1387,9 @@ template<typename T>
 struct is_genotype<genotype<T>> : std::true_type
 {};
 
+/**
+ * `is_genotype_v` is helper variable template for `is_genotype`.
+ */
 template<typename T>
 inline constexpr bool is_genotype_v = is_genotype<T>::value;
 
