@@ -1393,25 +1393,48 @@ struct is_genotype<genotype<T>> : std::true_type
 template<typename T>
 inline constexpr bool is_genotype_v = is_genotype<T>::value;
 
+/**
+ * `chromosome` specifies that `T` is some specialization of `genotype`.
+ */
 template<typename G>
 concept chromosome = is_genotype_v<G>;
 
+/**
+ * `floating_point_chromosome` specifies that `T` is some floating-point type
+ * specialization of `genotype`.
+ */
 template<typename G>
 concept floating_point_chromosome =
   chromosome<G> && floating_point_representation<typename G::genotype_t>;
 
+/**
+ * `integer_chromosome` specifies that `T` is some integer type specialization
+ * of `genotype`.
+ */
 template<typename G>
 concept integer_chromosome =
   chromosome<G> && integer_representation<typename G::genotype_t>;
 
+/**
+ * `binary_chromosome` specifies that `T` is some binary type specialization
+ * of `genotype`.
+ */
 template<typename G>
 concept binary_chromosome =
   chromosome<G> && binary_representation<typename G::genotype_t>;
 
+/**
+ * `permutation_chromosome` specifies that `T` is some permutation type
+ * specialization of `genotype`.
+ */
 template<typename G>
 concept permutation_chromosome =
   chromosome<G> && permutation_representation<typename G::genotype_t>;
 
+/**
+ * `uniform_chromosome` specifies that `T` is some specialization of `genotype`
+ * satisfying uniformity condition.
+ */
 template<typename G>
 concept uniform_chromosome = chromosome<G> && G::uniform_domain;
 
