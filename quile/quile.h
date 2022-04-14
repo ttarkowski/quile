@@ -1649,6 +1649,13 @@ template<typename G>
 requires chromosome<G>
 using recombination_fn = std::function<population<G>(const G&, const G&)>;
 
+/**
+ * `unary_identity` is an identity mutation.
+ *
+ * \tparam G Some `genotype` specialization.
+ * @param g Genotype.
+ * @return Population consisting of `g`.
+ */
 template<typename G>
 requires chromosome<G> population<G>
 unary_identity(const G& g)
