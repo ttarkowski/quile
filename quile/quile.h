@@ -1563,6 +1563,9 @@ struct is_population<population<G>> : std::true_type
 template<typename G>
 inline constexpr bool is_population_v = is_population<G>::value;
 
+/**
+ * `genetic_pool` specifies that `T` is some specialization of `population`.
+ */
 template<typename G>
 concept genetic_pool = is_population_v<G>;
 
