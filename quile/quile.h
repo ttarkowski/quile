@@ -1838,8 +1838,21 @@ requires chromosome<G>
 using termination_condition_fn =
   std::function<bool(std::size_t, const generations<G>&)>;
 
-// TODO: Is there any way to reduce number of arguments of this function
-// without increasing solution's complexity?
+/**
+ * `evolution` executes evolutionary process.
+ *
+ * \tparam G Some `genotype` specialization.
+ * @param v Variation.
+ * @param first_generation First generation.
+ * @param p1 Parents selection mechanism.
+ * @param p2 Selection to the next generation mechanism.
+ * @param tc Termination condition.
+ * @param parents_sz Size of the parents multiset (should be even).
+ * @param max_history Number of generations kept in memory and returned to the
+ * caller. Default zero value is special and means keeping and returning all
+ * generations.
+ * @return Generations produced during evolution (cf. `max_history` argument).
+ */
 template<typename G>
 requires chromosome<G> generations<G>
 evolution(const variation<G> v,
@@ -1866,6 +1879,22 @@ evolution(const variation<G> v,
   return res;
 }
 
+/**
+ * `evolution` executes evolutionary process.
+ *
+ * \tparam G Some `genotype` specialization.
+ * @param v Variation.
+ * @param p0 Mechanism for first generation creation.
+ * @param p1 Parents selection mechanism.
+ * @param p2 Selection to the next generation mechanism.
+ * @param tc Termination condition.
+ * @param generation_sz Generation size.
+ * @param parents_sz Size of the parents multiset (should be even).
+ * @param max_history Number of generations kept in memory and returned to the
+ * caller. Default zero value is special and means keeping and returning all
+ * generations.
+ * @return Generations produced during evolution (cf. `max_history` argument).
+ */
 template<typename G>
 requires chromosome<G> generations<G>
 evolution(const variation<G>& v,
