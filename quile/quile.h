@@ -2115,6 +2115,20 @@ private:
   std::shared_ptr<database> fitness_values_ = std::make_shared<database>();
 };
 
+/**
+ * `print` prints to the stream `os` information about each genotype from each
+ * generation accompanied with optional information about fitness function
+ * value.
+ *
+ * \tparam G Some `genotype` specialization.
+ * @param os Stream to print on.
+ * @param gs Generations.
+ * @param fd Pointer to the fitness function values database. Default value is
+ * equal to `nullptr`.
+ *
+ * \note If `fd` is equal to `nullptr` then information about fitness function
+ * values is not printed.
+ */
 template<typename G>
 requires chromosome<G>
 void
