@@ -1934,6 +1934,11 @@ template<typename G>
 requires chromosome<G>
 using fitness_function = std::function<fitness(const G&)>;
 
+/**
+ * `incalculable` is a special value which can be used when given gentotype is
+ * not proper (cf. `genotype_constraints`) or to signal some problem in
+ * `fitness_function` (e.g. non-convergence).
+ */
 const fitness incalculable = -std::numeric_limits<fitness>::infinity();
 
 template<typename G>
