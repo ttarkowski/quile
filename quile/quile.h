@@ -1678,28 +1678,65 @@ binary_identity(const G& g0, const G& g1)
   return population<G>{ g0, g1 };
 }
 
+/**
+ * `variation` represents variation operator.
+ *
+ * \tparam G Some `genotype` specialization.
+ *
+ * \note At the moment library supports only canonical forms of variations
+ * (unary and binary).
+ */
 template<typename G>
 requires chromosome<G>
 class variation
 {
 public:
+  /**
+   * `variation::variation` constructor creates object representing variation
+   * consisting of recombination `r` with mutation `m` applied separately to
+   * each child coming from `r`.
+   *
+   * @param m Mutation.
+   * @param r Recombination.
+   */
   variation(const mutation_fn<G>& m, const recombination_fn<G>& r)
     : m_{ m }
     , r_{ r }
   {}
 
+  /**
+   * `variation::variation` constructor creates identity variation.
+   */
   variation()
     : variation{ unary_identity<G>, binary_identity<G> }
   {}
 
+  /**
+   * `variation::variation` constructor creates variation equal to mutation `m`.
+   *
+   * @param m Mutation.
+   */
   explicit variation(const mutation_fn<G>& m)
     : variation{ m, binary_identity<G> }
   {}
 
+  /**
+   * `variation::variation` constructor creates variation equal to recombination
+   * `r`.
+   *
+   * @param r Recombination.
+   */
   explicit variation(const recombination_fn<G>& r)
     : variation{ unary_identity<G>, r }
   {}
 
+  /**
+   * `variation::operator()` applies variation to genotypes `g0` and `g1`.
+   *
+   * @param g0 Genotype.
+   * @param g1 Genotype.
+   * @return Population resulting from application of variation to genotypes.
+   */
   population<G> operator()(const G& g0, const G& g1) const
   {
     QUILE_LOG("Variation: " << g0 << ", " << g1);
@@ -1711,6 +1748,16 @@ public:
     return res;
   }
 
+  /**
+   * `variation::operator()` applies variation to consecutive pairs of genotypes
+   * in population `p`.
+   *
+   * @param p Population consisting of pairs of parents.
+   * @return Populative consisting of cumulative offspring.
+   *
+   * \throws std::invalid_argument Exception is raised if population size is
+   * odd.
+   */
   population<G> operator()(const population<G>& p) const
   {
     if (p.size() % 2) {
