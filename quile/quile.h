@@ -2386,6 +2386,10 @@ linear_ranking_selection(double s)
   };
 }
 
+/**
+ * `exponential_ranking_selection` is exponential pressure mechanism for ranking
+ * selection.
+ */
 inline probability
 exponential_ranking_selection(std::size_t mu, std::size_t j)
 {
