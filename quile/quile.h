@@ -1569,17 +1569,24 @@ inline constexpr bool is_population_v = is_population<G>::value;
 template<typename G>
 concept genetic_pool = is_population_v<G>;
 
-// Population generators/selectors
-// - first generation creator
+/**
+ * `populate_0_fn` can be used for first generation creation.
+ */
 template<typename G>
 requires chromosome<G>
 using populate_0_fn = std::function<population<G>(std::size_t)>;
-// - parents selection
+
+/**
+ * `populate_1_fn` can be used for parents selection.
+ */
 template<typename G>
 requires chromosome<G>
 using populate_1_fn =
   std::function<population<G>(std::size_t, const population<G>&)>;
-// - survivor selection
+
+/**
+ * `populate_2_fn` can be used for selection to the next generation.
+ */
 template<typename G>
 requires chromosome<G>
 using populate_2_fn = std::function<
