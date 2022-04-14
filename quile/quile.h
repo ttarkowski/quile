@@ -2204,6 +2204,19 @@ cumulative_probabilities(const selection_probabilities_fn<G>& spf,
   return res;
 }
 
+/**
+ * `select_different_than` returns copy of container `c` with deleted elements
+ * equal to `t`.
+ *
+ * \tparam C Container type.
+ * \tparam T Type convertible to C container element type.
+ * @param c Container.
+ * @param t Element to be dropped in returned container.
+ * @param require_nonempty_result Flag for possible exception.
+ *
+ * \throws std::runtime_error Exception is raised if `require_nonempty_result`
+ * is `true` and returned container is empty.
+ */
 template<typename C, typename T>
 C
 select_different_than(const C& c, T t, bool require_nonempty_result)
