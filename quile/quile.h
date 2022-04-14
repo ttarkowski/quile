@@ -2484,6 +2484,19 @@ generate(std::size_t lambda, const std::function<G()>& f)
 
 } // namespace detail
 
+/**
+ * `adapter` implements \em flatten function between `populate_2_fn` mechanism
+ * and `populate_1_fn` mechanism.
+ *
+ * \tparam G Some `genotype` specialization.
+ * @param fn Mechanism of `populate_1_fn` type.
+ * @return Mechanism of `populate_2_fn` type, which applies `fn` to two
+ * flattened populations.
+ *
+ * \note `adapter` can be useful when used with roulette wheel selection or
+ * stochastic universal sampling as a method of selection to the next
+ * generation.
+ */
 template<typename G>
 requires chromosome<G> populate_2_fn<G>
 adapter(const populate_1_fn<G>& fn)
