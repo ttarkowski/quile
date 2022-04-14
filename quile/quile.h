@@ -1778,6 +1778,15 @@ private:
   recombination_fn<G> r_;
 };
 
+/**
+ * `stochastic_mutation` creates stochastic mutation consisting of `m` applied
+ * with probability `p`.
+ *
+ * \tparam G Some `genotype` specialization.
+ * @param m Mutation.
+ * @param p Probability.
+ * @return Stochastic mutation.
+ */
 template<typename G>
 requires chromosome<G>
 auto
