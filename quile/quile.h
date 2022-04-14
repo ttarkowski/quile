@@ -2307,6 +2307,14 @@ private:
 
 namespace detail {
 
+/**
+ * `detail::advance_cpy` wraps `std::advance` and returns iterator.
+ *
+ * \tparam It Iterator type.
+ * @param it Iterator.
+ * @param n Distance to advance.
+ * @return Advanced iterator.
+ */
 template<typename It>
 It
 advance_cpy(It it, std::size_t n)
