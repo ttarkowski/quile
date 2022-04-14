@@ -2160,6 +2160,11 @@ print(std::ostream& os,
  */
 using selection_probabilities = std::vector<probability>;
 
+/**
+ * `selection_probabilities_fn` is a callable object which can be invoked on
+ * population and returns corresponding selection probabilities for each
+ * genotype from population.
+ */
 template<typename G>
 requires chromosome<G>
 using selection_probabilities_fn =
