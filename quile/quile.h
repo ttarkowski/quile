@@ -1360,7 +1360,7 @@ public:
   const_iterator begin() const { return chain_.begin(); }
 
   /**
-   * `genotype::begin` returns constant iterator to the end of genetic chain.
+   * `genotype::end` returns constant iterator to the end of genetic chain.
    *
    * @return Constant iterator to the end of genetic chain.
    *
@@ -1941,17 +1941,42 @@ using fitness_function = std::function<fitness(const G&)>;
  */
 const fitness incalculable = -std::numeric_limits<fitness>::infinity();
 
+/**
+ * `fitness_db` is an intermediary object to fitness function values database.
+ *
+ * \tparam G Some `genotype` specialization.
+ *
+ * \note Intermediary objects owns database through the `std::shared_ptr`.
+ */
 template<typename G>
 requires chromosome<G>
 class fitness_db
 {
 private:
+  /**
+   * `fitness_db::database` is an unordered map with genotypes as its keys and
+   * fitness function values as its values.
+   */
   using database = std::unordered_map<G, fitness>;
 
 public:
+  /**
+   * `fitness_db::const_iterator` is a constant iterator to the underlying
+   * `database` container.
+   */
   using const_iterator = typename database::const_iterator;
 
 public:
+  /**
+   * `fitness_db::fitness_db` constructor creates intermediary object to fitness
+   * function values database.
+   *
+   * @param f Fitness function.
+   * @param gc Predicate defining proper genotypes.
+   * @param thread_sz Number of threads for concurrent fitness function values
+   * calculations. Default value is equal to
+   * `std::thread::hardware_concurrency()`.
+   */
   explicit fitness_db(
     const fitness_function<G>& f,
     const genotype_constraints<G> auto& gc,
@@ -1963,6 +1988,16 @@ public:
   fitness_db(const fitness_db&) = default;
   fitness_db& operator=(const fitness_db&) = default;
 
+  /**
+   * `fitness_db::operator()` returns fitness function value for genotype `g`
+   * from database. If the value is not yet available, it is calculated,
+   * inserted to the database and then returned to the caller.
+   *
+   * @param g Genotype for which fitness function value is needed.
+   * @return Fitness function value for genotype `g`.
+   *
+   * \note This method is non-concurrent.
+   */
   fitness operator()(const G& g) const
   {
     const auto it{ fitness_values_->find(g) };
@@ -1974,6 +2009,18 @@ public:
     return res;
   }
 
+  /**
+   * `fitness_db::operator()` returns fitness function values for genotypes from
+   * population from database. If some values are not yet available, they are
+   * calculated, inserted to the database and then all values are returned to
+   * the caller.
+   *
+   * @param p Population for which fitness function values are needed.
+   * @return Fitness function values for genotypes from population `p` in order
+   * corresponding to the order of genotypes in population itself.
+   *
+   * \note This method is potentially concurrent.
+   */
   fitnesses operator()(const population<G>& p) const
   {
     if (thread_sz_ > 1 && p.size() > 1) {
@@ -1986,11 +2033,37 @@ public:
     return res;
   }
 
+  /**
+   * `fitness_db::size` returns number of keys (genotypes) in database.
+   *
+   * @return Number of database keys.
+   */
   std::size_t size() const { return fitness_values_->size(); }
 
+  /**
+   * `fitness_db::begin` returns constant iterator to the begin of database.
+   *
+   * @return Constant iterator to the begin of database.
+   */
   const_iterator begin() const { return fitness_values_->begin(); }
+
+  /**
+   * `fitness_db::end` returns constant iterator to the end of database.
+   *
+   * @return Constant iterator to the end of database.
+   *
+   * \note The word \em end means past-the-last element.
+   */
   const_iterator end() const { return fitness_values_->end(); }
 
+  /**
+   * `fitness_db::rank_order` returns all genotypes from database in descending
+   * order of fitness function value.
+   *
+   * @return Population consisting of all genotypes from database.
+   *
+   * \note `rank_order()[0]` gives the best genotype for non-empty database.
+   */
   population<G> rank_order() const
   {
     population<G> res{};
