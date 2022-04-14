@@ -1372,10 +1372,17 @@ private:
   chain_t chain_;
 };
 
+/**
+ * If `T` is some specialization of `genotype` then `is_genotype`
+ * provides member constant value equal to true. Otherwise value is false.
+ */
 template<typename T>
 struct is_genotype : std::false_type
 {};
 
+/**
+ * Please see documentation for `is_genotype<T>`.
+ */
 template<typename T>
 struct is_genotype<genotype<T>> : std::true_type
 {};
