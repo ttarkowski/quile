@@ -1919,6 +1919,9 @@ evolution(const variation<G>& v,
  */
 using fitness = double;
 
+/**
+ * `fitnesses` is a sequential container of fitness values.
+ */
 using fitnesses = std::vector<fitness>;
 
 template<typename G>
