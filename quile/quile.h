@@ -1620,6 +1620,10 @@ concept mutation = requires(M m, G g)
 }
 &&chromosome<G>;
 
+/**
+ * `mutation_fn` is a callable object which can be invoked on `genotype` and
+ * returns `population`.
+ */
 template<typename G>
 requires chromosome<G>
 using mutation_fn = std::function<population<G>(const G&)>;
