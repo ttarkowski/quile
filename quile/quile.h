@@ -2170,6 +2170,23 @@ requires chromosome<G>
 using selection_probabilities_fn =
   std::function<selection_probabilities(const population<G>&)>;
 
+/**
+ * `cumulative_probabilities` serves for calculation of cumulative selection
+ * probabilities, which can be used later in roulette wheel selection or
+ * stochastic universal sampling.
+ *
+ * \tparam G Some `genotype` specialization.
+ * @param spf Selection probabilities function.
+ * @param p Population.
+ * @return Cumulative selection probabilities.
+ *
+ * \note \em Cumulative selection probability for index `i` means sum of
+ * selection probabilities from index `0` up to `i`. Cumulative selection
+ * probability for last genotype in population is by definition equal to `1`.
+ *
+ * \note It is guaranteed that last cumulative probability in returned
+ * container is equal to `1` without any numerical error.
+ */
 template<typename G>
 requires chromosome<G> selection_probabilities
 cumulative_probabilities(const selection_probabilities_fn<G>& spf,
