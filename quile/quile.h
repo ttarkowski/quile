@@ -1504,6 +1504,15 @@ operator<<(std::ostream& os, const G& g)
 
 } // namespace quile
 
+/**
+ * `std::hash` for `genotype`.
+ *
+ * \note This `std::hash` specialization allows interoperability with STL
+ * unordered associative containers like `std::unordered_map`.
+ *
+ * \note `std::hash` is injected into `std` namespace of programs using this
+ * library.
+ */
 template<typename G>
 requires quile::chromosome<G>
 struct std::hash<G>
