@@ -2464,6 +2464,15 @@ private:
 
 namespace detail {
 
+/**
+ * `detail::generate` creates population of size `lambda` filled with result of
+ * function `f`.
+ *
+ * \tparam G Some `genotype` specialization.
+ * @param lambda Result population size.
+ * @param f Function returning genotype.
+ * @return Population of size `lambda` where each member is result of `f`.
+ */
 template<typename G>
 requires chromosome<G> population<G>
 generate(std::size_t lambda, const std::function<G()>& f)
