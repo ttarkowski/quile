@@ -1534,6 +1534,10 @@ namespace quile {
 // Population //
 ////////////////
 
+/**
+ * `population` is a sequence of genotypes implemented as a `std::vector`
+ * sequence container.
+ */
 template<typename G>
 requires chromosome<G>
 using population = std::vector<G>;
