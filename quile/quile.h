@@ -1542,10 +1542,17 @@ template<typename G>
 requires chromosome<G>
 using population = std::vector<G>;
 
+/**
+ * If `T` is some specialization of `population` then `is_population`
+ * provides member constant value equal to true. Otherwise value is false.
+ */
 template<typename T>
 struct is_population : std::false_type
 {};
 
+/**
+ * Please see documentation for `is_population<T>`.
+ */
 template<typename G>
 struct is_population<population<G>> : std::true_type
 {};
