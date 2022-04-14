@@ -2213,6 +2213,7 @@ cumulative_probabilities(const selection_probabilities_fn<G>& spf,
  * @param c Container.
  * @param t Element to be dropped in returned container.
  * @param require_nonempty_result Flag for possible exception.
+ * @return Container with values different than `t`.
  *
  * \throws std::runtime_error Exception is raised if `require_nonempty_result`
  * is `true` and returned container is empty.
@@ -2230,6 +2231,17 @@ select_different_than(const C& c, T t, bool require_nonempty_result)
   return res;
 }
 
+/**
+ * `select_calculable` returns container with fitness function values equal to
+ * `fs`, but with `incalculable` entries skipped.
+ *
+ * @param fs Fitness function values container.
+ * @param require_nonempty_result Flag for possible exception.
+ * @return Container with values different than `incalculable`.
+ *
+ * \throws std::runtime_error Exception is raised if `require_nonempty_result`
+ * is `true` and returned container is empty.
+ */
 inline fitnesses
 select_calculable(const fitnesses& fs, bool require_nonempty_result = false)
 {
