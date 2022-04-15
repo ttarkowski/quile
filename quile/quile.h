@@ -2955,6 +2955,13 @@ requires floating_point_chromosome<G> &&
   };
 }
 
+/**
+ * `swap_mutation` is swap mutation.
+ *
+ * \tparam G Some `genotype` specialization.
+ * @param g Genotype.
+ * @return Population containing mutated genotype.
+ */
 template<typename G>
 requires uniform_chromosome<G> population<G>
 swap_mutation(const G& g)
