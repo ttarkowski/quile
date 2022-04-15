@@ -3279,6 +3279,15 @@ namespace test_functions
     point_fn p_min_;
   };
 
+  /**
+   * `test_functions::Ackley` is Ackley test function.
+   *
+   * \f[
+   * -20 \exp\left( \frac{-0{.}02}{\sqrt{n}} \sqrt{\sum_{i = 0}^{n - 1} x_i^2}
+   * \right) - \exp\left( \frac{1}{n} \sum_{i = 0}^{n - 1} \cos \left( 2 \pi x_i
+   * \right) \right) + 20 + e
+   * \f]
+   */
   template<std::floating_point T, std::size_t N>
   const test_function<T, N> Ackley{
     "Ackley",
@@ -3296,6 +3305,13 @@ namespace test_functions
     []() { return uniform_point<T, N>(0.); }
   };
 
+  /**
+   * `test_functions::Alpine` is Alpine test function.
+   *
+   * \f[
+   * \sum_{i = 0}^{n - 1} \left| x_i \sin x_i  + 0{.}1 x_i \right|
+   * \f]
+   */
   template<std::floating_point T, std::size_t N>
   const test_function<T, N> Alpine{
     "Alpine",
@@ -3309,6 +3325,14 @@ namespace test_functions
     []() { return uniform_point<T, N>(0.); }
   };
 
+  /**
+   * `test_functions::Aluffi_Pentini` is Aluffi-Pentini test function.
+   *
+   * \f[
+   * \frac{1}{4} x_0^4 - \frac{1}{2} x_0^2 + \frac{1}{10} x_0 + \frac{1}{2}
+   * x_1^2
+   * \f]
+   */
   template<std::floating_point T>
   const test_function<T, 2> Aluffi_Pentini{
     "Aluffi-Pentini",
@@ -3330,6 +3354,13 @@ namespace test_functions
     }
   };
 
+  /**
+   * `test_functions::Booth` is Booth test function.
+   *
+   * \f[
+   * (x_0 + 2x_1 - 7)^2 + (2x_0 + x_1 - 5)^2
+   * \f]
+   */
   template<std::floating_point T>
   const test_function<T, 2> Booth{
     "Booth",
@@ -3343,6 +3374,16 @@ namespace test_functions
     }
   };
 
+  /**
+   * `test_functions::Colville` is Colville test function.
+   *
+   * \f[
+   * 100 \left( x_0 - x_1^2 \right)^2 + \left( 1 - x_0 \right)^2 + 90 \left( x_3
+   * - x_2^2 \right)^2 + \left( 1 - x_2 \right)^2 + 10{.}1 \left( x_1 - 1
+   * \right)^2 + \left( x_3 - 1 \right)^2 + 19{.}8 \left( x_1 - 1 \right) \left(
+   * x_3 - 1 \right)
+   * \f]
+   */
   template<std::floating_point T>
   const test_function<T, 4> Colville{
     "Colville",
@@ -3356,6 +3397,14 @@ namespace test_functions
     []() { return uniform_point<T, 4>(1.); }
   };
 
+  /**
+   * `test_functions::Easom` is Easom test function.
+   *
+   * \f[
+   * -\cos x_0 \cdot \cos x_1 \cdot \exp \left( -(x_0 - \pi )^2 - (x_1 - \pi )^2
+   * \right)
+   * \f]
+   */
   template<std::floating_point T>
   const test_function<T, 2> Easom{
     "Easom",
@@ -3368,6 +3417,13 @@ namespace test_functions
     []() { return uniform_point<T, 2>(pi<T>); }
   };
 
+  /**
+   * `test_functions::exponential` is exponential test function.
+   *
+   * \f[
+   * -\exp\left( -\frac{1}{2} \sum_{i = 0}^{n - 1} x_i^2 \right)
+   * \f]
+   */
   template<std::floating_point T, std::size_t N>
   const test_function<T, N> exponential{
     "exponential",
@@ -3381,6 +3437,16 @@ namespace test_functions
     []() { return uniform_point<T, N>(0.); }
   };
 
+  /**
+   * `test_functions::Goldstein_Price` is Goldstein-Price test function.
+   *
+   * \f[
+   * \left( 1 + \left( x_0 + x_1 + 1 \right)^2 \left( 19 - 14 x_0 + 3 x_0^2 - 14
+   * x_1 + 6 x_0 x_1 + 3 x_1^2 \right) \right) \cdot \left( 30 + \left( 2 x_0 -
+   * 3 x_1 \right)^2 \left( 18 - 32 x_0 + 12 x_0^2 + 48 x_1 - 36 x_0 x_1 + 27
+   * x_1^2 \right) \right)
+   * \f]
+   */
   template<std::floating_point T>
   const test_function<T, 2> Goldstein_Price{
     "Goldstein-Price",
@@ -3399,6 +3465,14 @@ namespace test_functions
     }
   };
 
+  /**
+   * `test_functions::Hosaki` is Hosaki test function.
+   *
+   * \f[
+   * \left( 1 - 8 x_0 + 7 x_0^2 - \frac{7}{3} x_0^3 + \frac{1}{4} x_0^4 \right)
+   * x_1^2 \exp (-x_1)
+   * \f]
+   */
   template<std::floating_point T>
   const test_function<T, 2> Hosaki{
     "Hosaki",
@@ -3413,6 +3487,13 @@ namespace test_functions
     }
   };
 
+  /**
+   * `test_functions::Leon` is Leon test function.
+   *
+   * \f[
+   * 100 \left( x_1 - x_0^2 \right)^2 + \left( 1 - x_0 \right)^2
+   * \f]
+   */
   template<std::floating_point T>
   const test_function<T, 2> Leon{
     "Leon",
@@ -3426,6 +3507,13 @@ namespace test_functions
     }
   };
 
+  /**
+   * `test_functions::Matyas` is Matyas test function.
+   *
+   * \f[
+   * 0{.}26 \left( x_0^2 + x_1^2 \right) - 0{.}48 x_0 x_1
+   * \f]
+   */
   template<std::floating_point T>
   const test_function<T, 2> Matyas{
     "Matyas",
@@ -3437,6 +3525,14 @@ namespace test_functions
     []() { return uniform_point<T, 2>(0.); }
   };
 
+  /**
+   * `test_functions::Mexican_hat` is Mexican hat test function.
+   *
+   * \f[
+   * -20 \frac{\sin g(x_0, x_1)}{g(x_0, x_1)}, \, g(x_0, x_1) = 0{.}1 +
+   * \sqrt{(x_0 - 4)^2 + (x_1 - 4)^2}
+   * \f]
+   */
   template<std::floating_point T>
   const test_function<T, 2> Mexican_hat{
     "Mexican hat",
@@ -3451,6 +3547,14 @@ namespace test_functions
     []() { return uniform_point<T, 2>(4.); }
   };
 
+  /**
+   * `test_functions::Miele_Cantrell` is Miele-Cantrell test function.
+   *
+   * \f[
+   * \left( \exp (-x_0) - x_1 \right)^4 + 100 \left( x_1 - x_2 \right)^6 +
+   * \tan^4 (x_2 - x_3) + x_0^8
+   * \f]
+   */
   template<std::floating_point T>
   const test_function<T, 4> Miele_Cantrell{
     "Miele-Cantrell",
@@ -3465,6 +3569,14 @@ namespace test_functions
     }
   };
 
+  /**
+   * `test_functions::Rosenbrock` is Rosenbrock test function.
+   *
+   * \f[
+   * \sum_{i = 0}^{n - 2} \left( 100 \left( x_{i + 1} - x_i^2 \right)^2 + \left(
+   * x_i - 1 \right)^2 \right)
+   * \f]
+   */
   template<std::floating_point T, std::size_t N>
   const test_function<T, N> Rosenbrock{
     "Rosenbrock",
@@ -3479,6 +3591,13 @@ namespace test_functions
     []() { return uniform_point<T, N>(1.); }
   };
 
+  /**
+   * `test_functions::Schwefel` is Schwefel test function.
+   *
+   * \f[
+   * \sum_{i = 0}^{n - 1} \left( \sum_{j = 0}^i x_i \right)^2
+   * \f]
+   */
   template<std::floating_point T, std::size_t N>
   const test_function<T, N> Schwefel{
     "Schwefel",
@@ -3493,6 +3612,13 @@ namespace test_functions
     []() { return uniform_point<T, N>(0.); }
   };
 
+  /**
+   * `test_functions::sphere` is sphere test function.
+   *
+   * \f[
+   * \sum_{i = 0}^{n - 1} x_i^2
+   * \f]
+   */
   template<std::floating_point T, std::size_t N>
   const test_function<T, N> sphere{
     "sphere",
