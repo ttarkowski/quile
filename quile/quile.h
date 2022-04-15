@@ -3020,6 +3020,14 @@ bit_flipping(probability p)
   };
 }
 
+/**
+ * `arithmetic_recombination` is arithmetic recombination.
+ *
+ * \tparam Some `G` specialization.
+ * @param g0 First parent.
+ * @param g1 Secong parent.
+ * @return Population containing one offspring genotype.
+ */
 template<typename G>
 requires floating_point_chromosome<G> population<G>
 arithmetic_recombination(const G& g0, const G& g1)
