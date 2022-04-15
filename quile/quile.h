@@ -126,7 +126,7 @@ struct static_loop
    * Result:
    * \verbinclude static_loop.out
    */
-  static void body(auto&&) {}
+  static void body([[maybe_unused]] auto&& f) {}
 };
 
 template<std::integral T, T I, T N>
