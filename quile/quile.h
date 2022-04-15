@@ -3262,7 +3262,7 @@ namespace test_functions
    * point coordinates.
    *
    * \tparam T Floating-point type.
-   * @param 2D-point.
+   * @param p 2D-point.
    * @return Corresponding tuple.
    */
   template<std::floating_point T>
@@ -3276,7 +3276,7 @@ namespace test_functions
    * point coordinates.
    *
    * \tparam T Floating-point type.
-   * @param 3D-point.
+   * @param p 3D-point.
    * @return Corresponding tuple.
    */
   template<std::floating_point T>
