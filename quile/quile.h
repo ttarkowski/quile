@@ -3177,6 +3177,15 @@ namespace test_functions
     return std::tuple<T, T, T>{ p[0], p[1], p[2] };
   }
 
+  /**
+   * `test_functions::uniform_point` returns point in N-dimensional space, where
+   * each coordinate has the same value `v`.
+   *
+   * \tparam T Floating-point type.
+   * \tparam Space dimension.
+   * @param v Coordinate value.
+   * @return Point in N-dimensional space.
+   */
   template<std::floating_point T, std::size_t N>
   point<T, N> uniform_point(T v)
   {
