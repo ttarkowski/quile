@@ -3194,15 +3194,42 @@ namespace test_functions
     return res;
   }
 
+  /**
+   * `test_functions::test_function` is floating-point test function.
+   *
+   * \tparam T Floating-point type.
+   * \tparam N Space dimension.
+   */
   template<std::floating_point T, std::size_t N>
   class test_function
   {
   public:
+    /**
+     * `test_functions::test_function::function` is underlying test function
+     * type.
+     */
     using function = std::function<T(const point<T, N>&)>;
+
+    /**
+     * `test_functions::test_function::domain_fn` is test function domain.
+     */
     using domain_fn = std::function<domain<T, N>()>;
+
+    /**
+     * `test_functions::test_function::point_fn` is solution generating function
+     * type.
+     */
     using point_fn = std::function<point<T, N>()>;
 
   public:
+    /**
+     * `test_functions::test_function::test_function` creates test function.
+     *
+     * @param name Test function name.
+     * @param fn The test function representation.
+     * @param d The test function domain.
+     * @param p_min Function generating solution minimizing the test function.
+     */
     test_function(const std::string& name,
                   const function& fn,
                   const domain_fn& d,
@@ -3213,9 +3240,36 @@ namespace test_functions
       , p_min_{ p_min }
     {}
 
+    /**
+     * `test_functions::test_function::name` returns test function name.
+     *
+     * @return Name of the test function.
+     */
     std::string name() const { return name_; }
+
+    /**
+     * `test_functions::test_function::operator()` returns test function value
+     * at point `p`.
+     *
+     * @param p Point.
+     * @return Test function value at point `p`.
+     */
     T operator()(const point<T, N>& p) const { return fn_(p); }
+
+    /**
+     * `test_functions::test_function::function_domain` returns test function
+     * domain.
+     *
+     * @return Test function domain.
+     */
     domain<T, N> function_domain() const { return d_(); }
+
+    /**
+     * `test_functions::test_function::p_min` returns point minimizing test
+     * function over its domain.
+     *
+     * @return Point minimizing test function over its domain.
+     */
     point<T, N> p_min() const { return p_min_(); }
 
   private:
