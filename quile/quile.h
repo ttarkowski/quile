@@ -1197,9 +1197,26 @@ requires chromosome_representation<R>
 class genotype
 {
 public:
+  /**
+   * `genotype::chain_t` is genetic chain type (underlying genotype
+   * representation).
+   */
   using chain_t = chain<typename R::type, R::size()>;
+
+  /**
+   * `genotype::const_iterator` is constant iterator to access underlying
+   * representation.
+   */
   using const_iterator = typename chain_t::const_iterator;
+
+  /**
+   * `genotype::gene_t` is type of gene (e.g. floating-point).
+   */
   using gene_t = typename R::type;
+
+  /**
+   * `genotype::genotype_t` is type of genotype representation dispatch tag.
+   */
   using genotype_t = R;
 
   /**
@@ -1261,9 +1278,24 @@ public:
     }
   }
 
+  /**
+   * Default copy constructor `genotype::genotype`.
+   */
   genotype(const genotype&) = default;
+
+  /**
+   * Default move constructor `genotype::genotype`.
+   */
   genotype(genotype&&) = default;
+
+  /**
+   * Default assignment operator `genotype::operator=`.
+   */
   genotype& operator=(const genotype&) = default;
+
+  /**
+   * Default move assignment operator `genotype::operator=`.
+   */
   genotype& operator=(genotype&&) = default;
 
   /**
