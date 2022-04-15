@@ -3060,6 +3060,14 @@ single_arithmetic_recombination(const G& g0, const G& g1)
   return population<G>{ res0, res1 };
 }
 
+/**
+ * `one_point_xover` is one-point crossover recombination.
+ *
+ * \tparam Some `G` specialization.
+ * @param g0 First parent.
+ * @param g1 Secong parent.
+ * @return Population containing two offspring genotypes.
+ */
 template<typename G>
 requires floating_point_chromosome<G> || integer_chromosome<G> ||
   binary_chromosome<G>
