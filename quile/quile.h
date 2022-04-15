@@ -2769,6 +2769,15 @@ min(const generations<G>& gs, const fitness_db<G>& ff)
   return res;
 }
 
+/**
+ * `max_iterations_termination` returns condition, which terminates algorithm
+ * after performing `max` loop iterations.
+ *
+ * \tparam G Some `genotype` specialization.
+ * @param max Number of genetic algorithm loop iteration to perform (number of
+ * generations).
+ * @return Predicate terminating genetic algorithm after `max` iterations.
+ */
 template<typename G>
 termination_condition_fn<G>
 max_iterations_termination(std::size_t max)
