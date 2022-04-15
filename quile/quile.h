@@ -1597,6 +1597,12 @@ template<typename G>
 requires quile::chromosome<G>
 struct std::hash<G>
 {
+  /**
+   * `std::hash::operator()` calculates hash function value for genotype `g`.
+   *
+   * @param g Genotype.
+   * @return Hash function value.
+   */
   std::size_t operator()(const G& g) const noexcept
   {
     const std::size_t sz{ sizeof(std::size_t) * CHAR_BIT };
