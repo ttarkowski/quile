@@ -2997,6 +2997,13 @@ random_reset(probability p)
   };
 }
 
+/**
+ * `bit_flipping` returns bit-flipping mutation with parameter `p`.
+ *
+ * \tparam G Some `genotype` specialization.
+ * @param p Gene mutation probability.
+ * @return Bit-flipping mutation operator.
+ */
 template<typename G>
 requires binary_chromosome<G>
 auto
