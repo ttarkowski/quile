@@ -2934,11 +2934,26 @@ Gaussian_mutation(typename G::gene_t sigma, probability p)
  * @param a0 Self adaptive mutation parameter.
  * @param a1 Self adaptive mutation parameter.
  * @return Self adaptive mutation operator.
+ *
+ * \note Due to documentation processing problem the above template declaration
+ * is incorrect. Corrected declaration:
+ * \code
+ * template<typename G>
+ * requires floating_point_chromosome<G> && (G::size() % 2 == 0)
+ * auto self_adaptive_mutation(typename G::gene_t a0, typename G::gene_t a1)
+ * \endcode
  */
 template<typename G>
-requires floating_point_chromosome<G> &&
-  (G::size() % 2 == 0) auto self_adaptive_mutation(typename G::gene_t a0,
-                                                   typename G::gene_t a1)
+requires floating_point_chromosome<G>
+  /**
+   * \cond
+   */
+  &&(G::size() % 2 == 0)
+  // This unfortunately cannot be processed properly by documentation system.
+  /**
+   * \endcond
+   */
+  auto self_adaptive_mutation(typename G::gene_t a0, typename G::gene_t a1)
 {
   return [=, n = G::size() / 2, c = G::constraints()](const G& g) {
     using type = typename G::gene_t;
