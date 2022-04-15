@@ -154,7 +154,7 @@ requires(I < N) struct static_loop<T, I, N>
  * Result: (might be empty)
  * \verbinclude fn_and.out
  *
- * \note `fn_and` can be useful to describe complex genetic algorithm
+ * @note `fn_and` can be useful to describe complex genetic algorithm
  * termination conditions.
  */
 auto
@@ -174,7 +174,7 @@ fn_and(const auto&... fs)
  * Result: (might be empty)
  * \verbinclude fn_or.out
  *
- * \note `fn_or` can be useful to describe complex genetic algorithm
+ * @note `fn_or` can be useful to describe complex genetic algorithm
  * termination conditions.
  */
 auto
@@ -294,7 +294,7 @@ public:
    * @param min Range infimum.
    * @param max Range supremum.
    *
-   * \throws std::invalid_argument Exception is raised if `min` is greater than
+   * @throws std::invalid_argument Exception is raised if `min` is greater than
    * `max`.
    */
   constexpr range(T min, T max)
@@ -310,7 +310,7 @@ public:
    * `range` constructor creates object representing full (closed) range for
    * type `T`.
    *
-   * \note This constructor is available for types possesing
+   * @note This constructor is available for types possesing
    * `std::numeric_limits` specialization.
    */
   template<typename U = T,
@@ -363,7 +363,7 @@ public:
    * to the range. If `T` is of integer type and the sum of `min` and `max` is
    * odd, the result is rounded towards `min`.
    *
-   * \note This method is disabled for ranges of type `bool`.
+   * @note This method is disabled for ranges of type `bool`.
    */
   template<typename U = T,
            typename = std::enable_if_t<!std::is_same_v<U, bool>>>
@@ -513,7 +513,7 @@ random_N(T mean, T standard_deviation)
  * @param b Parameter describing aforementioned interval or set.
  * @returns Value drawn from uniform distribution.
  *
- * \note For floating-point types overflow may occur for `std::nextafter(b,
+ * @note For floating-point types overflow may occur for `std::nextafter(b,
  * std::numeric_limits<T>::max()) - a` (cf. N4861, 26.6.8.2.2).
  */
 template<typename T>
@@ -625,7 +625,7 @@ angle(T x, T y)
  * @returns Tuple consisting of coordinates of \f$(r, \theta , \phi)\f$ point in
  * spherical coordinate system.
  *
- * \note \f$\theta \in [0, \pi]\f$, \f$\phi \in [0, 2\pi )\f$.
+ * @note \f$\theta \in [0, \pi]\f$, \f$\phi \in [0, 2\pi )\f$.
  */
 template<std::floating_point T>
 std::tuple<T, T, T>
@@ -648,7 +648,7 @@ cart2spher(T x, T y, T z)
  * @returns Tuple consisting of coordinates of \f$(x, y, z)\f$ point in
  * Cartesian coordinate system.
  *
- * \note \f$\theta \in [0, \pi]\f$, \f$\phi \in [0, 2\pi )\f$.
+ * @note \f$\theta \in [0, \pi]\f$, \f$\phi \in [0, 2\pi )\f$.
  */
 template<std::floating_point T>
 std::tuple<T, T, T>
@@ -668,7 +668,7 @@ spher2cart(T r, T theta, T phi)
  * @returns Tuple consisting of coordinates of \f$(r, \phi)\f$ point in polar
  * coordinate system.
  *
- * \note \f$\phi \in [0, 2\pi )\f$.
+ * @note \f$\phi \in [0, 2\pi )\f$.
  */
 template<std::floating_point T>
 std::tuple<T, T>
@@ -686,7 +686,7 @@ cart2polar(T x, T y)
  * @returns Tuple consisting of coordinates of \f$(x, y)\f$ point in Cartesian
  * coordinate system.
  *
- * \note \f$\phi \in [0, 2\pi )\f$.
+ * @note \f$\phi \in [0, 2\pi )\f$.
  */
 template<std::floating_point T>
 std::tuple<T, T>
@@ -1077,7 +1077,7 @@ struct g_binary
    *
    * @returns Boolean value of check result.
    *
-   * \note Result is equal to `true` by definition.
+   * @note Result is equal to `true` by definition.
    */
   static bool valid(const chain<type, size()>&) { return true; }
 
@@ -1124,7 +1124,7 @@ concept binary_representation = is_g_binary_v<T>;
  * @tparam N Genotype length.
  * @tparam M The lowest permuted number.
  *
- * \note Numbers from \f$\{M, \dots , M + N - 1\}\f$ set are permuted.
+ * @note Numbers from \f$\{M, \dots , M + N - 1\}\f$ set are permuted.
  */
 template<typename T, std::size_t N, T M>
 requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_permutation
@@ -1299,7 +1299,7 @@ public:
    *
    * @param c Genetic chain to be used for initialization.
    *
-   * \throws std::invalid_argument Exception is raised if `c` does not belong to
+   * @throws std::invalid_argument Exception is raised if `c` does not belong to
    * the domain or it does not fulfill condition of given representation (cf.
    * permutation condition).
    */
@@ -1346,10 +1346,10 @@ public:
    * @param v New gene value.
    * @returns Reference to `*this`.
    *
-   * \throws std::invalid_argument Exception is raised if new gene value is
+   * @throws std::invalid_argument Exception is raised if new gene value is
    * outside permitted interval for given \em locus `i`.
    *
-   * \note This method is not available for permutation representation.
+   * @note This method is not available for permutation representation.
    */
   template<typename = std::enable_if_t<!permutation_representation<R>>>
   genotype& value(std::size_t i, gene_t v)
@@ -1367,7 +1367,7 @@ public:
    *
    * @returns Reference to `*this`.
    *
-   * \note This overload is also available for permutation representation and
+   * @note This overload is also available for permutation representation and
    * draws new permutation in that case.
    */
   genotype& random_reset()
@@ -1389,7 +1389,7 @@ public:
    * @param i Gene \em locus.
    * @returns Reference to `*this`.
    *
-   * \note This overload is not available for permutation representation.
+   * @note This overload is not available for permutation representation.
    */
   template<typename = std::enable_if_t<!permutation_representation<R>>>
   genotype& random_reset(std::size_t i)
@@ -1407,7 +1407,7 @@ public:
    * @returns Ordering (cf. `std::strong_ordering`, `std::weak_ordering`,
    * `std::partial_ordering`).
    *
-   * \note Comparisons of genotypes with floating-point representation does not
+   * @note Comparisons of genotypes with floating-point representation does not
    * include tolerance.
    */
   auto operator<=>(const genotype& g) const { return chain_ <=> g.chain_; }
@@ -1419,7 +1419,7 @@ public:
    * @param g Genotype to be compared with `*this`.
    * @returns Boolean value `true` if chains are equal and false, otherwise.
    *
-   * \note Comparisons of genotypes with floating-point representation does not
+   * @note Comparisons of genotypes with floating-point representation does not
    * include tolerance.
    */
   bool operator==(const genotype& g) const { return chain_ == g.chain_; }
@@ -1444,7 +1444,7 @@ public:
    *
    * @returns Constant iterator to the end of genetic chain.
    *
-   * \note The word \em end means past-the-last element.
+   * @note The word \em end means past-the-last element.
    */
   const_iterator end() const { return chain_.end(); }
 
@@ -1522,16 +1522,16 @@ concept uniform_chromosome = chromosome<G> && G::uniform_domain;
  * `genotype_constraints` specifies that `F` is some predicate that states which
  * genotypes are proper.
  *
- * \note Genotype \f$g \in X_0 \times \dots \times X_{c-1} = \prod_{i=0}^{c-1}
+ * @note Genotype \f$g \in X_0 \times \dots \times X_{c-1} = \prod_{i=0}^{c-1}
  * X_i\f$, where \f$X_i\f$ is equal to \f$\mathbb{B} = \{{\rm false}, {\rm
  * true}\}\f$ or is bounded subset of set of real numbers \f$\mathbb{R}\f$ or
  * integer numbers \f$\mathbb{Z}\f$.
  *
- * \note Proper genotype \f$g \in G = \{(x_0, \dots , x_{c-1}) \in
+ * @note Proper genotype \f$g \in G = \{(x_0, \dots , x_{c-1}) \in
  * \prod_{i=0}^{c-1} X_i \mid Q(x_0, \dots , x_{c-1}) \}\f$, where \f$Q\f$ is
  * predicate stating which genotype is proper.
  *
- * \note Set defined with use of predicate is called \em extension \em of \em
+ * @note Set defined with use of predicate is called \em extension \em of \em
  * predicate.
  */
 template<typename F, typename G>
@@ -1568,7 +1568,7 @@ operator<<(std::ostream& os, const G& g)
  * @param g Genotype to be printed.
  * @returns Reference to the `os` stream.
  *
- * \note This overload is dedicated for floating-point genotypes.
+ * @note This overload is dedicated for floating-point genotypes.
  */
 template<typename G>
 requires floating_point_chromosome<G> std::ostream&
@@ -1592,10 +1592,10 @@ namespace std {
 /**
  * `std::hash` for `genotype`.
  *
- * \note This `std::hash` specialization allows interoperability with STL
+ * @note This `std::hash` specialization allows interoperability with STL
  * unordered associative containers like `std::unordered_map`.
  *
- * \note `std::hash` is injected into `std` namespace of programs using this
+ * @note `std::hash` is injected into `std` namespace of programs using this
  * library.
  */
 template<typename G>
@@ -1688,7 +1688,7 @@ using populate_2_fn = std::function<
 /**
  * `generations` is a sequence of populations.
  *
- * \note For memory optimization purpose the `std::deque` was chosen instead of
+ * @note For memory optimization purpose the `std::deque` was chosen instead of
  * `std::vector`---this implementation allows for erasing of the oldest
  * generation.
  */
@@ -1776,7 +1776,7 @@ binary_identity(const G& g0, const G& g1)
  *
  * @tparam G Some `genotype` specialization.
  *
- * \note At the moment library supports only canonical forms of variations
+ * @note At the moment library supports only canonical forms of variations
  * (unary and binary).
  */
 template<typename G>
@@ -1848,7 +1848,7 @@ public:
    * @param p Population consisting of pairs of parents.
    * @returns Populative consisting of cumulative offspring.
    *
-   * \throws std::invalid_argument Exception is raised if population size is
+   * @throws std::invalid_argument Exception is raised if population size is
    * odd.
    */
   population<G> operator()(const population<G>& p) const
@@ -2020,7 +2020,7 @@ using fitnesses = std::vector<fitness>;
 /**
  * `fitness_function` describes how fit genotype is.
  *
- * \note From implementation point of view the `fitness_function` should be
+ * @note From implementation point of view the `fitness_function` should be
  * thread-safe.
  */
 template<typename G>
@@ -2039,7 +2039,7 @@ const fitness incalculable = -std::numeric_limits<fitness>::infinity();
  *
  * @tparam G Some `genotype` specialization.
  *
- * \note Intermediary objects owns database through the `std::shared_ptr`.
+ * @note Intermediary objects owns database through the `std::shared_ptr`.
  */
 template<typename G>
 requires chromosome<G>
@@ -2096,7 +2096,7 @@ public:
    * @param g Genotype for which fitness function value is needed.
    * @returns Fitness function value for genotype `g`.
    *
-   * \note This method is non-concurrent.
+   * @note This method is non-concurrent.
    */
   fitness operator()(const G& g) const
   {
@@ -2119,7 +2119,7 @@ public:
    * @returns Fitness function values for genotypes from population `p` in order
    * corresponding to the order of genotypes in population itself.
    *
-   * \note This method is potentially concurrent.
+   * @note This method is potentially concurrent.
    */
   fitnesses operator()(const population<G>& p) const
   {
@@ -2152,7 +2152,7 @@ public:
    *
    * @returns Constant iterator to the end of database.
    *
-   * \note The word \em end means past-the-last element.
+   * @note The word \em end means past-the-last element.
    */
   const_iterator end() const { return fitness_values_->end(); }
 
@@ -2162,7 +2162,7 @@ public:
    *
    * @returns Population consisting of all genotypes from database.
    *
-   * \note `rank_order()[0]` gives the best genotype for non-empty database.
+   * @note `rank_order()[0]` gives the best genotype for non-empty database.
    */
   population<G> rank_order() const
   {
@@ -2226,7 +2226,7 @@ private:
  * @param fd Pointer to the fitness function values database. Default value is
  * equal to `nullptr`.
  *
- * \note If `fd` is equal to `nullptr` then information about fitness function
+ * @note If `fd` is equal to `nullptr` then information about fitness function
  * values is not printed.
  */
 template<typename G>
@@ -2280,11 +2280,11 @@ using selection_probabilities_fn =
  * @param p Population.
  * @returns Cumulative selection probabilities.
  *
- * \note \em Cumulative selection probability for index `i` means sum of
+ * @note \em Cumulative selection probability for index `i` means sum of
  * selection probabilities from index `0` up to `i`. Cumulative selection
  * probability for last genotype in population is by definition equal to `1`.
  *
- * \note It is guaranteed that last cumulative probability in returned
+ * @note It is guaranteed that last cumulative probability in returned
  * container is equal to `1` without any numerical error.
  */
 template<typename G>
@@ -2315,7 +2315,7 @@ cumulative_probabilities(const selection_probabilities_fn<G>& spf,
  * @param require_nonempty_result Flag for possible exception.
  * @returns Container with values different than `t`.
  *
- * \throws std::runtime_error Exception is raised if `require_nonempty_result`
+ * @throws std::runtime_error Exception is raised if `require_nonempty_result`
  * is `true` and returned container is empty.
  */
 template<typename C, typename T>
@@ -2339,7 +2339,7 @@ select_different_than(const C& c, T t, bool require_nonempty_result)
  * @param require_nonempty_result Flag for possible exception.
  * @returns Container with values different than `incalculable`.
  *
- * \throws std::runtime_error Exception is raised if `require_nonempty_result`
+ * @throws std::runtime_error Exception is raised if `require_nonempty_result`
  * is `true` and returned container is empty.
  */
 inline fitnesses
@@ -2354,7 +2354,7 @@ select_calculable(const fitnesses& fs, bool require_nonempty_result = false)
  *
  * @tparam G Some `genotype` specialization.
  *
- * \note This implementation has workarounds for population of equally fit
+ * @note This implementation has workarounds for population of equally fit
  * genotypes and populations containing genotypes which fitnesses cannot be
  * calculated. Please note that there should be at least one genotype, which
  * fitness can be calculated.
@@ -2381,7 +2381,7 @@ public:
    * @param p Population.
    * @returns FPS selection probabilities for population `p`.
    *
-   * \throws std::runtime_error Exception is raised if fitness function
+   * @throws std::runtime_error Exception is raised if fitness function
    * evaluates to `incalculable` for all genotypes from `p`.
    */
   selection_probabilities operator()(const population<G>& p) const
@@ -2505,7 +2505,7 @@ exponential_ranking_selection(std::size_t mu, std::size_t j)
 /**
  * `ranking_selection` is ranking selection (RS) mechanism.
  *
- * \note This implementation has workarounds for populations containing
+ * @note This implementation has workarounds for populations containing
  * genotypes which fitnesses cannot be calculated. Please note that there should
  * be at least one genotype, which fitness can be calculated.
  */
@@ -2534,7 +2534,7 @@ public:
    * @param p Population.
    * @returns RS selection probabilities for population `p`.
    *
-   * \throws std::runtime_error Exception is raised if fitness function
+   * @throws std::runtime_error Exception is raised if fitness function
    * evaluates to `incalculable` for all genotypes from `p`.
    */
   selection_probabilities operator()(const population<G>& p) const
@@ -2593,7 +2593,7 @@ generate(std::size_t lambda, const std::function<G()>& f)
  * @returns Mechanism of `populate_2_fn` type, which applies `fn` to two
  * flattened populations.
  *
- * \note `adapter` can be useful when used with roulette wheel selection or
+ * @note `adapter` can be useful when used with roulette wheel selection or
  * stochastic universal sampling as a method of selection to the next
  * generation.
  */
@@ -2734,7 +2734,7 @@ private:
  * @param offspring Offspring.
  * @returns Offspring.
  *
- * \throws std::invalid_argument Exception is raised if `generation` size or
+ * @throws std::invalid_argument Exception is raised if `generation` size or
  * `offspring` size is different from `sz`.
  */
 template<typename G>
@@ -2759,7 +2759,7 @@ generational_survivor_selection(std::size_t sz,
  * @param fs Fitness function values container.
  * @returns Maximum value.
  *
- * \throws std::runtime_error Exception is raised if all `fs` elements are equal
+ * @throws std::runtime_error Exception is raised if all `fs` elements are equal
  * to `incalculable`.
  */
 inline fitness
@@ -2778,7 +2778,7 @@ max(const fitnesses& fs)
  * @param ff Database intermediary object.
  * @returns Maximum value.
  *
- * \throws std::runtime_error Exception is raised if fitness function evaluates
+ * @throws std::runtime_error Exception is raised if fitness function evaluates
  * to `incalculable` for all genotypes from `p`.
  */
 template<typename G>
@@ -2797,7 +2797,7 @@ max(const population<G>& p, const fitness_db<G>& ff)
  * @param ff Database intermediary object.
  * @returns Maximum values corresponding to each generation.
  *
- * \throws std::runtime_error Exception is raised if fitness function evaluates
+ * @throws std::runtime_error Exception is raised if fitness function evaluates
  * to `incalculable` for all genotypes from at least one generation.
  */
 template<typename G>
@@ -2817,7 +2817,7 @@ max(const generations<G>& gs, const fitness_db<G>& ff)
  * @param fs Fitness function values container.
  * @returns Minimum value.
  *
- * \throws std::runtime_error Exception is raised if all `fs` elements are equal
+ * @throws std::runtime_error Exception is raised if all `fs` elements are equal
  * to `incalculable`.
  */
 inline fitness
@@ -2836,7 +2836,7 @@ min(const fitnesses& fs)
  * @param ff Database intermediary object.
  * @returns Minimum value.
  *
- * \throws std::runtime_error Exception is raised if fitness function evaluates
+ * @throws std::runtime_error Exception is raised if fitness function evaluates
  * to `incalculable` for all genotypes from `p`.
  */
 template<typename G>
@@ -2855,7 +2855,7 @@ min(const population<G>& p, const fitness_db<G>& ff)
  * @param ff Database intermediary object.
  * @returns Minimum values corresponding to each generation.
  *
- * \throws std::runtime_error Exception is raised if fitness function evaluates
+ * @throws std::runtime_error Exception is raised if fitness function evaluates
  * to `incalculable` for all genotypes from at least one generation.
  */
 template<typename G>
@@ -2899,7 +2899,7 @@ max_iterations_termination(std::size_t max)
  * @returns Predicate terminating genetic algorithm after reaching fitness
  * function \em plateau.
  *
- * \note This condition is not intended for use with `evolution` argument
+ * @note This condition is not intended for use with `evolution` argument
  * `max_history` different than `0`.
  */
 template<typename G>
@@ -2935,7 +2935,7 @@ max_fitness_improvement_termination(const fitness_db<G>& ff,
  * @returns Predicate terminating genetic algorithm after reaching fitness
  * function \em plateau.
  *
- * \note This condition is not intended for use with `evolution` argument
+ * @note This condition is not intended for use with `evolution` argument
  * `max_history` different than `0`.
  */
 template<typename G>
@@ -3035,7 +3035,7 @@ Gaussian_mutation(typename G::gene_t sigma, probability p)
  * @param a1 Self adaptive mutation parameter.
  * @returns Self adaptive mutation operator.
  *
- * \note Due to documentation processing problem the above template declaration
+ * @note Due to documentation processing problem the above template declaration
  * is incorrect. Corrected declaration:
  * \code
  * template<typename G>
