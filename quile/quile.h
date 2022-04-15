@@ -3130,6 +3130,15 @@ namespace test_functions
   template<std::floating_point T, std::size_t N>
   using point = std::array<T, N>;
 
+  /**
+   * `test_functions::distance` returns distance between two points.
+   *
+   * \tparam T Floating-point type.
+   * \tparam N Space dimension.
+   * @param p0 First point.
+   * @param p1 Second point.
+   * @return Distance between `p0` and `p1`.
+   */
   template<std::floating_point T, std::size_t N>
   T distance(const point<T, N>& p0, const point<T, N>& p1)
   {
