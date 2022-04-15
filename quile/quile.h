@@ -2926,6 +2926,15 @@ Gaussian_mutation(typename G::gene_t sigma, probability p)
   };
 }
 
+/**
+ * `self_adaptive_mutation` returns self adaptive mutation operator with
+ * parameters `a0` and `a1`.
+ *
+ * \tparam G Some `genotype` specialization.
+ * @param a0 Self adaptive mutation parameter.
+ * @param a1 Self adaptive mutation parameter.
+ * @return Self adaptive mutation operator.
+ */
 template<typename G>
 requires floating_point_chromosome<G> &&
   (G::size() % 2 == 0) auto self_adaptive_mutation(typename G::gene_t a0,
