@@ -3039,6 +3039,14 @@ arithmetic_recombination(const G& g0, const G& g1)
   return population<G>{ res };
 }
 
+/**
+ * `single_arithmetic_recombination` is single arithmetic recombination.
+ *
+ * \tparam Some `G` specialization.
+ * @param g0 First parent.
+ * @param g1 Secong parent.
+ * @return Population containing two offspring genotypes.
+ */
 template<typename G>
 requires floating_point_chromosome<G> population<G>
 single_arithmetic_recombination(const G& g0, const G& g1)
