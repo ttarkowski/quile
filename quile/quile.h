@@ -2795,7 +2795,7 @@ max_iterations_termination(std::size_t max)
  * \tparam G Some `genotype` specialization.
  * @param ff Database intermediary object.
  * @param n Number of \em last generations.
- * @param frac \em Platesu \em flatness.
+ * @param frac \em Plateau \em flatness.
  * @return Predicate terminating genetic algorithm after reaching fitness
  * function \em plateau.
  *
