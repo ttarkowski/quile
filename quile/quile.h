@@ -3396,13 +3396,14 @@ namespace test_functions
   /**
    * `test_functions::Colville` is Colville test function.
    *
-   * \f[
-   * f^*\left(\vec{x}\right) =
+   * \f{eqnarray*}{
+   * f^*\left(\vec{x}\right) & = &
    * 100 \left( x_0 - x_1^2 \right)^2 + \left( 1 - x_0 \right)^2 + 90 \left( x_3
-   * - x_2^2 \right)^2 + \left( 1 - x_2 \right)^2 + 10{.}1 \left( x_1 - 1
+   * - x_2^2 \right)^2 + \left( 1 - x_2 \right)^2 \\
+   * & & +\ 10{.}1 \left( x_1 - 1
    * \right)^2 + \left( x_3 - 1 \right)^2 + 19{.}8 \left( x_1 - 1 \right) \left(
    * x_3 - 1 \right)
-   * \f]
+   * \f}
    */
   template<std::floating_point T>
   const test_function<T, 4> Colville{
