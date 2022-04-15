@@ -892,6 +892,10 @@ struct g_floating_point
    */
   static constexpr const domain<type, size()>& constraints() { return *D; }
 
+  /**
+   * `g_floating_point::chain_t` is genetic chain type used as underlying
+   * representation in `genotype`.
+   */
   using chain_t = chain<type, size()>;
 
   /**
@@ -976,6 +980,10 @@ requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_integer
    */
   static constexpr const domain<type, size()>& constraints() { return *D; }
 
+  /**
+   * `g_integer::chain_t` is genetic chain type used as underlying
+   * representation in `genotype`.
+   */
   using chain_t = chain<type, size()>;
 
   /**
@@ -1058,6 +1066,10 @@ struct g_binary
     return domain<type, size()>{};
   }
 
+  /**
+   * `g_binary::chain_t` is genetic chain type used as underlying
+   * representation in `genotype`.
+   */
   using chain_t = chain<type, size()>;
 
   /**
@@ -1140,6 +1152,10 @@ requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_permutation
     return uniform_domain<type, size()>(M, M + N - 1);
   }
 
+  /**
+   * `g_permutation::chain_t` is genetic chain type used as underlying
+   * representation in `genotype`.
+   */
   using chain_t = chain<type, size()>;
 
   /**
