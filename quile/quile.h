@@ -3084,6 +3084,14 @@ requires floating_point_chromosome<G> || integer_chromosome<G> ||
   return population<G>{ G{ d0 }, G{ d1 } };
 }
 
+/**
+ * `cut_n_crossfill` is cut-and-crossfill recombination.
+ *
+ * \tparam Some `G` specialization.
+ * @param g0 First parent.
+ * @param g1 Secong parent.
+ * @return Population containing two offspring genotypes.
+ */
 template<typename G>
 requires permutation_chromosome<G> population<G>
 cut_n_crossfill(const G& g0, const G& g1)
