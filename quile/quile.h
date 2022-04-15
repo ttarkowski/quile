@@ -3115,6 +3115,9 @@ cut_n_crossfill(const G& g0, const G& g1)
 // Test functions for floating-point optimization //
 ////////////////////////////////////////////////////
 
+/**
+ * `test_functions` contains mechanisms for floating-point test functions.
+ */
 namespace test_functions
 {
 
