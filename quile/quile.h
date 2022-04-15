@@ -3298,6 +3298,7 @@ namespace test_functions
    * `test_functions::Ackley` is Ackley test function.
    *
    * \f[
+   * f^*\left(\vec{x}\right) =
    * -20 \exp\left( \frac{-0{.}02}{\sqrt{n}} \sqrt{\sum_{i = 0}^{n - 1} x_i^2}
    * \right) - \exp\left( \frac{1}{n} \sum_{i = 0}^{n - 1} \cos \left( 2 \pi x_i
    * \right) \right) + 20 + e
@@ -3324,6 +3325,7 @@ namespace test_functions
    * `test_functions::Alpine` is Alpine test function.
    *
    * \f[
+   * f^*\left(\vec{x}\right) =
    * \sum_{i = 0}^{n - 1} \left| x_i \sin x_i  + 0{.}1 x_i \right|
    * \f]
    */
@@ -3344,6 +3346,7 @@ namespace test_functions
    * `test_functions::Aluffi_Pentini` is Aluffi-Pentini test function.
    *
    * \f[
+   * f^*\left(\vec{x}\right) =
    * \frac{1}{4} x_0^4 - \frac{1}{2} x_0^2 + \frac{1}{10} x_0 + \frac{1}{2}
    * x_1^2
    * \f]
@@ -3373,6 +3376,7 @@ namespace test_functions
    * `test_functions::Booth` is Booth test function.
    *
    * \f[
+   * f^*\left(\vec{x}\right) =
    * (x_0 + 2x_1 - 7)^2 + (2x_0 + x_1 - 5)^2
    * \f]
    */
@@ -3393,6 +3397,7 @@ namespace test_functions
    * `test_functions::Colville` is Colville test function.
    *
    * \f[
+   * f^*\left(\vec{x}\right) =
    * 100 \left( x_0 - x_1^2 \right)^2 + \left( 1 - x_0 \right)^2 + 90 \left( x_3
    * - x_2^2 \right)^2 + \left( 1 - x_2 \right)^2 + 10{.}1 \left( x_1 - 1
    * \right)^2 + \left( x_3 - 1 \right)^2 + 19{.}8 \left( x_1 - 1 \right) \left(
@@ -3416,6 +3421,7 @@ namespace test_functions
    * `test_functions::Easom` is Easom test function.
    *
    * \f[
+   * f^*\left(\vec{x}\right) =
    * -\cos x_0 \cdot \cos x_1 \cdot \exp \left( -(x_0 - \pi )^2 - (x_1 - \pi )^2
    * \right)
    * \f]
@@ -3436,6 +3442,7 @@ namespace test_functions
    * `test_functions::exponential` is exponential test function.
    *
    * \f[
+   * f^*\left(\vec{x}\right) =
    * -\exp\left( -\frac{1}{2} \sum_{i = 0}^{n - 1} x_i^2 \right)
    * \f]
    */
@@ -3456,7 +3463,8 @@ namespace test_functions
    * `test_functions::Goldstein_Price` is Goldstein-Price test function.
    *
    * \f{eqnarray*}{
-   * & & \left( 1 + \left( x_0 + x_1 + 1 \right)^2 \left( 19 - 14 x_0 + 3 x_0^2
+   * f^*\left(\vec{x}\right) & = &
+   * \left( 1 + \left( x_0 + x_1 + 1 \right)^2 \left( 19 - 14 x_0 + 3 x_0^2
    * - 14
    * x_1 + 6 x_0 x_1 + 3 x_1^2 \right) \right) \\
    * & & \cdot \left( 30 + \left( 2 x_0 -
@@ -3486,6 +3494,7 @@ namespace test_functions
    * `test_functions::Hosaki` is Hosaki test function.
    *
    * \f[
+   * f^*\left(\vec{x}\right) =
    * \left( 1 - 8 x_0 + 7 x_0^2 - \frac{7}{3} x_0^3 + \frac{1}{4} x_0^4 \right)
    * x_1^2 \exp (-x_1)
    * \f]
@@ -3508,6 +3517,7 @@ namespace test_functions
    * `test_functions::Leon` is Leon test function.
    *
    * \f[
+   * f^*\left(\vec{x}\right) =
    * 100 \left( x_1 - x_0^2 \right)^2 + \left( 1 - x_0 \right)^2
    * \f]
    */
@@ -3528,6 +3538,7 @@ namespace test_functions
    * `test_functions::Matyas` is Matyas test function.
    *
    * \f[
+   * f^*\left(\vec{x}\right) =
    * 0{.}26 \left( x_0^2 + x_1^2 \right) - 0{.}48 x_0 x_1
    * \f]
    */
@@ -3546,6 +3557,7 @@ namespace test_functions
    * `test_functions::Mexican_hat` is Mexican hat test function.
    *
    * \f[
+   * f^*\left(\vec{x}\right) =
    * -20 \frac{\sin g(x_0, x_1)}{g(x_0, x_1)}, \, g(x_0, x_1) = 0{.}1 +
    * \sqrt{(x_0 - 4)^2 + (x_1 - 4)^2}
    * \f]
@@ -3568,6 +3580,7 @@ namespace test_functions
    * `test_functions::Miele_Cantrell` is Miele-Cantrell test function.
    *
    * \f[
+   * f^*\left(\vec{x}\right) =
    * \left( \exp (-x_0) - x_1 \right)^4 + 100 \left( x_1 - x_2 \right)^6 +
    * \tan^4 (x_2 - x_3) + x_0^8
    * \f]
@@ -3590,6 +3603,7 @@ namespace test_functions
    * `test_functions::Rosenbrock` is Rosenbrock test function.
    *
    * \f[
+   * f^*\left(\vec{x}\right) =
    * \sum_{i = 0}^{n - 2} \left( 100 \left( x_{i + 1} - x_i^2 \right)^2 + \left(
    * x_i - 1 \right)^2 \right)
    * \f]
@@ -3612,6 +3626,7 @@ namespace test_functions
    * `test_functions::Schwefel` is Schwefel test function.
    *
    * \f[
+   * f^*\left(\vec{x}\right) =
    * \sum_{i = 0}^{n - 1} \left( \sum_{j = 0}^i x_i \right)^2
    * \f]
    */
@@ -3633,6 +3648,7 @@ namespace test_functions
    * `test_functions::sphere` is sphere test function.
    *
    * \f[
+   * f^*\left(\vec{x}\right) =
    * \sum_{i = 0}^{n - 1} x_i^2
    * \f]
    */
