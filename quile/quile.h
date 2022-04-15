@@ -2789,8 +2789,8 @@ max_iterations_termination(std::size_t max)
  * `max_fitness_improvement_termination` returns condition, which terminates
  * algorithm after reaching fitness function \em plateau. The algorithm is
  * terminated if after `n` last generations fitness function maximum has not
- * improved relatively more than `frac` with respect to the whole evolutionary
- * process.
+ * improved \em relatively more than `frac` with respect to the whole
+ * evolutionary process.
  *
  * \tparam G Some `genotype` specialization.
  * @param ff Database intermediary object.
@@ -2799,7 +2799,7 @@ max_iterations_termination(std::size_t max)
  * @return Predicate terminating genetic algorithm after reaching fitness
  * function \em plateau.
  *
- * \note This condition was not intended for use with `evolution` argument
+ * \note This condition is not intended for use with `evolution` argument
  * `max_history` different than `0`.
  */
 template<typename G>
@@ -2821,6 +2821,23 @@ max_fitness_improvement_termination(const fitness_db<G>& ff,
   };
 }
 
+/**
+ * `max_fitness_improvement_termination_2` returns condition, which terminates
+ * algorithm after reaching fitness function \em plateau. The algorithm is
+ * terminated if after `n` last generations fitness function maximum has not
+ * improved \em absolutely more than `delta` with respect to the whole
+ * evolutionary process.
+ *
+ * \tparam G Some `genotype` specialization.
+ * @param ff Database intermediary object.
+ * @param n Number of \em last generations.
+ * @param delta \em Plateau \em flatness.
+ * @return Predicate terminating genetic algorithm after reaching fitness
+ * function \em plateau.
+ *
+ * \note This condition is not intended for use with `evolution` argument
+ * `max_history` different than `0`.
+ */
 template<typename G>
 termination_condition_fn<G>
 max_fitness_improvement_termination_2(const fitness_db<G>& ff,
