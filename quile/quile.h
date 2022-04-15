@@ -2900,6 +2900,15 @@ fitness_threshold_termination(const fitness_db<G>& fd, fitness thr, fitness eps)
 // Concrete mutation & recombination operators //
 /////////////////////////////////////////////////
 
+/**
+ * `Gaussian_mutation` returns Gaussian mutation operator with standard
+ * deviation `sigma` and gene mutation probability `p`.
+ *
+ * \tparam G Some `genotype` specialization.
+ * @param sigma Standard deviation.
+ * @param p Gene mutation probability.
+ * @return Gaussian mutation operator.
+ */
 template<typename G>
 requires floating_point_chromosome<G>
 auto
