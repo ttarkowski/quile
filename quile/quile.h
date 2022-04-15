@@ -1585,6 +1585,11 @@ operator<<(std::ostream& os, const G& g)
 } // namespace quile
 
 /**
+ * Namespace `std` is opened only for the purpose of injecting `hash` into it.
+ */
+namespace std {
+
+/**
  * `std::hash` for `genotype`.
  *
  * \note This `std::hash` specialization allows interoperability with STL
@@ -1595,7 +1600,7 @@ operator<<(std::ostream& os, const G& g)
  */
 template<typename G>
 requires quile::chromosome<G>
-struct std::hash<G>
+struct hash<G>
 {
   /**
    * `std::hash::operator()` calculates hash function value for genotype `g`.
@@ -1613,6 +1618,8 @@ struct std::hash<G>
     return res;
   }
 };
+
+} // namespace std
 
 namespace quile {
 
