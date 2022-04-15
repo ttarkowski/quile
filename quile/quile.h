@@ -2422,7 +2422,7 @@ advance_cpy(It it, std::size_t n)
  *
  * \tparam It Iterator type.
  * \tparam Compare Type of comparison mechanism.
- * @param firt Range begin.
+ * @param first Range begin.
  * @param last Range end.
  * @param comp Comparison function object.
  * @return Sequence container with ranking positions.
