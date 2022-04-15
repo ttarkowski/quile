@@ -2653,6 +2653,15 @@ generational_survivor_selection(std::size_t sz,
 // Termination condition //
 ///////////////////////////
 
+/**
+ * `max` returns maximum fitness function value from `fs`.
+ *
+ * @param fs Fitness function values container.
+ * @return Maximum value.
+ *
+ * \throws std::runtime_error Exception is raised if all `fs` elements are equal
+ * to `incalculable`.
+ */
 inline fitness
 max(const fitnesses& fs)
 {
@@ -2660,6 +2669,18 @@ max(const fitnesses& fs)
   return *std::ranges::max_element(calc);
 }
 
+/**
+ * `max` returns maximum fitness function value for population `p` and database
+ * intermediary object `ff`.
+ *
+ * \tparam G Some `genotype` specialization.
+ * @param p Population.
+ * @param ff Database intermediary object.
+ * @return Maximum value.
+ *
+ * \throws std::runtime_error Exception is raised if fitness function evaluates
+ * to `incalculable` for all genotypes from `p`.
+ */
 template<typename G>
 requires chromosome<G> fitness
 max(const population<G>& p, const fitness_db<G>& ff)
@@ -2667,6 +2688,18 @@ max(const population<G>& p, const fitness_db<G>& ff)
   return max(ff(p));
 }
 
+/**
+ * `max` returns maximum fitness function values for each generation from `gs`
+ * and database intermediary object `ff`.
+ *
+ * \tparam G Some `genotype` specialization.
+ * @param gs Sequence of generations.
+ * @param ff Database intermediary object.
+ * @return Maximum values corresponding to each generation.
+ *
+ * \throws std::runtime_error Exception is raised if fitness function evaluates
+ * to `incalculable` for all genotypes from at least one generation.
+ */
 template<typename G>
 requires chromosome<G> fitnesses
 max(const generations<G>& gs, const fitness_db<G>& ff)
@@ -2678,6 +2711,15 @@ max(const generations<G>& gs, const fitness_db<G>& ff)
   return res;
 }
 
+/**
+ * `min` returns minimum fitness function value from `fs`.
+ *
+ * @param fs Fitness function values container.
+ * @return Minimum value.
+ *
+ * \throws std::runtime_error Exception is raised if all `fs` elements are equal
+ * to `incalculable`.
+ */
 inline fitness
 min(const fitnesses& fs)
 {
@@ -2685,6 +2727,18 @@ min(const fitnesses& fs)
   return *std::ranges::min_element(calc);
 }
 
+/**
+ * `min` returns minimum fitness function value for population `p` and database
+ * intermediary object `ff`.
+ *
+ * \tparam G Some `genotype` specialization.
+ * @param p Population.
+ * @param ff Database intermediary object.
+ * @return Minimum value.
+ *
+ * \throws std::runtime_error Exception is raised if fitness function evaluates
+ * to `incalculable` for all genotypes from `p`.
+ */
 template<typename G>
 requires chromosome<G> fitness
 min(const population<G>& p, const fitness_db<G>& ff)
@@ -2692,6 +2746,18 @@ min(const population<G>& p, const fitness_db<G>& ff)
   return min(ff(p));
 }
 
+/**
+ * `min` returns minimum fitness function values for each generation from `gs`
+ * and database intermediary object `ff`.
+ *
+ * \tparam G Some `genotype` specialization.
+ * @param gs Sequence of generations.
+ * @param ff Database intermediary object.
+ * @return Minimum values corresponding to each generation.
+ *
+ * \throws std::runtime_error Exception is raised if fitness function evaluates
+ * to `incalculable` for all genotypes from at least one generation.
+ */
 template<typename G>
 requires chromosome<G> fitnesses
 min(const generations<G>& gs, const fitness_db<G>& ff)
