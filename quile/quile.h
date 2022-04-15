@@ -3121,6 +3121,12 @@ cut_n_crossfill(const G& g0, const G& g1)
 namespace test_functions
 {
 
+  /**
+   * `test_functions::point` is point in N-dimensional space.
+   *
+   * \tparam T Floating-point type.
+   * \tparam N Space dimension.
+   */
   template<std::floating_point T, std::size_t N>
   using point = std::array<T, N>;
 
