@@ -2899,6 +2899,8 @@ max_iterations_termination(std::size_t max)
  * @returns Predicate terminating genetic algorithm after reaching fitness
  * function \em plateau.
  *
+ * @throws std::runtime_error Exception is raised if fitness function evaluates
+ * to `incalculable` for all genotypes from at least one generation.
  * @note This condition is not intended for use with `evolution` argument
  * `max_history` different than `0`.
  */
@@ -2913,7 +2915,7 @@ max_fitness_improvement_termination(const fitness_db<G>& ff,
     if (gs.size() <= n) {
       return false;
     } else {
-      const fitnesses fs{ max(gs, ff) }; // TODO: This might throw exception.
+      const fitnesses fs{ max(gs, ff) };
       const fitness min_last_n = *std::min_element(fs.end() - n, fs.end());
       const double x = (max(fs) - min_last_n) / (max(fs) - min(fs));
       return x <= frac;
@@ -2935,6 +2937,8 @@ max_fitness_improvement_termination(const fitness_db<G>& ff,
  * @returns Predicate terminating genetic algorithm after reaching fitness
  * function \em plateau.
  *
+ * @throws std::runtime_error Exception is raised if fitness function evaluates
+ * to `incalculable` for all genotypes from at least one generation.
  * @note This condition is not intended for use with `evolution` argument
  * `max_history` different than `0`.
  */
@@ -2949,7 +2953,7 @@ max_fitness_improvement_termination_2(const fitness_db<G>& ff,
     if (gs.size() <= n) {
       return false;
     } else {
-      const fitnesses fs{ max(gs, ff) }; // TODO: This might throw exception.
+      const fitnesses fs{ max(gs, ff) };
       const fitness max_0 = *std::max_element(fs.begin(), fs.end() - n);
       const fitness max_1 = *std::max_element(fs.end() - n, fs.end());
       return max_1 <= max_0 + delta;
