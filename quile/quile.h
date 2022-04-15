@@ -3149,12 +3149,28 @@ namespace test_functions
     return std::sqrt(res);
   }
 
+  /**
+   * `test_functions::coordinates` converts 2D-point to `std::tuple` containing
+   * point coordinates.
+   *
+   * \tparam T Floating-point type.
+   * @param 2D-point.
+   * @return Corresponding tuple.
+   */
   template<std::floating_point T>
   std::tuple<T, T> coordinates(const point<T, 2>& p)
   {
     return std::tuple<T, T>{ p[0], p[1] };
   }
 
+  /**
+   * `test_functions::coordinates` converts 3D-point to `std::tuple` containing
+   * point coordinates.
+   *
+   * \tparam T Floating-point type.
+   * @param 3D-point.
+   * @return Corresponding tuple.
+   */
   template<std::floating_point T>
   std::tuple<T, T, T> coordinates(const point<T, 3>& p)
   {
