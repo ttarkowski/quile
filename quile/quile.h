@@ -55,7 +55,7 @@
 #include <vector>
 
 /**
- * \file
+ * @file
  * `quile/quile.h` is one and only file of the library implementation.
  *
  * Please include `quile/quile.h` header using the code `#include
@@ -73,7 +73,7 @@
  */
 
 /**
- * \def QUILE_LOG(x)
+ * @def QUILE_LOG(x)
  * `QUILE_LOG(x)` macro prints diagnostic information.
  *
  * `QUILE_LOG(x)` macro prints diagnostic information to the standard error
@@ -81,10 +81,10 @@
  * Otherwise it has no effect.
  *
  * Example:
- * \include QUILE_LOG.cc
+ * @include QUILE_LOG.cc
  *
  * Result:
- * \verbinclude QUILE_LOG.out
+ * @verbinclude QUILE_LOG.out
  */
 
 #ifdef QUILE_ENABLE_LOGGING
@@ -121,10 +121,10 @@ struct static_loop
    * type convertible from `T`, being the value of current loop index.
    *
    * Example:
-   * \include static_loop.cc
+   * @include static_loop.cc
    *
    * Result:
-   * \verbinclude static_loop.out
+   * @verbinclude static_loop.out
    */
   static void body([[maybe_unused]] auto&& f) {}
 };
@@ -149,10 +149,10 @@ requires(I < N) struct static_loop<T, I, N>
  * @param fs Callable object returning Boolean value.
  *
  * Example:
- * \include fn_and.cc
+ * @include fn_and.cc
  *
  * Result: (might be empty)
- * \verbinclude fn_and.out
+ * @verbinclude fn_and.out
  *
  * @note `fn_and` can be useful to describe complex genetic algorithm
  * termination conditions.
@@ -169,10 +169,10 @@ fn_and(const auto&... fs)
  * @param fs Callable object returning Boolean value.
  *
  * Example:
- * \include fn_or.cc
+ * @include fn_or.cc
  *
  * Result: (might be empty)
- * \verbinclude fn_or.out
+ * @verbinclude fn_or.out
  *
  * @note `fn_or` can be useful to describe complex genetic algorithm
  * termination conditions.
@@ -211,10 +211,10 @@ public:
    * @param f Callable object to be concurrently executed.
    *
    * Example:
-   * \include thread_pool.cc
+   * @include thread_pool.cc
    *
    * Result: (might be different due to concurrent execution)
-   * \verbinclude thread_pool.out
+   * @verbinclude thread_pool.out
    */
   template<typename T>
   std::future<T> async(std::launch policy, const std::function<T()>& f)
@@ -266,10 +266,10 @@ private:
  * @tparam Args Argument type.
  *
  * Example:
- * \include callable.cc
+ * @include callable.cc
  *
  * Result: (might be empty)
- * \verbinclude callable.out
+ * @verbinclude callable.out
  */
 template<typename F, typename R, typename... Args>
 concept callable = std::convertible_to<std::invoke_result_t<F, Args...>, R>;
@@ -3037,11 +3037,11 @@ Gaussian_mutation(typename G::gene_t sigma, probability p)
  *
  * @note Due to documentation processing problem the above template declaration
  * is incorrect. Corrected declaration:
- * \code
+ * @code
  * template<typename G>
  * requires floating_point_chromosome<G> && (G::size() % 2 == 0)
  * auto self_adaptive_mutation(typename G::gene_t a0, typename G::gene_t a1)
- * \endcode
+ * @endcode
  */
 template<typename G>
 requires floating_point_chromosome<G>
