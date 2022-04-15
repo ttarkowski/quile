@@ -2624,6 +2624,19 @@ private:
   const selection_probabilities_fn<G> spf_;
 };
 
+/**
+ * `generational_survivor_selection` is generational survivor selection
+ * mechanism.
+ *
+ * \tparam G Some `genotype` specialization.
+ * @param sz Generation / offspring size.
+ * @param generation Current generation.
+ * @param offspring Offspring.
+ * @return Offspring.
+ *
+ * \throws std::invalid_argument Exception is raised if `generation` size or
+ * `offspring` size is different from `sz`.
+ */
 template<typename G>
 requires chromosome<G> population<G>
 generational_survivor_selection(std::size_t sz,
