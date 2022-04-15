@@ -2575,16 +2575,35 @@ private:
   const selection_probabilities_fn<G> spf_;
 };
 
+/**
+ * `stochastic_universal_sampling` is stochastic universal sampling (SUS).
+ *
+ * \tparam G Some `genotype` specialization.
+ */
 template<typename G>
 requires chromosome<G>
 class stochastic_universal_sampling
 {
 public:
+  /**
+   * `stochastic_universal_sampling::stochastic_universal_sampling` constructor
+   * creates SUS with selection probability function `spf`.
+   *
+   * @param spf Selection probability function.
+   */
   explicit stochastic_universal_sampling(
     const selection_probabilities_fn<G>& spf)
     : spf_{ spf }
   {}
 
+  /**
+   * `stochastic_universal_sampling::operator()` draws `lambda` genotypes from
+   * population `p` according to the SUS.
+   *
+   * @param lambda Size of the returned population.
+   * @param p Source population.
+   * @return Population consisting of genotypes drawn from `p`.
+   */
   population<G> operator()(std::size_t lambda, const population<G>& p) const
   {
     QUILE_LOG("Stochastic Universal Sampling");
