@@ -871,6 +871,11 @@ struct g_floating_point
 {
   static_assert(D != nullptr);
   static_assert(N > 0);
+
+  /**
+   * `g_floating_point::type` is floating-point type used for representing gene
+   * values.
+   */
   using type = T;
 
   /**
@@ -951,6 +956,10 @@ requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_integer
 {
   static_assert(D != nullptr);
   static_assert(N > 0);
+
+  /**
+   * `g_integer::type` is floating-point type used for representing gene values.
+   */
   using type = T;
 
   /**
@@ -1026,6 +1035,10 @@ template<std::size_t N>
 struct g_binary
 {
   static_assert(N > 0);
+
+  /**
+   * `g_binary::type` is floating-point type used for representing gene values.
+   */
   using type = bool;
 
   /**
@@ -1104,6 +1117,10 @@ concept binary_representation = is_g_binary_v<T>;
 template<typename T, std::size_t N, T M>
 requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_permutation
 {
+  /**
+   * `g_permutation::type` is floating-point type used for representing gene
+   * values.
+   */
   using type = T;
 
   /**
