@@ -2973,6 +2973,13 @@ swap_mutation(const G& g)
   return population<G>{ G{ d } };
 }
 
+/**
+ * `random_reset` returns random reset mutation with parameter `p`.
+ *
+ * \tparam G Some `genotype` specialization.
+ * @param p Gene mutation probability.
+ * @return Random reset mutation operator.
+ */
 template<typename G>
 requires floating_point_chromosome<G> || integer_chromosome<G> ||
   binary_chromosome<G>
