@@ -2531,15 +2531,35 @@ random_population(std::size_t lambda)
   return res;
 }
 
+/**
+ * `roulette_wheel_selection` is roulette wheel selection (a.k.a. roulette wheel
+ * \em algorithm, RWA).
+ *
+ * \tparam G Some `genotype` specialization.
+ */
 template<typename G>
 requires chromosome<G>
 class roulette_wheel_selection
 {
 public:
+  /**
+   * `roulette_wheel_selection::roulette_wheel_selection` constructor creates
+   * RWA with selection probability function `spf`.
+   *
+   * @param spf Selection probability function.
+   */
   explicit roulette_wheel_selection(const selection_probabilities_fn<G>& spf)
     : spf_{ spf }
   {}
 
+  /**
+   * `roulette_wheel_selection::operator()` draws `lambda` genotypes from
+   * population `p` according to the RWA.
+   *
+   * @param lambda Size of the returned population.
+   * @param p Source population.
+   * @return Population consisting of genotypes drawn from `p`.
+   */
   population<G> operator()(std::size_t lambda, const population<G>& p) const
   {
     QUILE_LOG("Roulette wheel selection");
