@@ -106,9 +106,9 @@ namespace quile {
  * `static_loop` is a `for`-loop replacement with loop index usable at compile
  * time.
  *
- * \tparam T Loop index type.
- * \tparam I First index value (inclusive).
- * \tparam N Last index value (exclusive).
+ * @tparam T Loop index type.
+ * @tparam I First index value (inclusive).
+ * @tparam N Last index value (exclusive).
  */
 template<std::integral T, T I, T N>
 struct static_loop
@@ -261,9 +261,9 @@ private:
  * `callable` specifies that `F` is convertible to the callable object type,
  * which accepts arguments of types `Args...` and returns value of type `R`.
  *
- * \tparam F Type convertible to the callable object type.
- * \tparam R Return type.
- * \tparam Args Argument type.
+ * @tparam F Type convertible to the callable object type.
+ * @tparam R Return type.
+ * @tparam Args Argument type.
  *
  * Example:
  * \include callable.cc
@@ -281,7 +281,7 @@ concept callable = std::convertible_to<std::invoke_result_t<F, Args...>, R>;
 /**
  * `range` represents subrange (closed interval) of type `T`.
  *
- * \tparam T Base type.
+ * @tparam T Base type.
  */
 template<typename T>
 class range
@@ -342,7 +342,7 @@ public:
   /**
    * `range::min` returns range infimum.
    *
-   * @return Range infimum, i.e. left endpoint of interval \f$[{\rm min}, {\rm
+   * @returns Range infimum, i.e. left endpoint of interval \f$[{\rm min}, {\rm
    * max}]_{\rm T}\f$ (`min` value) corresponding to the range.
    */
   T min() const { return min_; }
@@ -350,15 +350,15 @@ public:
   /**
    * `range::max` returns range supremum.
    *
-   * @return Range supremum, i.e. right endpoint of interval \f$[{\rm min}, {\rm
-   * max}]_{\rm T}\f$ (`max` value) corresponding to the range.
+   * @returns Range supremum, i.e. right endpoint of interval \f$[{\rm min},
+   * {\rm max}]_{\rm T}\f$ (`max` value) corresponding to the range.
    */
   T max() const { return max_; }
 
   /**
    * `range::midpoint` returns midpoint of interval represented by range.
    *
-   * @return Range midpoint, i.e. center of interval \f$[{\rm min}, {\rm
+   * @returns Range midpoint, i.e. center of interval \f$[{\rm min}, {\rm
    * max}]_{\rm T}\f$ (arithmetic mean of `min` and `max` values) corresponding
    * to the range. If `T` is of integer type and the sum of `min` and `max` is
    * odd, the result is rounded towards `min`.
@@ -378,7 +378,7 @@ public:
    * than `t`; otherwise returns `t`.
    *
    * @param t Value to be clamped.
-   * @return Value clamped to the range.
+   * @returns Value clamped to the range.
    */
   template<typename U = T,
            typename = std::enable_if_t<!std::is_same_v<U, bool>>>
@@ -392,7 +392,7 @@ public:
    * \f$[{\rm min}, {\rm max}]_{\rm T}\f$ represented by the range.
    *
    * @param t Argument to be checked.
-   * @return Boolean value of check: `true` if `t` is in \f$[{\rm min}, {\rm
+   * @returns Boolean value of check: `true` if `t` is in \f$[{\rm min}, {\rm
    * max}]_{\rm T}\f$ interval and `false` otherwise.
    */
   bool contains(T t) const { return t >= min_ && t <= max_; }
@@ -402,7 +402,7 @@ public:
    * of left and right endpoints.
    *
    * @param r Range to be compared with `*this`.
-   * @return Ordering (cf. `std::strong_ordering`, `std::weak_ordering`,
+   * @returns Ordering (cf. `std::strong_ordering`, `std::weak_ordering`,
    * `std::partial_ordering`).
    */
   auto operator<=>(const range<T>& r) const = default;
@@ -417,7 +417,7 @@ private:
  *
  * @param os Stream to use.
  * @param r Range to be printed.
- * @return Reference to the `os` stream.
+ * @returns Reference to the `os` stream.
  */
 template<typename T>
 std::ostream&
@@ -430,10 +430,10 @@ operator<<(std::ostream& os, const range<T>& r)
  * `iota` returns `std::array` container filled with arithmetic sequence of
  * length `N`, with difference of 1 and starting from value `t`.
  *
- * \tparam T Number type.
- * \tparam N Returned container size.
+ * @tparam T Number type.
+ * @tparam N Returned container size.
  * @param t Starting value.
- * @return `std::array<T, N>` with consecutive numbers starting from value `t`.
+ * @returns `std::array<T, N>` with consecutive numbers starting from value `t`.
  */
 template<typename T, std::size_t N>
 std::array<T, N>
@@ -459,7 +459,7 @@ using probability = double;
 /**
  * `random_engine` returns pseudo-random number generator engine based on
  * Mersenne Twister.
- * @return Reference to static object with Mersenne Twister engine
+ * @returns Reference to static object with Mersenne Twister engine
  * `std::mt19937` initialized with `std::random_device{}()`.
  */
 inline std::mt19937&
@@ -476,7 +476,7 @@ random_engine()
  * probability `1 - success_probability`, i.e. it implements Bernoulli
  * distribution \f${\rm B}(1, {\rm success\_{}probability})\f$.
  * @param success_probability Probability of returning `true` value.
- * @return Logic value drawn from \f${\rm B}(1, {\rm
+ * @returns Logic value drawn from \f${\rm B}(1, {\rm
  * success\_{}probability})\f$.
  */
 inline bool
@@ -489,10 +489,10 @@ success(probability success_probability)
  * `random_N` returns random number from normal distribution with mean `mean`
  * and standard deviation `standard_deviation`.
  *
- * \tparam T Result type (floating-point).
+ * @tparam T Result type (floating-point).
  * @param mean Mean of normal distribution.
  * @param standard_deviation Standard deviation of normal distribution.
- * @return Number drawn from normal distribution.
+ * @returns Number drawn from normal distribution.
  */
 template<std::floating_point T>
 T
@@ -508,10 +508,10 @@ random_N(T mean, T standard_deviation)
  *   - from set \f$\{a, b\}\f$ for Boolean type `T`
  *   - from interval \f$[a, b]_{\mathbb{Z}}\f$ for integer type `T`
  *
- * \tparam T Return type.
+ * @tparam T Return type.
  * @param a Parameter describing aforementioned interval or set.
  * @param b Parameter describing aforementioned interval or set.
- * @return Value drawn from uniform distribution.
+ * @returns Value drawn from uniform distribution.
  *
  * \note For floating-point types overflow may occur for `std::nextafter(b,
  * std::numeric_limits<T>::max()) - a` (cf. N4861, 26.6.8.2.2).
@@ -541,9 +541,9 @@ random_U(T a, T b)
 /**
  * `square` returns second power of its argument.
  *
- * \tparam T Argument and return type (floating-point or integer type).
- * \param x Argument to be raised to the second power.
- * \return Argument raised to the second power, i.e. \f$x^2\f$.
+ * @tparam T Argument and return type (floating-point or integer type).
+ * @param x Argument to be raised to the second power.
+ * @returns Argument raised to the second power, i.e. \f$x^2\f$.
  */
 template<typename T>
 requires std::floating_point<T> || std::integral<T> T
@@ -555,9 +555,9 @@ square(T x)
 /**
  * `cube` returns thirdd power of its argument.
  *
- * \tparam T Argument and return type (floating-point or integer type).
- * \param x Argument to be raised to the third power.
- * \return Argument raised to the third power, i.e. \f$x^3\f$.
+ * @tparam T Argument and return type (floating-point or integer type).
+ * @param x Argument to be raised to the third power.
+ * @returns Argument raised to the third power, i.e. \f$x^3\f$.
  */
 template<typename T>
 requires std::floating_point<T> || std::integral<T> T
@@ -569,7 +569,7 @@ cube(T x)
 /**
  * `pi` is an approximation of \f$\pi\f$ number.
  *
- * \tparam T Floating-point type.
+ * @tparam T Floating-point type.
  */
 template<std::floating_point T>
 const T pi = std::numbers::pi_v<T>;
@@ -577,7 +577,7 @@ const T pi = std::numbers::pi_v<T>;
 /**
  * `e` is an approximation of \f$e\f$ number.
  *
- * \tparam T Floating-point type.
+ * @tparam T Floating-point type.
  */
 template<std::floating_point T>
 const T e = std::numbers::e_v<T>;
@@ -585,7 +585,7 @@ const T e = std::numbers::e_v<T>;
 /**
  * `ln2` is an approximation of \f$\ln 2\f$ number.
  *
- * \tparam T Floating-point type.
+ * @tparam T Floating-point type.
  */
 template<std::floating_point T>
 const T ln2 = std::numbers::ln2_v<T>;
@@ -599,10 +599,10 @@ namespace detail {
 /**
  * `detail::angle` returns angle \f$\phi\f$ in polar coordinate system.
  *
- * \tparam T Argument and return type (floating-point).
+ * @tparam T Argument and return type (floating-point).
  * @param x \f$x\f$ coordinate in Cartesian coordinate system.
  * @param y \f$y\f$ coordinate in Cartesian coordinate system.
- * @return \f$\phi\f$ coordinate in polar coordinate system corresponding to
+ * @returns \f$\phi\f$ coordinate in polar coordinate system corresponding to
  * \f$(x, y)\f$ point.
  */
 template<std::floating_point T>
@@ -618,11 +618,11 @@ angle(T x, T y)
 /**
  * `cart2spher` changes coordinate system from Cartesian to spherical.
  *
- * \tparam T Argument type and base for return type (floating-point).
+ * @tparam T Argument type and base for return type (floating-point).
  * @param x \f$x\f$ coordinate in Cartesian coordinate system.
  * @param y \f$y\f$ coordinate in Cartesian coordinate system.
  * @param z \f$y\f$ coordinate in Cartesian coordinate system.
- * @return Tuple consisting of coordinates of \f$(r, \theta , \phi)\f$ point in
+ * @returns Tuple consisting of coordinates of \f$(r, \theta , \phi)\f$ point in
  * spherical coordinate system.
  *
  * \note \f$\theta \in [0, \pi]\f$, \f$\phi \in [0, 2\pi )\f$.
@@ -641,11 +641,11 @@ cart2spher(T x, T y, T z)
 /**
  * `spher2cart` changes coordinate system from spherical to Cartesian.
  *
- * \tparam T Argument type and base for return type (floating-point).
+ * @tparam T Argument type and base for return type (floating-point).
  * @param r \f$r\f$ coordinate in spherical coordinate system.
  * @param theta \f$\theta\f$ coordinate in spherical coordinate system.
  * @param phi \f$\phi\f$ coordinate in spherical coordinate system.
- * @return Tuple consisting of coordinates of \f$(x, y, z)\f$ point in
+ * @returns Tuple consisting of coordinates of \f$(x, y, z)\f$ point in
  * Cartesian coordinate system.
  *
  * \note \f$\theta \in [0, \pi]\f$, \f$\phi \in [0, 2\pi )\f$.
@@ -662,10 +662,10 @@ spher2cart(T r, T theta, T phi)
 /**
  * `cart2polar` changes coordinate system from Cartesian to polar.
  *
- * \tparam T Argument type and base for return type (floating-point).
+ * @tparam T Argument type and base for return type (floating-point).
  * @param x \f$x\f$ coordinate in Cartesian coordinate system.
  * @param y \f$y\f$ coordinate in Cartesian coordinate system.
- * @return Tuple consisting of coordinates of \f$(r, \phi)\f$ point in polar
+ * @returns Tuple consisting of coordinates of \f$(r, \phi)\f$ point in polar
  * coordinate system.
  *
  * \note \f$\phi \in [0, 2\pi )\f$.
@@ -680,10 +680,10 @@ cart2polar(T x, T y)
 /**
  * `polar2cart` changes coordinate system from polar to Cartesian.
  *
- * \tparam T Argument type and base for return type (floating-point).
+ * @tparam T Argument type and base for return type (floating-point).
  * @param r \f$r\f$ coordinate in polar coordinate system.
  * @param phi \f$\phi\f$ coordinate in polar coordinate system.
- * @return Tuple consisting of coordinates of \f$(x, y)\f$ point in Cartesian
+ * @returns Tuple consisting of coordinates of \f$(x, y)\f$ point in Cartesian
  * coordinate system.
  *
  * \note \f$\phi \in [0, 2\pi )\f$.
@@ -703,8 +703,8 @@ polar2cart(T r, T phi)
  * `domain` is a type representing domain in form of N-dimensional
  * parallelepiped.
  *
- * \tparam T Base type.
- * \tparam N Domain dimension.
+ * @tparam T Base type.
+ * @tparam N Domain dimension.
  */
 template<typename T, std::size_t N>
 using domain = std::array<range<T>, N>;
@@ -740,11 +740,11 @@ concept set_of_departure = is_domain_v<T>;
  * `contains` checks if argument `p` is within domain `d` and returns `true` in
  * that case. Otherwise it returns `false`.
  *
- * \tparam T Domain base type.
- * \tparam N Domain dimensionality.
+ * @tparam T Domain base type.
+ * @tparam N Domain dimensionality.
  * @param d Domain.
  * @param p Point to be checked.
- * @return Boolean value describing whether point `p` is within domain `d`.
+ * @returns Boolean value describing whether point `p` is within domain `d`.
  */
 template<typename T, std::size_t N>
 bool
@@ -761,10 +761,10 @@ contains(const domain<T, N>& d, const std::array<T, N>& p)
  * `uniform_domain` creates domain, where constraints on each direction are
  * identical, i.e. domain is of form of hypercube.
  *
- * \tparam T Domain base type.
- * \tparam N Domain dimensionality.
+ * @tparam T Domain base type.
+ * @tparam N Domain dimensionality.
  * @param r Interval for hypercube construction.
- * @return `N`-dimensional hypercube with edge of `r`.
+ * @returns `N`-dimensional hypercube with edge of `r`.
  */
 template<typename T, std::size_t N>
 constexpr domain<T, N>
@@ -790,10 +790,10 @@ uniform_domain(T lo, T hi)
 /**
  * `uniform` checks whether domain is of form of hypercube.
  *
- * \tparam T Domain base type.
- * \tparam N Domain dimensionality.
+ * @tparam T Domain base type.
+ * @tparam N Domain dimensionality.
  * @param d Domain to be checked.
- * @return Boolean value of check result.
+ * @returns Boolean value of check result.
  */
 template<typename T, std::size_t N>
 constexpr bool
@@ -807,11 +807,11 @@ uniform(const domain<T, N>& d)
  * `self_adaptive_variation_domain` creates domain for self-adaptive mutation
  * based on domain for ordinary variation.
  *
- * \tparam T Domain base type.
- * \tparam N Domain dimensionality.
+ * @tparam T Domain base type.
+ * @tparam N Domain dimensionality.
  * @param d Domain to use.
  * @param lo Minimum value for \f$\sigma_i\f$ on each direction.
- * @return Domain with dimensionality of `2 * N`, where first part is equal to
+ * @returns Domain with dimensionality of `2 * N`, where first part is equal to
  * `d` and the second one consits of ranges of form `range{ lo, 0.5 *
  * std::max(std::fabs(d[i].min()), std::fabs(d[i].max())) }`.
  */
@@ -839,10 +839,10 @@ using chain = std::array<T, N>;
  * `chain_min` returns object of type `chain` filled at each `i` position with
  * `d[i].min()` value.
  *
- * \tparam T Chain base type.
- * \tparam N Chain length.
+ * @tparam T Chain base type.
+ * @tparam N Chain length.
  * @param d Domain.
- * @return Chain based on `d`.
+ * @returns Chain based on `d`.
  */
 template<typename T, std::size_t N>
 chain<T, N>
@@ -861,9 +861,9 @@ chain_min(const domain<T, N>& d)
  * `g_floating_point` specifies that `genotype` has floating-point
  * representation.
  *
- * \tparam T Floating-point type of representation.
- * \tparam N Genotype length.
- * \tparam D Pointer to the genotype domain.
+ * @tparam T Floating-point type of representation.
+ * @tparam N Genotype length.
+ * @tparam D Pointer to the genotype domain.
  */
 template<typename T, std::size_t N, const domain<T, N>* D>
 requires std::floating_point<T>
@@ -881,14 +881,14 @@ struct g_floating_point
   /**
    * `size` returns domain size, i.e. `N`.
    *
-   * @return Genotype length (domain size).
+   * @returns Genotype length (domain size).
    */
   static constexpr std::size_t size() { return N; }
 
   /**
    * `constraints` returns domain, i.e. `*D`.
    *
-   * @return Domain.
+   * @returns Domain.
    */
   static constexpr const domain<type, size()>& constraints() { return *D; }
 
@@ -903,7 +903,7 @@ struct g_floating_point
    * case. Otherwise returns `false`.
    *
    * @param c Chain to be checked.
-   * @return Boolean value of check result.
+   * @returns Boolean value of check result.
    */
   static bool valid(const chain<type, size()>& c)
   {
@@ -913,7 +913,7 @@ struct g_floating_point
   /**
    * `default_chain` returns chain filled in default way.
    *
-   * @return Default chain.
+   * @returns Default chain.
    */
   static chain_t default_chain() { return chain_min(constraints()); }
 };
@@ -951,9 +951,9 @@ concept floating_point_representation = is_g_floating_point_v<T>;
 /**
  * `g_integer` specifies that `genotype` has integer representation.
  *
- * \tparam T Integer type of representation.
- * \tparam N Genotype length.
- * \tparam D Pointer to the genotype domain.
+ * @tparam T Integer type of representation.
+ * @tparam N Genotype length.
+ * @tparam D Pointer to the genotype domain.
  */
 template<typename T, std::size_t N, const domain<T, N>* D>
 requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_integer
@@ -969,14 +969,14 @@ requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_integer
   /**
    * `size` returns domain size, i.e. `N`.
    *
-   * @return Genotype length (domain size).
+   * @returns Genotype length (domain size).
    */
   static constexpr std::size_t size() { return N; }
 
   /**
    * `constraints` returns domain, i.e. `*D`.
    *
-   * @return Domain.
+   * @returns Domain.
    */
   static constexpr const domain<type, size()>& constraints() { return *D; }
 
@@ -991,7 +991,7 @@ requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_integer
    * case. Otherwise returns `false`.
    *
    * @param c Chain to be checked.
-   * @return Boolean value of check result.
+   * @returns Boolean value of check result.
    */
   static bool valid(const chain<type, size()>& c)
   {
@@ -1001,7 +1001,7 @@ requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_integer
   /**
    * `default_chain` returns chain filled in default way.
    *
-   * @return Default chain.
+   * @returns Default chain.
    */
   static chain_t default_chain() { return chain_min(constraints()); }
 };
@@ -1037,7 +1037,7 @@ concept integer_representation = is_g_integer_v<T>;
 /**
  * `g_binary` specifies that `genotype` has binary representation.
  *
- * \tparam N Genotype length.
+ * @tparam N Genotype length.
  */
 template<std::size_t N>
 struct g_binary
@@ -1052,14 +1052,14 @@ struct g_binary
   /**
    * `size` returns domain size, i.e. `N`.
    *
-   * @return Genotype length (domain size).
+   * @returns Genotype length (domain size).
    */
   static constexpr std::size_t size() { return N; }
 
   /**
    * `constraints` returns domain, i.e. \f$\{0, 1\}^N\f$.
    *
-   * @return Domain.
+   * @returns Domain.
    */
   static constexpr const domain<type, size()> constraints()
   {
@@ -1075,7 +1075,7 @@ struct g_binary
   /**
    * `valid` checks whether its argument belongs to the domain.
    *
-   * @return Boolean value of check result.
+   * @returns Boolean value of check result.
    *
    * \note Result is equal to `true` by definition.
    */
@@ -1084,7 +1084,7 @@ struct g_binary
   /**
    * `default_chain` returns chain filled in default way.
    *
-   * @return Default chain.
+   * @returns Default chain.
    */
   static chain_t default_chain() { return chain_min(constraints()); }
 };
@@ -1120,9 +1120,9 @@ concept binary_representation = is_g_binary_v<T>;
 /**
  * `g_permutation` specifies that `genotype` has permutation representation.
  *
- * \tparam T Integer type of representation (excluding Boolean).
- * \tparam N Genotype length.
- * \tparam M The lowest permuted number.
+ * @tparam T Integer type of representation (excluding Boolean).
+ * @tparam N Genotype length.
+ * @tparam M The lowest permuted number.
  *
  * \note Numbers from \f$\{M, \dots , M + N - 1\}\f$ set are permuted.
  */
@@ -1138,14 +1138,14 @@ requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_permutation
   /**
    * `size` returns domain size, i.e. `N`.
    *
-   * @return Genotype length (domain size).
+   * @returns Genotype length (domain size).
    */
   static constexpr std::size_t size() { return N; }
 
   /**
    * `constraints` returns domain, i.e. \f$\{M, \dots , M + N - 1\}^N\f$.
    *
-   * @return Domain.
+   * @returns Domain.
    */
   static constexpr const domain<type, size()> constraints()
   {
@@ -1164,7 +1164,7 @@ requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_permutation
    * `false`.
    *
    * @param c Chain to be checked.
-   * @return Boolean value of check result.
+   * @returns Boolean value of check result.
    */
   static bool valid(const chain<type, size()>& c)
   {
@@ -1176,7 +1176,7 @@ requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_permutation
   /**
    * `default_chain` returns chain filled in default way.
    *
-   * @return Default chain.
+   * @returns Default chain.
    */
   static chain_t default_chain() { return iota<type, size()>(M); }
 };
@@ -1223,7 +1223,7 @@ concept chromosome_representation =
  * `genotype` is central type of the library---it allows genotype creation and
  * manipulation.
  *
- * \tparam R Type satisfying `chromosome_representation` concept.
+ * @tparam R Type satisfying `chromosome_representation` concept.
  */
 template<typename R>
 requires chromosome_representation<R>
@@ -1255,14 +1255,14 @@ public:
   /**
    * `genotype::size` returns domain size.
    *
-   * @return Genotype length (domain size).
+   * @returns Genotype length (domain size).
    */
   static constexpr std::size_t size() { return R::size(); }
 
   /**
    * `genotype::constraints` returns domain.
    *
-   * @return Domain.
+   * @returns Domain.
    */
   static constexpr const domain<gene_t, size()> constraints()
   {
@@ -1280,7 +1280,7 @@ public:
    * `true` in that case. Otherwise returns `false`.
    *
    * @param c Chain to be checked.
-   * @return Boolean value of check result.
+   * @returns Boolean value of check result.
    */
   static bool valid(const chain_t& c) { return R::valid(c); }
 
@@ -1335,7 +1335,7 @@ public:
    * `genotype::value` returns gene value at \em locus i.
    *
    * @param i Gene \em locus.
-   * @return Gene value.
+   * @returns Gene value.
    */
   gene_t value(std::size_t i) const { return chain_[i]; }
 
@@ -1344,7 +1344,7 @@ public:
    *
    * @param i Gene \em locus.
    * @param v New gene value.
-   * @return Reference to `*this`.
+   * @returns Reference to `*this`.
    *
    * \throws std::invalid_argument Exception is raised if new gene value is
    * outside permitted interval for given \em locus `i`.
@@ -1365,7 +1365,7 @@ public:
    * `genotype::random_reset` changes each gene value randomly using uniform
    * random distribution with intervals defined by domain.
    *
-   * @return Reference to `*this`.
+   * @returns Reference to `*this`.
    *
    * \note This overload is also available for permutation representation and
    * draws new permutation in that case.
@@ -1387,7 +1387,7 @@ public:
    * uniform random distribution with interval defined by domain.
    *
    * @param i Gene \em locus.
-   * @return Reference to `*this`.
+   * @returns Reference to `*this`.
    *
    * \note This overload is not available for permutation representation.
    */
@@ -1404,7 +1404,7 @@ public:
    * of genotypes' genetic chain.
    *
    * @param g Genotype to be compared with `*this`.
-   * @return Ordering (cf. `std::strong_ordering`, `std::weak_ordering`,
+   * @returns Ordering (cf. `std::strong_ordering`, `std::weak_ordering`,
    * `std::partial_ordering`).
    *
    * \note Comparisons of genotypes with floating-point representation does not
@@ -1417,7 +1417,7 @@ public:
    * chain.
    *
    * @param g Genotype to be compared with `*this`.
-   * @return Boolean value `true` if chains are equal and false, otherwise.
+   * @returns Boolean value `true` if chains are equal and false, otherwise.
    *
    * \note Comparisons of genotypes with floating-point representation does not
    * include tolerance.
@@ -1428,21 +1428,21 @@ public:
    * `genotype::data` returns constant reference to the underlying genetic
    * chain.
    *
-   * @return Constant reference to the genetic chain.
+   * @returns Constant reference to the genetic chain.
    */
   const chain_t& data() const { return chain_; }
 
   /**
    * `genotype::begin` returns constant iterator to the begin of genetic chain.
    *
-   * @return Constant iterator to the begin of genetic chain.
+   * @returns Constant iterator to the begin of genetic chain.
    */
   const_iterator begin() const { return chain_.begin(); }
 
   /**
    * `genotype::end` returns constant iterator to the end of genetic chain.
    *
-   * @return Constant iterator to the end of genetic chain.
+   * @returns Constant iterator to the end of genetic chain.
    *
    * \note The word \em end means past-the-last element.
    */
@@ -1549,7 +1549,7 @@ const auto constraints_satisfied = [](const G&) { return true; };
  *
  * @param os Stream to use.
  * @param g Genotype to be printed.
- * @return Reference to the `os` stream.
+ * @returns Reference to the `os` stream.
  */
 template<typename G>
 requires chromosome<G> std::ostream&
@@ -1566,7 +1566,7 @@ operator<<(std::ostream& os, const G& g)
  *
  * @param os Stream to use.
  * @param g Genotype to be printed.
- * @return Reference to the `os` stream.
+ * @returns Reference to the `os` stream.
  *
  * \note This overload is dedicated for floating-point genotypes.
  */
@@ -1606,7 +1606,7 @@ struct hash<G>
    * `std::hash::operator()` calculates hash function value for genotype `g`.
    *
    * @param g Genotype.
-   * @return Hash function value.
+   * @returns Hash function value.
    */
   std::size_t operator()(const G& g) const noexcept
   {
@@ -1745,9 +1745,9 @@ using recombination_fn = std::function<population<G>(const G&, const G&)>;
 /**
  * `unary_identity` is an identity mutation.
  *
- * \tparam G Some `genotype` specialization.
+ * @tparam G Some `genotype` specialization.
  * @param g Genotype.
- * @return Population consisting of `g`.
+ * @returns Population consisting of `g`.
  */
 template<typename G>
 requires chromosome<G> population<G>
@@ -1759,10 +1759,10 @@ unary_identity(const G& g)
 /**
  * `binary_identity` is an identity recombination.
  *
- * \tparam G Some `genotype` specialization.
+ * @tparam G Some `genotype` specialization.
  * @param g0 Genotype (first parent).
  * @param g1 Genotype (second parent)
- * @return Population consisting of `g0` and `g1`.
+ * @returns Population consisting of `g0` and `g1`.
  */
 template<typename G>
 requires chromosome<G> population<G>
@@ -1774,7 +1774,7 @@ binary_identity(const G& g0, const G& g1)
 /**
  * `variation` represents variation operator.
  *
- * \tparam G Some `genotype` specialization.
+ * @tparam G Some `genotype` specialization.
  *
  * \note At the moment library supports only canonical forms of variations
  * (unary and binary).
@@ -1828,7 +1828,7 @@ public:
    *
    * @param g0 Genotype.
    * @param g1 Genotype.
-   * @return Population resulting from application of variation to genotypes.
+   * @returns Population resulting from application of variation to genotypes.
    */
   population<G> operator()(const G& g0, const G& g1) const
   {
@@ -1846,7 +1846,7 @@ public:
    * in population `p`.
    *
    * @param p Population consisting of pairs of parents.
-   * @return Populative consisting of cumulative offspring.
+   * @returns Populative consisting of cumulative offspring.
    *
    * \throws std::invalid_argument Exception is raised if population size is
    * odd.
@@ -1875,10 +1875,10 @@ private:
  * `stochastic_mutation` creates stochastic mutation consisting of `m` applied
  * with probability `p`.
  *
- * \tparam G Some `genotype` specialization.
+ * @tparam G Some `genotype` specialization.
  * @param m Mutation.
  * @param p Probability.
- * @return Stochastic mutation.
+ * @returns Stochastic mutation.
  */
 template<typename G>
 requires chromosome<G>
@@ -1892,10 +1892,10 @@ stochastic_mutation(const mutation_fn<G>& m, probability p)
  * `stochastic_recombination` creates stochastic recombination consisting of `r`
  * applied with probability `p`.
  *
- * \tparam G Some `genotype` specialization.
+ * @tparam G Some `genotype` specialization.
  * @param r Recombination.
  * @param p Probability.
- * @return Stochastic recombination.
+ * @returns Stochastic recombination.
  */
 template<typename G>
 requires chromosome<G>
@@ -1934,7 +1934,7 @@ using termination_condition_fn =
 /**
  * `evolution` executes evolutionary process.
  *
- * \tparam G Some `genotype` specialization.
+ * @tparam G Some `genotype` specialization.
  * @param v Variation.
  * @param first_generation First generation.
  * @param p1 Parents selection mechanism.
@@ -1944,7 +1944,7 @@ using termination_condition_fn =
  * @param max_history Number of generations kept in memory and returned to the
  * caller. Default zero value is special and means keeping and returning all
  * generations.
- * @return Generations produced during evolution (cf. `max_history` argument).
+ * @returns Generations produced during evolution (cf. `max_history` argument).
  */
 template<typename G>
 requires chromosome<G> generations<G>
@@ -1975,7 +1975,7 @@ evolution(const variation<G> v,
 /**
  * `evolution` executes evolutionary process.
  *
- * \tparam G Some `genotype` specialization.
+ * @tparam G Some `genotype` specialization.
  * @param v Variation.
  * @param p0 Mechanism for first generation creation.
  * @param p1 Parents selection mechanism.
@@ -1986,7 +1986,7 @@ evolution(const variation<G> v,
  * @param max_history Number of generations kept in memory and returned to the
  * caller. Default zero value is special and means keeping and returning all
  * generations.
- * @return Generations produced during evolution (cf. `max_history` argument).
+ * @returns Generations produced during evolution (cf. `max_history` argument).
  */
 template<typename G>
 requires chromosome<G> generations<G>
@@ -2037,7 +2037,7 @@ const fitness incalculable = -std::numeric_limits<fitness>::infinity();
 /**
  * `fitness_db` is an intermediary object to fitness function values database.
  *
- * \tparam G Some `genotype` specialization.
+ * @tparam G Some `genotype` specialization.
  *
  * \note Intermediary objects owns database through the `std::shared_ptr`.
  */
@@ -2094,7 +2094,7 @@ public:
    * inserted to the database and then returned to the caller.
    *
    * @param g Genotype for which fitness function value is needed.
-   * @return Fitness function value for genotype `g`.
+   * @returns Fitness function value for genotype `g`.
    *
    * \note This method is non-concurrent.
    */
@@ -2116,7 +2116,7 @@ public:
    * the caller.
    *
    * @param p Population for which fitness function values are needed.
-   * @return Fitness function values for genotypes from population `p` in order
+   * @returns Fitness function values for genotypes from population `p` in order
    * corresponding to the order of genotypes in population itself.
    *
    * \note This method is potentially concurrent.
@@ -2136,21 +2136,21 @@ public:
   /**
    * `fitness_db::size` returns number of keys (genotypes) in database.
    *
-   * @return Number of database keys.
+   * @returns Number of database keys.
    */
   std::size_t size() const { return fitness_values_->size(); }
 
   /**
    * `fitness_db::begin` returns constant iterator to the begin of database.
    *
-   * @return Constant iterator to the begin of database.
+   * @returns Constant iterator to the begin of database.
    */
   const_iterator begin() const { return fitness_values_->begin(); }
 
   /**
    * `fitness_db::end` returns constant iterator to the end of database.
    *
-   * @return Constant iterator to the end of database.
+   * @returns Constant iterator to the end of database.
    *
    * \note The word \em end means past-the-last element.
    */
@@ -2160,7 +2160,7 @@ public:
    * `fitness_db::rank_order` returns all genotypes from database in descending
    * order of fitness function value.
    *
-   * @return Population consisting of all genotypes from database.
+   * @returns Population consisting of all genotypes from database.
    *
    * \note `rank_order()[0]` gives the best genotype for non-empty database.
    */
@@ -2220,7 +2220,7 @@ private:
  * generation accompanied with optional information about fitness function
  * value.
  *
- * \tparam G Some `genotype` specialization.
+ * @tparam G Some `genotype` specialization.
  * @param os Stream to print on.
  * @param gs Generations.
  * @param fd Pointer to the fitness function values database. Default value is
@@ -2275,10 +2275,10 @@ using selection_probabilities_fn =
  * probabilities, which can be used later in roulette wheel selection or
  * stochastic universal sampling.
  *
- * \tparam G Some `genotype` specialization.
+ * @tparam G Some `genotype` specialization.
  * @param spf Selection probabilities function.
  * @param p Population.
- * @return Cumulative selection probabilities.
+ * @returns Cumulative selection probabilities.
  *
  * \note \em Cumulative selection probability for index `i` means sum of
  * selection probabilities from index `0` up to `i`. Cumulative selection
@@ -2308,12 +2308,12 @@ cumulative_probabilities(const selection_probabilities_fn<G>& spf,
  * `select_different_than` returns copy of container `c` with deleted elements
  * equal to `t`.
  *
- * \tparam C Container type.
- * \tparam T Type convertible to C container element type.
+ * @tparam C Container type.
+ * @tparam T Type convertible to C container element type.
  * @param c Container.
  * @param t Element to be dropped in returned container.
  * @param require_nonempty_result Flag for possible exception.
- * @return Container with values different than `t`.
+ * @returns Container with values different than `t`.
  *
  * \throws std::runtime_error Exception is raised if `require_nonempty_result`
  * is `true` and returned container is empty.
@@ -2337,7 +2337,7 @@ select_different_than(const C& c, T t, bool require_nonempty_result)
  *
  * @param fs Fitness function values container.
  * @param require_nonempty_result Flag for possible exception.
- * @return Container with values different than `incalculable`.
+ * @returns Container with values different than `incalculable`.
  *
  * \throws std::runtime_error Exception is raised if `require_nonempty_result`
  * is `true` and returned container is empty.
@@ -2352,7 +2352,7 @@ select_calculable(const fitnesses& fs, bool require_nonempty_result = false)
  * `fitness_proportional_selection` is fitness proportional selection (a.k.a.
  * fitness \em proportionate selection) with windowing procedure (FPS).
  *
- * \tparam G Some `genotype` specialization.
+ * @tparam G Some `genotype` specialization.
  *
  * \note This implementation has workarounds for population of equally fit
  * genotypes and populations containing genotypes which fitnesses cannot be
@@ -2379,7 +2379,7 @@ public:
    * probabilities for population `p`.
    *
    * @param p Population.
-   * @return FPS selection probabilities for population `p`.
+   * @returns FPS selection probabilities for population `p`.
    *
    * \throws std::runtime_error Exception is raised if fitness function
    * evaluates to `incalculable` for all genotypes from `p`.
@@ -2410,10 +2410,10 @@ namespace detail {
 /**
  * `detail::advance_cpy` wraps `std::advance` and returns iterator.
  *
- * \tparam It Iterator type.
+ * @tparam It Iterator type.
  * @param it Iterator.
  * @param n Distance to advance.
- * @return Advanced iterator.
+ * @returns Advanced iterator.
  */
 template<typename It>
 It
@@ -2427,12 +2427,12 @@ advance_cpy(It it, std::size_t n)
  * `detail::rank` returns ranking position of element in range after stable
  * sort.
  *
- * \tparam It Iterator type.
- * \tparam Compare Type of comparison mechanism.
+ * @tparam It Iterator type.
+ * @tparam Compare Type of comparison mechanism.
  * @param first Range begin.
  * @param last Range end.
  * @param comp Comparison function object.
- * @return Sequence container with ranking positions.
+ * @returns Sequence container with ranking positions.
  */
 template<typename It, typename Compare = std::less<>>
 std::vector<std::size_t>
@@ -2453,10 +2453,10 @@ rank(It first, It last, Compare comp = {})
 /**
  * `detail::id` performs identity operation between types.
  *
- * \tparam T Destination type.
- * \tparam U Source type.
+ * @tparam T Destination type.
+ * @tparam U Source type.
  * @param u Argument.
- * @return Argument after transformation to destination type.
+ * @returns Argument after transformation to destination type.
  */
 template<typename T, typename U>
 T
@@ -2472,7 +2472,7 @@ id(U u)
  * selection.
  *
  * @param s So-called \em s parameter.
- * @return Linear pressure mechanism.
+ * @returns Linear pressure mechanism.
  */
 inline auto
 linear_ranking_selection(double s)
@@ -2532,7 +2532,7 @@ public:
    * population `p`.
    *
    * @param p Population.
-   * @return RS selection probabilities for population `p`.
+   * @returns RS selection probabilities for population `p`.
    *
    * \throws std::runtime_error Exception is raised if fitness function
    * evaluates to `incalculable` for all genotypes from `p`.
@@ -2568,10 +2568,10 @@ namespace detail {
  * `detail::generate` creates population of size `lambda` filled with result of
  * function `f`.
  *
- * \tparam G Some `genotype` specialization.
+ * @tparam G Some `genotype` specialization.
  * @param lambda Result population size.
  * @param f Function returning genotype.
- * @return Population of size `lambda` where each member is result of `f`.
+ * @returns Population of size `lambda` where each member is result of `f`.
  */
 template<typename G>
 requires chromosome<G> population<G>
@@ -2588,9 +2588,9 @@ generate(std::size_t lambda, const std::function<G()>& f)
  * `adapter` implements \em flatten function between `populate_2_fn` mechanism
  * and `populate_1_fn` mechanism.
  *
- * \tparam G Some `genotype` specialization.
+ * @tparam G Some `genotype` specialization.
  * @param fn Mechanism of `populate_1_fn` type.
- * @return Mechanism of `populate_2_fn` type, which applies `fn` to two
+ * @returns Mechanism of `populate_2_fn` type, which applies `fn` to two
  * flattened populations.
  *
  * \note `adapter` can be useful when used with roulette wheel selection or
@@ -2612,10 +2612,10 @@ adapter(const populate_1_fn<G>& fn)
  * `random_population` returns random population of size `lambda`, where each
  * member genotype satisfies predicate `C`.
  *
- * \tparam C Proper genotype predicate.
- * \tparam G Some `genotype` specialization.
+ * @tparam C Proper genotype predicate.
+ * @tparam G Some `genotype` specialization.
  * @param lambda Size of returned population.
- * @return Random population.
+ * @returns Random population.
  */
 template<auto C, typename G>
 requires genotype_constraints<decltype(C), G> && chromosome<G> population<G>
@@ -2635,7 +2635,7 @@ random_population(std::size_t lambda)
  * `roulette_wheel_selection` is roulette wheel selection (a.k.a. roulette wheel
  * \em algorithm, RWA).
  *
- * \tparam G Some `genotype` specialization.
+ * @tparam G Some `genotype` specialization.
  */
 template<typename G>
 requires chromosome<G>
@@ -2658,7 +2658,7 @@ public:
    *
    * @param lambda Size of the returned population.
    * @param p Source population.
-   * @return Population consisting of genotypes drawn from `p`.
+   * @returns Population consisting of genotypes drawn from `p`.
    */
   population<G> operator()(std::size_t lambda, const population<G>& p) const
   {
@@ -2678,7 +2678,7 @@ private:
 /**
  * `stochastic_universal_sampling` is stochastic universal sampling (SUS).
  *
- * \tparam G Some `genotype` specialization.
+ * @tparam G Some `genotype` specialization.
  */
 template<typename G>
 requires chromosome<G>
@@ -2702,7 +2702,7 @@ public:
    *
    * @param lambda Size of the returned population.
    * @param p Source population.
-   * @return Population consisting of genotypes drawn from `p`.
+   * @returns Population consisting of genotypes drawn from `p`.
    */
   population<G> operator()(std::size_t lambda, const population<G>& p) const
   {
@@ -2728,11 +2728,11 @@ private:
  * `generational_survivor_selection` is generational survivor selection
  * mechanism.
  *
- * \tparam G Some `genotype` specialization.
+ * @tparam G Some `genotype` specialization.
  * @param sz Generation / offspring size.
  * @param generation Current generation.
  * @param offspring Offspring.
- * @return Offspring.
+ * @returns Offspring.
  *
  * \throws std::invalid_argument Exception is raised if `generation` size or
  * `offspring` size is different from `sz`.
@@ -2757,7 +2757,7 @@ generational_survivor_selection(std::size_t sz,
  * `max` returns maximum fitness function value from `fs`.
  *
  * @param fs Fitness function values container.
- * @return Maximum value.
+ * @returns Maximum value.
  *
  * \throws std::runtime_error Exception is raised if all `fs` elements are equal
  * to `incalculable`.
@@ -2773,10 +2773,10 @@ max(const fitnesses& fs)
  * `max` returns maximum fitness function value for population `p` and database
  * intermediary object `ff`.
  *
- * \tparam G Some `genotype` specialization.
+ * @tparam G Some `genotype` specialization.
  * @param p Population.
  * @param ff Database intermediary object.
- * @return Maximum value.
+ * @returns Maximum value.
  *
  * \throws std::runtime_error Exception is raised if fitness function evaluates
  * to `incalculable` for all genotypes from `p`.
@@ -2792,10 +2792,10 @@ max(const population<G>& p, const fitness_db<G>& ff)
  * `max` returns maximum fitness function values for each generation from `gs`
  * and database intermediary object `ff`.
  *
- * \tparam G Some `genotype` specialization.
+ * @tparam G Some `genotype` specialization.
  * @param gs Sequence of generations.
  * @param ff Database intermediary object.
- * @return Maximum values corresponding to each generation.
+ * @returns Maximum values corresponding to each generation.
  *
  * \throws std::runtime_error Exception is raised if fitness function evaluates
  * to `incalculable` for all genotypes from at least one generation.
@@ -2815,7 +2815,7 @@ max(const generations<G>& gs, const fitness_db<G>& ff)
  * `min` returns minimum fitness function value from `fs`.
  *
  * @param fs Fitness function values container.
- * @return Minimum value.
+ * @returns Minimum value.
  *
  * \throws std::runtime_error Exception is raised if all `fs` elements are equal
  * to `incalculable`.
@@ -2831,10 +2831,10 @@ min(const fitnesses& fs)
  * `min` returns minimum fitness function value for population `p` and database
  * intermediary object `ff`.
  *
- * \tparam G Some `genotype` specialization.
+ * @tparam G Some `genotype` specialization.
  * @param p Population.
  * @param ff Database intermediary object.
- * @return Minimum value.
+ * @returns Minimum value.
  *
  * \throws std::runtime_error Exception is raised if fitness function evaluates
  * to `incalculable` for all genotypes from `p`.
@@ -2850,10 +2850,10 @@ min(const population<G>& p, const fitness_db<G>& ff)
  * `min` returns minimum fitness function values for each generation from `gs`
  * and database intermediary object `ff`.
  *
- * \tparam G Some `genotype` specialization.
+ * @tparam G Some `genotype` specialization.
  * @param gs Sequence of generations.
  * @param ff Database intermediary object.
- * @return Minimum values corresponding to each generation.
+ * @returns Minimum values corresponding to each generation.
  *
  * \throws std::runtime_error Exception is raised if fitness function evaluates
  * to `incalculable` for all genotypes from at least one generation.
@@ -2873,10 +2873,10 @@ min(const generations<G>& gs, const fitness_db<G>& ff)
  * `max_iterations_termination` returns condition, which terminates algorithm
  * after performing `max` loop iterations.
  *
- * \tparam G Some `genotype` specialization.
+ * @tparam G Some `genotype` specialization.
  * @param max Number of genetic algorithm loop iteration to perform (number of
  * generations).
- * @return Predicate terminating genetic algorithm after `max` iterations.
+ * @returns Predicate terminating genetic algorithm after `max` iterations.
  */
 template<typename G>
 termination_condition_fn<G>
@@ -2892,11 +2892,11 @@ max_iterations_termination(std::size_t max)
  * improved \em relatively more than `frac` with respect to the whole
  * evolutionary process.
  *
- * \tparam G Some `genotype` specialization.
+ * @tparam G Some `genotype` specialization.
  * @param ff Database intermediary object.
  * @param n Number of \em last generations.
  * @param frac \em Plateau \em flatness.
- * @return Predicate terminating genetic algorithm after reaching fitness
+ * @returns Predicate terminating genetic algorithm after reaching fitness
  * function \em plateau.
  *
  * \note This condition is not intended for use with `evolution` argument
@@ -2928,11 +2928,11 @@ max_fitness_improvement_termination(const fitness_db<G>& ff,
  * improved \em absolutely more than `delta` with respect to the whole
  * evolutionary process.
  *
- * \tparam G Some `genotype` specialization.
+ * @tparam G Some `genotype` specialization.
  * @param ff Database intermediary object.
  * @param n Number of \em last generations.
  * @param delta \em Plateau \em flatness.
- * @return Predicate terminating genetic algorithm after reaching fitness
+ * @returns Predicate terminating genetic algorithm after reaching fitness
  * function \em plateau.
  *
  * \note This condition is not intended for use with `evolution` argument
@@ -2961,10 +2961,10 @@ max_fitness_improvement_termination_2(const fitness_db<G>& ff,
  * `threshold_termination` returns condition, which terminates algorithm if at
  * least one genotype fulfills predicate `thr`.
  *
- * \tparam G Some `genotype` specialization.
- * \tparam F Predicate type.
+ * @tparam G Some `genotype` specialization.
+ * @tparam F Predicate type.
  * @param thr Predicate identifying searched genotype.
- * @return Predicate terminating genetic algorithm after genotype satisfying
+ * @returns Predicate terminating genetic algorithm after genotype satisfying
  * `thr` predicate is found.
  */
 template<typename G, typename F>
@@ -2981,11 +2981,11 @@ threshold_termination(const F& thr)
  * if at least one genotype reaches `thr` fitness function value with absolute
  * precision `eps`.
  *
- * \tparam G Some `genotype` specialization.
+ * @tparam G Some `genotype` specialization.
  * @param fd Database intermediary object.
  * @param thr Fitness function value to achieve.
  * @param eps Fitness function value absolute precision.
- * @return Predicate terminating genetic algorithm after genotype reaching
+ * @returns Predicate terminating genetic algorithm after genotype reaching
  * fitness function value `thr` with absolute precision `eps` is found.
  */
 template<typename G>
@@ -3004,10 +3004,10 @@ fitness_threshold_termination(const fitness_db<G>& fd, fitness thr, fitness eps)
  * `Gaussian_mutation` returns Gaussian mutation operator with standard
  * deviation `sigma` and gene mutation probability `p`.
  *
- * \tparam G Some `genotype` specialization.
+ * @tparam G Some `genotype` specialization.
  * @param sigma Standard deviation.
  * @param p Gene mutation probability.
- * @return Gaussian mutation operator.
+ * @returns Gaussian mutation operator.
  */
 template<typename G>
 requires floating_point_chromosome<G>
@@ -3030,10 +3030,10 @@ Gaussian_mutation(typename G::gene_t sigma, probability p)
  * `self_adaptive_mutation` returns self adaptive mutation operator with
  * parameters `a0` and `a1`.
  *
- * \tparam G Some `genotype` specialization.
+ * @tparam G Some `genotype` specialization.
  * @param a0 Self adaptive mutation parameter.
  * @param a1 Self adaptive mutation parameter.
- * @return Self adaptive mutation operator.
+ * @returns Self adaptive mutation operator.
  *
  * \note Due to documentation processing problem the above template declaration
  * is incorrect. Corrected declaration:
@@ -3073,9 +3073,9 @@ requires floating_point_chromosome<G>
 /**
  * `swap_mutation` is swap mutation.
  *
- * \tparam G Some `genotype` specialization.
+ * @tparam G Some `genotype` specialization.
  * @param g Genotype.
- * @return Population containing mutated genotype.
+ * @returns Population containing mutated genotype.
  */
 template<typename G>
 requires uniform_chromosome<G> population<G>
@@ -3091,9 +3091,9 @@ swap_mutation(const G& g)
 /**
  * `random_reset` returns random reset mutation with parameter `p`.
  *
- * \tparam G Some `genotype` specialization.
+ * @tparam G Some `genotype` specialization.
  * @param p Gene mutation probability.
- * @return Random reset mutation operator.
+ * @returns Random reset mutation operator.
  */
 template<typename G>
 requires floating_point_chromosome<G> || integer_chromosome<G> ||
@@ -3115,9 +3115,9 @@ random_reset(probability p)
 /**
  * `bit_flipping` returns bit-flipping mutation with parameter `p`.
  *
- * \tparam G Some `genotype` specialization.
+ * @tparam G Some `genotype` specialization.
  * @param p Gene mutation probability.
- * @return Bit-flipping mutation operator.
+ * @returns Bit-flipping mutation operator.
  */
 template<typename G>
 requires binary_chromosome<G>
@@ -3138,10 +3138,10 @@ bit_flipping(probability p)
 /**
  * `arithmetic_recombination` is arithmetic recombination.
  *
- * \tparam Some `G` specialization.
+ * @tparam Some `G` specialization.
  * @param g0 First parent.
  * @param g1 Secong parent.
- * @return Population containing one offspring genotype.
+ * @returns Population containing one offspring genotype.
  */
 template<typename G>
 requires floating_point_chromosome<G> population<G>
@@ -3157,10 +3157,10 @@ arithmetic_recombination(const G& g0, const G& g1)
 /**
  * `single_arithmetic_recombination` is single arithmetic recombination.
  *
- * \tparam Some `G` specialization.
+ * @tparam Some `G` specialization.
  * @param g0 First parent.
  * @param g1 Secong parent.
- * @return Population containing two offspring genotypes.
+ * @returns Population containing two offspring genotypes.
  */
 template<typename G>
 requires floating_point_chromosome<G> population<G>
@@ -3178,10 +3178,10 @@ single_arithmetic_recombination(const G& g0, const G& g1)
 /**
  * `one_point_xover` is one-point crossover recombination.
  *
- * \tparam Some `G` specialization.
+ * @tparam Some `G` specialization.
  * @param g0 First parent.
  * @param g1 Secong parent.
- * @return Population containing two offspring genotypes.
+ * @returns Population containing two offspring genotypes.
  */
 template<typename G>
 requires floating_point_chromosome<G> || integer_chromosome<G> ||
@@ -3202,10 +3202,10 @@ requires floating_point_chromosome<G> || integer_chromosome<G> ||
 /**
  * `cut_n_crossfill` is cut-and-crossfill recombination.
  *
- * \tparam Some `G` specialization.
+ * @tparam Some `G` specialization.
  * @param g0 First parent.
  * @param g1 Secong parent.
- * @return Population containing two offspring genotypes.
+ * @returns Population containing two offspring genotypes.
  */
 template<typename G>
 requires permutation_chromosome<G> population<G>
@@ -3239,8 +3239,8 @@ namespace test_functions
   /**
    * `test_functions::point` is point in N-dimensional space.
    *
-   * \tparam T Floating-point type.
-   * \tparam N Space dimension.
+   * @tparam T Floating-point type.
+   * @tparam N Space dimension.
    */
   template<std::floating_point T, std::size_t N>
   using point = std::array<T, N>;
@@ -3248,11 +3248,11 @@ namespace test_functions
   /**
    * `test_functions::distance` returns distance between two points.
    *
-   * \tparam T Floating-point type.
-   * \tparam N Space dimension.
+   * @tparam T Floating-point type.
+   * @tparam N Space dimension.
    * @param p0 First point.
    * @param p1 Second point.
-   * @return Distance between `p0` and `p1`.
+   * @returns Distance between `p0` and `p1`.
    */
   template<std::floating_point T, std::size_t N>
   T distance(const point<T, N>& p0, const point<T, N>& p1)
@@ -3268,9 +3268,9 @@ namespace test_functions
    * `test_functions::coordinates` converts 2D-point to `std::tuple` containing
    * point coordinates.
    *
-   * \tparam T Floating-point type.
+   * @tparam T Floating-point type.
    * @param p 2D-point.
-   * @return Corresponding tuple.
+   * @returns Corresponding tuple.
    */
   template<std::floating_point T>
   std::tuple<T, T> coordinates(const point<T, 2>& p)
@@ -3282,9 +3282,9 @@ namespace test_functions
    * `test_functions::coordinates` converts 3D-point to `std::tuple` containing
    * point coordinates.
    *
-   * \tparam T Floating-point type.
+   * @tparam T Floating-point type.
    * @param p 3D-point.
-   * @return Corresponding tuple.
+   * @returns Corresponding tuple.
    */
   template<std::floating_point T>
   std::tuple<T, T, T> coordinates(const point<T, 3>& p)
@@ -3296,10 +3296,10 @@ namespace test_functions
    * `test_functions::uniform_point` returns point in N-dimensional space, where
    * each coordinate has the same value `v`.
    *
-   * \tparam T Floating-point type.
-   * \tparam Space dimension.
+   * @tparam T Floating-point type.
+   * @tparam Space dimension.
    * @param v Coordinate value.
-   * @return Point in N-dimensional space.
+   * @returns Point in N-dimensional space.
    */
   template<std::floating_point T, std::size_t N>
   point<T, N> uniform_point(T v)
@@ -3312,8 +3312,8 @@ namespace test_functions
   /**
    * `test_functions::test_function` is floating-point test function.
    *
-   * \tparam T Floating-point type.
-   * \tparam N Space dimension.
+   * @tparam T Floating-point type.
+   * @tparam N Space dimension.
    */
   template<std::floating_point T, std::size_t N>
   class test_function
@@ -3358,7 +3358,7 @@ namespace test_functions
     /**
      * `test_functions::test_function::name` returns test function name.
      *
-     * @return Name of the test function.
+     * @returns Name of the test function.
      */
     std::string name() const { return name_; }
 
@@ -3367,7 +3367,7 @@ namespace test_functions
      * at point `p`.
      *
      * @param p Point.
-     * @return Test function value at point `p`.
+     * @returns Test function value at point `p`.
      */
     T operator()(const point<T, N>& p) const { return fn_(p); }
 
@@ -3375,7 +3375,7 @@ namespace test_functions
      * `test_functions::test_function::function_domain` returns test function
      * domain.
      *
-     * @return Test function domain.
+     * @returns Test function domain.
      */
     domain<T, N> function_domain() const { return d_(); }
 
@@ -3383,7 +3383,7 @@ namespace test_functions
      * `test_functions::test_function::p_min` returns point minimizing test
      * function over its domain.
      *
-     * @return Point minimizing test function over its domain.
+     * @returns Point minimizing test function over its domain.
      */
     point<T, N> p_min() const { return p_min_(); }
 
