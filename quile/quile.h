@@ -2032,7 +2032,14 @@ public:
     , thread_sz_{ thread_sz }
   {}
 
+  /**
+   * Default copy constructor `fitness_db::fitness_db`.
+   */
   fitness_db(const fitness_db&) = default;
+
+  /**
+   * Default assignment operator `fitness_db::operator=`.
+   */
   fitness_db& operator=(const fitness_db&) = default;
 
   /**
