@@ -2876,6 +2876,18 @@ threshold_termination(const F& thr)
   };
 }
 
+/**
+ * `fitness_threshold_termination` returns condition, which terminates algorithm
+ * if at least one genotype reaches `thr` fitness function value with absolute
+ * precision `eps`.
+ *
+ * \tparam G Some `genotype` specialization.
+ * @param fd Database intermediary object.
+ * @param thr Fitness function value to achieve.
+ * @param eps Fitness function value absolute precision.
+ * @return Predicate terminating genetic algorithm after genotype reaching
+ * fitness function value `thr` with absolute precision `eps` is found.
+ */
 template<typename G>
 termination_condition_fn<G>
 fitness_threshold_termination(const fitness_db<G>& fd, fitness thr, fitness eps)
