@@ -319,9 +319,24 @@ public:
     : range{ std::numeric_limits<T>::lowest(), std::numeric_limits<T>::max() }
   {}
 
+  /**
+   * Default copy constructor `range::range`.
+   */
   constexpr range(const range&) = default;
+
+  /**
+   * Default move constructor `range::range`.
+   */
   constexpr range(range&&) = default;
+
+  /**
+   * Default assignment operator `range::operator=`.
+   */
   range& operator=(const range&) = default;
+
+  /**
+   * Default move assignment operator `range::operator=`.
+   */
   range& operator=(range&&) = default;
 
   /**
