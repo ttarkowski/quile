@@ -2508,6 +2508,15 @@ adapter(const populate_1_fn<G>& fn)
   };
 }
 
+/**
+ * `random_population` returns random population of size `lambda`, where each
+ * member genotype satisfies predicate `C`.
+ *
+ * \tparam C Proper genotype predicate.
+ * \tparam G Some `genotype` specialization.
+ * @param lambda Size of returned population.
+ * @return Random population.
+ */
 template<auto C, typename G>
 requires genotype_constraints<decltype(C), G> && chromosome<G> population<G>
 random_population(std::size_t lambda)
