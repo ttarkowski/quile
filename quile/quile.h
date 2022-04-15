@@ -3455,12 +3455,14 @@ namespace test_functions
   /**
    * `test_functions::Goldstein_Price` is Goldstein-Price test function.
    *
-   * \f[
-   * \left( 1 + \left( x_0 + x_1 + 1 \right)^2 \left( 19 - 14 x_0 + 3 x_0^2 - 14
-   * x_1 + 6 x_0 x_1 + 3 x_1^2 \right) \right) \cdot \left( 30 + \left( 2 x_0 -
+   * \f{eqnarray*}{
+   * & & \left( 1 + \left( x_0 + x_1 + 1 \right)^2 \left( 19 - 14 x_0 + 3 x_0^2
+   * - 14
+   * x_1 + 6 x_0 x_1 + 3 x_1^2 \right) \right) \\
+   * & & \cdot \left( 30 + \left( 2 x_0 -
    * 3 x_1 \right)^2 \left( 18 - 32 x_0 + 12 x_0^2 + 48 x_1 - 36 x_0 x_1 + 27
    * x_1^2 \right) \right)
-   * \f]
+   * \f}
    */
   template<std::floating_point T>
   const test_function<T, 2> Goldstein_Price{
