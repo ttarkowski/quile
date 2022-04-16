@@ -446,6 +446,12 @@ operator<<(std::ostream& os, const range<T>& r)
  * @tparam N Returned container size.
  * @param t Starting value.
  * @returns `std::array<T, N>` with consecutive numbers starting from value `t`.
+ *
+ * Example:
+ * @include iota.cc
+ *
+ * Result:
+ * @verbinclude iota.out
  */
 template<typename T, std::size_t N>
 std::array<T, N>
