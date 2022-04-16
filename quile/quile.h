@@ -55,6 +55,22 @@
 #include <vector>
 
 /**
+ * @mainpage Introduction
+ *
+ * Quilë is a C++20 header-only general purpose genetic algorithms library with
+ * no external dependencies supporting floating-point, integer, binary and
+ * permutation representations. It is released under the terms of the MIT
+ * License.
+ *
+ * The name  of this library origins from fictional language Neo-Quenya and
+ * means \em color.
+ *
+ * This work is a result of the project funded by National Science Centre Poland
+ * (Twardowskiego 16, PL-30312 Kraków, Poland, http://www.ncn.gov.pl/) under the
+ * grant number UMO-2016/23/B/ST3/03575.
+ */
+
+/**
  * @file
  * `quile/quile.h` is one and only file of the library implementation.
  *
