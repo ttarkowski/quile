@@ -344,6 +344,12 @@ public:
    *
    * @returns Range infimum, i.e. left endpoint of interval \f$[{\rm min}, {\rm
    * max}]_{\rm T}\f$ (`min` value) corresponding to the range.
+   *
+   * Example:
+   * @include range_min.cc
+   *
+   * Result (might be empty):
+   * @verbinclude range_min.out
    */
   T min() const { return min_; }
 
