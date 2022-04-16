@@ -424,6 +424,12 @@ private:
  * @param os Stream to use.
  * @param r Range to be printed.
  * @returns Reference to the `os` stream.
+ *
+ * Example:
+ * @include range_stream.cc
+ *
+ * Result:
+ * @verbinclude range_stream.out
  */
 template<typename T>
 std::ostream&
