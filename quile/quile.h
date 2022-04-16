@@ -268,7 +268,7 @@ private:
  * Example:
  * @include callable.cc
  *
- * Result: (might be empty)
+ * Result (might be empty):
  * @verbinclude callable.out
  */
 template<typename F, typename R, typename... Args>
@@ -379,6 +379,12 @@ public:
    *
    * @param t Value to be clamped.
    * @returns Value clamped to the range.
+   *
+   * Example:
+   * @include range_clamp.cc
+   *
+   * Result (might be empty):
+   * @verbinclude range_clamp.out
    */
   template<typename U = T,
            typename = std::enable_if_t<!std::is_same_v<U, bool>>>
