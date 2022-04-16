@@ -775,7 +775,7 @@ concept set_of_departure = is_domain_v<T>;
  * Example:
  * @include contains.cc
  *
- * Result (might be exmpty):
+ * Result (might be empty):
  * @verbinclude contains.out
  */
 template<typename T, std::size_t N>
