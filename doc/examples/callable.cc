@@ -2,8 +2,14 @@
 #include <quile/quile.h>
 
 template<quile::callable<bool> B>
-bool negate(B b) { return !b(); }
+bool
+negate(B b)
+{
+  return !b();
+}
 
-int main() {
+int
+main()
+{
   assert(negate([]() { return false; }));
 }

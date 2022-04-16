@@ -1,5 +1,7 @@
 #include <quile/quile.h>
 
-int main() {
+int
+main()
+{
   QUILE_LOG("main");
 }
