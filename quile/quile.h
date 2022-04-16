@@ -477,6 +477,7 @@ using probability = double;
 /**
  * `random_engine` returns pseudo-random number generator engine based on
  * Mersenne Twister.
+ *
  * @returns Reference to static object with Mersenne Twister engine
  * `std::mt19937` initialized with `std::random_device{}()`.
  */
