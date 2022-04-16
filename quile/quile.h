@@ -526,6 +526,12 @@ using probability = double;
  *
  * @returns Reference to static object with Mersenne Twister engine
  * `std::mt19937` initialized with `std::random_device{}()`.
+ *
+ * Example:
+ * @include random_engine.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude random_engine.out
  */
 inline std::mt19937&
 random_engine()
