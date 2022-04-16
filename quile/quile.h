@@ -450,6 +450,12 @@ public:
    * @param r Range to be compared with `*this`.
    * @returns Ordering (cf. `std::strong_ordering`, `std::weak_ordering`,
    * `std::partial_ordering`).
+   *
+   * Example:
+   * @include range_spaceship.cc
+   *
+   * Result (might be empty):
+   * @verbinclude range_spaceship.out
    */
   auto operator<=>(const range<T>& r) const = default;
 
