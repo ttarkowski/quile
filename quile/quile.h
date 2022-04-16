@@ -498,6 +498,12 @@ random_engine()
  * @param success_probability Probability of returning `true` value.
  * @returns Logic value drawn from \f${\rm B}(1, {\rm
  * success\_{}probability})\f$.
+ *
+ * Example:
+ * @include success.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude success.out
  */
 inline bool
 success(probability success_probability)
