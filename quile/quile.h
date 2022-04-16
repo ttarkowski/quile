@@ -494,6 +494,7 @@ random_engine()
  * `success` returns true with probability `success_probability` and false with
  * probability `1 - success_probability`, i.e. it implements Bernoulli
  * distribution \f${\rm B}(1, {\rm success\_{}probability})\f$.
+ *
  * @param success_probability Probability of returning `true` value.
  * @returns Logic value drawn from \f${\rm B}(1, {\rm
  * success\_{}probability})\f$.
