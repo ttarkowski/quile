@@ -376,6 +376,12 @@ public:
    * odd, the result is rounded towards `min`.
    *
    * @note This method is disabled for ranges of type `bool`.
+   *
+   * Example:
+   * @include range_midpoint.cc
+   *
+   * Result (might be empty):
+   * @verbinclude range_midpoint.out
    */
   template<typename U = T,
            typename = std::enable_if_t<!std::is_same_v<U, bool>>>
