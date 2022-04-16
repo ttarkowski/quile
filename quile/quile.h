@@ -151,7 +151,7 @@ requires(I < N) struct static_loop<T, I, N>
  * Example:
  * @include fn_and.cc
  *
- * Result: (might be empty)
+ * Result (might be empty):
  * @verbinclude fn_and.out
  *
  * @note `fn_and` can be useful to describe complex genetic algorithm
@@ -171,7 +171,7 @@ fn_and(const auto&... fs)
  * Example:
  * @include fn_or.cc
  *
- * Result: (might be empty)
+ * Result (might be empty):
  * @verbinclude fn_or.out
  *
  * @note `fn_or` can be useful to describe complex genetic algorithm
@@ -211,10 +211,10 @@ public:
    * @param f Callable object to be concurrently executed.
    *
    * Example:
-   * @include thread_pool.cc
+   * @include thread_pool_async.cc
    *
-   * Result: (might be different due to concurrent execution)
-   * @verbinclude thread_pool.out
+   * Result (might be different due to concurrent execution):
+   * @verbinclude thread_pool_async.out
    */
   template<typename T>
   std::future<T> async(std::launch policy, const std::function<T()>& f)
