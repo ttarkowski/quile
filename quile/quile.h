@@ -599,6 +599,12 @@ random_N(T mean, T standard_deviation)
  *
  * @note For floating-point types overflow may occur for `std::nextafter(b,
  * std::numeric_limits<T>::max()) - a` (cf. N4861, 26.6.8.2.2).
+ *
+ * Example:
+ * @include random_U.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude random_U.out
  */
 template<typename T>
 T
