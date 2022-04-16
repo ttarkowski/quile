@@ -771,6 +771,12 @@ concept set_of_departure = is_domain_v<T>;
  * @param d Domain.
  * @param p Point to be checked.
  * @returns Boolean value describing whether point `p` is within domain `d`.
+ *
+ * Example:
+ * @include contains.cc
+ *
+ * Result (might be exmpty):
+ * @verbinclude contains.out
  */
 template<typename T, std::size_t N>
 bool
