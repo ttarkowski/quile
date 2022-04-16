@@ -121,10 +121,10 @@ struct static_loop
    * type convertible from `T`, being the value of current loop index.
    *
    * Example:
-   * @include static_loop.cc
+   * @include static_loop_body.cc
    *
    * Result:
-   * @verbinclude static_loop.out
+   * @verbinclude static_loop_body.out
    */
   static void body([[maybe_unused]] auto&& f) {}
 };
