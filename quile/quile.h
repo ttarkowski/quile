@@ -634,6 +634,12 @@ random_U(T a, T b)
  * @tparam T Argument and return type (floating-point or integer type).
  * @param x Argument to be raised to the second power.
  * @returns Argument raised to the second power, i.e. \f$x^2\f$.
+ *
+ * Example:
+ * @include square.cc
+ *
+ * Result (might be empty):
+ * @verbinclude square.out
  */
 template<typename T>
 requires std::floating_point<T> || std::integral<T> T
