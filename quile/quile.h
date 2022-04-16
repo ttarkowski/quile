@@ -571,6 +571,12 @@ success(probability success_probability)
  * @param mean Mean of normal distribution.
  * @param standard_deviation Standard deviation of normal distribution.
  * @returns Number drawn from normal distribution.
+ *
+ * Example:
+ * @include random_N.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude random_N.out
  */
 template<std::floating_point T>
 T
