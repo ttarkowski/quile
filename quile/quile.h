@@ -358,6 +358,12 @@ public:
    *
    * @returns Range supremum, i.e. right endpoint of interval \f$[{\rm min},
    * {\rm max}]_{\rm T}\f$ (`max` value) corresponding to the range.
+   *
+   * Example:
+   * @include range_max.cc
+   *
+   * Result (might be empty):
+   * @verbinclude range_max.out
    */
   T max() const { return max_; }
 
