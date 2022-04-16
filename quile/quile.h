@@ -418,6 +418,12 @@ public:
    * @param t Argument to be checked.
    * @returns Boolean value of check: `true` if `t` is in \f$[{\rm min}, {\rm
    * max}]_{\rm T}\f$ interval and `false` otherwise.
+   *
+   * Example:
+   * @include range_contains.cc
+   *
+   * Result (might be empty):
+   * @verbinclude range_contains.out
    */
   bool contains(T t) const { return t >= min_ && t <= max_; }
 
