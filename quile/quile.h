@@ -62,7 +62,7 @@
  * permutation representations. It is released under the terms of the MIT
  * License.
  *
- * The name  of this library origins from fictional language Neo-Quenya and
+ * The name of this library origins from fictional language Neo-Quenya and
  * means \em color.
  *
  * This work is a result of the project funded by National Science Centre Poland
