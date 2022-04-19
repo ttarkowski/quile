@@ -1034,7 +1034,7 @@ self_adaptive_variation_domain(const domain<T, N>& d, T lo)
  * Example:
  * @include chain.cc
  *
- * Result (might be different due to randomness):
+ * Result (might be empty):
  * @verbinclude chain.out
  */
 template<typename T, std::size_t N>
@@ -1052,7 +1052,7 @@ using chain = std::array<T, N>;
  * Example:
  * @include chain.cc
  *
- * Result (might be different due to randomness):
+ * Result (might be empty):
  * @verbinclude chain.out
  */
 template<typename T, std::size_t N>
