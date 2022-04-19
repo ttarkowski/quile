@@ -1030,6 +1030,12 @@ self_adaptive_variation_domain(const domain<T, N>& d, T lo)
 
 /**
  * `chain` represents genetic chain.
+ *
+ * Example:
+ * @include chain.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude chain.out
  */
 template<typename T, std::size_t N>
 using chain = std::array<T, N>;
@@ -1042,6 +1048,12 @@ using chain = std::array<T, N>;
  * @tparam N Chain length.
  * @param d Domain.
  * @returns Chain based on `d`.
+ *
+ * Example:
+ * @include chain.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude chain.out
  */
 template<typename T, std::size_t N>
 chain<T, N>
