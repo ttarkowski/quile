@@ -1006,6 +1006,12 @@ uniform(const domain<T, N>& d)
  * @returns Domain with dimensionality of `2 * N`, where first part is equal to
  * `d` and the second one consits of ranges of form `range{ lo, 0.5 *
  * std::max(std::fabs(d[i].min()), std::fabs(d[i].max())) }`.
+ *
+ * Example:
+ * @include self_adaptive.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude self_adaptive.out
  */
 template<typename T, std::size_t N>
 requires std::floating_point<T>
@@ -3239,6 +3245,12 @@ Gaussian_mutation(typename G::gene_t sigma, probability p)
  * requires floating_point_chromosome<G> && (G::size() % 2 == 0)
  * auto self_adaptive_mutation(typename G::gene_t a0, typename G::gene_t a1)
  * @endcode
+ *
+ * Example:
+ * @include self_adaptive.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude self_adaptive.out
  */
 template<typename G>
 requires floating_point_chromosome<G>
