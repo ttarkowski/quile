@@ -672,6 +672,12 @@ cube(T x)
  * `pi` is an approximation of \f$\pi\f$ number.
  *
  * @tparam T Floating-point type.
+ *
+ * Example:
+ * @include pi_e_ln2.cc
+ *
+ * Result:
+ * @verbinclude pi_e_ln2.out
  */
 template<std::floating_point T>
 const T pi = std::numbers::pi_v<T>;
@@ -680,6 +686,12 @@ const T pi = std::numbers::pi_v<T>;
  * `e` is an approximation of \f$e\f$ number.
  *
  * @tparam T Floating-point type.
+ *
+ * Example:
+ * @include pi_e_ln2.cc
+ *
+ * Result:
+ * @verbinclude pi_e_ln2.out
  */
 template<std::floating_point T>
 const T e = std::numbers::e_v<T>;
@@ -688,6 +700,12 @@ const T e = std::numbers::e_v<T>;
  * `ln2` is an approximation of \f$\ln 2\f$ number.
  *
  * @tparam T Floating-point type.
+ *
+ * Example:
+ * @include pi_e_ln2.cc
+ *
+ * Result:
+ * @verbinclude pi_e_ln2.out
  */
 template<std::floating_point T>
 const T ln2 = std::numbers::ln2_v<T>;
