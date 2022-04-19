@@ -939,6 +939,12 @@ contains(const domain<T, N>& d, const std::array<T, N>& p)
  * @tparam N Domain dimensionality.
  * @param r Interval for hypercube construction.
  * @returns `N`-dimensional hypercube with edge of `r`.
+ *
+ * Example:
+ * @include uniform_domain.cc
+ *
+ * Result (might be empty):
+ * @verbinclude uniform_domain.out
  */
 template<typename T, std::size_t N>
 constexpr domain<T, N>
@@ -953,6 +959,12 @@ uniform_domain(const range<T>& r)
  * `uniform_domain<T, N>(lo, hi)` is equivalent to `uniform_domain<T,
  * N>(range<T>{ lo, hi})` call. Please see documentation for `uniform_domain`
  * for argument of type `range`.
+ *
+ * Example:
+ * @include uniform_domain.cc
+ *
+ * Result (might be empty):
+ * @verbinclude uniform_domain.out
  */
 template<typename T, std::size_t N>
 constexpr domain<T, N>
@@ -968,6 +980,12 @@ uniform_domain(T lo, T hi)
  * @tparam N Domain dimensionality.
  * @param d Domain to be checked.
  * @returns Boolean value of check result.
+ *
+ * Example:
+ * @include uniform_domain.cc
+ *
+ * Result (might be empty):
+ * @verbinclude uniform_domain.out
  */
 template<typename T, std::size_t N>
 constexpr bool
