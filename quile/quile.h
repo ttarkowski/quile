@@ -746,6 +746,12 @@ angle(T x, T y)
  * spherical coordinate system.
  *
  * @note \f$\theta \in [0, \pi]\f$, \f$\phi \in [0, 2\pi )\f$.
+ *
+ * Example:
+ * @include cart2spher.cc
+ *
+ * Result:
+ * @verbinclude cart2spher.out
  */
 template<std::floating_point T>
 std::tuple<T, T, T>
@@ -769,6 +775,12 @@ cart2spher(T x, T y, T z)
  * Cartesian coordinate system.
  *
  * @note \f$\theta \in [0, \pi]\f$, \f$\phi \in [0, 2\pi )\f$.
+ *
+ * Example:
+ * @include cart2spher.cc
+ *
+ * Result:
+ * @verbinclude cart2spher.out
  */
 template<std::floating_point T>
 std::tuple<T, T, T>
