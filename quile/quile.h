@@ -849,6 +849,12 @@ polar2cart(T r, T phi)
  *
  * @tparam T Base type.
  * @tparam N Domain dimension.
+ *
+ * Example:
+ * @include domain.cc
+ *
+ * Result (might be empty):
+ * @verbinclude domain.out
  */
 template<typename T, std::size_t N>
 using domain = std::array<range<T>, N>;
@@ -856,6 +862,12 @@ using domain = std::array<range<T>, N>;
 /**
  * If `T` is some specialization of `domain` then `is_domain` provides member
  * constant `value` equal to `true`. Otherwise `value` is `false`.
+ *
+ * Example:
+ * @include domain.cc
+ *
+ * Result (might be empty):
+ * @verbinclude domain.out
  */
 template<typename T>
 struct is_domain : std::false_type
@@ -870,12 +882,24 @@ struct is_domain<domain<T, N>> : std::true_type
 
 /**
  * `is_domain_v` is helper variable template for `is_domain`.
+ *
+ * Example:
+ * @include domain.cc
+ *
+ * Result (might be empty):
+ * @verbinclude domain.out
  */
 template<typename T>
 inline constexpr bool is_domain_v = is_domain<T>::value;
 
 /**
  * `set_of_departure` specifies that `T` is some specialization of `domain`.
+ *
+ * Example:
+ * @include domain.cc
+ *
+ * Result (might be empty):
+ * @verbinclude domain.out
  */
 template<typename T>
 concept set_of_departure = is_domain_v<T>;
