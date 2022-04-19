@@ -801,6 +801,12 @@ spher2cart(T r, T theta, T phi)
  * coordinate system.
  *
  * @note \f$\phi \in [0, 2\pi )\f$.
+ *
+ * Example:
+ * @include cart2polar.cc
+ *
+ * Result:
+ * @verbinclude cart2polar.out
  */
 template<std::floating_point T>
 std::tuple<T, T>
@@ -819,6 +825,12 @@ cart2polar(T x, T y)
  * coordinate system.
  *
  * @note \f$\phi \in [0, 2\pi )\f$.
+ *
+ * Example:
+ * @include cart2polar.cc
+ *
+ * Result:
+ * @verbinclude cart2polar.out
  */
 template<std::floating_point T>
 std::tuple<T, T>
