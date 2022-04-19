@@ -1008,6 +1008,7 @@ uniform(const domain<T, N>& d)
  * std::max(std::fabs(d[i].min()), std::fabs(d[i].max())) }`.
  */
 template<typename T, std::size_t N>
+requires std::floating_point<T>
 constexpr domain<T, 2 * N>
 self_adaptive_variation_domain(const domain<T, N>& d, T lo)
 {
