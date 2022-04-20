@@ -1094,6 +1094,12 @@ struct g_floating_point
   /**
    * `g_floating_point::type` is floating-point type used for representing gene
    * values.
+   *
+   * Example:
+   * @include g_floating_point.cc
+   *
+   * Result (might be empty):
+   * @verbinclude g_floating_point.out
    */
   using type = T;
 
@@ -1101,6 +1107,12 @@ struct g_floating_point
    * `size` returns domain size, i.e. `N`.
    *
    * @returns Genotype length (domain size).
+   *
+   * Example:
+   * @include g_floating_point.cc
+   *
+   * Result (might be empty):
+   * @verbinclude g_floating_point.out
    */
   static constexpr std::size_t size() { return N; }
 
@@ -1108,12 +1120,24 @@ struct g_floating_point
    * `constraints` returns domain, i.e. `*D`.
    *
    * @returns Domain.
+   *
+   * Example:
+   * @include g_floating_point.cc
+   *
+   * Result (might be empty):
+   * @verbinclude g_floating_point.out
    */
   static constexpr const domain<type, size()>& constraints() { return *D; }
 
   /**
    * `g_floating_point::chain_t` is genetic chain type used as underlying
    * representation in `genotype`.
+   *
+   * Example:
+   * @include g_floating_point.cc
+   *
+   * Result (might be empty):
+   * @verbinclude g_floating_point.out
    */
   using chain_t = chain<type, size()>;
 
@@ -1123,6 +1147,12 @@ struct g_floating_point
    *
    * @param c Chain to be checked.
    * @returns Boolean value of check result.
+   *
+   * Example:
+   * @include g_floating_point.cc
+   *
+   * Result (might be empty):
+   * @verbinclude g_floating_point.out
    */
   static bool valid(const chain<type, size()>& c)
   {
@@ -1133,6 +1163,12 @@ struct g_floating_point
    * `default_chain` returns chain filled in default way.
    *
    * @returns Default chain.
+   *
+   * Example:
+   * @include g_floating_point.cc
+   *
+   * Result (might be empty):
+   * @verbinclude g_floating_point.out
    */
   static chain_t default_chain() { return chain_min(constraints()); }
 };
@@ -1141,6 +1177,12 @@ struct g_floating_point
  * If `T` is some specialization of `g_floating_point` then
  * `is_g_floating_point` provides member constant value equal to true. Otherwise
  * value is false.
+ *
+ * Example:
+ * @include g_floating_point.cc
+ *
+ * Result (might be empty):
+ * @verbinclude g_floating_point.out
  */
 template<typename T>
 struct is_g_floating_point : std::false_type
@@ -1156,6 +1198,12 @@ struct is_g_floating_point<g_floating_point<T, N, D>> : std::true_type
 /**
  * `is_g_floating_point_v` is helper variable template for
  * `is_g_floating_point`.
+ *
+ * Example:
+ * @include g_floating_point.cc
+ *
+ * Result (might be empty):
+ * @verbinclude g_floating_point.out
  */
 template<typename T>
 inline constexpr bool is_g_floating_point_v = is_g_floating_point<T>::value;
@@ -1163,6 +1211,12 @@ inline constexpr bool is_g_floating_point_v = is_g_floating_point<T>::value;
 /**
  * `floating_point_representation` specifies that `T` is some specialization of
  * `g_floating_point`.
+ *
+ * Example:
+ * @include g_floating_point.cc
+ *
+ * Result (might be empty):
+ * @verbinclude g_floating_point.out
  */
 template<typename T>
 concept floating_point_representation = is_g_floating_point_v<T>;
