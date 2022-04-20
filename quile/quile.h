@@ -1687,6 +1687,12 @@ public:
   /**
    * `genotype::chain_t` is genetic chain type (underlying genotype
    * representation).
+   *
+   * Example:
+   * @include genotype_data.cc
+   *
+   * Result:
+   * @verbinclude genotype_data.out
    */
   using chain_t = chain<typename R::type, R::size()>;
 
