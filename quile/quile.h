@@ -1519,6 +1519,12 @@ concept binary_representation = is_g_binary_v<T>;
  * @tparam M The lowest permuted number.
  *
  * @note Numbers from \f$\{M, \dots , M + N - 1\}\f$ set are permuted.
+ *
+ * Example:
+ * @include g_permutation.cc
+ *
+ * Result (might be empty):
+ * @verbinclude g_permutation.out
  */
 template<typename T, std::size_t N, T M>
 requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_permutation
@@ -1526,6 +1532,12 @@ requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_permutation
   /**
    * `g_permutation::type` is integer non-Boolean type used for representing
    * gene values.
+   *
+   * Example:
+   * @include g_permutation.cc
+   *
+   * Result (might be empty):
+   * @verbinclude g_permutation.out
    */
   using type = T;
 
@@ -1533,6 +1545,12 @@ requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_permutation
    * `size` returns domain size, i.e. `N`.
    *
    * @returns Genotype length (domain size).
+   *
+   * Example:
+   * @include g_permutation.cc
+   *
+   * Result (might be empty):
+   * @verbinclude g_permutation.out
    */
   static constexpr std::size_t size() { return N; }
 
@@ -1540,6 +1558,12 @@ requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_permutation
    * `constraints` returns domain, i.e. \f$\{M, \dots , M + N - 1\}^N\f$.
    *
    * @returns Domain.
+   *
+   * Example:
+   * @include g_permutation.cc
+   *
+   * Result (might be empty):
+   * @verbinclude g_permutation.out
    */
   static constexpr const domain<type, size()> constraints()
   {
@@ -1549,6 +1573,12 @@ requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_permutation
   /**
    * `g_permutation::chain_t` is genetic chain type used as underlying
    * representation in `genotype`.
+   *
+   * Example:
+   * @include g_permutation.cc
+   *
+   * Result (might be empty):
+   * @verbinclude g_permutation.out
    */
   using chain_t = chain<type, size()>;
 
@@ -1559,6 +1589,12 @@ requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_permutation
    *
    * @param c Chain to be checked.
    * @returns Boolean value of check result.
+   *
+   * Example:
+   * @include g_permutation.cc
+   *
+   * Result (might be empty):
+   * @verbinclude g_permutation.out
    */
   static bool valid(const chain<type, size()>& c)
   {
@@ -1571,6 +1607,12 @@ requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_permutation
    * `default_chain` returns chain filled in default way.
    *
    * @returns Default chain.
+   *
+   * Example:
+   * @include g_permutation.cc
+   *
+   * Result (might be empty):
+   * @verbinclude g_permutation.out
    */
   static chain_t default_chain() { return iota<type, size()>(M); }
 };
@@ -1578,6 +1620,12 @@ requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_permutation
 /**
  * If `T` is some specialization of `g_permutation` then `is_g_permutation`
  * provides member constant value equal to true. Otherwise value is false.
+ *
+ * Example:
+ * @include g_permutation.cc
+ *
+ * Result (might be empty):
+ * @verbinclude g_permutation.out
  */
 template<typename T>
 struct is_g_permutation : std::false_type
@@ -1592,6 +1640,12 @@ struct is_g_permutation<g_permutation<T, N, M>> : std::true_type
 
 /**
  * `is_g_permutation_v` is helper variable template for `is_g_permutation`.
+ *
+ * Example:
+ * @include g_permutation.cc
+ *
+ * Result (might be empty):
+ * @verbinclude g_permutation.out
  */
 template<typename T>
 inline constexpr bool is_g_permutation_v = is_g_permutation<T>::value;
@@ -1599,6 +1653,12 @@ inline constexpr bool is_g_permutation_v = is_g_permutation<T>::value;
 /**
  * `permutation_representation` specifies that `T` is some specialization of
  * `g_permutation`.
+ *
+ * Example:
+ * @include g_permutation.cc
+ *
+ * Result (might be empty):
+ * @verbinclude g_permutation.out
  */
 template<typename T>
 concept permutation_representation = is_g_permutation_v<T>;
