@@ -1790,6 +1790,12 @@ public:
    *
    * @param i Gene \em locus.
    * @returns Gene value.
+   *
+   * Example:
+   * @include genotype_value.cc
+   *
+   * Result:
+   * @verbinclude genotype_value.out
    */
   gene_t value(std::size_t i) const { return chain_[i]; }
 
@@ -1804,6 +1810,12 @@ public:
    * outside permitted interval for given \em locus `i`.
    *
    * @note This method is not available for permutation representation.
+   *
+   * Example:
+   * @include genotype_value.cc
+   *
+   * Result:
+   * @verbinclude genotype_value.out
    */
   template<typename = std::enable_if_t<!permutation_representation<R>>>
   genotype& value(std::size_t i, gene_t v)
