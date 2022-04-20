@@ -1077,6 +1077,12 @@ chain_min(const domain<T, N>& d)
  * @tparam T Floating-point type of representation.
  * @tparam N Genotype length.
  * @tparam D Pointer to the genotype domain.
+ *
+ * Example:
+ * @include g_floating_point.cc
+ *
+ * Result (might be empty):
+ * @verbinclude g_floating_point.out
  */
 template<typename T, std::size_t N, const domain<T, N>* D>
 requires std::floating_point<T>
