@@ -1854,8 +1854,8 @@ public:
   }
 
   /**
-   * `range::operator<=>` performs default lexicographical comparison with use
-   * of genotypes' genetic chain.
+   * `genotype::operator<=>` performs default lexicographical comparison with
+   * use of genotypes' genetic chain.
    *
    * @param g Genotype to be compared with `*this`.
    * @returns Ordering (cf. `std::strong_ordering`, `std::weak_ordering`,
@@ -1867,7 +1867,7 @@ public:
   auto operator<=>(const genotype& g) const { return chain_ <=> g.chain_; }
 
   /**
-   * `range::operator==` performs comparison with use of genotypes' genetic
+   * `genotype::operator==` performs comparison with use of genotypes' genetic
    * chain.
    *
    * @param g Genotype to be compared with `*this`.
