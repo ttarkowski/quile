@@ -1227,6 +1227,12 @@ concept floating_point_representation = is_g_floating_point_v<T>;
  * @tparam T Integer type of representation.
  * @tparam N Genotype length.
  * @tparam D Pointer to the genotype domain.
+ *
+ * Example:
+ * @include g_integer.cc
+ *
+ * Result (might be empty):
+ * @verbinclude g_integer.out
  */
 template<typename T, std::size_t N, const domain<T, N>* D>
 requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_integer
@@ -1236,6 +1242,12 @@ requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_integer
 
   /**
    * `g_integer::type` is floating-point type used for representing gene values.
+   *
+   * Example:
+   * @include g_integer.cc
+   *
+   * Result (might be empty):
+   * @verbinclude g_integer.out
    */
   using type = T;
 
@@ -1243,6 +1255,12 @@ requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_integer
    * `size` returns domain size, i.e. `N`.
    *
    * @returns Genotype length (domain size).
+   *
+   * Example:
+   * @include g_integer.cc
+   *
+   * Result (might be empty):
+   * @verbinclude g_integer.out
    */
   static constexpr std::size_t size() { return N; }
 
@@ -1250,12 +1268,24 @@ requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_integer
    * `constraints` returns domain, i.e. `*D`.
    *
    * @returns Domain.
+   *
+   * Example:
+   * @include g_integer.cc
+   *
+   * Result (might be empty):
+   * @verbinclude g_integer.out
    */
   static constexpr const domain<type, size()>& constraints() { return *D; }
 
   /**
    * `g_integer::chain_t` is genetic chain type used as underlying
    * representation in `genotype`.
+   *
+   * Example:
+   * @include g_integer.cc
+   *
+   * Result (might be empty):
+   * @verbinclude g_integer.out
    */
   using chain_t = chain<type, size()>;
 
@@ -1265,6 +1295,12 @@ requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_integer
    *
    * @param c Chain to be checked.
    * @returns Boolean value of check result.
+   *
+   * Example:
+   * @include g_integer.cc
+   *
+   * Result (might be empty):
+   * @verbinclude g_integer.out
    */
   static bool valid(const chain<type, size()>& c)
   {
@@ -1275,6 +1311,12 @@ requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_integer
    * `default_chain` returns chain filled in default way.
    *
    * @returns Default chain.
+   *
+   * Example:
+   * @include g_integer.cc
+   *
+   * Result (might be empty):
+   * @verbinclude g_integer.out
    */
   static chain_t default_chain() { return chain_min(constraints()); }
 };
@@ -1282,6 +1324,12 @@ requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_integer
 /**
  * If `T` is some specialization of `g_integer` then `is_g_integer` provides
  * member constant value equal to true. Otherwise value is false.
+ *
+ * Example:
+ * @include g_integer.cc
+ *
+ * Result (might be empty):
+ * @verbinclude g_integer.out
  */
 template<typename T>
 struct is_g_integer : std::false_type
@@ -1296,6 +1344,12 @@ struct is_g_integer<g_integer<T, N, D>> : std::true_type
 
 /**
  * `is_g_integer_v` is helper variable template for `is_g_integer`.
+ *
+ * Example:
+ * @include g_integer.cc
+ *
+ * Result (might be empty):
+ * @verbinclude g_integer.out
  */
 template<typename T>
 inline constexpr bool is_g_integer_v = is_g_integer<T>::value;
@@ -1303,6 +1357,12 @@ inline constexpr bool is_g_integer_v = is_g_integer<T>::value;
 /**
  * `integer_representation` specifies that `T` is some specialization of
  * `g_integer`.
+ *
+ * Example:
+ * @include g_integer.cc
+ *
+ * Result (might be empty):
+ * @verbinclude g_integer.out
  */
 template<typename T>
 concept integer_representation = is_g_integer_v<T>;
