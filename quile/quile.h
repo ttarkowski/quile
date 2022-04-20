@@ -1667,6 +1667,12 @@ concept permutation_representation = is_g_permutation_v<T>;
  * `chromosome_representation` specifies that `T` is some specialization of
  * one of allowed representations, i.e. `g_floating_point`, `g_integer`,
  * `g_binary` or `g_permutation`.
+ *
+ * Example:
+ * @include genotype.cc
+ *
+ * Result (might be empty):
+ * @verbinclude genotype.out
  */
 template<typename T>
 concept chromosome_representation =
@@ -1678,6 +1684,12 @@ concept chromosome_representation =
  * manipulation.
  *
  * @tparam R Type satisfying `chromosome_representation` concept.
+ *
+ * Example:
+ * @include genotype.cc
+ *
+ * Result (might be empty):
+ * @verbinclude genotype.out
  */
 template<typename R>
 requires chromosome_representation<R>
@@ -1710,11 +1722,23 @@ public:
 
   /**
    * `genotype::gene_t` is type of gene (e.g. floating-point).
+   *
+   * Example:
+   * @include genotype.cc
+   *
+   * Result (might be empty):
+   * @verbinclude genotype.out
    */
   using gene_t = typename R::type;
 
   /**
    * `genotype::genotype_t` is type of genotype representation dispatch tag.
+   *
+   * Example:
+   * @include genotype.cc
+   *
+   * Result (might be empty):
+   * @verbinclude genotype.out
    */
   using genotype_t = R;
 
@@ -1722,6 +1746,12 @@ public:
    * `genotype::size` returns domain size.
    *
    * @returns Genotype length (domain size).
+   *
+   * Example:
+   * @include genotype.cc
+   *
+   * Result (might be empty):
+   * @verbinclude genotype.out
    */
   static constexpr std::size_t size() { return R::size(); }
 
@@ -1729,6 +1759,12 @@ public:
    * `genotype::constraints` returns domain.
    *
    * @returns Domain.
+   *
+   * Example:
+   * @include genotype.cc
+   *
+   * Result (might be empty):
+   * @verbinclude genotype.out
    */
   static constexpr const domain<gene_t, size()> constraints()
   {
@@ -1738,6 +1774,12 @@ public:
   /**
    * `genotype::uniform_domain` states whether `genotype` domain is uniform,
    * i.e. its domain is of form \f$X_0^N\f$.
+   *
+   * Example:
+   * @include genotype.cc
+   *
+   * Result (might be empty):
+   * @verbinclude genotype.out
    */
   static constexpr bool uniform_domain = uniform(constraints());
 
@@ -1747,6 +1789,12 @@ public:
    *
    * @param c Chain to be checked.
    * @returns Boolean value of check result.
+   *
+   * Example:
+   * @include genotype.cc
+   *
+   * Result (might be empty):
+   * @verbinclude genotype.out
    */
   static bool valid(const chain_t& c) { return R::valid(c); }
 
@@ -1754,6 +1802,12 @@ public:
   /**
    * `genotype::genotype` constructor creates object initialized with default
    * genetic chain.
+   *
+   * Example:
+   * @include genotype.cc
+   *
+   * Result (might be empty):
+   * @verbinclude genotype.out
    */
   genotype()
     : chain_{ R::default_chain() }
@@ -1975,6 +2029,12 @@ private:
 /**
  * If `T` is some specialization of `genotype` then `is_genotype`
  * provides member constant value equal to true. Otherwise value is false.
+ *
+ * Example:
+ * @include genotype.cc
+ *
+ * Result (might be empty):
+ * @verbinclude genotype.out
  */
 template<typename T>
 struct is_genotype : std::false_type
@@ -1989,12 +2049,24 @@ struct is_genotype<genotype<T>> : std::true_type
 
 /**
  * `is_genotype_v` is helper variable template for `is_genotype`.
+ *
+ * Example:
+ * @include genotype.cc
+ *
+ * Result (might be empty):
+ * @verbinclude genotype.out
  */
 template<typename T>
 inline constexpr bool is_genotype_v = is_genotype<T>::value;
 
 /**
  * `chromosome` specifies that `T` is some specialization of `genotype`.
+ *
+ * Example:
+ * @include genotype.cc
+ *
+ * Result (might be empty):
+ * @verbinclude genotype.out
  */
 template<typename G>
 concept chromosome = is_genotype_v<G>;
@@ -2002,6 +2074,12 @@ concept chromosome = is_genotype_v<G>;
 /**
  * `floating_point_chromosome` specifies that `T` is some floating-point type
  * specialization of `genotype`.
+ *
+ * Example:
+ * @include genotype.cc
+ *
+ * Result (might be empty):
+ * @verbinclude genotype.out
  */
 template<typename G>
 concept floating_point_chromosome =
