@@ -1012,6 +1012,8 @@ uniform(const domain<T, N>& d)
  *
  * Result (might be different due to randomness):
  * @verbinclude self_adaptive.out
+ *
+ * @note Evolution result is saved in separate file (not included).
  */
 template<typename T, std::size_t N>
 requires std::floating_point<T>
@@ -3263,6 +3265,8 @@ Gaussian_mutation(typename G::gene_t sigma, probability p)
  *
  * Result (might be different due to randomness):
  * @verbinclude self_adaptive.out
+ *
+ * @note Evolution result is saved in separate file (not included).
  */
 template<typename G>
 requires floating_point_chromosome<G>
