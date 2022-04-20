@@ -1863,6 +1863,12 @@ public:
    *
    * @note Comparisons of genotypes with floating-point representation does not
    * include tolerance.
+   *
+   * Example:
+   * @include genotype_cmp.cc
+   *
+   * Result (might be empty):
+   * @verbinclude genotype_cmp.cc
    */
   auto operator<=>(const genotype& g) const { return chain_ <=> g.chain_; }
 
@@ -1875,6 +1881,12 @@ public:
    *
    * @note Comparisons of genotypes with floating-point representation does not
    * include tolerance.
+   *
+   * Example:
+   * @include genotype_cmp.cc
+   *
+   * Result (might be empty):
+   * @verbinclude genotype_cmp.cc
    */
   bool operator==(const genotype& g) const { return chain_ == g.chain_; }
 
