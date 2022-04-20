@@ -1883,6 +1883,12 @@ public:
    * chain.
    *
    * @returns Constant reference to the genetic chain.
+   *
+   * Example:
+   * @include genotype_data.cc
+   *
+   * Result:
+   * @verbinclude genotype_data.out
    */
   const chain_t& data() const { return chain_; }
 
