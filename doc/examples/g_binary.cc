@@ -4,13 +4,13 @@
 
 constexpr const quile::domain<bool, 42> d{};
 
-using i_type = quile::g_binary<42>;
+using b_type = quile::g_binary<42>;
 
-static_assert(std::is_same_v<i_type::type, bool>);
-static_assert(i_type::size() == 42);
-static_assert(i_type::constraints() == d);
+static_assert(std::is_same_v<b_type::type, bool>);
+static_assert(b_type::size() == 42);
+static_assert(b_type::constraints() == d);
 
-static_assert(quile::is_g_binary<i_type>::value);
+static_assert(quile::is_g_binary<b_type>::value);
 static_assert(!quile::is_g_binary_v<decltype(d)>);
 
 template<typename T>
@@ -21,8 +21,8 @@ struct test
 int
 main()
 {
-  i_type::chain_t c{ quile::chain_min(d) };
-  assert(i_type::valid(c));
-  assert(i_type::default_chain() == c);
-  [[maybe_unused]] test<i_type> t{};
+  b_type::chain_t c{ quile::chain_min(d) };
+  assert(b_type::valid(c));
+  assert(b_type::default_chain() == c);
+  [[maybe_unused]] test<b_type> t{};
 }
