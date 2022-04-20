@@ -1823,6 +1823,12 @@ public:
    *
    * @note This overload is also available for permutation representation and
    * draws new permutation in that case.
+   *
+   * Example:
+   * @include genotype_random_reset.cc
+   *
+   * Result (might be different due to randomness):
+   * @verbinclude genotype_random_reset.out
    */
   genotype& random_reset()
   {
@@ -1844,6 +1850,12 @@ public:
    * @returns Reference to `*this`.
    *
    * @note This overload is not available for permutation representation.
+   *
+   * Example:
+   * @include genotype_random_reset.cc
+   *
+   * Result (might be different due to randomness):
+   * @verbinclude genotype_random_reset.out
    */
   template<typename = std::enable_if_t<!permutation_representation<R>>>
   genotype& random_reset(std::size_t i)
