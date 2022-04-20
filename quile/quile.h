@@ -1371,6 +1371,12 @@ concept integer_representation = is_g_integer_v<T>;
  * `g_binary` specifies that `genotype` has binary representation.
  *
  * @tparam N Genotype length.
+ *
+ * Example:
+ * @include g_binary.cc
+ *
+ * Result (might be empty):
+ * @verbinclude g_binary.out
  */
 template<std::size_t N>
 struct g_binary
@@ -1379,6 +1385,12 @@ struct g_binary
 
   /**
    * `g_binary::type` is floating-point type used for representing gene values.
+   *
+   * Example:
+   * @include g_binary.cc
+   *
+   * Result (might be empty):
+   * @verbinclude g_binary.out
    */
   using type = bool;
 
@@ -1386,6 +1398,12 @@ struct g_binary
    * `size` returns domain size, i.e. `N`.
    *
    * @returns Genotype length (domain size).
+   *
+   * Example:
+   * @include g_binary.cc
+   *
+   * Result (might be empty):
+   * @verbinclude g_binary.out
    */
   static constexpr std::size_t size() { return N; }
 
@@ -1393,6 +1411,12 @@ struct g_binary
    * `constraints` returns domain, i.e. \f$\{0, 1\}^N\f$.
    *
    * @returns Domain.
+   *
+   * Example:
+   * @include g_binary.cc
+   *
+   * Result (might be empty):
+   * @verbinclude g_binary.out
    */
   static constexpr const domain<type, size()> constraints()
   {
@@ -1402,6 +1426,12 @@ struct g_binary
   /**
    * `g_binary::chain_t` is genetic chain type used as underlying
    * representation in `genotype`.
+   *
+   * Example:
+   * @include g_binary.cc
+   *
+   * Result (might be empty):
+   * @verbinclude g_binary.out
    */
   using chain_t = chain<type, size()>;
 
@@ -1411,6 +1441,12 @@ struct g_binary
    * @returns Boolean value of check result.
    *
    * @note Result is equal to `true` by definition.
+   *
+   * Example:
+   * @include g_binary.cc
+   *
+   * Result (might be empty):
+   * @verbinclude g_binary.out
    */
   static bool valid(const chain<type, size()>&) { return true; }
 
@@ -1418,6 +1454,12 @@ struct g_binary
    * `default_chain` returns chain filled in default way.
    *
    * @returns Default chain.
+   *
+   * Example:
+   * @include g_binary.cc
+   *
+   * Result (might be empty):
+   * @verbinclude g_binary.out
    */
   static chain_t default_chain() { return chain_min(constraints()); }
 };
@@ -1425,6 +1467,12 @@ struct g_binary
 /**
  * If `T` is some specialization of `g_binary` then `is_g_binary` provides
  * member constant value equal to true. Otherwise value is false.
+ *
+ * Example:
+ * @include g_binary.cc
+ *
+ * Result (might be empty):
+ * @verbinclude g_binary.out
  */
 template<typename T>
 struct is_g_binary : std::false_type
@@ -1439,6 +1487,12 @@ struct is_g_binary<g_binary<N>> : std::true_type
 
 /**
  * `is_g_binary_v` is helper variable template for `is_g_binary`.
+ *
+ * Example:
+ * @include g_binary.cc
+ *
+ * Result (might be empty):
+ * @verbinclude g_binary.out
  */
 template<typename T>
 inline constexpr bool is_g_binary_v = is_g_binary<T>::value;
@@ -1446,6 +1500,12 @@ inline constexpr bool is_g_binary_v = is_g_binary<T>::value;
 /**
  * `binary_representation` specifies that `T` is some specialization of
  * `g_binary`.
+ *
+ * Example:
+ * @include g_binary.cc
+ *
+ * Result (might be empty):
+ * @verbinclude g_binary.out
  */
 template<typename T>
 concept binary_representation = is_g_binary_v<T>;
