@@ -1224,7 +1224,7 @@ concept floating_point_representation = is_g_floating_point_v<T>;
 /**
  * `g_integer` specifies that `genotype` has integer representation.
  *
- * @tparam T Integer type of representation.
+ * @tparam T Integer type of representation (excluding Boolean).
  * @tparam N Genotype length.
  * @tparam D Pointer to the genotype domain.
  *
@@ -1241,7 +1241,8 @@ requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_integer
   static_assert(N > 0);
 
   /**
-   * `g_integer::type` is floating-point type used for representing gene values.
+   * `g_integer::type` is integer non-Boolean type used for representing gene
+   * values.
    *
    * Example:
    * @include g_integer.cc
@@ -1384,7 +1385,7 @@ struct g_binary
   static_assert(N > 0);
 
   /**
-   * `g_binary::type` is floating-point type used for representing gene values.
+   * `g_binary::type` is Boolean type used for representing gene values.
    *
    * Example:
    * @include g_binary.cc
@@ -1523,8 +1524,8 @@ template<typename T, std::size_t N, T M>
 requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_permutation
 {
   /**
-   * `g_permutation::type` is floating-point type used for representing gene
-   * values.
+   * `g_permutation::type` is integer non-Boolean type used for representing
+   * gene values.
    */
   using type = T;
 
