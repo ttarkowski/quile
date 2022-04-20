@@ -1693,6 +1693,12 @@ public:
   /**
    * `genotype::const_iterator` is constant iterator to access underlying
    * representation.
+   *
+   * Example:
+   * @include genotype_begin_end.cc
+   *
+   * Result:
+   * @verbinclude genotype_begin_end.out
    */
   using const_iterator = typename chain_t::const_iterator;
 
