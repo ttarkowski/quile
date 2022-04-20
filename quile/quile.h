@@ -1890,6 +1890,12 @@ public:
    * `genotype::begin` returns constant iterator to the begin of genetic chain.
    *
    * @returns Constant iterator to the begin of genetic chain.
+   *
+   * Example:
+   * @include genotype_begin_end.cc
+   *
+   * Result:
+   * @verbinclude genotype_begin_end.out
    */
   const_iterator begin() const { return chain_.begin(); }
 
@@ -1899,6 +1905,12 @@ public:
    * @returns Constant iterator to the end of genetic chain.
    *
    * @note The word \em end means past-the-last element.
+   *
+   * Example:
+   * @include genotype_begin_end.cc
+   *
+   * Result:
+   * @verbinclude genotype_begin_end.out
    */
   const_iterator end() const { return chain_.end(); }
 
