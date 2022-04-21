@@ -2173,6 +2173,12 @@ operator<<(std::ostream& os, const G& g)
  * @returns Reference to the `os` stream.
  *
  * @note This overload is dedicated for floating-point genotypes.
+ *
+ * Example:
+ * @include genotype_stream.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude genotype_stream.out
  */
 template<typename G>
 requires floating_point_chromosome<G> std::ostream&
