@@ -2148,6 +2148,12 @@ const auto constraints_satisfied = [](const G&) { return true; };
  * @param os Stream to use.
  * @param g Genotype to be printed.
  * @returns Reference to the `os` stream.
+ *
+ * Example:
+ * @include genotype_stream.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude genotype_stream.out
  */
 template<typename G>
 requires chromosome<G> std::ostream&
