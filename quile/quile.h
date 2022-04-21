@@ -2092,7 +2092,7 @@ concept floating_point_chromosome =
  * Example:
  * @include integer_chromosome.cc
  *
- * Result (might be empty):
+ * Result (might be different due to randomness):
  * @verbinclude integer_chromosome.out
  */
 template<typename G>
