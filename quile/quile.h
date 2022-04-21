@@ -2088,6 +2088,12 @@ concept floating_point_chromosome =
 /**
  * `integer_chromosome` specifies that `T` is some integer type specialization
  * of `genotype`.
+ *
+ * Example:
+ * @include integer_chromosome.cc
+ *
+ * Result (might be empty):
+ * @verbinclude integer_chromosome.out
  */
 template<typename G>
 concept integer_chromosome =
