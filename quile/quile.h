@@ -2130,6 +2130,12 @@ concept permutation_chromosome =
 /**
  * `uniform_chromosome` specifies that `T` is some specialization of `genotype`
  * satisfying uniformity condition.
+ *
+ * Example:
+ * @include permutation_chromosome.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude permutation_chromosome.out
  */
 template<typename G>
 concept uniform_chromosome = chromosome<G> && G::uniform_domain;

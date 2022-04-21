@@ -4,7 +4,7 @@
 #include <quile/quile.h>
 
 template<typename G>
-requires quile::permutation_chromosome<G>
+requires quile::permutation_chromosome<G> || quile::uniform_chromosome<G>
 auto
 n_swap_mutation(std::size_t n)
 {
