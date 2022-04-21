@@ -2155,12 +2155,24 @@ concept uniform_chromosome = chromosome<G> && G::uniform_domain;
  *
  * @note Set defined with use of predicate is called \em extension \em of \em
  * predicate.
+ *
+ * Example:
+ * @include genotype_constraints.cc
+ *
+ * Result (might be empty):
+ * @verbinclude genotype_constraints.out
  */
 template<typename F, typename G>
 concept genotype_constraints = std::predicate<F, G> && chromosome<G>;
 
 /**
  * `constraints_satisfied` is predicate stating that all genotypes are proper.
+ *
+ * Example:
+ * @include genotype_constraints.cc
+ *
+ * Result (might be empty):
+ * @verbinclude genotype_constraints.out
  */
 template<typename G>
 requires chromosome<G>
