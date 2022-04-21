@@ -2102,6 +2102,12 @@ concept integer_chromosome =
 /**
  * `binary_chromosome` specifies that `T` is some binary type specialization
  * of `genotype`.
+ *
+ * Example:
+ * @include binary_chromosome.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude binary_chromosome.out
  */
 template<typename G>
 concept binary_chromosome =
