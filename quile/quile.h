@@ -2334,6 +2334,12 @@ concept genetic_pool = is_population_v<G>;
 
 /**
  * `populate_0_fn` can be used for first generation creation.
+ *
+ * Example:
+ * @include random_population.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude random_population.out
  */
 template<typename G>
 requires chromosome<G>
@@ -3286,6 +3292,12 @@ adapter(const populate_1_fn<G>& fn)
  * @tparam G Some `genotype` specialization.
  * @param lambda Size of returned population.
  * @returns Random population.
+ *
+ * Example:
+ * @include random_population.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude random_population.out
  */
 template<auto C, typename G>
 requires genotype_constraints<decltype(C), G> && chromosome<G> population<G>
