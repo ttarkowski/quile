@@ -2116,6 +2116,12 @@ concept binary_chromosome =
 /**
  * `permutation_chromosome` specifies that `T` is some permutation type
  * specialization of `genotype`.
+ *
+ * Example:
+ * @include permutation_chromosome.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude permutation_chromosome.out
  */
 template<typename G>
 concept permutation_chromosome =
