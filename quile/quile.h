@@ -2276,6 +2276,12 @@ namespace quile {
 /**
  * `population` is a sequence of genotypes implemented as a `std::vector`
  * sequence container.
+ *
+ * Example:
+ * @include population.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude population.out
  */
 template<typename G>
 requires chromosome<G>
@@ -2284,6 +2290,12 @@ using population = std::vector<G>;
 /**
  * If `T` is some specialization of `population` then `is_population`
  * provides member constant value equal to true. Otherwise value is false.
+ *
+ * Example:
+ * @include population.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude population.out
  */
 template<typename T>
 struct is_population : std::false_type
@@ -2298,12 +2310,24 @@ struct is_population<population<G>> : std::true_type
 
 /**
  * `is_population_v` is helper variable template for `is_population`.
+ *
+ * Example:
+ * @include population.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude population.out
  */
 template<typename G>
 inline constexpr bool is_population_v = is_population<G>::value;
 
 /**
  * `genetic_pool` specifies that `T` is some specialization of `population`.
+ *
+ * Example:
+ * @include population.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude population.out
  */
 template<typename G>
 concept genetic_pool = is_population_v<G>;
