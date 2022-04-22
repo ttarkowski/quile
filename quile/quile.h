@@ -2460,6 +2460,12 @@ using mutation_fn = std::function<population<G>(const G&)>;
 /**
  * `recombination` specifies that `M` instance applied to two objects of type
  * `genotype` returns object convertible to `population`.
+ *
+ * Example:
+ * @include recombination.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude recombination.out
  */
 template<typename R, typename G>
 concept recombination = requires(R r, G g)
@@ -2473,6 +2479,12 @@ concept recombination = requires(R r, G g)
 /**
  * `recombination_fn` is a callable object which can be invoked on two objects
  * of type `genotype` and returns `population`.
+ *
+ * Example:
+ * @include recombination.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude recombination.out
  */
 template<typename G>
 requires chromosome<G>
