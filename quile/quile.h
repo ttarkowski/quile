@@ -1957,6 +1957,13 @@ public:
   }
 
   /**
+   * `genotype::random` returns random genotype.
+   *
+   * @return Random genotype.
+   */
+  static genotype random() { return genotype{}.random_reset(); }
+
+  /**
    * `genotype::operator<=>` performs default lexicographical comparison with
    * use of genotypes' genetic chain.
    *
