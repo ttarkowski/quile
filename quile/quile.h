@@ -2414,6 +2414,12 @@ using generations = std::deque<population<G>>;
 /**
  * `mutation` specifies that `M` instance applied to `genotype` returns
  * object convertible to `population`.
+ *
+ * Example:
+ * @include mutation.cc
+ *
+ * Result:
+ * @verbinclude mutation.out
  */
 template<typename M, typename G>
 concept mutation = requires(M m, G g)
@@ -2427,6 +2433,12 @@ concept mutation = requires(M m, G g)
 /**
  * `mutation_fn` is a callable object which can be invoked on `genotype` and
  * returns `population`.
+ *
+ * Example:
+ * @include mutation.cc
+ *
+ * Result:
+ * @verbinclude mutation.out
  */
 template<typename G>
 requires chromosome<G>
