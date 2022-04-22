@@ -216,7 +216,8 @@ public:
    */
   explicit thread_pool(std::size_t sz)
     : free_threads_{ sz }
-  {}
+  {
+  }
 
   /**
    * `thread_pool::async` asynchronically executes callable object `f`
@@ -333,7 +334,8 @@ public:
            typename = std::enable_if_t<std::numeric_limits<U>::is_specialized>>
   constexpr range()
     : range{ std::numeric_limits<T>::lowest(), std::numeric_limits<T>::max() }
-  {}
+  {
+  }
 
   /**
    * Default copy constructor `range::range`.
@@ -871,14 +873,16 @@ using domain = std::array<range<T>, N>;
  */
 template<typename T>
 struct is_domain : std::false_type
-{};
+{
+};
 
 /**
  * Please see documentation for `is_domain<T>`.
  */
 template<typename T, std::size_t N>
 struct is_domain<domain<T, N>> : std::true_type
-{};
+{
+};
 
 /**
  * `is_domain_v` is helper variable template for `is_domain`.
@@ -1186,14 +1190,16 @@ struct g_floating_point
  */
 template<typename T>
 struct is_g_floating_point : std::false_type
-{};
+{
+};
 
 /**
  * Please see documentation for `is_g_floating_point<T>`.
  */
 template<typename T, std::size_t N, const domain<T, N>* D>
 struct is_g_floating_point<g_floating_point<T, N, D>> : std::true_type
-{};
+{
+};
 
 /**
  * `is_g_floating_point_v` is helper variable template for
@@ -1334,14 +1340,16 @@ requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_integer
  */
 template<typename T>
 struct is_g_integer : std::false_type
-{};
+{
+};
 
 /**
  * Please see documentation for `is_g_integer<T>`.
  */
 template<typename T, std::size_t N, const domain<T, N>* D>
 struct is_g_integer<g_integer<T, N, D>> : std::true_type
-{};
+{
+};
 
 /**
  * `is_g_integer_v` is helper variable template for `is_g_integer`.
@@ -1477,14 +1485,16 @@ struct g_binary
  */
 template<typename T>
 struct is_g_binary : std::false_type
-{};
+{
+};
 
 /**
  * Please see documentation for `is_g_binary<T>`.
  */
 template<std::size_t N>
 struct is_g_binary<g_binary<N>> : std::true_type
-{};
+{
+};
 
 /**
  * `is_g_binary_v` is helper variable template for `is_g_binary`.
@@ -1629,14 +1639,16 @@ requires std::integral<T> &&(!std::is_same_v<T, bool>)struct g_permutation
  */
 template<typename T>
 struct is_g_permutation : std::false_type
-{};
+{
+};
 
 /**
  * Please see documentation for `is_g_permutation<T>`.
  */
 template<typename T, std::size_t N, T M>
 struct is_g_permutation<g_permutation<T, N, M>> : std::true_type
-{};
+{
+};
 
 /**
  * `is_g_permutation_v` is helper variable template for `is_g_permutation`.
@@ -1811,7 +1823,8 @@ public:
    */
   genotype()
     : chain_{ R::default_chain() }
-  {}
+  {
+  }
 
   /**
    * `genotype::genotype` constructor creates object initialized with genetic
@@ -2038,14 +2051,16 @@ private:
  */
 template<typename T>
 struct is_genotype : std::false_type
-{};
+{
+};
 
 /**
  * Please see documentation for `is_genotype<T>`.
  */
 template<typename T>
 struct is_genotype<genotype<T>> : std::true_type
-{};
+{
+};
 
 /**
  * `is_genotype_v` is helper variable template for `is_genotype`.
@@ -2299,14 +2314,16 @@ using population = std::vector<G>;
  */
 template<typename T>
 struct is_population : std::false_type
-{};
+{
+};
 
 /**
  * Please see documentation for `is_population<T>`.
  */
 template<typename G>
 struct is_population<population<G>> : std::true_type
-{};
+{
+};
 
 /**
  * `is_population_v` is helper variable template for `is_population`.
@@ -2471,14 +2488,16 @@ public:
   variation(const mutation_fn<G>& m, const recombination_fn<G>& r)
     : m_{ m }
     , r_{ r }
-  {}
+  {
+  }
 
   /**
    * `variation::variation` constructor creates identity variation.
    */
   variation()
     : variation{ unary_identity<G>, binary_identity<G> }
-  {}
+  {
+  }
 
   /**
    * `variation::variation` constructor creates variation equal to mutation `m`.
@@ -2487,7 +2506,8 @@ public:
    */
   explicit variation(const mutation_fn<G>& m)
     : variation{ m, binary_identity<G> }
-  {}
+  {
+  }
 
   /**
    * `variation::variation` constructor creates variation equal to recombination
@@ -2497,7 +2517,8 @@ public:
    */
   explicit variation(const recombination_fn<G>& r)
     : variation{ unary_identity<G>, r }
-  {}
+  {
+  }
 
   /**
    * `variation::operator()` applies variation to genotypes `g0` and `g1`.
@@ -2752,7 +2773,8 @@ public:
     unsigned int thread_sz = std::thread::hardware_concurrency())
     : function_{ [=](const G& g) { return gc(g) ? f(g) : incalculable; } }
     , thread_sz_{ thread_sz }
-  {}
+  {
+  }
 
   /**
    * Default copy constructor `fitness_db::fitness_db`.
@@ -3048,7 +3070,8 @@ public:
    */
   explicit fitness_proportional_selection(const fitness_db<G>& ff)
     : ff_{ ff }
-  {}
+  {
+  }
 
   /**
    * `fitness_proportional_selection::operator()` returns selection
@@ -3201,7 +3224,8 @@ public:
   ranking_selection(const fitness_db<G>& ff, const probability_fn& pf)
     : ff_{ ff }
     , pf_{ pf }
-  {}
+  {
+  }
 
   /**
    * `ranking_selection::operator()` returns selection probabilities for
@@ -3332,7 +3356,8 @@ public:
    */
   explicit roulette_wheel_selection(const selection_probabilities_fn<G>& spf)
     : spf_{ spf }
-  {}
+  {
+  }
 
   /**
    * `roulette_wheel_selection::operator()` draws `lambda` genotypes from
@@ -3376,7 +3401,8 @@ public:
   explicit stochastic_universal_sampling(
     const selection_probabilities_fn<G>& spf)
     : spf_{ spf }
-  {}
+  {
+  }
 
   /**
    * `stochastic_universal_sampling::operator()` draws `lambda` genotypes from
@@ -3927,536 +3953,538 @@ cut_n_crossfill(const G& g0, const G& g1)
 /**
  * `test_functions` contains mechanisms for floating-point test functions.
  */
-namespace test_functions
+namespace test_functions {
+
+/**
+ * `test_functions::point` is point in N-dimensional space.
+ *
+ * @tparam T Floating-point type.
+ * @tparam N Space dimension.
+ */
+template<std::floating_point T, std::size_t N>
+using point = std::array<T, N>;
+
+/**
+ * `test_functions::distance` returns distance between two points.
+ *
+ * @tparam T Floating-point type.
+ * @tparam N Space dimension.
+ * @param p0 First point.
+ * @param p1 Second point.
+ * @returns Distance between `p0` and `p1`.
+ */
+template<std::floating_point T, std::size_t N>
+T
+distance(const point<T, N>& p0, const point<T, N>& p1)
 {
+  T res = .0;
+  for (std::size_t i = 0; i < N; ++i) {
+    res += square(p0[i] - p1[i]);
+  }
+  return std::sqrt(res);
+}
+
+/**
+ * `test_functions::coordinates` converts 2D-point to `std::tuple` containing
+ * point coordinates.
+ *
+ * @tparam T Floating-point type.
+ * @param p 2D-point.
+ * @returns Corresponding tuple.
+ */
+template<std::floating_point T>
+std::tuple<T, T>
+coordinates(const point<T, 2>& p)
+{
+  return std::tuple<T, T>{ p[0], p[1] };
+}
+
+/**
+ * `test_functions::coordinates` converts 3D-point to `std::tuple` containing
+ * point coordinates.
+ *
+ * @tparam T Floating-point type.
+ * @param p 3D-point.
+ * @returns Corresponding tuple.
+ */
+template<std::floating_point T>
+std::tuple<T, T, T>
+coordinates(const point<T, 3>& p)
+{
+  return std::tuple<T, T, T>{ p[0], p[1], p[2] };
+}
+
+/**
+ * `test_functions::uniform_point` returns point in N-dimensional space, where
+ * each coordinate has the same value `v`.
+ *
+ * @tparam T Floating-point type.
+ * @tparam Space dimension.
+ * @param v Coordinate value.
+ * @returns Point in N-dimensional space.
+ */
+template<std::floating_point T, std::size_t N>
+point<T, N>
+uniform_point(T v)
+{
+  point<T, N> res{};
+  std::ranges::generate(res, [=]() -> T { return v; });
+  return res;
+}
+
+/**
+ * `test_functions::test_function` is floating-point test function.
+ *
+ * @tparam T Floating-point type.
+ * @tparam N Space dimension.
+ */
+template<std::floating_point T, std::size_t N>
+class test_function
+{
+public:
+  /**
+   * `test_functions::test_function::function` is underlying test function
+   * type.
+   */
+  using function = std::function<T(const point<T, N>&)>;
 
   /**
-   * `test_functions::point` is point in N-dimensional space.
-   *
-   * @tparam T Floating-point type.
-   * @tparam N Space dimension.
+   * `test_functions::test_function::domain_fn` is test function domain.
    */
-  template<std::floating_point T, std::size_t N>
-  using point = std::array<T, N>;
+  using domain_fn = std::function<domain<T, N>()>;
 
   /**
-   * `test_functions::distance` returns distance between two points.
-   *
-   * @tparam T Floating-point type.
-   * @tparam N Space dimension.
-   * @param p0 First point.
-   * @param p1 Second point.
-   * @returns Distance between `p0` and `p1`.
+   * `test_functions::test_function::point_fn` is solution generating function
+   * type.
    */
-  template<std::floating_point T, std::size_t N>
-  T distance(const point<T, N>& p0, const point<T, N>& p1)
+  using point_fn = std::function<point<T, N>()>;
+
+public:
+  /**
+   * `test_functions::test_function::test_function` creates test function.
+   *
+   * @param name Test function name.
+   * @param fn The test function representation.
+   * @param d The test function domain.
+   * @param p_min Function generating solution minimizing the test function.
+   */
+  test_function(const std::string& name,
+                const function& fn,
+                const domain_fn& d,
+                const point_fn& p_min)
+    : name_{ name }
+    , fn_{ fn }
+    , d_{ d }
+    , p_min_{ p_min }
   {
-    T res = .0;
-    for (std::size_t i = 0; i < N; ++i) {
-      res += square(p0[i] - p1[i]);
+  }
+
+  /**
+   * `test_functions::test_function::name` returns test function name.
+   *
+   * @returns Name of the test function.
+   */
+  std::string name() const { return name_; }
+
+  /**
+   * `test_functions::test_function::operator()` returns test function value
+   * at point `p`.
+   *
+   * @param p Point.
+   * @returns Test function value at point `p`.
+   */
+  T operator()(const point<T, N>& p) const { return fn_(p); }
+
+  /**
+   * `test_functions::test_function::function_domain` returns test function
+   * domain.
+   *
+   * @returns Test function domain.
+   */
+  domain<T, N> function_domain() const { return d_(); }
+
+  /**
+   * `test_functions::test_function::p_min` returns point minimizing test
+   * function over its domain.
+   *
+   * @returns Point minimizing test function over its domain.
+   */
+  point<T, N> p_min() const { return p_min_(); }
+
+private:
+  std::string name_;
+  function fn_;
+  domain_fn d_;
+  point_fn p_min_;
+};
+
+/**
+ * `test_functions::Ackley` is Ackley test function.
+ *
+ * \f[
+ * f^*\left(\vec{x}\right) =
+ * -20 \exp\left( \frac{-0{.}02}{\sqrt{n}} \sqrt{\sum_{i = 0}^{n - 1} x_i^2}
+ * \right) - \exp\left( \frac{1}{n} \sum_{i = 0}^{n - 1} \cos \left( 2 \pi x_i
+ * \right) \right) + 20 + e
+ * \f]
+ */
+template<std::floating_point T, std::size_t N>
+const test_function<T, N> Ackley{
+  "Ackley",
+  [](const point<T, N>& p) {
+    T s0 = 0.;
+    T s1 = 0.;
+    for (auto x : p) {
+      s0 += square(x);
+      s1 += std::cos(2 * pi<T> * x);
     }
-    return std::sqrt(res);
-  }
+    return -20. * std::exp(-.02 * std::sqrt(s0) / std::sqrt(N)) -
+           std::exp(s1 / N) + 20. + e<T>;
+  },
+  []() { return uniform_domain<T, N>(-35., 35.); },
+  []() { return uniform_point<T, N>(0.); }
+};
 
-  /**
-   * `test_functions::coordinates` converts 2D-point to `std::tuple` containing
-   * point coordinates.
-   *
-   * @tparam T Floating-point type.
-   * @param p 2D-point.
-   * @returns Corresponding tuple.
-   */
-  template<std::floating_point T>
-  std::tuple<T, T> coordinates(const point<T, 2>& p)
-  {
-    return std::tuple<T, T>{ p[0], p[1] };
-  }
+/**
+ * `test_functions::Alpine` is Alpine test function.
+ *
+ * \f[
+ * f^*\left(\vec{x}\right) =
+ * \sum_{i = 0}^{n - 1} \left| x_i \sin x_i  + 0{.}1 x_i \right|
+ * \f]
+ */
+template<std::floating_point T, std::size_t N>
+const test_function<T, N> Alpine{
+  "Alpine",
+  [](const point<T, N>& p) {
+    return std::transform_reduce(
+      std::begin(p), std::end(p), T{ 0. }, std::plus<T>{}, [](auto x) {
+        return std::fabs(x * std::sin(x) + .1 * x);
+      });
+  },
+  []() { return uniform_domain<T, N>(-10., 10.); },
+  []() { return uniform_point<T, N>(0.); }
+};
 
-  /**
-   * `test_functions::coordinates` converts 3D-point to `std::tuple` containing
-   * point coordinates.
-   *
-   * @tparam T Floating-point type.
-   * @param p 3D-point.
-   * @returns Corresponding tuple.
-   */
-  template<std::floating_point T>
-  std::tuple<T, T, T> coordinates(const point<T, 3>& p)
-  {
-    return std::tuple<T, T, T>{ p[0], p[1], p[2] };
+/**
+ * `test_functions::Aluffi_Pentini` is Aluffi-Pentini test function.
+ *
+ * \f[
+ * f^*\left(\vec{x}\right) =
+ * \frac{1}{4} x_0^4 - \frac{1}{2} x_0^2 + \frac{1}{10} x_0 + \frac{1}{2}
+ * x_1^2
+ * \f]
+ */
+template<std::floating_point T>
+const test_function<T, 2> Aluffi_Pentini{
+  "Aluffi-Pentini",
+  [](const point<T, 2>& p) {
+    const auto [x, y] = coordinates(p);
+    return ((.25 * x * x - .5) * x + .1) * x + 0.5 * y * y;
+  },
+  []() { return uniform_domain<T, 2>(-10., 10.); },
+  []() {
+    return point<T, 2>{ [q = 0.1](int k) -> T {
+                         return 2. * std::sqrt(3.) *
+                                std::cos(
+                                  std::acos(-3. * std::sqrt(3.) * q / 2.) / 3. -
+                                  2. * std::numbers::pi_v<T> * k / 3.) /
+                                3.;
+                       }(2),
+                        0. };
   }
+};
 
-  /**
-   * `test_functions::uniform_point` returns point in N-dimensional space, where
-   * each coordinate has the same value `v`.
-   *
-   * @tparam T Floating-point type.
-   * @tparam Space dimension.
-   * @param v Coordinate value.
-   * @returns Point in N-dimensional space.
-   */
-  template<std::floating_point T, std::size_t N>
-  point<T, N> uniform_point(T v)
-  {
-    point<T, N> res{};
-    std::ranges::generate(res, [=]() -> T { return v; });
+/**
+ * `test_functions::Booth` is Booth test function.
+ *
+ * \f[
+ * f^*\left(\vec{x}\right) =
+ * (x_0 + 2x_1 - 7)^2 + (2x_0 + x_1 - 5)^2
+ * \f]
+ */
+template<std::floating_point T>
+const test_function<T, 2> Booth{
+  "Booth",
+  [](const point<T, 2>& p) {
+    const auto [x, y] = coordinates(p);
+    return square(x + 2. * y - 7.) + square(2. * x + y - 5.);
+  },
+  []() { return uniform_domain<T, 2>(-10., 10.); },
+  []() {
+    return point<T, 2>{ 1., 3. };
+  }
+};
+
+/**
+ * `test_functions::Colville` is Colville test function.
+ *
+ * \f{eqnarray*}{
+ * f^*\left(\vec{x}\right) & = &
+ * 100 \left( x_0 - x_1^2 \right)^2 + \left( 1 - x_0 \right)^2 + 90 \left( x_3
+ * - x_2^2 \right)^2 + \left( 1 - x_2 \right)^2 \\
+ * & & +\ 10{.}1 \left( x_1 - 1
+ * \right)^2 + \left( x_3 - 1 \right)^2 + 19{.}8 \left( x_1 - 1 \right) \left(
+ * x_3 - 1 \right)
+ * \f}
+ */
+template<std::floating_point T>
+const test_function<T, 4> Colville{
+  "Colville",
+  [](const point<T, 4>& p) {
+    return 100. * square(p[0] - square(p[1])) + square(1. - p[0]) +
+           90. * square(p[3] - p[2] * p[2]) + square(1. - p[2]) +
+           10.1 * square(p[1] - 1.) + square(p[3] - 1.) +
+           19.8 * (p[1] - 1.) * (p[3] - 1.);
+  },
+  []() { return uniform_domain<T, 4>(-10., 10.); },
+  []() { return uniform_point<T, 4>(1.); }
+};
+
+/**
+ * `test_functions::Easom` is Easom test function.
+ *
+ * \f[
+ * f^*\left(\vec{x}\right) =
+ * -\cos x_0 \cdot \cos x_1 \cdot \exp \left( -(x_0 - \pi )^2 - (x_1 - \pi )^2
+ * \right)
+ * \f]
+ */
+template<std::floating_point T>
+const test_function<T, 2> Easom{
+  "Easom",
+  [](const point<T, 2>& p) {
+    const auto [x, y] = coordinates(p);
+    return -std::cos(x) * std::cos(y) *
+           std::exp(-square(x - pi<T>) - square(y - pi<T>));
+  },
+  []() { return uniform_domain<T, 2>(-100., 100); },
+  []() { return uniform_point<T, 2>(pi<T>); }
+};
+
+/**
+ * `test_functions::exponential` is exponential test function.
+ *
+ * \f[
+ * f^*\left(\vec{x}\right) =
+ * -\exp\left( -\frac{1}{2} \sum_{i = 0}^{n - 1} x_i^2 \right)
+ * \f]
+ */
+template<std::floating_point T, std::size_t N>
+const test_function<T, N> exponential{
+  "exponential",
+  [](const point<T, N>& p) {
+    return -std::exp(
+      -.5 * std::transform_reduce(
+              std::begin(p), std::end(p), T{ 0. }, std::plus<T>{}, square<T>));
+  },
+  []() { return uniform_domain<T, N>(-1., 1.); },
+  []() { return uniform_point<T, N>(0.); }
+};
+
+/**
+ * `test_functions::Goldstein_Price` is Goldstein-Price test function.
+ *
+ * \f{eqnarray*}{
+ * f^*\left(\vec{x}\right) & = &
+ * \left( 1 + \left( x_0 + x_1 + 1 \right)^2 \left( 19 - 14 x_0 + 3 x_0^2
+ * - 14
+ * x_1 + 6 x_0 x_1 + 3 x_1^2 \right) \right) \\
+ * & & \cdot \left( 30 + \left( 2 x_0 -
+ * 3 x_1 \right)^2 \left( 18 - 32 x_0 + 12 x_0^2 + 48 x_1 - 36 x_0 x_1 + 27
+ * x_1^2 \right) \right)
+ * \f}
+ */
+template<std::floating_point T>
+const test_function<T, 2> Goldstein_Price{
+  "Goldstein-Price",
+  [](const point<T, 2>& p) {
+    const auto [x, y] = coordinates(p);
+    const auto [x2, y2] = std::tuple<T, T>{ x * x, y * y };
+    const auto xy = x * y;
+    return (1. + square(x + y + 1.) *
+                   (19. - 14. * x + 3. * x2 - 14. * y + 6. * xy + 3. * y2)) *
+           (30. + square(2. * x - 3. * y) *
+                    (18. - 32. * x + 12. * x2 + 48. * y - 36. * xy + 27. * y2));
+  },
+  []() { return uniform_domain<T, 2>(-2., 2.); },
+  []() {
+    return point<T, 2>{ 0., -1. };
+  }
+};
+
+/**
+ * `test_functions::Hosaki` is Hosaki test function.
+ *
+ * \f[
+ * f^*\left(\vec{x}\right) =
+ * \left( 1 - 8 x_0 + 7 x_0^2 - \frac{7}{3} x_0^3 + \frac{1}{4} x_0^4 \right)
+ * x_1^2 \exp (-x_1)
+ * \f]
+ */
+template<std::floating_point T>
+const test_function<T, 2> Hosaki{
+  "Hosaki",
+  [](const point<T, 2>& p) {
+    const auto [x, y] = coordinates(p);
+    return (1. + x * (-8. + x * (7. + x * (-7. / 3. + x / 4.)))) * y * y *
+           std::exp(-y);
+  },
+  []() { return uniform_domain<T, 2>(-10., 10.); },
+  []() {
+    return point<T, 2>{ 4., 2. };
+  }
+};
+
+/**
+ * `test_functions::Leon` is Leon test function.
+ *
+ * \f[
+ * f^*\left(\vec{x}\right) =
+ * 100 \left( x_1 - x_0^2 \right)^2 + \left( 1 - x_0 \right)^2
+ * \f]
+ */
+template<std::floating_point T>
+const test_function<T, 2> Leon{
+  "Leon",
+  [](const point<T, 2>& p) {
+    const auto [x, y] = coordinates(p);
+    return 100. * square(y - x * x) + square(1. - x);
+  },
+  []() { return uniform_domain<T, 2>(-1.2, 1.2); },
+  []() {
+    return point<T, 2>{ 1., 1. };
+  }
+};
+
+/**
+ * `test_functions::Matyas` is Matyas test function.
+ *
+ * \f[
+ * f^*\left(\vec{x}\right) =
+ * 0{.}26 \left( x_0^2 + x_1^2 \right) - 0{.}48 x_0 x_1
+ * \f]
+ */
+template<std::floating_point T>
+const test_function<T, 2> Matyas{ "Matyas",
+                                  [](const point<T, 2>& p) {
+                                    const auto [x, y] = coordinates(p);
+                                    return .26 * (x * x + y * y) - .48 * x * y;
+                                  },
+                                  []() {
+                                    return uniform_domain<T, 2>(-10., 10.);
+                                  },
+                                  []() { return uniform_point<T, 2>(0.); } };
+
+/**
+ * `test_functions::Mexican_hat` is Mexican hat test function.
+ *
+ * \f[
+ * f^*\left(\vec{x}\right) =
+ * -20 \frac{\sin g(x_0, x_1)}{g(x_0, x_1)}, \, g(x_0, x_1) = 0{.}1 +
+ * \sqrt{(x_0 - 4)^2 + (x_1 - 4)^2}
+ * \f]
+ */
+template<std::floating_point T>
+const test_function<T, 2> Mexican_hat{
+  "Mexican hat",
+  [](const point<T, 2>& p) {
+    const auto [x, y] = coordinates(p);
+    const auto f = [&, x = x, y = y]() {
+      return .1 + std::sqrt(square(x - 4.) + square(y - 4.));
+    };
+    return -20. * std::sin(f()) / f();
+  },
+  []() { return uniform_domain<T, 2>(-10., 10.); },
+  []() { return uniform_point<T, 2>(4.); }
+};
+
+/**
+ * `test_functions::Miele_Cantrell` is Miele-Cantrell test function.
+ *
+ * \f[
+ * f^*\left(\vec{x}\right) =
+ * \left( \exp (-x_0) - x_1 \right)^4 + 100 \left( x_1 - x_2 \right)^6 +
+ * \tan^4 (x_2 - x_3) + x_0^8
+ * \f]
+ */
+template<std::floating_point T>
+const test_function<T, 4> Miele_Cantrell{
+  "Miele-Cantrell",
+  [](const point<T, 4>& p) {
+    return std::pow(std::exp(-p[0]) - p[1], 4.) +
+           100. * std::pow(p[1] - p[2], 6.) +
+           std::pow(std::tan(p[2] - p[3]), 4.) + std::pow(p[0], 8.);
+  },
+  []() { return uniform_domain<T, 4>(-1., 1); },
+  []() {
+    return point<T, 4>{ 0., 1., 1., 1. };
+  }
+};
+
+/**
+ * `test_functions::Rosenbrock` is Rosenbrock test function.
+ *
+ * \f[
+ * f^*\left(\vec{x}\right) =
+ * \sum_{i = 0}^{n - 2} \left( 100 \left( x_{i + 1} - x_i^2 \right)^2 + \left(
+ * x_i - 1 \right)^2 \right)
+ * \f]
+ */
+template<std::floating_point T, std::size_t N>
+const test_function<T, N> Rosenbrock{
+  "Rosenbrock",
+  [](const point<T, N>& p) {
+    T res = 0.;
+    for (std::size_t i = 0; i < N - 1; ++i) {
+      res += 100. * square(p[i + 1] - square(p[i])) + square(p[i] - 1.);
+    }
     return res;
-  }
+  },
+  []() { return uniform_domain<T, N>(-30., 30.); },
+  []() { return uniform_point<T, N>(1.); }
+};
 
-  /**
-   * `test_functions::test_function` is floating-point test function.
-   *
-   * @tparam T Floating-point type.
-   * @tparam N Space dimension.
-   */
-  template<std::floating_point T, std::size_t N>
-  class test_function
-  {
-  public:
-    /**
-     * `test_functions::test_function::function` is underlying test function
-     * type.
-     */
-    using function = std::function<T(const point<T, N>&)>;
+/**
+ * `test_functions::Schwefel` is Schwefel test function.
+ *
+ * \f[
+ * f^*\left(\vec{x}\right) =
+ * \sum_{i = 0}^{n - 1} \left( \sum_{j = 0}^i x_i \right)^2
+ * \f]
+ */
+template<std::floating_point T, std::size_t N>
+const test_function<T, N> Schwefel{ "Schwefel",
+                                    [](const point<T, N>& p) {
+                                      T res = 0.;
+                                      for (T sum = 0.; auto x : p) {
+                                        res += square(sum += x);
+                                      }
+                                      return res;
+                                    },
+                                    []() {
+                                      return uniform_domain<T, N>(-100., 100.);
+                                    },
+                                    []() { return uniform_point<T, N>(0.); } };
 
-    /**
-     * `test_functions::test_function::domain_fn` is test function domain.
-     */
-    using domain_fn = std::function<domain<T, N>()>;
-
-    /**
-     * `test_functions::test_function::point_fn` is solution generating function
-     * type.
-     */
-    using point_fn = std::function<point<T, N>()>;
-
-  public:
-    /**
-     * `test_functions::test_function::test_function` creates test function.
-     *
-     * @param name Test function name.
-     * @param fn The test function representation.
-     * @param d The test function domain.
-     * @param p_min Function generating solution minimizing the test function.
-     */
-    test_function(const std::string& name,
-                  const function& fn,
-                  const domain_fn& d,
-                  const point_fn& p_min)
-      : name_{ name }
-      , fn_{ fn }
-      , d_{ d }
-      , p_min_{ p_min }
-    {}
-
-    /**
-     * `test_functions::test_function::name` returns test function name.
-     *
-     * @returns Name of the test function.
-     */
-    std::string name() const { return name_; }
-
-    /**
-     * `test_functions::test_function::operator()` returns test function value
-     * at point `p`.
-     *
-     * @param p Point.
-     * @returns Test function value at point `p`.
-     */
-    T operator()(const point<T, N>& p) const { return fn_(p); }
-
-    /**
-     * `test_functions::test_function::function_domain` returns test function
-     * domain.
-     *
-     * @returns Test function domain.
-     */
-    domain<T, N> function_domain() const { return d_(); }
-
-    /**
-     * `test_functions::test_function::p_min` returns point minimizing test
-     * function over its domain.
-     *
-     * @returns Point minimizing test function over its domain.
-     */
-    point<T, N> p_min() const { return p_min_(); }
-
-  private:
-    std::string name_;
-    function fn_;
-    domain_fn d_;
-    point_fn p_min_;
-  };
-
-  /**
-   * `test_functions::Ackley` is Ackley test function.
-   *
-   * \f[
-   * f^*\left(\vec{x}\right) =
-   * -20 \exp\left( \frac{-0{.}02}{\sqrt{n}} \sqrt{\sum_{i = 0}^{n - 1} x_i^2}
-   * \right) - \exp\left( \frac{1}{n} \sum_{i = 0}^{n - 1} \cos \left( 2 \pi x_i
-   * \right) \right) + 20 + e
-   * \f]
-   */
-  template<std::floating_point T, std::size_t N>
-  const test_function<T, N> Ackley{
-    "Ackley",
-    [](const point<T, N>& p) {
-      T s0 = 0.;
-      T s1 = 0.;
-      for (auto x : p) {
-        s0 += square(x);
-        s1 += std::cos(2 * pi<T> * x);
-      }
-      return -20. * std::exp(-.02 * std::sqrt(s0) / std::sqrt(N)) -
-             std::exp(s1 / N) + 20. + e<T>;
-    },
-    []() { return uniform_domain<T, N>(-35., 35.); },
-    []() { return uniform_point<T, N>(0.); }
-  };
-
-  /**
-   * `test_functions::Alpine` is Alpine test function.
-   *
-   * \f[
-   * f^*\left(\vec{x}\right) =
-   * \sum_{i = 0}^{n - 1} \left| x_i \sin x_i  + 0{.}1 x_i \right|
-   * \f]
-   */
-  template<std::floating_point T, std::size_t N>
-  const test_function<T, N> Alpine{
-    "Alpine",
-    [](const point<T, N>& p) {
-      return std::transform_reduce(
-        std::begin(p), std::end(p), T{ 0. }, std::plus<T>{}, [](auto x) {
-          return std::fabs(x * std::sin(x) + .1 * x);
-        });
-    },
-    []() { return uniform_domain<T, N>(-10., 10.); },
-    []() { return uniform_point<T, N>(0.); }
-  };
-
-  /**
-   * `test_functions::Aluffi_Pentini` is Aluffi-Pentini test function.
-   *
-   * \f[
-   * f^*\left(\vec{x}\right) =
-   * \frac{1}{4} x_0^4 - \frac{1}{2} x_0^2 + \frac{1}{10} x_0 + \frac{1}{2}
-   * x_1^2
-   * \f]
-   */
-  template<std::floating_point T>
-  const test_function<T, 2> Aluffi_Pentini{
-    "Aluffi-Pentini",
-    [](const point<T, 2>& p) {
-      const auto [x, y] = coordinates(p);
-      return ((.25 * x * x - .5) * x + .1) * x + 0.5 * y * y;
-    },
-    []() { return uniform_domain<T, 2>(-10., 10.); },
-    []() {
-      return point<T, 2>{
-        [q = 0.1](int k) -> T {
-          return 2. * std::sqrt(3.) *
-                 std::cos(std::acos(-3. * std::sqrt(3.) * q / 2.) / 3. -
-                          2. * std::numbers::pi_v<T> * k / 3.) /
-                 3.;
-        }(2),
-        0.
-      };
-    }
-  };
-
-  /**
-   * `test_functions::Booth` is Booth test function.
-   *
-   * \f[
-   * f^*\left(\vec{x}\right) =
-   * (x_0 + 2x_1 - 7)^2 + (2x_0 + x_1 - 5)^2
-   * \f]
-   */
-  template<std::floating_point T>
-  const test_function<T, 2> Booth{
-    "Booth",
-    [](const point<T, 2>& p) {
-      const auto [x, y] = coordinates(p);
-      return square(x + 2. * y - 7.) + square(2. * x + y - 5.);
-    },
-    []() { return uniform_domain<T, 2>(-10., 10.); },
-    []() {
-      return point<T, 2>{ 1., 3. };
-    }
-  };
-
-  /**
-   * `test_functions::Colville` is Colville test function.
-   *
-   * \f{eqnarray*}{
-   * f^*\left(\vec{x}\right) & = &
-   * 100 \left( x_0 - x_1^2 \right)^2 + \left( 1 - x_0 \right)^2 + 90 \left( x_3
-   * - x_2^2 \right)^2 + \left( 1 - x_2 \right)^2 \\
-   * & & +\ 10{.}1 \left( x_1 - 1
-   * \right)^2 + \left( x_3 - 1 \right)^2 + 19{.}8 \left( x_1 - 1 \right) \left(
-   * x_3 - 1 \right)
-   * \f}
-   */
-  template<std::floating_point T>
-  const test_function<T, 4> Colville{
-    "Colville",
-    [](const point<T, 4>& p) {
-      return 100. * square(p[0] - square(p[1])) + square(1. - p[0]) +
-             90. * square(p[3] - p[2] * p[2]) + square(1. - p[2]) +
-             10.1 * square(p[1] - 1.) + square(p[3] - 1.) +
-             19.8 * (p[1] - 1.) * (p[3] - 1.);
-    },
-    []() { return uniform_domain<T, 4>(-10., 10.); },
-    []() { return uniform_point<T, 4>(1.); }
-  };
-
-  /**
-   * `test_functions::Easom` is Easom test function.
-   *
-   * \f[
-   * f^*\left(\vec{x}\right) =
-   * -\cos x_0 \cdot \cos x_1 \cdot \exp \left( -(x_0 - \pi )^2 - (x_1 - \pi )^2
-   * \right)
-   * \f]
-   */
-  template<std::floating_point T>
-  const test_function<T, 2> Easom{
-    "Easom",
-    [](const point<T, 2>& p) {
-      const auto [x, y] = coordinates(p);
-      return -std::cos(x) * std::cos(y) *
-             std::exp(-square(x - pi<T>) - square(y - pi<T>));
-    },
-    []() { return uniform_domain<T, 2>(-100., 100); },
-    []() { return uniform_point<T, 2>(pi<T>); }
-  };
-
-  /**
-   * `test_functions::exponential` is exponential test function.
-   *
-   * \f[
-   * f^*\left(\vec{x}\right) =
-   * -\exp\left( -\frac{1}{2} \sum_{i = 0}^{n - 1} x_i^2 \right)
-   * \f]
-   */
-  template<std::floating_point T, std::size_t N>
-  const test_function<T, N> exponential{
-    "exponential",
-    [](const point<T, N>& p) {
-      return -std::exp(
-        -.5 *
-        std::transform_reduce(
-          std::begin(p), std::end(p), T{ 0. }, std::plus<T>{}, square<T>));
-    },
-    []() { return uniform_domain<T, N>(-1., 1.); },
-    []() { return uniform_point<T, N>(0.); }
-  };
-
-  /**
-   * `test_functions::Goldstein_Price` is Goldstein-Price test function.
-   *
-   * \f{eqnarray*}{
-   * f^*\left(\vec{x}\right) & = &
-   * \left( 1 + \left( x_0 + x_1 + 1 \right)^2 \left( 19 - 14 x_0 + 3 x_0^2
-   * - 14
-   * x_1 + 6 x_0 x_1 + 3 x_1^2 \right) \right) \\
-   * & & \cdot \left( 30 + \left( 2 x_0 -
-   * 3 x_1 \right)^2 \left( 18 - 32 x_0 + 12 x_0^2 + 48 x_1 - 36 x_0 x_1 + 27
-   * x_1^2 \right) \right)
-   * \f}
-   */
-  template<std::floating_point T>
-  const test_function<T, 2> Goldstein_Price{
-    "Goldstein-Price",
-    [](const point<T, 2>& p) {
-      const auto [x, y] = coordinates(p);
-      const auto [x2, y2] = std::tuple<T, T>{ x * x, y * y };
-      const auto xy = x * y;
-      return (1. + square(x + y + 1.) *
-                     (19. - 14. * x + 3. * x2 - 14. * y + 6. * xy + 3. * y2)) *
-             (30. + square(2. * x - 3. * y) * (18. - 32. * x + 12. * x2 +
-                                               48. * y - 36. * xy + 27. * y2));
-    },
-    []() { return uniform_domain<T, 2>(-2., 2.); },
-    []() {
-      return point<T, 2>{ 0., -1. };
-    }
-  };
-
-  /**
-   * `test_functions::Hosaki` is Hosaki test function.
-   *
-   * \f[
-   * f^*\left(\vec{x}\right) =
-   * \left( 1 - 8 x_0 + 7 x_0^2 - \frac{7}{3} x_0^3 + \frac{1}{4} x_0^4 \right)
-   * x_1^2 \exp (-x_1)
-   * \f]
-   */
-  template<std::floating_point T>
-  const test_function<T, 2> Hosaki{
-    "Hosaki",
-    [](const point<T, 2>& p) {
-      const auto [x, y] = coordinates(p);
-      return (1. + x * (-8. + x * (7. + x * (-7. / 3. + x / 4.)))) * y * y *
-             std::exp(-y);
-    },
-    []() { return uniform_domain<T, 2>(-10., 10.); },
-    []() {
-      return point<T, 2>{ 4., 2. };
-    }
-  };
-
-  /**
-   * `test_functions::Leon` is Leon test function.
-   *
-   * \f[
-   * f^*\left(\vec{x}\right) =
-   * 100 \left( x_1 - x_0^2 \right)^2 + \left( 1 - x_0 \right)^2
-   * \f]
-   */
-  template<std::floating_point T>
-  const test_function<T, 2> Leon{
-    "Leon",
-    [](const point<T, 2>& p) {
-      const auto [x, y] = coordinates(p);
-      return 100. * square(y - x * x) + square(1. - x);
-    },
-    []() { return uniform_domain<T, 2>(-1.2, 1.2); },
-    []() {
-      return point<T, 2>{ 1., 1. };
-    }
-  };
-
-  /**
-   * `test_functions::Matyas` is Matyas test function.
-   *
-   * \f[
-   * f^*\left(\vec{x}\right) =
-   * 0{.}26 \left( x_0^2 + x_1^2 \right) - 0{.}48 x_0 x_1
-   * \f]
-   */
-  template<std::floating_point T>
-  const test_function<T, 2> Matyas{
-    "Matyas",
-    [](const point<T, 2>& p) {
-      const auto [x, y] = coordinates(p);
-      return .26 * (x * x + y * y) - .48 * x * y;
-    },
-    []() { return uniform_domain<T, 2>(-10., 10.); },
-    []() { return uniform_point<T, 2>(0.); }
-  };
-
-  /**
-   * `test_functions::Mexican_hat` is Mexican hat test function.
-   *
-   * \f[
-   * f^*\left(\vec{x}\right) =
-   * -20 \frac{\sin g(x_0, x_1)}{g(x_0, x_1)}, \, g(x_0, x_1) = 0{.}1 +
-   * \sqrt{(x_0 - 4)^2 + (x_1 - 4)^2}
-   * \f]
-   */
-  template<std::floating_point T>
-  const test_function<T, 2> Mexican_hat{
-    "Mexican hat",
-    [](const point<T, 2>& p) {
-      const auto [x, y] = coordinates(p);
-      const auto f = [&, x = x, y = y]() {
-        return .1 + std::sqrt(square(x - 4.) + square(y - 4.));
-      };
-      return -20. * std::sin(f()) / f();
-    },
-    []() { return uniform_domain<T, 2>(-10., 10.); },
-    []() { return uniform_point<T, 2>(4.); }
-  };
-
-  /**
-   * `test_functions::Miele_Cantrell` is Miele-Cantrell test function.
-   *
-   * \f[
-   * f^*\left(\vec{x}\right) =
-   * \left( \exp (-x_0) - x_1 \right)^4 + 100 \left( x_1 - x_2 \right)^6 +
-   * \tan^4 (x_2 - x_3) + x_0^8
-   * \f]
-   */
-  template<std::floating_point T>
-  const test_function<T, 4> Miele_Cantrell{
-    "Miele-Cantrell",
-    [](const point<T, 4>& p) {
-      return std::pow(std::exp(-p[0]) - p[1], 4.) +
-             100. * std::pow(p[1] - p[2], 6.) +
-             std::pow(std::tan(p[2] - p[3]), 4.) + std::pow(p[0], 8.);
-    },
-    []() { return uniform_domain<T, 4>(-1., 1); },
-    []() {
-      return point<T, 4>{ 0., 1., 1., 1. };
-    }
-  };
-
-  /**
-   * `test_functions::Rosenbrock` is Rosenbrock test function.
-   *
-   * \f[
-   * f^*\left(\vec{x}\right) =
-   * \sum_{i = 0}^{n - 2} \left( 100 \left( x_{i + 1} - x_i^2 \right)^2 + \left(
-   * x_i - 1 \right)^2 \right)
-   * \f]
-   */
-  template<std::floating_point T, std::size_t N>
-  const test_function<T, N> Rosenbrock{
-    "Rosenbrock",
-    [](const point<T, N>& p) {
-      T res = 0.;
-      for (std::size_t i = 0; i < N - 1; ++i) {
-        res += 100. * square(p[i + 1] - square(p[i])) + square(p[i] - 1.);
-      }
-      return res;
-    },
-    []() { return uniform_domain<T, N>(-30., 30.); },
-    []() { return uniform_point<T, N>(1.); }
-  };
-
-  /**
-   * `test_functions::Schwefel` is Schwefel test function.
-   *
-   * \f[
-   * f^*\left(\vec{x}\right) =
-   * \sum_{i = 0}^{n - 1} \left( \sum_{j = 0}^i x_i \right)^2
-   * \f]
-   */
-  template<std::floating_point T, std::size_t N>
-  const test_function<T, N> Schwefel{
-    "Schwefel",
-    [](const point<T, N>& p) {
-      T res = 0.;
-      for (T sum = 0.; auto x : p) {
-        res += square(sum += x);
-      }
-      return res;
-    },
-    []() { return uniform_domain<T, N>(-100., 100.); },
-    []() { return uniform_point<T, N>(0.); }
-  };
-
-  /**
-   * `test_functions::sphere` is sphere test function.
-   *
-   * \f[
-   * f^*\left(\vec{x}\right) =
-   * \sum_{i = 0}^{n - 1} x_i^2
-   * \f]
-   */
-  template<std::floating_point T, std::size_t N>
-  const test_function<T, N> sphere{
-    "sphere",
-    [](const point<T, N>& p) {
-      return std::transform_reduce(
-        std::begin(p), std::end(p), T{ 0. }, std::plus<T>{}, square<T>);
-    },
-    []() { return uniform_domain<T, N>(0., 10.); },
-    []() { return uniform_point<T, N>(0.); }
-  };
+/**
+ * `test_functions::sphere` is sphere test function.
+ *
+ * \f[
+ * f^*\left(\vec{x}\right) =
+ * \sum_{i = 0}^{n - 1} x_i^2
+ * \f]
+ */
+template<std::floating_point T, std::size_t N>
+const test_function<T, N> sphere{
+  "sphere",
+  [](const point<T, N>& p) {
+    return std::transform_reduce(
+      std::begin(p), std::end(p), T{ 0. }, std::plus<T>{}, square<T>);
+  },
+  []() { return uniform_domain<T, N>(0., 10.); },
+  []() { return uniform_point<T, N>(0.); }
+};
 
 } // namespace test_functions
 
