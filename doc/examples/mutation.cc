@@ -1,6 +1,5 @@
 #include <iostream>
 #include <quile/quile.h>
-#include <utility>
 
 using namespace quile;
 
