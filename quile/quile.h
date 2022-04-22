@@ -2364,6 +2364,12 @@ using populate_0_fn = std::function<population<G>(std::size_t)>;
 
 /**
  * `populate_1_fn` can be used for parents selection.
+ *
+ * Example:
+ * @include selection.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude selection.out
  */
 template<typename G>
 requires chromosome<G>
@@ -2372,6 +2378,12 @@ using populate_1_fn =
 
 /**
  * `populate_2_fn` can be used for selection to the next generation.
+ *
+ * Example:
+ * @include selection.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude selection.out
  */
 template<typename G>
 requires chromosome<G>
