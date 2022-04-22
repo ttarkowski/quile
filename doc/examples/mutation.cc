@@ -25,10 +25,7 @@ template<chromosome G, typename... Ms>
 requires(mutation<Ms, G>&&...) auto mutation_composition(Ms&&... ms)
 {
   return [=](const G& g) -> population<G> {
-    if constexpr (sizeof...(ms))
-      return { compose([=](const G& g) -> G { return ms(g)[0]; }...)(g) };
-    else
-      return { compose()(g) };
+    return { compose([=](const G& g) -> G { return ms(g)[0]; }...)(g) };
   };
 }
 
