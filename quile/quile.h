@@ -1960,6 +1960,12 @@ public:
    * `genotype::random` returns random genotype.
    *
    * @return Random genotype.
+   *
+   * Example:
+   * @include genotype_random.cc
+   *
+   * Result (might be different due to randomness):
+   * @verbinclude genotype_random.out
    */
   static genotype random() { return genotype{}.random_reset(); }
 
