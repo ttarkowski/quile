@@ -3308,6 +3308,12 @@ generate(std::size_t lambda, const std::function<G()>& f)
  * @note `adapter` can be useful when used with roulette wheel selection or
  * stochastic universal sampling as a method of selection to the next
  * generation.
+ *
+ * Example:
+ * @include selection.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude selection.out
  */
 template<typename G>
 requires chromosome<G> populate_2_fn<G>
