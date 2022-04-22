@@ -2396,6 +2396,12 @@ using populate_2_fn = std::function<
  * @note For memory optimization purpose the `std::deque` was chosen instead of
  * `std::vector`---this implementation allows for erasing of the oldest
  * generation.
+ *
+ * Example:
+ * @include generations.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude generations.out
  */
 template<typename G>
 requires chromosome<G>
