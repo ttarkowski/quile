@@ -7,4 +7,5 @@ all: $(patsubst %.cc,%.out,$(wildcard *.cc))
 	-I../../ -pthread \
 	$< \
 	&& ./a.out >$@ 2>&1 \
-	&& rm a.out
+	&& rm a.out \
+	&& ./trim.sh $@
