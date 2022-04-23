@@ -1894,7 +1894,8 @@ public:
    * Result:
    * @verbinclude genotype_value.out
    */
-  template<typename = std::enable_if_t<!permutation_representation<R>>>
+  template<typename S = R,
+           typename = std::enable_if_t<!permutation_representation<S>>>
   genotype& value(std::size_t i, gene_t v)
   {
     if (!constraints()[i].contains(v)) {
@@ -1946,7 +1947,8 @@ public:
    * Result (might be different due to randomness):
    * @verbinclude genotype_random_reset.out
    */
-  template<typename = std::enable_if_t<!permutation_representation<R>>>
+  template<typename S = R,
+           typename = std::enable_if_t<!permutation_representation<S>>>
   genotype& random_reset(std::size_t i)
   {
     const auto& c = constraints();
