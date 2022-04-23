@@ -506,9 +506,7 @@ std::array<T, N>
 iota(T t)
 {
   std::array<T, N> res{};
-  std::ranges::transform(std::views::iota(t) | std::views::take(N),
-                         std::begin(res),
-                         std::identity{});
+  std::generate_n(std::begin(res), N, [t]() mutable { return t++; });
   return res;
 }
 
