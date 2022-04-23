@@ -2496,6 +2496,12 @@ using recombination_fn = std::function<population<G>(const G&, const G&)>;
  * @tparam G Some `genotype` specialization.
  * @param g Genotype.
  * @returns Population consisting of `g`.
+ *
+ * Example:
+ * @include identity.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude identity.out
  */
 template<typename G>
 requires chromosome<G> population<G>
@@ -2511,6 +2517,12 @@ unary_identity(const G& g)
  * @param g0 Genotype (first parent).
  * @param g1 Genotype (second parent)
  * @returns Population consisting of `g0` and `g1`.
+ *
+ * Example:
+ * @include identity.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude identity.out
  */
 template<typename G>
 requires chromosome<G> population<G>
