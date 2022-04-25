@@ -3513,6 +3513,12 @@ private:
  * `stochastic_universal_sampling` is stochastic universal sampling (SUS).
  *
  * @tparam G Some `genotype` specialization.
+ *
+ * Example:
+ * @include selection.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude selection.out
  */
 template<typename G>
 requires chromosome<G>
@@ -3524,6 +3530,12 @@ public:
    * creates SUS with selection probability function `spf`.
    *
    * @param spf Selection probability function.
+   *
+   * Example:
+   * @include selection.cc
+   *
+   * Result (might be different due to randomness):
+   * @verbinclude selection.out
    */
   explicit stochastic_universal_sampling(
     const selection_probabilities_fn<G>& spf)
@@ -3538,6 +3550,12 @@ public:
    * @param lambda Size of the returned population.
    * @param p Source population.
    * @returns Population consisting of genotypes drawn from `p`.
+   *
+   * Example:
+   * @include selection.cc
+   *
+   * Result (might be different due to randomness):
+   * @verbinclude selection.out
    */
   population<G> operator()(std::size_t lambda, const population<G>& p) const
   {
