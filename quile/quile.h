@@ -68,6 +68,16 @@
  * This work is a result of the project funded by National Science Centre Poland
  * (Twardowskiego 16, PL-30312 Kraków, Poland, http://www.ncn.gov.pl/) under the
  * grant number UMO-2016/23/B/ST3/03575.
+ *
+ * Example compilation command: `g++ -std=c++20 -DNDEBUG -O3 -Wall -Wextra
+ * -pedantic -I/home/user/repos/quile -pthread program.cc`. Clang compilation
+ * flags are identical. Please remove `-DNDEBUG` to enable assertions. Please
+ * add `-DQUILE_ENABLE_LOGGING` to enable logging.
+ *
+ * Please note that examples from `doc/examples` directory were compiled with
+ * following command `g++ -std=c++20 -DQUILE_ENABLE_LOGGING -O3 -Wall -Wextra
+ * -pedantic -I../../ -pthread` and their output consisting of `std::cout` and
+ * `std::cerr` streams were wrapped to fit 80 colums lines.
  */
 
 /**
@@ -77,20 +87,6 @@
  * Please include `quile/quile.h` header using the code `#include
  * <quile/quile.h>` and compiling your program with apropriate include flag,
  * e.g. `-I/home/user/repos/quile` for GCC and Clang compilers.
- *
- * Example compilation command: `g++ -std=c++20 -DNDEBUG -O3 -Wall -Wextra
- * -pedantic -I/home/user/repos/quile -pthread program.cc`.
- *
- * Please remove `-DNDEBUG` to enable assertions.
- *
- * Please add `-DQUILE_ENABLE_LOGGING` to enable logging.
- *
- * Clang compilation command is similar: please change `g++` to `clang++`.
- *
- * Please note that examples from `doc/examples` directory were compiled with
- * following command `g++ -std=c++20 -DQUILE_ENABLE_LOGGING -O3 -Wall -Wextra
- * -pedantic -I../../ -pthread` and their output consisting of `std::cout` and
- * `std::cerr` streams were wrapped to fit 80 colums lines.
  */
 
 /**
