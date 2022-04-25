@@ -3047,6 +3047,14 @@ private:
  *
  * @note If `fd` is equal to `nullptr` then information about fitness function
  * values is not printed.
+ *
+ * Example:
+ * @include self_adaptive.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude self_adaptive.out
+ *
+ * @note Evolution result is saved in separate file (not included).
  */
 template<typename G>
 requires chromosome<G>
