@@ -4114,6 +4114,12 @@ arithmetic_recombination(const G& g0, const G& g1)
  * @param g0 First parent.
  * @param g1 Secong parent.
  * @returns Population containing two offspring genotypes.
+ *
+ * Example:
+ * @include recombination.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude recombination.out
  */
 template<typename G>
 requires floating_point_chromosome<G> population<G>
