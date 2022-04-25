@@ -86,6 +86,11 @@
  * Please add `-DQUILE_ENABLE_LOGGING` to enable logging.
  *
  * Clang compilation command is similar: please change `g++` to `clang++`.
+ *
+ * Please note that examples from `doc/examples` directory were compiled with
+ * following command `g++ -std=c++20 -DQUILE_ENABLE_LOGGING -O3 -Wall -Wextra
+ * -pedantic -I../../ -pthread` and their output consisting of `std::cout` and
+ * `std::cerr` streams were wrapped to fit 80 colums lines.
  */
 
 /**
