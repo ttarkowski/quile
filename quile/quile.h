@@ -4029,6 +4029,12 @@ requires floating_point_chromosome<G>
  * @tparam G Some `genotype` specialization.
  * @param g Genotype.
  * @returns Population containing mutated genotype.
+ *
+ * Example:
+ * @include variation.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude variation.out
  */
 template<typename G>
 requires uniform_chromosome<G> population<G>
