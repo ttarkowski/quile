@@ -3910,6 +3910,14 @@ max_iterations_termination(std::size_t max)
  * to `incalculable` for all genotypes from at least one generation.
  * @note This condition is not intended for use with `evolution` argument
  * `max_history` different than `0`.
+ *
+ * Example:
+ * @include self_adaptive.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude self_adaptive.out
+ *
+ * @note Evolution result is saved in separate file (not included).
  */
 template<typename G>
 termination_condition_fn<G>
