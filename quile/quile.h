@@ -4027,6 +4027,14 @@ fitness_threshold_termination(const fitness_db<G>& fd, fitness thr, fitness eps)
  * @param sigma Standard deviation.
  * @param p Gene mutation probability.
  * @returns Gaussian mutation operator.
+ *
+ * Example:
+ * @include Gaussian_mutation.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude Gaussian_mutation.out
+ *
+ * @note Evolution result is saved in separate file (not included).
  */
 template<typename G>
 requires floating_point_chromosome<G>
