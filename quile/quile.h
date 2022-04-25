@@ -2805,6 +2805,14 @@ evolution(const variation<G> v,
  * caller. Default zero value is special and means keeping and returning all
  * generations.
  * @returns Generations produced during evolution (cf. `max_history` argument).
+ *
+ * Example:
+ * @include self_adaptive.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude self_adaptive.out
+ *
+ * @note Evolution result is saved in separate file (not included).
  */
 template<typename G>
 requires chromosome<G> generations<G>
