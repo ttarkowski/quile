@@ -4159,6 +4159,12 @@ requires floating_point_chromosome<G> || integer_chromosome<G> ||
  * @param g0 First parent.
  * @param g1 Secong parent.
  * @returns Population containing two offspring genotypes.
+ *
+ * Example:
+ * @include variation.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude variation.out
  */
 template<typename G>
 requires permutation_chromosome<G> population<G>
