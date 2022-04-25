@@ -4095,6 +4095,14 @@ bit_flipping(probability p)
  * @param g0 First parent.
  * @param g1 Secong parent.
  * @returns Population containing one offspring genotype.
+ *
+ * Example:
+ * @include self_adaptive.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude self_adaptive.out
+ *
+ * @note Evolution result is saved in separate file (not included).
  */
 template<typename G>
 requires floating_point_chromosome<G> population<G>
