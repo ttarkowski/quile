@@ -6,6 +6,6 @@ all: $(patsubst %.cc,%.out,$(wildcard *.cc))
 	-O3 -Wall -Wextra -pedantic \
 	-I../../ -pthread \
 	$< \
-	&& ./a.out >$@ 2>&1 \
+	&& ./a.out 2>&1 | fold >$@ \
 	&& rm a.out \
 	&& ./trim.sh $@
