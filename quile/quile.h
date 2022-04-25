@@ -2685,6 +2685,12 @@ private:
  * @param m Mutation.
  * @param p Probability.
  * @returns Stochastic mutation.
+ *
+ * Example:
+ * @include stochastic_variation.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude stochastic_variation.out
  */
 template<typename G>
 requires chromosome<G>
@@ -2702,6 +2708,12 @@ stochastic_mutation(const mutation_fn<G>& m, probability p)
  * @param r Recombination.
  * @param p Probability.
  * @returns Stochastic recombination.
+ *
+ * Example:
+ * @include stochastic_variation.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude stochastic_variation.out
  */
 template<typename G>
 requires chromosome<G>
