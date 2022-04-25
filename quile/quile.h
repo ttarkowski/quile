@@ -2835,6 +2835,12 @@ evolution(const variation<G>& v,
 
 /**
  * `fitness` is a fitness function value type.
+ *
+ * Example:
+ * @include selection.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude selection.out
  */
 using fitness = double;
 
