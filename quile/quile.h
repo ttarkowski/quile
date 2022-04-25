@@ -3164,6 +3164,12 @@ print(std::ostream& os,
 /**
  * `selection_probabilities` is a sequential container intended for keeping
  * selection probabilities values.
+ *
+ * Example:
+ * @include spf.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude spf.out
  */
 using selection_probabilities = std::vector<probability>;
 
@@ -3171,6 +3177,12 @@ using selection_probabilities = std::vector<probability>;
  * `selection_probabilities_fn` is a callable object which can be invoked on
  * population and returns corresponding selection probabilities for each
  * genotype from population.
+ *
+ * Example:
+ * @include spf.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude spf.out
  */
 template<typename G>
 requires chromosome<G>
@@ -3193,6 +3205,12 @@ using selection_probabilities_fn =
  *
  * @note It is guaranteed that last cumulative probability in returned
  * container is equal to `1` without any numerical error.
+ *
+ * Example:
+ * @include spf.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude spf.out
  */
 template<typename G>
 requires chromosome<G> selection_probabilities
@@ -3265,6 +3283,12 @@ select_calculable(const fitnesses& fs, bool require_nonempty_result = false)
  * genotypes and populations containing genotypes which fitnesses cannot be
  * calculated. Please note that there should be at least one genotype, which
  * fitness can be calculated.
+ *
+ * Example:
+ * @include spf.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude spf.out
  */
 template<typename G>
 class fitness_proportional_selection
@@ -3276,6 +3300,12 @@ public:
    * object `ff`.
    *
    * @param ff Fitness database intermediary object.
+   *
+   * Example:
+   * @include spf.cc
+   *
+   * Result (might be different due to randomness):
+   * @verbinclude spf.out
    */
   explicit fitness_proportional_selection(const fitness_db<G>& ff)
     : ff_{ ff }
@@ -3291,6 +3321,12 @@ public:
    *
    * @throws std::runtime_error Exception is raised if fitness function
    * evaluates to `incalculable` for all genotypes from `p`.
+   *
+   * Example:
+   * @include spf.cc
+   *
+   * Result (might be different due to randomness):
+   * @verbinclude spf.out
    */
   selection_probabilities operator()(const population<G>& p) const
   {
@@ -3381,6 +3417,12 @@ id(U u)
  *
  * @param s So-called \em s parameter.
  * @returns Linear pressure mechanism.
+ *
+ * Example:
+ * @include spf.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude spf.out
  */
 inline auto
 linear_ranking_selection(double s)
@@ -3397,6 +3439,12 @@ linear_ranking_selection(double s)
 /**
  * `exponential_ranking_selection` is exponential pressure mechanism for ranking
  * selection.
+ *
+ * Example:
+ * @include spf.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude spf.out
  */
 inline probability
 exponential_ranking_selection(std::size_t mu, std::size_t j)
@@ -3416,6 +3464,12 @@ exponential_ranking_selection(std::size_t mu, std::size_t j)
  * @note This implementation has workarounds for populations containing
  * genotypes which fitnesses cannot be calculated. Please note that there should
  * be at least one genotype, which fitness can be calculated.
+ *
+ * Example:
+ * @include spf.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude spf.out
  */
 template<typename G>
 class ranking_selection
@@ -3429,6 +3483,12 @@ public:
    *
    * @param ff Fitness function database intermediary object.
    * @param pf Selection pressure mechanism (linear or exponential).
+   *
+   * Example:
+   * @include spf.cc
+   *
+   * Result (might be different due to randomness):
+   * @verbinclude spf.out
    */
   ranking_selection(const fitness_db<G>& ff, const probability_fn& pf)
     : ff_{ ff }
@@ -3445,6 +3505,12 @@ public:
    *
    * @throws std::runtime_error Exception is raised if fitness function
    * evaluates to `incalculable` for all genotypes from `p`.
+   *
+   * Example:
+   * @include spf.cc
+   *
+   * Result (might be different due to randomness):
+   * @verbinclude spf.out
    */
   selection_probabilities operator()(const population<G>& p) const
   {
