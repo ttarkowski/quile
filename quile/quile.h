@@ -2871,7 +2871,7 @@ const fitness incalculable = -std::numeric_limits<fitness>::infinity();
  *
  * @tparam G Some `genotype` specialization.
  *
- * @note Intermediary objects owns database through the `std::shared_ptr`.
+ * @note Intermediary objects own database through the `std::shared_ptr`.
  */
 template<typename G>
 requires chromosome<G>
