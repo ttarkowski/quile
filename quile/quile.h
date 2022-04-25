@@ -2538,6 +2538,12 @@ binary_identity(const G& g0, const G& g1)
  *
  * @note At the moment library supports only canonical forms of variations
  * (unary and binary).
+ *
+ * Example:
+ * @include variation.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude variation.out
  */
 template<typename G>
 requires chromosome<G>
@@ -2551,6 +2557,12 @@ public:
    *
    * @param m Mutation.
    * @param r Recombination.
+   *
+   * Example:
+   * @include variation.cc
+   *
+   * Result (might be different due to randomness):
+   * @verbinclude variation.out
    */
   variation(const mutation_fn<G>& m, const recombination_fn<G>& r)
     : m_{ m }
@@ -2560,6 +2572,12 @@ public:
 
   /**
    * `variation::variation` constructor creates identity variation.
+   *
+   * Example:
+   * @include variation.cc
+   *
+   * Result (might be different due to randomness):
+   * @verbinclude variation.out
    */
   variation()
     : variation{ unary_identity<G>, binary_identity<G> }
@@ -2570,6 +2588,12 @@ public:
    * `variation::variation` constructor creates variation equal to mutation `m`.
    *
    * @param m Mutation.
+   *
+   * Example:
+   * @include variation.cc
+   *
+   * Result (might be different due to randomness):
+   * @verbinclude variation.out
    */
   explicit variation(const mutation_fn<G>& m)
     : variation{ m, binary_identity<G> }
@@ -2581,6 +2605,12 @@ public:
    * `r`.
    *
    * @param r Recombination.
+   *
+   * Example:
+   * @include variation.cc
+   *
+   * Result (might be different due to randomness):
+   * @verbinclude variation.out
    */
   explicit variation(const recombination_fn<G>& r)
     : variation{ unary_identity<G>, r }
@@ -2593,6 +2623,12 @@ public:
    * @param g0 Genotype.
    * @param g1 Genotype.
    * @returns Population resulting from application of variation to genotypes.
+   *
+   * Example:
+   * @include variation.cc
+   *
+   * Result (might be different due to randomness):
+   * @verbinclude variation.out
    */
   population<G> operator()(const G& g0, const G& g1) const
   {
@@ -2614,6 +2650,12 @@ public:
    *
    * @throws std::invalid_argument Exception is raised if population size is
    * odd.
+   *
+   * Example:
+   * @include variation.cc
+   *
+   * Result (might be different due to randomness):
+   * @verbinclude variation.out
    */
   population<G> operator()(const population<G>& p) const
   {
