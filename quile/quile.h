@@ -2846,6 +2846,12 @@ using fitness = double;
 
 /**
  * `fitnesses` is a sequential container of fitness values.
+ *
+ * Example:
+ * @include fitness_db.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude fitness_db.out
  */
 using fitnesses = std::vector<fitness>;
 
@@ -2854,6 +2860,12 @@ using fitnesses = std::vector<fitness>;
  *
  * @note From implementation point of view the `fitness_function` should be
  * thread-safe.
+ *
+ * Example:
+ * @include fitness_db.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude fitness_db.out
  */
 template<typename G>
 requires chromosome<G>
@@ -2872,6 +2884,12 @@ const fitness incalculable = -std::numeric_limits<fitness>::infinity();
  * @tparam G Some `genotype` specialization.
  *
  * @note Intermediary objects own database through the `std::shared_ptr`.
+ *
+ * Example:
+ * @include fitness_db.cc
+ *
+ * Result (might be different due to randomness):
+ * @verbinclude fitness_db.out
  */
 template<typename G>
 requires chromosome<G>
@@ -2888,6 +2906,12 @@ public:
   /**
    * `fitness_db::const_iterator` is a constant iterator to the underlying
    * `database` container.
+   *
+   * Example:
+   * @include fitness_db.cc
+   *
+   * Result (might be different due to randomness):
+   * @verbinclude fitness_db.out
    */
   using const_iterator = typename database::const_iterator;
 
@@ -2901,6 +2925,12 @@ public:
    * @param thread_sz Number of threads for concurrent fitness function values
    * calculations. Default value is equal to
    * `std::thread::hardware_concurrency()`.
+   *
+   * Example:
+   * @include fitness_db.cc
+   *
+   * Result (might be different due to randomness):
+   * @verbinclude fitness_db.out
    */
   explicit fitness_db(
     const fitness_function<G>& f,
@@ -2930,6 +2960,12 @@ public:
    * @returns Fitness function value for genotype `g`.
    *
    * @note This method is non-concurrent.
+   *
+   * Example:
+   * @include fitness_db.cc
+   *
+   * Result (might be different due to randomness):
+   * @verbinclude fitness_db.out
    */
   fitness operator()(const G& g) const
   {
@@ -2953,6 +2989,12 @@ public:
    * corresponding to the order of genotypes in population itself.
    *
    * @note This method is potentially concurrent.
+   *
+   * Example:
+   * @include fitness_db.cc
+   *
+   * Result (might be different due to randomness):
+   * @verbinclude fitness_db.out
    */
   fitnesses operator()(const population<G>& p) const
   {
@@ -2970,6 +3012,12 @@ public:
    * `fitness_db::size` returns number of keys (genotypes) in database.
    *
    * @returns Number of database keys.
+   *
+   * Example:
+   * @include fitness_db.cc
+   *
+   * Result (might be different due to randomness):
+   * @verbinclude fitness_db.out
    */
   std::size_t size() const { return fitness_values_->size(); }
 
@@ -2977,6 +3025,12 @@ public:
    * `fitness_db::begin` returns constant iterator to the begin of database.
    *
    * @returns Constant iterator to the begin of database.
+   *
+   * Example:
+   * @include fitness_db.cc
+   *
+   * Result (might be different due to randomness):
+   * @verbinclude fitness_db.out
    */
   const_iterator begin() const { return fitness_values_->begin(); }
 
@@ -2986,6 +3040,12 @@ public:
    * @returns Constant iterator to the end of database.
    *
    * @note The word \em end means past-the-last element.
+   *
+   * Example:
+   * @include fitness_db.cc
+   *
+   * Result (might be different due to randomness):
+   * @verbinclude fitness_db.out
    */
   const_iterator end() const { return fitness_values_->end(); }
 
@@ -2996,6 +3056,12 @@ public:
    * @returns Population consisting of all genotypes from database.
    *
    * @note `rank_order()[0]` gives the best genotype for non-empty database.
+   *
+   * Example:
+   * @include fitness_db.cc
+   *
+   * Result (might be different due to randomness):
+   * @verbinclude fitness_db.out
    */
   population<G> rank_order() const
   {
