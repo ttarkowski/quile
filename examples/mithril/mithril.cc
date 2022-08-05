@@ -44,7 +44,7 @@ main()
     return energy_from_model<G, n_phi, n_z>(g, decomposition_values);
   };
 
-  const fitness_db<G> fd{ ff, nanotube_condition<G, n_phi, n_z> };
+  const fitness_db<G> fd{ ff, nanotube_condition<G, n_phi, n_z>, 1 };
   const ranking_selection<G> rs{ fd, linear_ranking_selection(2.) };
 
   const auto p0 = random_population<nanotube_condition<G, n_phi, n_z>, G>;
