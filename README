@@ -14,9 +14,10 @@ List of contents:
   examples/
     benchmark/  Benchmark programs and benchmark results.
     common/     Common files.
-    evenstar/   Crystal structure prediction in 1D.
+    evenstar/   Crystal structure prediction of nanowires.
     example_1/  Floating-point representation example.
     example_2/  Permutation representation example.
+    mithril/    Crystal structure prediction of nanotubes.
 
   quile/        The Quilë library itself.
 
