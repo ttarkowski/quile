@@ -12,7 +12,6 @@
 #include <iomanip>
 #include <ios>
 #include <quile/quile.h>
-#include <string>
 
 using namespace quile;
 using namespace mithril;
