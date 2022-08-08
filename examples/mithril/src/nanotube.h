@@ -8,6 +8,7 @@
 #include <iterator>
 #include <quile/quile.h>
 #include <ranges>
+#include <sstream>
 #include <tuple>
 #include <vector>
 
@@ -200,6 +201,20 @@ adjacency_at_unit_cell_boundary_at_circumference(const G& g)
     }
   }
   return false;
+}
+
+// operator>> reads genotype from the stream.
+// TODO: Move this to the Quilë library.
+template<quile::chromosome G>
+std::istream&
+operator>>(std::istream& is, G& g)
+{
+  for (std::size_t i = 0; i < G::size(); ++i) {
+    typename G::gene_t v{};
+    is >> v;
+    g.value(i, v);
+  }
+  return is;
 }
 
 } // namespace mithril
