@@ -254,6 +254,23 @@ compare_as_unsigned_numbers(const G& g0, const G& g1)
   return c0 <=> c1;
 }
 
+// Finds minimum of the nanotube abstract class representation.
+template<quile::binary_chromosome G, std::size_t n_phi, std::size_t n_z>
+G
+find_min_element_of_abstract_class(const G& g)
+{
+  G min{ g };
+  for (std::size_t d_n_phi = 0; d_n_phi < n_phi; ++d_n_phi) {
+    for (std::size_t d_n_z = 0; d_n_z < n_z; ++d_n_z) {
+      G h{ rotate<G, n_phi, n_z>(translate<G, n_phi, n_z>(g, d_n_z), d_n_phi) };
+      if (compare_as_unsigned_numbers(h, min) < 0) {
+        min = h;
+      }
+    }
+  }
+  return min;
+}
+
 } // namespace mithril
 
 #endif // MITHRIL_SRC_NANOTUBE_H
