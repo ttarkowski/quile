@@ -219,26 +219,26 @@ operator>>(std::istream& is, G& g)
 
 // Rotates nanotube representation by positive value delta.
 template<quile::binary_chromosome G, std::size_t n_phi, std::size_t n_z>
-G::chain_t
-rotate(const typename G::chain_t& c, std::size_t delta)
+G
+rotate(const G& g, std::size_t delta)
 {
   typename G::chain_t res{};
   for (std::size_t i = 0; i < G::size(); ++i) {
-    res[(i + 2 * delta * n_z) % (2 * n_phi * n_z)] = c[i];
+    res[(i + 2 * delta * n_z) % (2 * n_phi * n_z)] = g.value(i);
   }
-  return res;
+  return G{ res };
 }
 
 // Translates nanotube representation by positive value delta.
 template<quile::binary_chromosome G, std::size_t n_phi, std::size_t n_z>
-G::chain_t
-translate(const typename G::chain_t& c, std::size_t delta)
+G
+translate(const G& g, std::size_t delta)
 {
   typename G::chain_t res{};
   for (std::size_t i = 0; i < G::size(); ++i) {
-    res[((i + delta) % n_z) + (i / n_z) * n_z] = c[i];
+    res[((i + delta) % n_z) + (i / n_z) * n_z] = g.value(i);
   }
-  return res;
+  return G{ res };
 }
 
 // Three-way comparison with unsigned numbers interpretation of function
