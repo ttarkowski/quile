@@ -8,8 +8,9 @@ nanowires. It requires additional software and data:
 
 The program can be compiled with following example command:
 
-  g++ -Wall -Wextra -pedantic -O3 -std=c++20 -pthread -I../../ \
-    evenstar.cc src/*.cc -DFLAT=true -DCELL_ATOMS=5 -o evenstar
+  g++ -Wall -Wextra -pedantic -O3 -std=c++20 -pthread -DNDEBUG \
+    -I../../ evenstar.cc src/*.cc -DFLAT=true -DCELL_ATOMS=5 \
+    -o evenstar
 
 Please  note that  -DFLAT  parameter, describing  whether nanowire  is
 flat, can be either true  or false and -DCELL_ATOMS, describing number
