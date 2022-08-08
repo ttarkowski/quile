@@ -241,6 +241,19 @@ translate(const typename G::chain_t& c, std::size_t delta)
   return res;
 }
 
+// Three-way comparison with unsigned numbers interpretation of function
+// arguments (\sum_i 2^i x_i).
+template<quile::binary_chromosome G>
+auto
+compare_as_unsigned_numbers(const G& g0, const G& g1)
+{
+  auto c0{ g0.data() };
+  auto c1{ g1.data() };
+  std::reverse(std::begin(c0), std::end(c0));
+  std::reverse(std::begin(c1), std::end(c1));
+  return c0 <=> c1;
+}
+
 } // namespace mithril
 
 #endif // MITHRIL_SRC_NANOTUBE_H
