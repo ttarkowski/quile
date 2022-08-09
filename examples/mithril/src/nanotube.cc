@@ -1,5 +1,6 @@
 #include "nanotube.h"
 #include <cstddef>
+#include <vector>
 
 mithril::hex_lattice_pbc::hex_lattice_pbc(std::size_t n_phi, std::size_t n_z)
   : n_phi_{ n_phi }
@@ -111,6 +112,18 @@ mithril::hex_lattice_ord::neighbors(std::size_t i) const
                         &hex_lattice_ord::down_right }) {
     if (const auto aux = (this->*f)(i); aux != i) {
       res.push_back(aux);
+    }
+  }
+  return res;
+}
+
+std::vector<std::size_t>
+mithril::detail::divisors(std::size_t n)
+{
+  std::vector<std::size_t> res{};
+  for (std::size_t i = 1; i <= n; ++i) {
+    if (n % i == 0) {
+      res.push_back(i);
     }
   }
   return res;

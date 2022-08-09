@@ -271,6 +271,14 @@ find_min_element_of_abstract_class(const G& g)
   return min;
 }
 
+namespace detail {
+
+// Computes divisors of a number.
+std::vector<std::size_t>
+divisors(std::size_t n);
+
+} // namespace detail
+
 } // namespace mithril
 
 #endif // MITHRIL_SRC_NANOTUBE_H
