@@ -279,6 +279,36 @@ divisors(std::size_t n);
 
 } // namespace detail
 
+// Computes d_n_phi.
+template<quile::binary_chromosome G, std::size_t n_phi, std::size_t n_z>
+std::size_t
+d_n_phi(const G& g)
+{
+  static const auto divs{ detail::divisors(n_phi) };
+  std::size_t res{ 1 };
+  for (auto d : divs) {
+    if (g == rotate<G, n_phi, n_z>(g, n_phi / d) && d > res) {
+      res = d;
+    }
+  }
+  return res;
+}
+
+// Computes d_n_z.
+template<quile::binary_chromosome G, std::size_t n_phi, std::size_t n_z>
+std::size_t
+d_n_z(const G& g)
+{
+  static const auto divs{ detail::divisors(n_z) };
+  std::size_t res{ 1 };
+  for (auto d : divs) {
+    if (g == translate<G, n_phi, n_z>(g, n_z / d) && d > res) {
+      res = d;
+    }
+  }
+  return res;
+}
+
 } // namespace mithril
 
 #endif // MITHRIL_SRC_NANOTUBE_H
