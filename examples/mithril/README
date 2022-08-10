@@ -9,3 +9,10 @@ The program can be compiled with following example command:
   g++ -Wall -Wextra -pedantic -O3 -std=c++20 -pthread -DNDEBUG \
     -I../../ mithril.cc src/*.cc -DN_PHI=23 -DN_Z=10 \
     -o mithril
+
+Additional program  postprocessing.cc  can be compiled  with following
+example command:
+
+  g++ -Wall -Wextra -pedantic -O3 -std=c++20 -pthread \
+    -I../../ postprocessing.cc src/*.cc -DN_PHI=23 -DN_Z=10 \
+    -o postprocessing
