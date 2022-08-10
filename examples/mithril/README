@@ -16,3 +16,9 @@ example command:
   g++ -Wall -Wextra -pedantic -O3 -std=c++20 -pthread \
     -I../../ postprocessing.cc src/*.cc -DN_PHI=23 -DN_Z=10 \
     -o postprocessing
+
+Example compilation command for Quantum ESPRESSO input generator:
+
+  g++ -Wall -Wextra -pedantic -O3 -std=c++20 -pthread \
+    -I../../ qe.cc src/*.cc -DN_PHI=23 -DN_Z=10 \
+    -o qe
