@@ -51,8 +51,8 @@ main()
   const auto p1 = stochastic_universal_sampling<G>{ rs };
   const auto p2 = adapter<G>(stochastic_universal_sampling<G>{ rs });
 
-  const std::size_t generation_sz{ c };
-  const std::size_t parents_sz{ c / 2 };
+  const std::size_t generation_sz{ 2 * c };
+  const std::size_t parents_sz{ c };
   const fitness dE{ 1e-3 };
   const auto tc = max_fitness_improvement_termination_2<G>(fd, 100, dE);
 
