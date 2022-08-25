@@ -38,11 +38,21 @@ x_coord(std::size_t i)
   return (i % n_z) * a + (((i / n_z) % 2) ? 0. : a / 2.);
 }
 
+auto
+neighbors(std::size_t i)
+{
+  static const hex_lattice_ord h{ n_phi, n_z };
+  return h.neighbors(i);
+}
+
 template<binary_chromosome G>
 void
 latex_input(std::ostream& os, const G& g)
 {
   os << "\\documentclass[tikz]{standalone}\n"
+     << "\n"
+     << "\\pgfdeclarelayer{background}\n"
+     << "\\pgfsetlayers{background, main}\n"
      << "\n"
      << "\\begin{document}\n"
      << "  \\begin{tikzpicture}\n";
@@ -53,7 +63,18 @@ latex_input(std::ostream& os, const G& g)
          << std::fixed << std::setprecision(9) << y_coord(i) << ") {};\n";
     }
   }
-  os << "  \\end{tikzpicture}\n"
+  os << "    \\begin{pgfonlayer}{background}\n";
+  for (std::size_t i = 0; i < G::size(); ++i) {
+    if (g.value(i)) {
+      for (auto j : neighbors(i)) {
+        if (g.value(j)) {
+          os << "      \\draw[gray](" << i << ")--(" << j << ");\n";
+        }
+      }
+    }
+  }
+  os << "    \\end{pgfonlayer}\n"
+     << "  \\end{tikzpicture}\n"
      << "\\end{document}\n";
 }
 
