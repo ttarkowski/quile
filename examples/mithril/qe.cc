@@ -43,7 +43,7 @@ phi_coord(std::size_t i)
 double
 z_coord(std::size_t i)
 {
-  return (i % n_z) * a + (((i / n_z) % 2) ? 0. : a / 2.);
+  return (i % n_z) * a + (((i / n_z) % 2 == 0) ? 0. : a / 2.);
 }
 
 double
