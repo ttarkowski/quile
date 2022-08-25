@@ -68,7 +68,8 @@ latex_input(std::ostream& os, const G& g)
     if (g.value(i)) {
       for (auto j : neighbors(i)) {
         if (g.value(j)) {
-          os << "      \\draw[gray](" << i << ")--(" << j << ");\n";
+          os << "      \\draw[gray, line width=1mm](" << i << ")--(" << j
+             << ");\n";
         }
       }
     }
