@@ -1,0 +1,3894 @@
+Each point below corresponds to the non-zero SR value from the results.txt file
+and provides information about the most effective (the highest SR value)
+parameterization. Please note that the metric notation was used (e.g. 3.14k
+means 3.14E+03 and 42u = 42E-06).
+
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 1
+  p_r = 1
+  mu = 100
+  2k = 64
+  test function: Ackley
+  SR = 100
+  AUS = 12.72k
+  sigma_AUS = 9.27k
+  avg. Delta f* = 3.22m
+  sigma_{avg. Delta f*} = 1.43m
+  avg. Delta x = 6.66m
+  sigma_{avg. Delta x} = 2.38m
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 50m
+  p_m = 1
+  p_r = 1
+  mu = 100
+  2k = 64
+  test function: Alpine
+  SR = 56
+  AUS = 56.06k
+  sigma_AUS = 57.1k
+  avg. Delta f* = 664.89u
+  sigma_{avg. Delta f*} = 344.36u
+  avg. Delta x = 5.15m
+  sigma_{avg. Delta x} = 2.58m
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 64
+  test function: Aluffi-Pentini
+  SR = 99
+  AUS = 232.58k
+  sigma_AUS = 244.43k
+  avg. Delta f* = 32.85u
+  sigma_{avg. Delta f*} = 30.53u
+  avg. Delta x = 4.76m
+  sigma_{avg. Delta x} = 2.7m
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 1
+  p_r = 1
+  mu = 100
+  2k = 8
+  test function: Booth
+  SR = 90
+  AUS = 13.94k
+  sigma_AUS = 15.37k
+  avg. Delta f* = 219.02u
+  sigma_{avg. Delta f*} = 219.09u
+  avg. Delta x = 6.1m
+  sigma_{avg. Delta x} = 2.5m
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 4
+  test function: Easom
+  SR = 15
+  AUS = 11.82k
+  sigma_AUS = 8.33k
+  avg. Delta f* = 73.71u
+  sigma_{avg. Delta f*} = 41.81u
+  avg. Delta x = 6.7m
+  sigma_{avg. Delta x} = 2.12m
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 50m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 4
+  test function: exponential
+  SR = 100
+  AUS = 217.24
+  sigma_AUS = 77.78
+  avg. Delta f* = 24.22u
+  sigma_{avg. Delta f*} = 14.05u
+  avg. Delta x = 6.57m
+  sigma_{avg. Delta x} = 2.32m
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 50m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 16
+  test function: Goldstein-Price
+  SR = 99
+  AUS = 10.13k
+  sigma_AUS = 8.43k
+  avg. Delta f* = 16.69m
+  sigma_{avg. Delta f*} = 10.76m
+  avg. Delta x = 6.84m
+  sigma_{avg. Delta x} = 2m
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 50m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: Leon
+  SR = 45
+  AUS = 1.58k
+  sigma_AUS = 1.71k
+  avg. Delta f* = 1.56m
+  sigma_{avg. Delta f*} = 3.21m
+  avg. Delta x = 5.66m
+  sigma_{avg. Delta x} = 2.6m
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 32
+  test function: Matyas
+  SR = 100
+  AUS = 5.45k
+  sigma_AUS = 6.74k
+  avg. Delta f* = 256.53n
+  sigma_{avg. Delta f*} = 2.38u
+  avg. Delta x = 122.46u
+  sigma_{avg. Delta x} = 990.7u
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 4
+  test function: Mexican hat
+  SR = 100
+  AUS = 495.21
+  sigma_AUS = 405.51
+  avg. Delta f* = 4.52m
+  sigma_{avg. Delta f*} = 1.74m
+  avg. Delta x = 6.54m
+  sigma_{avg. Delta x} = 2.46m
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: Rosenbrock
+  SR = 46
+  AUS = 11.92k
+  sigma_AUS = 11.63k
+  avg. Delta f* = 1.26m
+  sigma_{avg. Delta f*} = 3.49m
+  avg. Delta x = 5.25m
+  sigma_{avg. Delta x} = 3.01m
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 64
+  test function: Schwefel
+  SR = 100
+  AUS = 7.93k
+  sigma_AUS = 8.05k
+  avg. Delta f* = 0
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 0
+  sigma_{avg. Delta x} = 0
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 1
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: sphere
+  SR = 100
+  AUS = 102.5
+  sigma_AUS = 1.59
+  avg. Delta f* = 0
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 0
+  sigma_{avg. Delta x} = 0
+- Gaussian mutation
+  arithmetic recombination
+  c = 4
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 64
+  test function: Ackley
+  SR = 7
+  AUS = 494.92k
+  sigma_AUS = 260.29k
+  avg. Delta f* = 3.05m
+  sigma_{avg. Delta f*} = 164.15u
+  avg. Delta x = 9.37m
+  sigma_{avg. Delta x} = 362.54u
+- Gaussian mutation
+  arithmetic recombination
+  c = 4
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 16
+  test function: Alpine
+  SR = 4
+  AUS = 299.92k
+  sigma_AUS = 71.34k
+  avg. Delta f* = 1.49m
+  sigma_{avg. Delta f*} = 220.32u
+  avg. Delta x = 8.49m
+  sigma_{avg. Delta x} = 975.74u
+- Gaussian mutation
+  arithmetic recombination
+  c = 4
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: exponential
+  SR = 100
+  AUS = 30.92k
+  sigma_AUS = 12.52k
+  avg. Delta f* = 35.84u
+  sigma_{avg. Delta f*} = 11.75u
+  avg. Delta x = 8.31m
+  sigma_{avg. Delta x} = 1.62m
+- Gaussian mutation
+  arithmetic recombination
+  c = 4
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 1
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: Miele-Cantrell
+  SR = 27
+  AUS = 30.02k
+  sigma_AUS = 9.6k
+  avg. Delta f* = 2.66n
+  sigma_{avg. Delta f*} = 3.31n
+  avg. Delta x = 5.61m
+  sigma_{avg. Delta x} = 2.81m
+- Gaussian mutation
+  arithmetic recombination
+  c = 4
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 64
+  test function: Schwefel
+  SR = 72
+  AUS = 697.44k
+  sigma_AUS = 457.71k
+  avg. Delta f* = 0
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 0
+  sigma_{avg. Delta x} = 0
+- Gaussian mutation
+  arithmetic recombination
+  c = 4
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 1
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: sphere
+  SR = 100
+  AUS = 102.28
+  sigma_AUS = 1.73
+  avg. Delta f* = 0
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 0
+  sigma_{avg. Delta x} = 0
+- Gaussian mutation
+  arithmetic recombination
+  c = 8
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 1
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: sphere
+  SR = 100
+  AUS = 102.12
+  sigma_AUS = 1.57
+  avg. Delta f* = 0
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 0
+  sigma_{avg. Delta x} = 0
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 64
+  test function: Ackley
+  SR = 100
+  AUS = 5.63k
+  sigma_AUS = 6.72k
+  avg. Delta f* = 2.92m
+  sigma_{avg. Delta f*} = 1.5m
+  avg. Delta x = 6.15m
+  sigma_{avg. Delta x} = 2.51m
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 50m
+  p_m = 1
+  p_r = 0.5
+  mu = 100
+  2k = 64
+  test function: Alpine
+  SR = 56
+  AUS = 64.5k
+  sigma_AUS = 224.83k
+  avg. Delta f* = 737.11u
+  sigma_{avg. Delta f*} = 329.41u
+  avg. Delta x = 5.96m
+  sigma_{avg. Delta x} = 2.61m
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 50m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 16
+  test function: Aluffi-Pentini
+  SR = 100
+  AUS = 23.83k
+  sigma_AUS = 30.21k
+  avg. Delta f* = 32.52u
+  sigma_{avg. Delta f*} = 24.53u
+  avg. Delta x = 5.86m
+  sigma_{avg. Delta x} = 2.58m
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 1
+  p_r = 1
+  mu = 100
+  2k = 4
+  test function: Booth
+  SR = 100
+  AUS = 995.91
+  sigma_AUS = 929.76
+  avg. Delta f* = 198.39u
+  sigma_{avg. Delta f*} = 184.22u
+  avg. Delta x = 6.63m
+  sigma_{avg. Delta x} = 2.17m
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 64
+  test function: Easom
+  SR = 100
+  AUS = 11.44k
+  sigma_AUS = 23.66k
+  avg. Delta f* = 67.95u
+  sigma_{avg. Delta f*} = 43.86u
+  avg. Delta x = 6.3m
+  sigma_{avg. Delta x} = 2.37m
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 4
+  test function: exponential
+  SR = 100
+  AUS = 170.61
+  sigma_AUS = 51.88
+  avg. Delta f* = 24.81u
+  sigma_{avg. Delta f*} = 15.15u
+  avg. Delta x = 6.58m
+  sigma_{avg. Delta x} = 2.53m
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 50m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 32
+  test function: Goldstein-Price
+  SR = 100
+  AUS = 1.09k
+  sigma_AUS = 1.73k
+  avg. Delta f* = 17.11m
+  sigma_{avg. Delta f*} = 10.59m
+  avg. Delta x = 6.87m
+  sigma_{avg. Delta x} = 2.32m
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: Leon
+  SR = 100
+  AUS = 3.08k
+  sigma_AUS = 1.41k
+  avg. Delta f* = 249.24u
+  sigma_{avg. Delta f*} = 1.95m
+  avg. Delta x = 5.42m
+  sigma_{avg. Delta x} = 2.71m
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 1
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: Matyas
+  SR = 100
+  AUS = 1.3k
+  sigma_AUS = 1.13k
+  avg. Delta f* = 6.45u
+  sigma_{avg. Delta f*} = 8.56u
+  avg. Delta x = 5.58m
+  sigma_{avg. Delta x} = 2.47m
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 16
+  test function: Mexican hat
+  SR = 100
+  AUS = 438.76
+  sigma_AUS = 250.42
+  avg. Delta f* = 4.58m
+  sigma_{avg. Delta f*} = 1.77m
+  avg. Delta x = 6.63m
+  sigma_{avg. Delta x} = 2.5m
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 1
+  p_r = 1
+  mu = 100
+  2k = 4
+  test function: Rosenbrock
+  SR = 82
+  AUS = 33.28k
+  sigma_AUS = 28.7k
+  avg. Delta f* = 1.11m
+  sigma_{avg. Delta f*} = 2.69m
+  avg. Delta x = 4.74m
+  sigma_{avg. Delta x} = 2.54m
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 1
+  p_r = 1
+  mu = 100
+  2k = 16
+  test function: Schwefel
+  SR = 98
+  AUS = 60.34k
+  sigma_AUS = 64.14k
+  avg. Delta f* = 60.69u
+  sigma_{avg. Delta f*} = 46.69u
+  avg. Delta x = 6.39m
+  sigma_{avg. Delta x} = 2.27m
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 1
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: sphere
+  SR = 100
+  AUS = 102.44
+  sigma_AUS = 1.57
+  avg. Delta f* = 0
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 0
+  sigma_{avg. Delta x} = 0
+- Gaussian mutation
+  arithmetic recombination
+  c = 4
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 32
+  test function: Alpine
+  SR = 2
+  AUS = 132.03k
+  sigma_AUS = 81.01k
+  avg. Delta f* = 1.45m
+  sigma_{avg. Delta f*} = 213.55n
+  avg. Delta x = 8.53m
+  sigma_{avg. Delta x} = 659.54u
+- Gaussian mutation
+  arithmetic recombination
+  c = 4
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 64
+  test function: exponential
+  SR = 100
+  AUS = 3.93k
+  sigma_AUS = 4.63k
+  avg. Delta f* = 35.05u
+  sigma_{avg. Delta f*} = 12.46u
+  avg. Delta x = 8.2m
+  sigma_{avg. Delta x} = 1.72m
+- Gaussian mutation
+  arithmetic recombination
+  c = 4
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 1
+  p_r = 1
+  mu = 100
+  2k = 64
+  test function: Miele-Cantrell
+  SR = 100
+  AUS = 95.98k
+  sigma_AUS = 108.77k
+  avg. Delta f* = 1.74n
+  sigma_{avg. Delta f*} = 2.31n
+  avg. Delta x = 4.87m
+  sigma_{avg. Delta x} = 2.77m
+- Gaussian mutation
+  arithmetic recombination
+  c = 4
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 1
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: sphere
+  SR = 100
+  AUS = 102.09
+  sigma_AUS = 1.28
+  avg. Delta f* = 0
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 0
+  sigma_{avg. Delta x} = 0
+- Gaussian mutation
+  arithmetic recombination
+  c = 8
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 1
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: sphere
+  SR = 100
+  AUS = 102.05
+  sigma_AUS = 1.23
+  avg. Delta f* = 0
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 0
+  sigma_{avg. Delta x} = 0
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 32
+  test function: Ackley
+  SR = 100
+  AUS = 2.13k
+  sigma_AUS = 2.1k
+  avg. Delta f* = 0
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 0
+  sigma_{avg. Delta x} = 0
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 16
+  test function: Alpine
+  SR = 100
+  AUS = 1.04k
+  sigma_AUS = 818.7
+  avg. Delta f* = 18.13u
+  sigma_{avg. Delta f*} = 107.06u
+  avg. Delta x = 194.85u
+  sigma_{avg. Delta x} = 1.16m
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 32
+  test function: Aluffi-Pentini
+  SR = 99
+  AUS = 152.45k
+  sigma_AUS = 146.9k
+  avg. Delta f* = 36.54u
+  sigma_{avg. Delta f*} = 33.55u
+  avg. Delta x = 4.92m
+  sigma_{avg. Delta x} = 2.93m
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 1
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: Booth
+  SR = 91
+  AUS = 1.44k
+  sigma_AUS = 693.3
+  avg. Delta f* = 207.32u
+  sigma_{avg. Delta f*} = 175.7u
+  avg. Delta x = 6.51m
+  sigma_{avg. Delta x} = 2.35m
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: Easom
+  SR = 97
+  AUS = 2.16k
+  sigma_AUS = 4.73k
+  avg. Delta f* = 81.05u
+  sigma_{avg. Delta f*} = 44.05u
+  avg. Delta x = 6.97m
+  sigma_{avg. Delta x} = 2.34m
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: exponential
+  SR = 100
+  AUS = 289.05
+  sigma_AUS = 68.06
+  avg. Delta f* = 27.74u
+  sigma_{avg. Delta f*} = 14.04u
+  avg. Delta x = 7.11m
+  sigma_{avg. Delta x} = 2.22m
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 50m
+  p_m = 1
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: Goldstein-Price
+  SR = 100
+  AUS = 3.04k
+  sigma_AUS = 2.54k
+  avg. Delta f* = 16.61m
+  sigma_{avg. Delta f*} = 10.8m
+  avg. Delta x = 6.65m
+  sigma_{avg. Delta x} = 2.42m
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: Leon
+  SR = 88
+  AUS = 11.91k
+  sigma_AUS = 6.92k
+  avg. Delta f* = 640.25u
+  sigma_{avg. Delta f*} = 4.18m
+  avg. Delta x = 5.12m
+  sigma_{avg. Delta x} = 2.82m
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 16
+  test function: Matyas
+  SR = 100
+  AUS = 6.11k
+  sigma_AUS = 7.06k
+  avg. Delta f* = 522.94n
+  sigma_{avg. Delta f*} = 2.86u
+  avg. Delta x = 285.84u
+  sigma_{avg. Delta x} = 1.4m
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: Mexican hat
+  SR = 100
+  AUS = 744.57
+  sigma_AUS = 505.77
+  avg. Delta f* = 4.63m
+  sigma_{avg. Delta f*} = 1.81m
+  avg. Delta x = 6.7m
+  sigma_{avg. Delta x} = 2.56m
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 1
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: Rosenbrock
+  SR = 67
+  AUS = 26.69k
+  sigma_AUS = 23.16k
+  avg. Delta f* = 1.25m
+  sigma_{avg. Delta f*} = 3.01m
+  avg. Delta x = 4.36m
+  sigma_{avg. Delta x} = 2.77m
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 16
+  test function: Schwefel
+  SR = 100
+  AUS = 952.14
+  sigma_AUS = 834.58
+  avg. Delta f* = 0
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 0
+  sigma_{avg. Delta x} = 0
+- Gaussian mutation
+  arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 1
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: sphere
+  SR = 100
+  AUS = 102.84
+  sigma_AUS = 7.15
+  avg. Delta f* = 52.55n
+  sigma_{avg. Delta f*} = 525.51n
+  avg. Delta x = 22.92u
+  sigma_{avg. Delta x} = 229.24u
+- Gaussian mutation
+  arithmetic recombination
+  c = 4
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 64
+  test function: Ackley
+  SR = 4
+  AUS = 886.01k
+  sigma_AUS = 360.5k
+  avg. Delta f* = 0
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 0
+  sigma_{avg. Delta x} = 0
+- Gaussian mutation
+  arithmetic recombination
+  c = 4
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 64
+  test function: Alpine
+  SR = 5
+  AUS = 604.5k
+  sigma_AUS = 482.6k
+  avg. Delta f* = 0
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 0
+  sigma_{avg. Delta x} = 0
+- Gaussian mutation
+  arithmetic recombination
+  c = 4
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: exponential
+  SR = 100
+  AUS = 5.75k
+  sigma_AUS = 6.2k
+  avg. Delta f* = 34.16u
+  sigma_{avg. Delta f*} = 12.49u
+  avg. Delta x = 8.08m
+  sigma_{avg. Delta x} = 1.75m
+- Gaussian mutation
+  arithmetic recombination
+  c = 4
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 1
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: Miele-Cantrell
+  SR = 35
+  AUS = 27.38k
+  sigma_AUS = 11.41k
+  avg. Delta f* = 1.68n
+  sigma_{avg. Delta f*} = 2.4n
+  avg. Delta x = 4.82m
+  sigma_{avg. Delta x} = 2.86m
+- Gaussian mutation
+  arithmetic recombination
+  c = 4
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 8
+  test function: Schwefel
+  SR = 10
+  AUS = 122.79k
+  sigma_AUS = 70.63k
+  avg. Delta f* = 0
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 0
+  sigma_{avg. Delta x} = 0
+- Gaussian mutation
+  arithmetic recombination
+  c = 4
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 1
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: sphere
+  SR = 100
+  AUS = 102.38
+  sigma_AUS = 1.8
+  avg. Delta f* = 0
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 0
+  sigma_{avg. Delta x} = 0
+- Gaussian mutation
+  arithmetic recombination
+  c = 8
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 1
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: sphere
+  SR = 100
+  AUS = 102.24
+  sigma_AUS = 1.43
+  avg. Delta f* = 0
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 0
+  sigma_{avg. Delta x} = 0
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 50m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 64
+  test function: Ackley
+  SR = 100
+  AUS = 4.77k
+  sigma_AUS = 2.1k
+  avg. Delta f* = 3.3m
+  sigma_{avg. Delta f*} = 1.5m
+  avg. Delta x = 6.75m
+  sigma_{avg. Delta x} = 2.47m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 50m
+  p_m = 1
+  p_r = 0.5
+  mu = 100
+  2k = 64
+  test function: Alpine
+  SR = 52
+  AUS = 66.07k
+  sigma_AUS = 73.77k
+  avg. Delta f* = 668.35u
+  sigma_{avg. Delta f*} = 302.33u
+  avg. Delta x = 5.41m
+  sigma_{avg. Delta x} = 2.36m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 64
+  test function: Aluffi-Pentini
+  SR = 100
+  AUS = 109.46k
+  sigma_AUS = 96.79k
+  avg. Delta f* = 31.41u
+  sigma_{avg. Delta f*} = 32.73u
+  avg. Delta x = 4.46m
+  sigma_{avg. Delta x} = 3.01m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 50m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 8
+  test function: Booth
+  SR = 91
+  AUS = 12.25k
+  sigma_AUS = 11.49k
+  avg. Delta f* = 219.15u
+  sigma_{avg. Delta f*} = 177.46u
+  avg. Delta x = 6.51m
+  sigma_{avg. Delta x} = 2.32m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 64
+  test function: Easom
+  SR = 32
+  AUS = 422.31k
+  sigma_AUS = 561.24k
+  avg. Delta f* = 75.32u
+  sigma_{avg. Delta f*} = 44.58u
+  avg. Delta x = 6.72m
+  sigma_{avg. Delta x} = 2.28m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: exponential
+  SR = 100
+  AUS = 283.6
+  sigma_AUS = 193.63
+  avg. Delta f* = 25.02u
+  sigma_{avg. Delta f*} = 14.56u
+  avg. Delta x = 6.67m
+  sigma_{avg. Delta x} = 2.38m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 50m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 4
+  test function: Goldstein-Price
+  SR = 100
+  AUS = 1.36k
+  sigma_AUS = 698.06
+  avg. Delta f* = 16.32m
+  sigma_{avg. Delta f*} = 9.5m
+  avg. Delta x = 6.78m
+  sigma_{avg. Delta x} = 2.19m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 50m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: Hosaki
+  SR = 1
+  AUS = 3
+  sigma_AUS = 0
+  avg. Delta f* = 37.64u
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 6.53m
+  sigma_{avg. Delta x} = 0
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 50m
+  p_m = 1
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: Leon
+  SR = 31
+  AUS = 6.94k
+  sigma_AUS = 5.46k
+  avg. Delta f* = 2.29m
+  sigma_{avg. Delta f*} = 4.86m
+  avg. Delta x = 5.8m
+  sigma_{avg. Delta x} = 2.32m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 64
+  test function: Matyas
+  SR = 100
+  AUS = 296.01k
+  sigma_AUS = 281.15k
+  avg. Delta f* = 517.84n
+  sigma_{avg. Delta f*} = 2.17u
+  avg. Delta x = 429.36u
+  sigma_{avg. Delta x} = 1.49m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: Mexican hat
+  SR = 100
+  AUS = 399.62
+  sigma_AUS = 251.73
+  avg. Delta f* = 4.72m
+  sigma_{avg. Delta f*} = 1.81m
+  avg. Delta x = 6.82m
+  sigma_{avg. Delta x} = 2.57m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 8
+  test function: Rosenbrock
+  SR = 26
+  AUS = 182.9k
+  sigma_AUS = 143.11k
+  avg. Delta f* = 1.71m
+  sigma_{avg. Delta f*} = 3.86m
+  avg. Delta x = 5.32m
+  sigma_{avg. Delta x} = 2.75m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 64
+  test function: Schwefel
+  SR = 100
+  AUS = 239k
+  sigma_AUS = 219.4k
+  avg. Delta f* = 8.13u
+  sigma_{avg. Delta f*} = 33.97u
+  avg. Delta x = 522.55u
+  sigma_{avg. Delta x} = 1.96m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 1
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: sphere
+  SR = 100
+  AUS = 102.81
+  sigma_AUS = 2
+  avg. Delta f* = 0
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 0
+  sigma_{avg. Delta x} = 0
+- Gaussian mutation
+  single arithmetic recombination
+  c = 4
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 50m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 64
+  test function: Ackley
+  SR = 22
+  AUS = 1.97m
+  sigma_AUS = 1.08m
+  avg. Delta f* = 2.85m
+  sigma_{avg. Delta f*} = 491.51u
+  avg. Delta x = 8.88m
+  sigma_{avg. Delta x} = 1.18m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 4
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 50m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 32
+  test function: Alpine
+  SR = 4
+  AUS = 791.57k
+  sigma_AUS = 988.75k
+  avg. Delta f* = 1.58m
+  sigma_{avg. Delta f*} = 352.96u
+  avg. Delta x = 8.52m
+  sigma_{avg. Delta x} = 1.55m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 4
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: exponential
+  SR = 100
+  AUS = 31.2k
+  sigma_AUS = 10.7k
+  avg. Delta f* = 35.7u
+  sigma_{avg. Delta f*} = 12.56u
+  avg. Delta x = 8.27m
+  sigma_{avg. Delta x} = 1.72m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 4
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: Miele-Cantrell
+  SR = 46
+  AUS = 24.92k
+  sigma_AUS = 19.31k
+  avg. Delta f* = 1.41n
+  sigma_{avg. Delta f*} = 1.95n
+  avg. Delta x = 4.81m
+  sigma_{avg. Delta x} = 2.53m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 4
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 64
+  test function: Schwefel
+  SR = 4
+  AUS = 1.18m
+  sigma_AUS = 914.88k
+  avg. Delta f* = 0
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 0
+  sigma_{avg. Delta x} = 0
+- Gaussian mutation
+  single arithmetic recombination
+  c = 4
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 1
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: sphere
+  SR = 100
+  AUS = 102.43
+  sigma_AUS = 1.39
+  avg. Delta f* = 0
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 0
+  sigma_{avg. Delta x} = 0
+- Gaussian mutation
+  single arithmetic recombination
+  c = 8
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 1
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: sphere
+  SR = 100
+  AUS = 102.38
+  sigma_AUS = 1.52
+  avg. Delta f* = 0
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 0
+  sigma_{avg. Delta x} = 0
+- Gaussian mutation
+  single arithmetic recombination
+  c = 16
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 1
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: sphere
+  SR = 100
+  AUS = 102.58
+  sigma_AUS = 1.52
+  avg. Delta f* = 0
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 0
+  sigma_{avg. Delta x} = 0
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 64
+  test function: Ackley
+  SR = 100
+  AUS = 1.93k
+  sigma_AUS = 2.41k
+  avg. Delta f* = 3.1m
+  sigma_{avg. Delta f*} = 1.62m
+  avg. Delta x = 6.39m
+  sigma_{avg. Delta x} = 2.71m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 50m
+  p_m = 1
+  p_r = 0.5
+  mu = 100
+  2k = 16
+  test function: Alpine
+  SR = 53
+  AUS = 77.48k
+  sigma_AUS = 84.17k
+  avg. Delta f* = 628.84u
+  sigma_{avg. Delta f*} = 334.58u
+  avg. Delta x = 4.88m
+  sigma_{avg. Delta x} = 2.51m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 50m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 64
+  test function: Aluffi-Pentini
+  SR = 100
+  AUS = 1.06k
+  sigma_AUS = 1.7k
+  avg. Delta f* = 33.15u
+  sigma_{avg. Delta f*} = 22.88u
+  avg. Delta x = 6.15m
+  sigma_{avg. Delta x} = 2.35m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 1
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: Booth
+  SR = 99
+  AUS = 1.05k
+  sigma_AUS = 830.28
+  avg. Delta f* = 192.84u
+  sigma_{avg. Delta f*} = 182.59u
+  avg. Delta x = 6.25m
+  sigma_{avg. Delta x} = 2.55m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 64
+  test function: Easom
+  SR = 100
+  AUS = 2.3k
+  sigma_AUS = 4.12k
+  avg. Delta f* = 63.95u
+  sigma_{avg. Delta f*} = 41.5u
+  avg. Delta x = 6.07m
+  sigma_{avg. Delta x} = 2.43m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 4
+  test function: exponential
+  SR = 100
+  AUS = 194.55
+  sigma_AUS = 58.92
+  avg. Delta f* = 23.99u
+  sigma_{avg. Delta f*} = 15.89u
+  avg. Delta x = 6.39m
+  sigma_{avg. Delta x} = 2.68m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 50m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 32
+  test function: Goldstein-Price
+  SR = 100
+  AUS = 494.01
+  sigma_AUS = 229.38
+  avg. Delta f* = 14.86m
+  sigma_{avg. Delta f*} = 9.67m
+  avg. Delta x = 6.46m
+  sigma_{avg. Delta x} = 2.43m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 50m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: Leon
+  SR = 90
+  AUS = 9.37k
+  sigma_AUS = 11.89k
+  avg. Delta f* = 539.52u
+  sigma_{avg. Delta f*} = 2.09m
+  avg. Delta x = 4.56m
+  sigma_{avg. Delta x} = 2.76m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 1
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: Matyas
+  SR = 99
+  AUS = 1.47k
+  sigma_AUS = 1.34k
+  avg. Delta f* = 7.11u
+  sigma_{avg. Delta f*} = 9.38u
+  avg. Delta x = 6.08m
+  sigma_{avg. Delta x} = 2.72m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 8
+  test function: Mexican hat
+  SR = 100
+  AUS = 449.32
+  sigma_AUS = 252.1
+  avg. Delta f* = 4.75m
+  sigma_{avg. Delta f*} = 1.7m
+  avg. Delta x = 6.87m
+  sigma_{avg. Delta x} = 2.41m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 1
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: Rosenbrock
+  SR = 79
+  AUS = 30.21k
+  sigma_AUS = 29.87k
+  avg. Delta f* = 1.14m
+  sigma_{avg. Delta f*} = 3.6m
+  avg. Delta x = 5.81m
+  sigma_{avg. Delta x} = 2.84m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 1
+  p_r = 1
+  mu = 100
+  2k = 8
+  test function: Schwefel
+  SR = 99
+  AUS = 63.52k
+  sigma_AUS = 71.08k
+  avg. Delta f* = 54.22u
+  sigma_{avg. Delta f*} = 41.92u
+  avg. Delta x = 6.38m
+  sigma_{avg. Delta x} = 2.31m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 1
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: sphere
+  SR = 100
+  AUS = 102.59
+  sigma_AUS = 1.56
+  avg. Delta f* = 0
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 0
+  sigma_{avg. Delta x} = 0
+- Gaussian mutation
+  single arithmetic recombination
+  c = 4
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 50m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 64
+  test function: Ackley
+  SR = 100
+  AUS = 490k
+  sigma_AUS = 335.78k
+  avg. Delta f* = 1.72m
+  sigma_{avg. Delta f*} = 898.82u
+  avg. Delta x = 5.86m
+  sigma_{avg. Delta x} = 2.56m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 4
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 50m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 64
+  test function: Alpine
+  SR = 14
+  AUS = 281.17k
+  sigma_AUS = 283.24k
+  avg. Delta f* = 660.88u
+  sigma_{avg. Delta f*} = 418.3u
+  avg. Delta x = 4.5m
+  sigma_{avg. Delta x} = 2.84m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 4
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 64
+  test function: exponential
+  SR = 100
+  AUS = 3.11k
+  sigma_AUS = 2.57k
+  avg. Delta f* = 36.61u
+  sigma_{avg. Delta f*} = 10.98u
+  avg. Delta x = 8.42m
+  sigma_{avg. Delta x} = 1.54m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 4
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 32
+  test function: Miele-Cantrell
+  SR = 100
+  AUS = 79.09k
+  sigma_AUS = 82.59k
+  avg. Delta f* = 1.01n
+  sigma_{avg. Delta f*} = 1.69n
+  avg. Delta x = 4m
+  sigma_{avg. Delta x} = 2.57m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 4
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 64
+  test function: Schwefel
+  SR = 1
+  AUS = 445.8k
+  sigma_AUS = 0
+  avg. Delta f* = 516.16u
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 9.91m
+  sigma_{avg. Delta x} = 0
+- Gaussian mutation
+  single arithmetic recombination
+  c = 4
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 1
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: sphere
+  SR = 100
+  AUS = 102.66
+  sigma_AUS = 1.75
+  avg. Delta f* = 0
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 0
+  sigma_{avg. Delta x} = 0
+- Gaussian mutation
+  single arithmetic recombination
+  c = 8
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 50m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 64
+  test function: Ackley
+  SR = 40
+  AUS = 1.69m
+  sigma_AUS = 334.31k
+  avg. Delta f* = 1.36m
+  sigma_{avg. Delta f*} = 453.22u
+  avg. Delta x = 7.07m
+  sigma_{avg. Delta x} = 1.96m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 8
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 50m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 64
+  test function: exponential
+  SR = 100
+  AUS = 141.59k
+  sigma_AUS = 56.17k
+  avg. Delta f* = 27.74u
+  sigma_{avg. Delta f*} = 14.68u
+  avg. Delta x = 7.11m
+  sigma_{avg. Delta x} = 2.23m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 8
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 1
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: sphere
+  SR = 100
+  AUS = 102.56
+  sigma_AUS = 1.44
+  avg. Delta f* = 0
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 0
+  sigma_{avg. Delta x} = 0
+- Gaussian mutation
+  single arithmetic recombination
+  c = 16
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 50m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 64
+  test function: exponential
+  SR = 98
+  AUS = 994.3k
+  sigma_AUS = 267.35k
+  avg. Delta f* = 33.72u
+  sigma_{avg. Delta f*} = 11.47u
+  avg. Delta x = 8.06m
+  sigma_{avg. Delta x} = 1.59m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 16
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 1
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: sphere
+  SR = 100
+  AUS = 102.66
+  sigma_AUS = 1.43
+  avg. Delta f* = 0
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 0
+  sigma_{avg. Delta x} = 0
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: Ackley
+  SR = 100
+  AUS = 4.98k
+  sigma_AUS = 6.08k
+  avg. Delta f* = 3.35m
+  sigma_{avg. Delta f*} = 1.46m
+  avg. Delta x = 6.86m
+  sigma_{avg. Delta x} = 2.38m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 8
+  test function: Alpine
+  SR = 100
+  AUS = 4.1k
+  sigma_AUS = 3.92k
+  avg. Delta f* = 34.66u
+  sigma_{avg. Delta f*} = 148.41u
+  avg. Delta x = 354.07u
+  sigma_{avg. Delta x} = 1.52m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 32
+  test function: Aluffi-Pentini
+  SR = 100
+  AUS = 221.2k
+  sigma_AUS = 209.91k
+  avg. Delta f* = 37.4u
+  sigma_{avg. Delta f*} = 35.51u
+  avg. Delta x = 4.91m
+  sigma_{avg. Delta x} = 2.96m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: Booth
+  SR = 87
+  AUS = 1.44k
+  sigma_AUS = 523.16
+  avg. Delta f* = 183.3u
+  sigma_{avg. Delta f*} = 201.48u
+  avg. Delta x = 5.89m
+  sigma_{avg. Delta x} = 2.54m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: Easom
+  SR = 84
+  AUS = 4.81k
+  sigma_AUS = 3.95k
+  avg. Delta f* = 76.28u
+  sigma_{avg. Delta f*} = 41.67u
+  avg. Delta x = 6.8m
+  sigma_{avg. Delta x} = 2.15m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 50m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: exponential
+  SR = 100
+  AUS = 605.93
+  sigma_AUS = 148.18
+  avg. Delta f* = 24.46u
+  sigma_{avg. Delta f*} = 14.39u
+  avg. Delta x = 6.57m
+  sigma_{avg. Delta x} = 2.4m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 64
+  test function: Goldstein-Price
+  SR = 100
+  AUS = 55.29k
+  sigma_AUS = 56.34k
+  avg. Delta f* = 10.11m
+  sigma_{avg. Delta f*} = 12.67m
+  avg. Delta x = 3.71m
+  sigma_{avg. Delta x} = 3.38m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: Hosaki
+  SR = 1
+  AUS = 2
+  sigma_AUS = 0
+  avg. Delta f* = 2.13u
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 1.88m
+  sigma_{avg. Delta x} = 0
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 50m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: Leon
+  SR = 33
+  AUS = 8.18k
+  sigma_AUS = 4.2k
+  avg. Delta f* = 1.16m
+  sigma_{avg. Delta f*} = 2.12m
+  avg. Delta x = 6.53m
+  sigma_{avg. Delta x} = 2.58m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 32
+  test function: Matyas
+  SR = 100
+  AUS = 42.82k
+  sigma_AUS = 41.03k
+  avg. Delta f* = 1.18u
+  sigma_{avg. Delta f*} = 4.61u
+  avg. Delta x = 570.28u
+  sigma_{avg. Delta x} = 2m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 50m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: Mexican hat
+  SR = 100
+  AUS = 2.3k
+  sigma_AUS = 3.69k
+  avg. Delta f* = 4.81m
+  sigma_{avg. Delta f*} = 1.56m
+  avg. Delta x = 6.96m
+  sigma_{avg. Delta x} = 2.21m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: Rosenbrock
+  SR = 29
+  AUS = 17.22k
+  sigma_AUS = 16.6k
+  avg. Delta f* = 1.78m
+  sigma_{avg. Delta f*} = 2.78m
+  avg. Delta x = 6.08m
+  sigma_{avg. Delta x} = 2.56m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 8
+  test function: Schwefel
+  SR = 100
+  AUS = 4.29k
+  sigma_AUS = 4.07k
+  avg. Delta f* = 23.68n
+  sigma_{avg. Delta f*} = 236.78n
+  avg. Delta x = 10.88u
+  sigma_{avg. Delta x} = 108.81u
+- Gaussian mutation
+  single arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 1
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: sphere
+  SR = 100
+  AUS = 102.96
+  sigma_AUS = 2.13
+  avg. Delta f* = 0
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 0
+  sigma_{avg. Delta x} = 0
+- Gaussian mutation
+  single arithmetic recombination
+  c = 4
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: Ackley
+  SR = 5
+  AUS = 32.14k
+  sigma_AUS = 34.43k
+  avg. Delta f* = 2.21m
+  sigma_{avg. Delta f*} = 1.1m
+  avg. Delta x = 7.14m
+  sigma_{avg. Delta x} = 2.99m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 4
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 50m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: Alpine
+  SR = 3
+  AUS = 3.82k
+  sigma_AUS = 564.98
+  avg. Delta f* = 1.33m
+  sigma_{avg. Delta f*} = 280.51u
+  avg. Delta x = 8.77m
+  sigma_{avg. Delta x} = 1.66m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 4
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 5m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: exponential
+  SR = 100
+  AUS = 6.63k
+  sigma_AUS = 7.42k
+  avg. Delta f* = 39.65u
+  sigma_{avg. Delta f*} = 9u
+  avg. Delta x = 8.83m
+  sigma_{avg. Delta x} = 1.14m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 4
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: Miele-Cantrell
+  SR = 29
+  AUS = 23.92k
+  sigma_AUS = 13.62k
+  avg. Delta f* = 1.76n
+  sigma_{avg. Delta f*} = 2.57n
+  avg. Delta x = 4.77m
+  sigma_{avg. Delta x} = 2.8m
+- Gaussian mutation
+  single arithmetic recombination
+  c = 4
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 4
+  test function: Schwefel
+  SR = 3
+  AUS = 100.37k
+  sigma_AUS = 52.32k
+  avg. Delta f* = 0
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 0
+  sigma_{avg. Delta x} = 0
+- Gaussian mutation
+  single arithmetic recombination
+  c = 4
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 1
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: sphere
+  SR = 100
+  AUS = 102.78
+  sigma_AUS = 1.72
+  avg. Delta f* = 0
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 0
+  sigma_{avg. Delta x} = 0
+- Gaussian mutation
+  single arithmetic recombination
+  c = 8
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 50m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: exponential
+  SR = 2
+  AUS = 20.42k
+  sigma_AUS = 21.08k
+  avg. Delta f* = 45.73u
+  sigma_{avg. Delta f*} = 1.81u
+  avg. Delta x = 9.56m
+  sigma_{avg. Delta x} = 189.37u
+- Gaussian mutation
+  single arithmetic recombination
+  c = 8
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 1
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: sphere
+  SR = 100
+  AUS = 102.65
+  sigma_AUS = 1.64
+  avg. Delta f* = 0
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 0
+  sigma_{avg. Delta x} = 0
+- Gaussian mutation
+  single arithmetic recombination
+  c = 16
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  r = 500m
+  p_m = 1
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: sphere
+  SR = 100
+  AUS = 102.31
+  sigma_AUS = 1.2
+  avg. Delta f* = 0
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 0
+  sigma_{avg. Delta x} = 0
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 1
+  p_r = 1
+  mu = 100
+  2k = 32
+  test function: Ackley
+  SR = 100
+  AUS = 5.12k
+  sigma_AUS = 5.04k
+  avg. Delta f* = 3.26m
+  sigma_{avg. Delta f*} = 1.3m
+  avg. Delta x = 6.76m
+  sigma_{avg. Delta x} = 2.16m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 16
+  test function: Alpine
+  SR = 47
+  AUS = 3.15k
+  sigma_AUS = 2.45k
+  avg. Delta f* = 658.26u
+  sigma_{avg. Delta f*} = 353.32u
+  avg. Delta x = 5.26m
+  sigma_{avg. Delta x} = 2.71m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: Aluffi-Pentini
+  SR = 100
+  AUS = 3.74k
+  sigma_AUS = 4.02k
+  avg. Delta f* = 40.59u
+  sigma_{avg. Delta f*} = 26.88u
+  avg. Delta x = 6.68m
+  sigma_{avg. Delta x} = 2.39m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 32
+  test function: Booth
+  SR = 88
+  AUS = 48.16k
+  sigma_AUS = 55.07k
+  avg. Delta f* = 180.67u
+  sigma_{avg. Delta f*} = 186.13u
+  avg. Delta x = 6.28m
+  sigma_{avg. Delta x} = 2.33m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 1
+  p_r = 0.5
+  mu = 100
+  2k = 8
+  test function: Easom
+  SR = 100
+  AUS = 64.87k
+  sigma_AUS = 84.27k
+  avg. Delta f* = 84.11u
+  sigma_{avg. Delta f*} = 44.01u
+  avg. Delta x = 7.14m
+  sigma_{avg. Delta x} = 2.27m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: exponential
+  SR = 100
+  AUS = 354.61
+  sigma_AUS = 326.92
+  avg. Delta f* = 25.15u
+  sigma_{avg. Delta f*} = 14.11u
+  avg. Delta x = 6.72m
+  sigma_{avg. Delta x} = 2.29m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: Goldstein-Price
+  SR = 100
+  AUS = 1.03k
+  sigma_AUS = 596.93
+  avg. Delta f* = 17.22m
+  sigma_{avg. Delta f*} = 10.85m
+  avg. Delta x = 6.86m
+  sigma_{avg. Delta x} = 2.17m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 1
+  p_r = 1
+  mu = 100
+  2k = 8
+  test function: Leon
+  SR = 33
+  AUS = 32.3k
+  sigma_AUS = 38.4k
+  avg. Delta f* = 1.84m
+  sigma_{avg. Delta f*} = 3.87m
+  avg. Delta x = 4.81m
+  sigma_{avg. Delta x} = 2.92m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 64
+  test function: Matyas
+  SR = 78
+  AUS = 246.88k
+  sigma_AUS = 234.36k
+  avg. Delta f* = 6.48u
+  sigma_{avg. Delta f*} = 9.91u
+  avg. Delta x = 5.83m
+  sigma_{avg. Delta x} = 2.29m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 1
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: Mexican hat
+  SR = 100
+  AUS = 2.35k
+  sigma_AUS = 2.04k
+  avg. Delta f* = 4.66m
+  sigma_{avg. Delta f*} = 1.77m
+  avg. Delta x = 6.74m
+  sigma_{avg. Delta x} = 2.51m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 16
+  test function: Rosenbrock
+  SR = 33
+  AUS = 373.56k
+  sigma_AUS = 410.99k
+  avg. Delta f* = 4.61m
+  sigma_{avg. Delta f*} = 7.61m
+  avg. Delta x = 5.36m
+  sigma_{avg. Delta x} = 2.8m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 8
+  test function: Schwefel
+  SR = 87
+  AUS = 87.94k
+  sigma_AUS = 90.88k
+  avg. Delta f* = 66.25u
+  sigma_{avg. Delta f*} = 60.47u
+  avg. Delta x = 6.36m
+  sigma_{avg. Delta x} = 2.31m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: sphere
+  SR = 100
+  AUS = 9.98k
+  sigma_AUS = 10.21k
+  avg. Delta f* = 61.09u
+  sigma_{avg. Delta f*} = 27.83u
+  avg. Delta x = 7.53m
+  sigma_{avg. Delta x} = 2.1m
+- random-reset mutation
+  single arithmetic recombination
+  c = 4
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 1
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: Ackley
+  SR = 100
+  AUS = 39.77k
+  sigma_AUS = 28.5k
+  avg. Delta f* = 2.23m
+  sigma_{avg. Delta f*} = 763.32u
+  avg. Delta x = 7.3m
+  sigma_{avg. Delta x} = 2.05m
+- random-reset mutation
+  single arithmetic recombination
+  c = 4
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 32
+  test function: Alpine
+  SR = 13
+  AUS = 364.76k
+  sigma_AUS = 408.33k
+  avg. Delta f* = 1.06m
+  sigma_{avg. Delta f*} = 299.13u
+  avg. Delta x = 6.84m
+  sigma_{avg. Delta x} = 1.87m
+- random-reset mutation
+  single arithmetic recombination
+  c = 4
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: exponential
+  SR = 100
+  AUS = 2.67k
+  sigma_AUS = 1.8k
+  avg. Delta f* = 36.73u
+  sigma_{avg. Delta f*} = 11.92u
+  avg. Delta x = 8.42m
+  sigma_{avg. Delta x} = 1.62m
+- random-reset mutation
+  single arithmetic recombination
+  c = 4
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 1
+  p_r = 1
+  mu = 100
+  2k = 64
+  test function: Miele-Cantrell
+  SR = 1
+  AUS = 6.38m
+  sigma_AUS = 0
+  avg. Delta f* = 543.52p
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 5.76m
+  sigma_{avg. Delta x} = 0
+- random-reset mutation
+  single arithmetic recombination
+  c = 4
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 4
+  test function: Rosenbrock
+  SR = 1
+  AUS = 118.76k
+  sigma_AUS = 0
+  avg. Delta f* = 18.85m
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 8.56m
+  sigma_{avg. Delta x} = 0
+- random-reset mutation
+  single arithmetic recombination
+  c = 4
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: sphere
+  SR = 86
+  AUS = 33.55k
+  sigma_AUS = 23.08k
+  avg. Delta f* = 76.55u
+  sigma_{avg. Delta f*} = 20.4u
+  avg. Delta x = 8.65m
+  sigma_{avg. Delta x} = 1.34m
+- random-reset mutation
+  single arithmetic recombination
+  c = 8
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 1
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: Ackley
+  SR = 45
+  AUS = 99.25k
+  sigma_AUS = 24.34k
+  avg. Delta f* = 1.64m
+  sigma_{avg. Delta f*} = 327.54u
+  avg. Delta x = 8.25m
+  sigma_{avg. Delta x} = 1.34m
+- random-reset mutation
+  single arithmetic recombination
+  c = 8
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: Alpine
+  SR = 2
+  AUS = 26.36k
+  sigma_AUS = 1.63k
+  avg. Delta f* = 1.63m
+  sigma_{avg. Delta f*} = 4.04u
+  avg. Delta x = 8.47m
+  sigma_{avg. Delta x} = 1.72m
+- random-reset mutation
+  single arithmetic recombination
+  c = 8
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: exponential
+  SR = 100
+  AUS = 20.17k
+  sigma_AUS = 14.14k
+  avg. Delta f* = 43.95u
+  sigma_{avg. Delta f*} = 6.11u
+  avg. Delta x = 9.35m
+  sigma_{avg. Delta x} = 700.74u
+- random-reset mutation
+  single arithmetic recombination
+  c = 8
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: sphere
+  SR = 4
+  AUS = 51.11k
+  sigma_AUS = 15.05k
+  avg. Delta f* = 84.05u
+  sigma_{avg. Delta f*} = 13.77u
+  avg. Delta x = 9.14m
+  sigma_{avg. Delta x} = 765.94u
+- random-reset mutation
+  single arithmetic recombination
+  c = 16
+  FPS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 1
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: exponential
+  SR = 57
+  AUS = 125.16k
+  sigma_AUS = 27.01k
+  avg. Delta f* = 47.17u
+  sigma_{avg. Delta f*} = 3.29u
+  avg. Delta x = 9.71m
+  sigma_{avg. Delta x} = 353.42u
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 64
+  test function: Ackley
+  SR = 100
+  AUS = 3.58k
+  sigma_AUS = 6.29k
+  avg. Delta f* = 3.08m
+  sigma_{avg. Delta f*} = 1.46m
+  avg. Delta x = 6.41m
+  sigma_{avg. Delta x} = 2.51m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 1
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: Alpine
+  SR = 74
+  AUS = 13.3k
+  sigma_AUS = 23.41k
+  avg. Delta f* = 476.26u
+  sigma_{avg. Delta f*} = 365.69u
+  avg. Delta x = 3.85m
+  sigma_{avg. Delta x} = 2.9m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 16
+  test function: Aluffi-Pentini
+  SR = 100
+  AUS = 1.78k
+  sigma_AUS = 2.57k
+  avg. Delta f* = 36.07u
+  sigma_{avg. Delta f*} = 30.45u
+  avg. Delta x = 5.98m
+  sigma_{avg. Delta x} = 2.91m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 1
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: Booth
+  SR = 98
+  AUS = 37.29k
+  sigma_AUS = 24.05k
+  avg. Delta f* = 147.32u
+  sigma_{avg. Delta f*} = 131.78u
+  avg. Delta x = 8m
+  sigma_{avg. Delta x} = 1.83m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 64
+  test function: Easom
+  SR = 100
+  AUS = 4.94k
+  sigma_AUS = 10.5k
+  avg. Delta f* = 67.68u
+  sigma_{avg. Delta f*} = 43.6u
+  avg. Delta x = 6.28m
+  sigma_{avg. Delta x} = 2.39m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 8
+  test function: exponential
+  SR = 100
+  AUS = 292.78
+  sigma_AUS = 178.43
+  avg. Delta f* = 22.95u
+  sigma_{avg. Delta f*} = 14.18u
+  avg. Delta x = 6.33m
+  sigma_{avg. Delta x} = 2.42m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 16
+  test function: Goldstein-Price
+  SR = 100
+  AUS = 903.42
+  sigma_AUS = 714.25
+  avg. Delta f* = 15.53m
+  sigma_{avg. Delta f*} = 11.2m
+  avg. Delta x = 6.38m
+  sigma_{avg. Delta x} = 2.35m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 1
+  p_r = 0.5
+  mu = 100
+  2k = 8
+  test function: Leon
+  SR = 47
+  AUS = 133.54k
+  sigma_AUS = 140.14k
+  avg. Delta f* = 1.49m
+  sigma_{avg. Delta f*} = 4.54m
+  avg. Delta x = 5.57m
+  sigma_{avg. Delta x} = 3.06m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 64
+  test function: Matyas
+  SR = 54
+  AUS = 5.44k
+  sigma_AUS = 24.46k
+  avg. Delta f* = 5.21u
+  sigma_{avg. Delta f*} = 6.83u
+  avg. Delta x = 5.33m
+  sigma_{avg. Delta x} = 2.33m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 64
+  test function: Mexican hat
+  SR = 100
+  AUS = 938.3
+  sigma_AUS = 774.14
+  avg. Delta f* = 4.36m
+  sigma_{avg. Delta f*} = 1.72m
+  avg. Delta x = 6.32m
+  sigma_{avg. Delta x} = 2.44m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 64
+  test function: Rosenbrock
+  SR = 10
+  AUS = 763.36k
+  sigma_AUS = 740.69k
+  avg. Delta f* = 9.63m
+  sigma_{avg. Delta f*} = 12.29m
+  avg. Delta x = 6.66m
+  sigma_{avg. Delta x} = 2.7m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 32
+  test function: Schwefel
+  SR = 87
+  AUS = 163.33k
+  sigma_AUS = 166.8k
+  avg. Delta f* = 47.98u
+  sigma_{avg. Delta f*} = 32.31u
+  avg. Delta x = 7.23m
+  sigma_{avg. Delta x} = 2.51m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 1
+  p_r = 0.5
+  mu = 100
+  2k = 8
+  test function: sphere
+  SR = 100
+  AUS = 4.39k
+  sigma_AUS = 2.92k
+  avg. Delta f* = 50.4u
+  sigma_{avg. Delta f*} = 29.68u
+  avg. Delta x = 6.65m
+  sigma_{avg. Delta x} = 2.49m
+- random-reset mutation
+  single arithmetic recombination
+  c = 4
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 64
+  test function: Ackley
+  SR = 100
+  AUS = 25.79k
+  sigma_AUS = 19.42k
+  avg. Delta f* = 2.04m
+  sigma_{avg. Delta f*} = 862.8u
+  avg. Delta x = 6.75m
+  sigma_{avg. Delta x} = 2.4m
+- random-reset mutation
+  single arithmetic recombination
+  c = 4
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: Alpine
+  SR = 33
+  AUS = 20k
+  sigma_AUS = 15.17k
+  avg. Delta f* = 796.16u
+  sigma_{avg. Delta f*} = 487.28u
+  avg. Delta x = 4.93m
+  sigma_{avg. Delta x} = 2.94m
+- random-reset mutation
+  single arithmetic recombination
+  c = 4
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 16
+  test function: exponential
+  SR = 100
+  AUS = 1.25k
+  sigma_AUS = 732.33
+  avg. Delta f* = 26.8u
+  sigma_{avg. Delta f*} = 15.67u
+  avg. Delta x = 6.92m
+  sigma_{avg. Delta x} = 2.41m
+- random-reset mutation
+  single arithmetic recombination
+  c = 4
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 64
+  test function: Rosenbrock
+  SR = 1
+  AUS = 1.98k
+  sigma_AUS = 0
+  avg. Delta f* = 13.21m
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 7.86m
+  sigma_{avg. Delta x} = 0
+- random-reset mutation
+  single arithmetic recombination
+  c = 4
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 1
+  p_r = 0.5
+  mu = 100
+  2k = 8
+  test function: Schwefel
+  SR = 1
+  AUS = 518.71k
+  sigma_AUS = 0
+  avg. Delta f* = 61.62u
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 8.81m
+  sigma_{avg. Delta x} = 0
+- random-reset mutation
+  single arithmetic recombination
+  c = 4
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 16
+  test function: sphere
+  SR = 100
+  AUS = 15.48k
+  sigma_AUS = 7.84k
+  avg. Delta f* = 61.21u
+  sigma_{avg. Delta f*} = 26.88u
+  avg. Delta x = 7.59m
+  sigma_{avg. Delta x} = 1.92m
+- random-reset mutation
+  single arithmetic recombination
+  c = 8
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 64
+  test function: Ackley
+  SR = 100
+  AUS = 90.77k
+  sigma_AUS = 49.37k
+  avg. Delta f* = 1.43m
+  sigma_{avg. Delta f*} = 466.69u
+  avg. Delta x = 7.37m
+  sigma_{avg. Delta x} = 2.03m
+- random-reset mutation
+  single arithmetic recombination
+  c = 8
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 16
+  test function: Alpine
+  SR = 6
+  AUS = 57.42k
+  sigma_AUS = 45.69k
+  avg. Delta f* = 1.1m
+  sigma_{avg. Delta f*} = 513.32u
+  avg. Delta x = 5.59m
+  sigma_{avg. Delta x} = 2.8m
+- random-reset mutation
+  single arithmetic recombination
+  c = 8
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 16
+  test function: exponential
+  SR = 100
+  AUS = 3.8k
+  sigma_AUS = 1.36k
+  avg. Delta f* = 36.26u
+  sigma_{avg. Delta f*} = 11.72u
+  avg. Delta x = 8.37m
+  sigma_{avg. Delta x} = 1.56m
+- random-reset mutation
+  single arithmetic recombination
+  c = 8
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 1
+  p_r = 0.5
+  mu = 100
+  2k = 32
+  test function: Rosenbrock
+  SR = 1
+  AUS = 1.08m
+  sigma_AUS = 0
+  avg. Delta f* = 10.9m
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 9.38m
+  sigma_{avg. Delta x} = 0
+- random-reset mutation
+  single arithmetic recombination
+  c = 8
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 16
+  test function: sphere
+  SR = 100
+  AUS = 48.87k
+  sigma_AUS = 20.39k
+  avg. Delta f* = 72.55u
+  sigma_{avg. Delta f*} = 20.12u
+  avg. Delta x = 8.42m
+  sigma_{avg. Delta x} = 1.32m
+- random-reset mutation
+  single arithmetic recombination
+  c = 16
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 64
+  test function: Ackley
+  SR = 100
+  AUS = 311.06k
+  sigma_AUS = 102.13k
+  avg. Delta f* = 1.11m
+  sigma_{avg. Delta f*} = 216.04u
+  avg. Delta x = 8.55m
+  sigma_{avg. Delta x} = 1.44m
+- random-reset mutation
+  single arithmetic recombination
+  c = 16
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 16
+  test function: exponential
+  SR = 100
+  AUS = 12.99k
+  sigma_AUS = 3.31k
+  avg. Delta f* = 40.49u
+  sigma_{avg. Delta f*} = 9.31u
+  avg. Delta x = 8.92m
+  sigma_{avg. Delta x} = 1.17m
+- random-reset mutation
+  single arithmetic recombination
+  c = 16
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 8
+  test function: sphere
+  SR = 100
+  AUS = 148.05k
+  sigma_AUS = 37.78k
+  avg. Delta f* = 83.21u
+  sigma_{avg. Delta f*} = 15.25u
+  avg. Delta x = 9.08m
+  sigma_{avg. Delta x} = 917.79u
+- random-reset mutation
+  single arithmetic recombination
+  c = 32
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 64
+  test function: Ackley
+  SR = 100
+  AUS = 1.04m
+  sigma_AUS = 227.41k
+  avg. Delta f* = 798.63u
+  sigma_{avg. Delta f*} = 92.52u
+  avg. Delta x = 9.25m
+  sigma_{avg. Delta x} = 939.3u
+- random-reset mutation
+  single arithmetic recombination
+  c = 32
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 16
+  test function: exponential
+  SR = 100
+  AUS = 39.7k
+  sigma_AUS = 8.4k
+  avg. Delta f* = 44.34u
+  sigma_{avg. Delta f*} = 6.13u
+  avg. Delta x = 9.39m
+  sigma_{avg. Delta x} = 707.37u
+- random-reset mutation
+  single arithmetic recombination
+  c = 32
+  lin-RS
+  s = 2
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 1
+  p_r = 0.5
+  mu = 100
+  2k = 16
+  test function: sphere
+  SR = 100
+  AUS = 433.18k
+  sigma_AUS = 82.4k
+  avg. Delta f* = 90.64u
+  sigma_{avg. Delta f*} = 10.91u
+  avg. Delta x = 9.5m
+  sigma_{avg. Delta x} = 621u
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: Ackley
+  SR = 100
+  AUS = 4.55k
+  sigma_AUS = 7.49k
+  avg. Delta f* = 3.32m
+  sigma_{avg. Delta f*} = 1.53m
+  avg. Delta x = 6.78m
+  sigma_{avg. Delta x} = 2.52m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 16
+  test function: Alpine
+  SR = 49
+  AUS = 172.93k
+  sigma_AUS = 175.61k
+  avg. Delta f* = 619.92u
+  sigma_{avg. Delta f*} = 292.1u
+  avg. Delta x = 5.16m
+  sigma_{avg. Delta x} = 2.43m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 16
+  test function: Aluffi-Pentini
+  SR = 100
+  AUS = 184.19k
+  sigma_AUS = 168.75k
+  avg. Delta f* = 39.56u
+  sigma_{avg. Delta f*} = 27.83u
+  avg. Delta x = 6.55m
+  sigma_{avg. Delta x} = 2.51m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 32
+  test function: Booth
+  SR = 90
+  AUS = 424.81k
+  sigma_AUS = 398.51k
+  avg. Delta f* = 194.59u
+  sigma_{avg. Delta f*} = 195.37u
+  avg. Delta x = 6.36m
+  sigma_{avg. Delta x} = 2.47m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: Easom
+  SR = 99
+  AUS = 8.13k
+  sigma_AUS = 13.86k
+  avg. Delta f* = 65.71u
+  sigma_{avg. Delta f*} = 44.83u
+  avg. Delta x = 6.16m
+  sigma_{avg. Delta x} = 2.44m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: exponential
+  SR = 100
+  AUS = 549.42
+  sigma_AUS = 152.32
+  avg. Delta f* = 25.84u
+  sigma_{avg. Delta f*} = 14.43u
+  avg. Delta x = 6.81m
+  sigma_{avg. Delta x} = 2.32m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: Goldstein-Price
+  SR = 99
+  AUS = 1.23k
+  sigma_AUS = 593.46
+  avg. Delta f* = 16.04m
+  sigma_{avg. Delta f*} = 11.66m
+  avg. Delta x = 6.32m
+  sigma_{avg. Delta x} = 2.59m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 32
+  test function: Leon
+  SR = 38
+  AUS = 44.59k
+  sigma_AUS = 51.38k
+  avg. Delta f* = 1.52m
+  sigma_{avg. Delta f*} = 3.73m
+  avg. Delta x = 5.44m
+  sigma_{avg. Delta x} = 2.98m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 64
+  test function: Matyas
+  SR = 83
+  AUS = 368.88k
+  sigma_AUS = 349.37k
+  avg. Delta f* = 7.56u
+  sigma_{avg. Delta f*} = 10u
+  avg. Delta x = 6.46m
+  sigma_{avg. Delta x} = 2.49m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: Mexican hat
+  SR = 100
+  AUS = 1.37k
+  sigma_AUS = 678.07
+  avg. Delta f* = 4.86m
+  sigma_{avg. Delta f*} = 1.74m
+  avg. Delta x = 7.03m
+  sigma_{avg. Delta x} = 2.47m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 16
+  test function: Rosenbrock
+  SR = 29
+  AUS = 394.7k
+  sigma_AUS = 443.94k
+  avg. Delta f* = 3.49m
+  sigma_{avg. Delta f*} = 5.89m
+  avg. Delta x = 5.13m
+  sigma_{avg. Delta x} = 2.45m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 4
+  test function: Schwefel
+  SR = 78
+  AUS = 91.27k
+  sigma_AUS = 53.13k
+  avg. Delta f* = 56.27u
+  sigma_{avg. Delta f*} = 57.93u
+  avg. Delta x = 6.14m
+  sigma_{avg. Delta x} = 2.61m
+- random-reset mutation
+  single arithmetic recombination
+  c = 2
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: sphere
+  SR = 100
+  AUS = 9.77k
+  sigma_AUS = 5k
+  avg. Delta f* = 56.09u
+  sigma_{avg. Delta f*} = 30.67u
+  avg. Delta x = 7.07m
+  sigma_{avg. Delta x} = 2.48m
+- random-reset mutation
+  single arithmetic recombination
+  c = 4
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 1
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: Ackley
+  SR = 96
+  AUS = 69.65k
+  sigma_AUS = 31.27k
+  avg. Delta f* = 2.06m
+  sigma_{avg. Delta f*} = 881.25u
+  avg. Delta x = 6.8m
+  sigma_{avg. Delta x} = 2.44m
+- random-reset mutation
+  single arithmetic recombination
+  c = 4
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 4
+  test function: Alpine
+  SR = 13
+  AUS = 56.88k
+  sigma_AUS = 36.81k
+  avg. Delta f* = 1.04m
+  sigma_{avg. Delta f*} = 338.69u
+  avg. Delta x = 6.93m
+  sigma_{avg. Delta x} = 2.22m
+- random-reset mutation
+  single arithmetic recombination
+  c = 4
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: exponential
+  SR = 100
+  AUS = 2.15k
+  sigma_AUS = 794.65
+  avg. Delta f* = 36.31u
+  sigma_{avg. Delta f*} = 12.07u
+  avg. Delta x = 8.35m
+  sigma_{avg. Delta x} = 1.7m
+- random-reset mutation
+  single arithmetic recombination
+  c = 4
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: Schwefel
+  SR = 1
+  AUS = 3.99k
+  sigma_AUS = 0
+  avg. Delta f* = 110.51u
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 8.16m
+  sigma_{avg. Delta x} = 0
+- random-reset mutation
+  single arithmetic recombination
+  c = 4
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: sphere
+  SR = 100
+  AUS = 27.21k
+  sigma_AUS = 9.63k
+  avg. Delta f* = 63.22u
+  sigma_{avg. Delta f*} = 26.4u
+  avg. Delta x = 7.73m
+  sigma_{avg. Delta x} = 1.88m
+- random-reset mutation
+  single arithmetic recombination
+  c = 8
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 1
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: Ackley
+  SR = 17
+  AUS = 108.65k
+  sigma_AUS = 16.74k
+  avg. Delta f* = 1.62m
+  sigma_{avg. Delta f*} = 364.54u
+  avg. Delta x = 8.17m
+  sigma_{avg. Delta x} = 1.51m
+- random-reset mutation
+  single arithmetic recombination
+  c = 8
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: Alpine
+  SR = 1
+  AUS = 33.96k
+  sigma_AUS = 0
+  avg. Delta f* = 1.04m
+  sigma_{avg. Delta f*} = 0
+  avg. Delta x = 6.26m
+  sigma_{avg. Delta x} = 0
+- random-reset mutation
+  single arithmetic recombination
+  c = 8
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: exponential
+  SR = 100
+  AUS = 8.17k
+  sigma_AUS = 1.98k
+  avg. Delta f* = 37.12u
+  sigma_{avg. Delta f*} = 10.21u
+  avg. Delta x = 8.52m
+  sigma_{avg. Delta x} = 1.27m
+- random-reset mutation
+  single arithmetic recombination
+  c = 8
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 0.5
+  mu = 100
+  2k = 2
+  test function: sphere
+  SR = 33
+  AUS = 53.33k
+  sigma_AUS = 9.52k
+  avg. Delta f* = 80.45u
+  sigma_{avg. Delta f*} = 17.32u
+  avg. Delta x = 8.91m
+  sigma_{avg. Delta x} = 1.02m
+- random-reset mutation
+  single arithmetic recombination
+  c = 16
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: exponential
+  SR = 100
+  AUS = 23.03k
+  sigma_AUS = 4.41k
+  avg. Delta f* = 41.98u
+  sigma_{avg. Delta f*} = 7.02u
+  avg. Delta x = 9.13m
+  sigma_{avg. Delta x} = 829.71u
+- random-reset mutation
+  single arithmetic recombination
+  c = 32
+  exp-RS
+  epsilon_{f*} = 100m
+  epsilon_{x} = 10m
+  p_m = 0.5
+  p_r = 1
+  mu = 100
+  2k = 2
+  test function: exponential
+  SR = 80
+  AUS = 57.6k
+  sigma_AUS = 6.26k
+  avg. Delta f* = 45.34u
+  sigma_{avg. Delta f*} = 5.44u
+  avg. Delta x = 9.5m
+  sigma_{avg. Delta x} = 602.5u
