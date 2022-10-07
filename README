@@ -26,7 +26,7 @@ List of contents
 Installation
 
   The library  is header-only,  therefore  installation  on the user's
-  system  is done  by  copying  the library  source-code.   In case of
+  system  is done  by  copying  the library  source code.   In case of
   GNU/Linux operating system  it can be achieved by invoking following
   command in terminal in some directory,  e.g. in  /home/${USER}/repos
   directory:
