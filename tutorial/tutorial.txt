@@ -1,0 +1,253 @@
+Introduction
+
+  Welcome to the Quilë C++ genetic algorithms scientific library!
+
+  This  tutorial  aims  at beginner  library users,   who already know
+  basics of  the  genetic  algorithm (GA)  theory.   If you don't know
+  foundations of the GA, then you can read about it from the following
+  book:
+
+    A. E. Eiben, J. E. Smith.  Introduction  to Evolutionary Computing.
+    Second  Edition.  Natural  Computing  Series.  Berlin,  Heidelberg,
+    Germany: Springer, 2015. doi: 10.1007/978-3-662-44874-8.
+
+  The material of  the book  is  laid  down  in accessible manner  and
+  knowledge  from Part I  is much more  than enough to understand this
+  tutorial.  Mathematically inclined  readers  who would like to  read
+  something short might refer to the following article:
+
+    Tomasz Tarkowski.  Genetic algorithm formulation  and  tuning with
+    use of  test  functions.  2022.  https://arxiv.org/abs/2210.03217 .
+
+Table of contents
+
+  1. Installation of the software
+  2. Downloading the Quilë library
+  3. Example program———Eight queens puzzle
+
+1. Installation of the software
+
+  The following software will be needed:
+
+    * Git revision control system
+    * GCC C++ compiler supporting C++20 standard of the language
+
+  It is  assumed,  that reader  has access  to the  personal  computer
+  running  GNU/Linux  operating  system  or  has  enough knowledge  to
+  translate following instructions  to the specific environment of the
+  given operating system software in use.
+
+  To install the software please use your distribution package manager.
+  Before installing  any software  please read  your distribution  man
+  pages documentation about package manager  (e.g. apt, dnf, pacman or
+  zypper  to  name   a  few  package  managers    used   by  different
+  distributions).  Please  also  check  if  you have  sudo  priviliges
+  (please see sudo man page for details).
+
+  Exercise: Find  and  install  Git  revision control system  and  C++
+  # 1.1   : frontend of the GCC compiler.
+
+2. Downloading the Quilë library
+
+  It is assumed here that you have working Git revision control system
+  software installed.
+
+  Exercise: Please open the terminal and in your home directory create
+  # 2.1   : the ``repos'' directory, if you haven't done it yet:
+          :
+          : $ cd ~ && mkdir repos
+
+  Tip: The dollar ($) sign at the beginning of the line is not part of
+       the command. It indicates the command prompt of the shell.
+
+  Note: It is  assumed  that  you  use  the Bash shell,  which  can be
+        checked with following command:
+
+        $ echo ${SHELL}
+
+        If the result is similar to following:
+        
+        > /bin/bash
+
+        then your shell is indeed the Bash shell.
+
+  Tip: The greater (>) sign  at  the beginning  of  the line  idicates
+       command output.
+
+  Exercise: Enter the  ``repos''  directory  and check  that you don't
+  # 2.2   : have the directory or file named ``quile'':
+          :
+          : $ cd repos && ls
+          : >
+          :
+          : If such directory  or  file  does not exist,  then you can
+          : clone the newest version of the library:
+          :
+          : $ git clone https://github.com/ttarkowski/quile.git
+          :
+          : New directory named ``quile'' should appear after you type
+          : ls command again:
+          :
+          : $ ls
+          : > quile
+
+3. Example program———Eight queens puzzle
+
+  It is assumed here  that you have  working  C++ frontend of the  GCC
+  compiler installed.
+
+  Exercise: The Quilë library  requires  C++ compiler  supporting  the
+  # 3.1   : C++20  standard of  the language.  Please check version of
+          : the GCC software by running following command:
+          :
+          : $ g++ --version
+          :
+          : If your  g++ compiler version  is older than 10.2.1,  then
+          : you  probably  should  consider  upgrading  your GNU/Linux
+          : distribution.  See  your  distribution  website  for  more
+          : details.
+
+  Note: GCC compiler  version 10.2.1  is enough to follow  the rest of
+        the tutorial.
+
+  The eight queens puzzle is well known problem of placing eight chess
+  queens on an standard (i.e. 8 x 8) chessboard  so that no two queens
+  threaten each other. Here, the problem to solve,  is to generate any
+  8 x 8 chessboard configuration satisfying the puzzle.
+
+  Obviously,  no two queens can be placed  on the same row (column) as
+  this violates  validity of the solution.  Hence, the problem  can be
+  formulated as a some permutation puzzle.
+
+  Let us start with  the view  on the empty 8 x 8 chessboard.  Usually,
+  it is shown as in the Fig. 3.1.
+
+      +---+---+---+---+---+---+---+---+
+    8 |   |   |   |   |   |   |   |   |  Fig. 3.1.  View on  the empty
+      +---+---+---+---+---+---+---+---+  8 x 8 chessboard.
+    7 |   |   |   |   |   |   |   |   |
+      +---+---+---+---+---+---+---+---+
+    6 |   |   |   |   |   |   |   |   |
+      +---+---+---+---+---+---+---+---+
+    5 |   |   |   |   |   |   |   |   |
+      +---+---+---+---+---+---+---+---+
+    4 |   |   |   |   |   |   |   |   |
+      +---+---+---+---+---+---+---+---+
+    3 |   |   |   |   |   |   |   |   |
+      +---+---+---+---+---+---+---+---+
+    2 |   |   |   |   |   |   |   |   |
+      +---+---+---+---+---+---+---+---+
+    1 |   |   |   |   |   |   |   |   |
+      +---+---+---+---+---+---+---+---+
+        a   b   c   d   e   f   g   h
+
+  The  usual notation  of placing  pieces  on the chessboard  involves
+  letter  from the set {a, ..., h}  followed by a number  from the set
+  {1, ..., 9}, e.g. g5.  However,  for the purpose of the puzzle, this
+  notation can be adapted———with loss of generality——— as shown in Fig.
+  3.2 below.
+
+        0   1   2   3   4   5   6   7
+      +---+---+---+---+---+---+---+---+  Fig. 3.2.    View    on   the
+      |   |   |   |   | Q |   |   |   |  chessboard  filled  with    8
+      +---+---+---+---+---+---+---+---+  queens  equivalent   to   the
+      | Q |   |   |   |   |   |   |   |  (4,  0,  7,  5, 2,  6, 1,  3)
+      +---+---+---+---+---+---+---+---+  permutation.  This is example
+      |   |   |   |   |   |   |   | Q |  solution  of the eight queens
+      +---+---+---+---+---+---+---+---+  puzzle.
+      |   |   |   |   |   | Q |   |   |
+      +---+---+---+---+---+---+---+---+
+      |   |   | Q |   |   |   |   |   |
+      +---+---+---+---+---+---+---+---+
+      |   |   |   |   |   |   | Q |   |
+      +---+---+---+---+---+---+---+---+
+      |   | Q |   |   |   |   |   |   |
+      +---+---+---+---+---+---+---+---+
+      |   |   |   | Q |   |   |   |   |
+      +---+---+---+---+---+---+---+---+
+
+  This figure demonstrates,  that whole chessboard with 8 queens on it
+  can be encoded  into some permutation.  Let us start from the top of
+  the figure,  i.e. from the highermost row.  The queen  at highermost
+  row  is  put on the column  no. 4  (column numbering  starts from 0).
+  The queen at the next row  is at the column no. 0.  Reader might now
+  easily see,  that the whole example chessboard can be encoded as the
+  following sequence:
+
+    (4, 0, 7, 5, 2, 6, 1, 3)
+
+  which  is   some  permutation   of  (0, ..., 7).   The   permutation
+  formulation guarantees  that no two queens threaten each other along
+  columns and rows.  However,  the diagonals (in chess meaning)  still
+  pose a problem. How it can be solved programmatically?
+
+  The eight queens puzzle can be formulated as an optimization problem.
+  One can search for such  permutation (chessboard configuration) that
+  minimizes  number of pairs  of queens threatening  each  other.  The
+  solution of  the problem  has  number  of such pairs  equal  to zero.
+  Fitness  function  can be defined  as  a negated  number of pairs of
+  queens threatening  each other (fitness function in GA is maximized):
+
+    f(given chessboard) = - (# of queen pairs threatening each other)
+
+  The  complete  program  can  be  found   in  ``examples/example_2/``
+  directory:
+
+  $ less ~/repos/examples/example_2/example_2.cc
+
+  Tip: Please use up and down arrows  to navigate through the document
+       and `q` character key to leave ``less'' program.
+
+  Note: There is no mistake. The first example in this tutorial really
+        refers to the ``example_2'' from ``examples'' directory of the
+        library.
+
+  The source code will  be described  in details later.  At the moment
+  it  is worth  to  mention  that  it  uses the swap mutation  and the
+  cut-and-crossfill recombination as the variation operators,  fitness
+  proportionate selection  with windowing procedure  as the  selection
+  probability  function  and  stochastic  universal  sampling  as  the
+  selection mechanism.
+
+  Exercise: Compile and run the source code of the eight queens puzzle
+  # 3.2   : example.
+          :
+          : $ cd ~/repos/examples/example_2/
+          : $ g++ -std=c++20 -DNDEBUG -O3 -Wall -Wextra -pedantic \
+          :     -I/home/${USER}/repos/quile/ -pthread example_2.cc
+          : $ ./a.out
+
+  Tip: Long shell commands  can be split into multiple lines  with use
+       of '\' character.
+
+  Tip: Shell variable ${USER} is set to the user login string:
+
+       $ echo ${USER}
+       > jdoe
+
+  Tip: Default executable name is  a.out.  This can be changed with -o
+       option of the compiler:
+
+       $ ls
+       > program.cc
+       $ g++ program.cc -o program
+       $ ls
+       > program  program.cc
+       $ ./program
+       > Hello, world!
+
+  Tip: The exercise  compilation example  uses multiple compiler flags.
+       Meaning of each flag can be checked in man page of the compiler.
+       Some explanations are also available here:
+       
+         * -std=c++20 selects C++20 standard of the language.
+         * -DNDEBUG disables assertions for faster execution.
+         * -O3 optimizes result code for performance.
+         * -Wall and -Wextra turn on additional warnings.
+         * -pedantic rejects non-standard (cf. -std= flag) behavior.
+         * -I/home/${USER}/repos/quile/   includes  Quilë  library  in
+            header file search path.
+         * -pthread adds support for multithreading.
+
+  Note: The Quilë  library  uses  multithreded  execution  for fitness
+        function evaluations.
