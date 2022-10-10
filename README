@@ -23,6 +23,8 @@ List of contents
 
   quile/        The Quilë library itself.
 
+  tutorial/     Tutorial.
+
 Installation
 
   The library  is header-only,  therefore  installation  on the user's
@@ -32,6 +34,8 @@ Installation
   directory:
 
     git clone https://github.com/ttarkowski/quile.git
+
+  Please see the tutorial for more details.
 
 Documentation
 
