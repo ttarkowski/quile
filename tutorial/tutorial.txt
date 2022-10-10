@@ -1,3 +1,8 @@
+                         * * * * * * * * * * *
+                         * The Quilë library *
+                         *    Tutorial       *
+                         * * * * * * * * * * *
+
 Introduction
 
   Welcome to the Quilë C++ genetic algorithms scientific library!
@@ -24,6 +29,7 @@ Table of contents
   1. Installation of the software
   2. Downloading the Quilë library
   3. Example program———Eight queens puzzle
+  4. Structure of the program
 
 1. Installation of the software
 
@@ -251,3 +257,161 @@ Table of contents
 
   Note: The Quilë  library  uses  multithreded  execution  for fitness
         function evaluations.
+
+  After execution of  the program, you should see something similar to
+  the following line:
+
+  > 171 genotypes created in 113 generations.
+
+  Moreover, in the working direcotory the ``solution.dat'' file should
+  appear.  You can examine its content———it is encoded in FEN notation.
+  Please note,  that Fig. 3.2 shows  one of the valid solutions of the
+  eight queens puzzle, written in FEN as:
+
+    4Q3/Q7/7Q/5Q2/2Q5/6Q1/1Q6/3Q4 w − − 0 0
+
+  For more details about FEN, please see following article:
+
+    Steven  J.  Edwards.  Portable  Game  Notation  Specification  and
+    Implementation Guide. 1994.
+
+  Note: There  are  92 solutions to  the eight queens puzzle  and  the
+        solution  generated  by  your  run  of  the program  might  be
+        different.
+
+4. Structure of the program
+
+  The  source code of  the eight queens puzzle  used  in  Sect. 3 is a
+  representative  example of the use  of the library features.  Let us
+  describe the details of the program.
+
+  Tip: The source code  is described below step by step.  However, you
+       might like to open  the source code in separate terminal to get
+       a bigger picture of what is going on:
+
+       $ cd ~/repos/quile/examples/example_2/
+       $ less example_2.cc
+
+    +---------------------------------+
+    | examples/example_2/example_2.cc |
+    +---------------------------------+
+  1 | #include <cassert>
+  2 | #include <cstddef>
+  3 | #include <fstream>
+  4 | #include <iostream>
+  5 | #include <string>
+  6 | #include <quile/quile.h>
+
+  Tip: Numbers on the left are line numbers of source code file.
+
+  All the functionality of the library  is provided as one header file
+  that can be easily included  in client-side source code  as shown in
+  line 6.  Please remember to add proper  -I  flag  to the compilation
+  command as outlines in Sect. 3.
+
+  The functionality of the library is available in namespace ``quile''.
+  In this example,  instead of repeating ``quile::'' before each token,
+  using-directive is applied:
+
+  7 | 
+  8 | using namespace quile;
+  9 | 
+
+  Note: Use of  using-directive  in the  global scope  with effect for
+        large  amount  of code  might  be  considered  as  a violation
+        of some coding guidelines, but for the case of current (short)
+        example it is acceptable.
+
+  Tip: If you are looking for  some coding guidelines,  then C++ Core
+       Guidelines is the place to start with:
+
+         Bjarne Stroustrup, Herb Sutter (Editors). C++ Core Guidelines.
+         https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines .
+  
+  10| using type = int;
+
+  In the code snippet above,  the type ``type''  is stated to be equal
+  to ``int''.  The  ``type'' type is actually used later as a base for
+  permutation representation of genotype.
+
+  It is good practice to use named constants instead of respective
+  values (so-called ``magic constants''). In the line 11:
+
+  11| const std::size_t n = 8;
+
+  the constant ``n'' is defined as 8, for eight queens problem. If one
+  would like to solve  e.g. 314 queens problem,  then it is sufficient
+  to change  the ``n'' value in line 11,  to easily solve that problem.
+
+  Tip: In large  source code bases  it is necessary  to use meaningful
+       names for widely available entities. Instead of use of ``n'' it
+       would    be   beneficial    to   use    something    like   e.g.
+       ``linear_chessboard_size''. However,  for  the case of  current
+       program, the name ``n'' is good enough.
+
+  Tip: Avoid  ``magic constants''   i.e.  hard-coded  values   in your
+       programs. Use real constants instead.
+
+  Now it is good time to introduce fitness function:
+
+  12|
+  13| fitness f(const auto& chessboard)
+  14| {
+  15|   assert(n == chessboard.size());
+  16|   int counts = 0;
+  17|   for (std::size_t i = 0; i < n; ++i) {
+  18|     for (std::size_t j = i + 1; j < n; ++j) {
+  19|       const int d = j - i;
+  20|       if (chessboard[i] == chessboard[j] ||
+  21|           chessboard[i] + d == chessboard[j] ||
+  22|           chessboard[i] == chessboard[j] + d) {
+  23|         ++counts;
+  24|       }
+  25|     }
+  26|   }
+  27|   return -counts;
+  28| }
+  29| 
+
+  This function calculates  how ``good'' is the given chessboard,  i.e.
+  the lower the number of queens threating each other———the ``better''
+  given chessboard is.
+
+  Tip: The  ``quile::fitness''  type  is  a  floating-point  type  for
+       holding fitness function values.
+
+  Tip: The  ``chessboard''  variable  type  of  the  function ``f'' is
+       deduced during compilation.
+
+  Type of the genotype is represented by alias with name ``G'':
+
+  30| using G = genotype<g_permutation<type, n, 0>>;
+
+  This alias  states,  that  ``G''  is  the genotype  with permutation
+  representation of length ``n'' (numbers from 0 to 7 are used).
+
+  The FEN notation  is implemented for genotype type stated in line 30:
+
+  31| 
+  32| std::string Forsyth_Edwards_Notation(const G& g)
+  33| {
+  34|   std::string res{};
+  35|   for (std::size_t i = 0; auto x : g) {
+  36|     if (x != 0) {
+  37|       res += std::to_string(x);
+  38|     }
+  39|     res += 'Q';
+  40|     if (x != (n - 1)) {
+  41|       res += std::to_string(n - 1 - x);
+  42|     }
+  43|     if (++i != n) {
+  44|       res += '/';
+  45|     }
+  46|   }
+  47|   res += " w - - 0 0";
+  48|   return res;
+  49| }
+  50| 
+
+  Note: This FEN implementation is constrained to the specific problem
+        of the n queens puzzle.
