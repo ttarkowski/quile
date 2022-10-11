@@ -150,7 +150,7 @@ Table of contents
   The  usual notation  of placing  pieces  on the chessboard  involves
   letter  from the set {a, ..., h}  followed by a number  from the set
   {1, ..., 9}, e.g. g5.  However,  for the purpose of the puzzle, this
-  notation can be adapted———with loss of generality——— as shown in Fig.
+  notation  can be adapted———with loss of generality———as shown in Fig.
   3.2 below.
 
         0   1   2   3   4   5   6   7
@@ -415,3 +415,154 @@ Table of contents
 
   Note: This FEN implementation is constrained to the specific problem
         of the n queens puzzle.
+
+  Finally, we have reached the ``main'' function:
+
+  51| int main()
+  52| {
+
+  Tip: It is a good practice  to not exceed  80 characters in line  in
+       source code as it increases readability.
+
+  Note: This tutorial  uses  at most  71  of characters per line.  The
+        library itself uses at most  80 characters per line.  To adapt
+        between both standards, the '⤶' character is used.
+
+  Tip: The '⤶' means  continuation of the current  line  of the source
+       code.
+
+  First, let us define the fitness function:
+
+  53|   const fitness_function<G> ff = [](const G& g) { return f(g.da⤶
+    | ta()); };
+
+  Note: Yes, we have already defined  the fitness function named ``f''.
+        However,  it was only convenient  ``helper implementation'' of
+        the ``real'' fitness function named here ``ff''.
+
+  Tip: The ``ff'' function is  a so-called ``lamda function'' and uses
+       syntax with three kind of brackets: [], () and {}. If you don't
+       know what  lambda function is,  then you can read about it from
+       https://en.cppreference.com/w/cpp/language/lambda .
+
+  The ``ff'' fitness functions  takes underlying representation of the
+  genotype ``g''  with use of member function ``data'' and passes this
+  representation as  the ``chessboard'' parameter  of the ``f'' helper
+  fitness function.
+
+  The Quilë library uses database of computed fitness function values:
+
+  54|   const fitness_db<G> fd{ ff, constraints_satisfied<G> };
+
+  Note: The use of the database  lowers  the computational cost,  when
+        fitness function values are costly to obtain.
+
+  Tip: At the moment  we will  leave  the ``constraints_satisfied<G>''
+       code without explanation.
+
+  This database is used in the next line of the program, where fitness
+  proportional  selection  with windowing procedure  is chosen  as the
+  selection probability function:
+
+  55|   const fitness_proportional_selection<G> fps{ fd };
+
+  Lines number 57, 58 and 59 describe  how to create  first generation,
+  select parents and select genotypes to the next generation:
+
+  56| 
+  57|   const auto p0 = random_population<constraints_satisfied<G>, G⤶
+    | >;
+  58|   const auto p1 = stochastic_universal_sampling<G>{ fps };
+  59|   const auto p2 = adapter<G>(stochastic_universal_sampling<G>{ ⤶
+    | fps });
+  60| 
+
+  For the  purpose  of first generation creation,  random mechanism is
+  used.  Selection of parents and to the next generation  is performed
+  with use of the stochastic universal sampling.
+
+  Note: ``adapter'' is  an implementation  of the flatten  (flat,  i.e.
+        Italian bemolle)  function from the short article mentioned in
+        the Introduction.
+
+  The next two lines describe size of the generation  and  size of the
+  multiset of parents.
+
+  61|   const std::size_t generation_sz{ 20 };
+  62|   const std::size_t parents_sz{ 2 };
+
+  Tip: Size of the multiset of parents should be even number.
+
+  One has to  determine termination condition of the genetic algorithm.
+  The eight queens problem  is somehow unique in this regard,  because
+  fitness function  value of  the solution is  known  a priori———it is
+  equal to 0 (cf. second argument equal to 0.):
+
+  63|   const auto tc = fitness_threshold_termination<G>(fd, 0., 0.01⤶
+    | );
+
+  Tip: Third argument of  the ``fitness_threshold_termination'' is the
+       precision,  i.e. algorithm finishes  when genotype with fitness
+       in range [-0.01, +0.01] is found.  This parameter  is therefore
+       chosen arbitrarily to some extent.
+
+  For   the   purpose   of   variation   operator,   cut-and-crossfill
+  recombination followed by swap mutation was chosen:
+
+  64| 
+  65|   const variation<G> v{ swap_mutation<G>, cut_n_crossfill<G> };
+  66| 
+
+  Finally, we might perform evolution:
+
+  67|   const auto e = evolution<G>(v, p0, p1, p2, tc, generation_sz,⤶
+    |  parents_sz);
+
+  and print results of the computations:
+
+  68|   std::ofstream file{ "solution.dat" };
+  69|   file << Forsyth_Edwards_Notation(fd.rank_order()[0]) << '\n';
+  70|   std::cout << fd.size() << " genotypes created in " << e.size()
+  71|             << " generations.\n";
+  72| }
+
+  Tip: ``rank_order'' method of the fitness database returns container
+       with all generated genotypes  sorted in descending order of the
+       fitness  function  values.   Therefore,  ``fd.rank_order()[0]''
+       represents the best genotype.
+
+  Exercise: Try to change  different parts of  the source code,  while
+  # 4.1   : compiling and running it  after modifications.  Please see
+          : the ``Tip''s below for some pieces of advice.
+          :
+          : Here are some suggestions:
+          :
+          :  * Try to change  variation  operator,  e.g. use only swap
+          :    mutation.
+          :  * What  happens   if  you  use   roulette_wheel_selection
+          :    instead of stochastic_universal_sampling?
+          :  * Change  the size of  the  chessboard (``n''  parameter).
+          :    How does it affect the execution time?
+
+  Tip: Some  modifications  of  the source code  done in  Exercise 4.1
+       might  lead  to prolonged execution and/or excessive use of RAM.
+       If you run into troubles, you can stop the program execution by
+       pressing [Ctrl] + [C] combination of  the keys in terminal with
+       running program.
+
+  Tip: You can observe  parameters of  the running program with use of
+       the ``top'' command. Please see man page of the top command for
+       more details.
+
+  Tip: You  might  want to  slightly change  the evolution command  to
+       tackle with problem of excessive use of RAM. Try something like
+       this :
+
+         67|   const auto e = evolution<G>(v, p0, p1, p2, tc, generat⤶
+           | ion_sz, parents_sz, 1);
+
+       The addition of the last parameter (equal to 1) forces algoritm
+       implementation  to  remeber  only  the last  generation  of the
+       evolution.  This reduces the amount of  the RAM needed. However,
+       this also makes statistical information printed by lines 70 and
+       71 incorrect as the whole evolution is no longer kept in memory.
