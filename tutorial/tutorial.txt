@@ -30,6 +30,7 @@ Table of contents
   2. Downloading the Quilë library
   3. Example program———Eight queens puzzle
   4. Structure of the program
+  5. Example program———Function maximization
 
 1. Installation of the software
 
@@ -556,7 +557,7 @@ Table of contents
 
   Tip: You  might  want to  slightly change  the evolution command  to
        tackle with problem of excessive use of RAM. Try something like
-       this :
+       this:
 
          67|   const auto e = evolution<G>(v, p0, p1, p2, tc, generat⤶
            | ion_sz, parents_sz, 1);
@@ -566,3 +567,72 @@ Table of contents
        evolution.  This reduces the amount of  the RAM needed. However,
        this also makes statistical information printed by lines 70 and
        71 incorrect as the whole evolution is no longer kept in memory.
+
+5. Example program———Function maximization
+
+  One of the typical tasks in numerical methods is to find the maximum
+  of some function. One can use e.g. ``golden section search'' (in one
+  dimension) or ``conjugate gradient methods''. However, we'll see how
+  to  use  the library  implementation of GA  for  finding  maximum of
+  relatively simple function:
+
+    f(x, y) = cos(sqrt(x^2 + y^2) / 4) + e
+
+  over domain [-10, 10]^2.
+
+  The  complete  program  can  be  found   in  ``examples/example_1/``
+  directory:
+
+  $ less ~/repos/examples/example_1/example_1.cc
+
+  Instead  of  analyzing  the whole program,  which  is actually quite
+  similar to  the  previous one,  we will  focus on the most important
+  differences.
+
+  First of all, this is floating-point optimization problem:
+
+  8 | using type = double;
+
+  and the helper fitness function implementation  is therefore defined
+  as follows:
+
+  11| fitness f(type x, type y)
+  12| { return std::cos(0.25 * std::hypot(x, y)) + e<type>; }
+
+  Tip: The Quilë library defines several math constants: e, pi and ln2.
+       Example of use is shown above for the e constant.
+
+  The problem is constrained to the domain [-10, 10] x [-10, 10]. This
+  is reflected in code in natural way:
+
+  16|   static const domain<type, dim> d{ range{ -10., +10. }, range{⤶
+    |  -10., +10. } };
+  17|   using G = genotype<g_floating_point<type, dim, &d>>;
+
+  Note: The genotype type  has access  to the domain  information  (cf.
+        third template parameter of g_floating_point template.
+
+  Note: The g_floating_point template  indicates,  that the problem is
+        indeed floating-point in its nature.
+
+  This time, the termination condition is stated differently:
+
+  30|   const auto tc = max_fitness_improvement_termination<G>(fd, 10⤶
+    | , 0.05);
+
+  The algorithm  is terminated  if after  10 last generations  fitness
+  function  maximum  has not  improved  relatively  more than  5% with
+  respect to the whole evolutionary process.
+
+  For the purpose of the variation  the Gaussian mutation is used this
+  time:
+
+  32|   const type sigma{ .2 };
+  33|   const variation<G> v{ Gaussian_mutation<G>(sigma, 1.) };
+
+  To save the whole evolution  into a file  the ``print'' function can
+  be used:
+
+  35|   std::ofstream file{ "evolution.dat" };
+  36|   print(file, evolution<G>(v, p0, p1, p2, tc, generation_sz, pa⤶
+    | rents_sz));
