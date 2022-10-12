@@ -32,6 +32,7 @@ Table of contents
   4. Structure of the program
   5. Example program———Function maximization
   6. Structure of the output
+  7. Documentation
 
 1. Installation of the software
 
@@ -742,3 +743,35 @@ Table of contents
 
   At this momemt you have images (or video) of genetic drift available
   to show to somebody!
+
+7. Documentation
+
+  Documentation of the API  can be  generated from  the source code of
+  the library  with use of the Doxygen tool,  LaTeX typesetting system
+  and GNU Make program.
+
+  Exercise: Find and install Doxygen,  LaTeX  and GNU Make with use of
+  # 7.1   : your package manager.
+
+  Exercise: Generate the documentation:
+  # 7.2   :
+          : $ cd ~/repos/quile
+          : $ doxygen
+          : $ cd doc/latex/
+          : $ make
+          : $ open refman.pdf
+
+  If everything goes without problems, a window with the generated PDF
+  file should open.
+
+  Exercise: Find  some information  about permutation,  floating-point,
+  # 7.3   : binary and integer representations of genotype.
+
+  Tip: Genotype  representations   are  defined   with   use   of  the
+       ``g_permutation'',   ``g_floating_point'',   ``g_binary''   and
+       ``g_integer'' structures.
+
+                                * * *
+
+Congratulations! You have completed the tutorial.  Now you are able to
+write genetic algorithms programs with use of the Quilë library.
