@@ -31,6 +31,7 @@ Table of contents
   3. Example program———Eight queens puzzle
   4. Structure of the program
   5. Example program———Function maximization
+  6. Structure of the output
 
 1. Installation of the software
 
@@ -293,9 +294,6 @@ Table of contents
        $ cd ~/repos/quile/examples/example_2/
        $ less example_2.cc
 
-    +---------------------------------+
-    | examples/example_2/example_2.cc |
-    +---------------------------------+
   1 | #include <cassert>
   2 | #include <cstddef>
   3 | #include <fstream>
@@ -636,3 +634,111 @@ Table of contents
   35|   std::ofstream file{ "evolution.dat" };
   36|   print(file, evolution<G>(v, p0, p1, p2, tc, generation_sz, pa⤶
     | rents_sz));
+
+  Exercise: Compile and run source code described in this section (i.e.
+  # 5.1   : from   directory   ``examples/example_1/``).    Open   the
+          : ``evolution.dat''  file with  the less command and examine
+          : its content.
+
+6. Structure of the output
+
+  In  the  eight queens  example  from Sect. 3  we were  intersted  in
+  obtaining solution  to the puzzle.  Sometimes, however,  the genetic
+  drift might be interesting  as well.  We will try to visualize drift
+  of the maximization example from Sect. 5.
+
+  It is assumed here, that you have done Exercise 5.1.
+
+  The  ``evolution.dat''  file created during execution of the genetic
+  program from  Sect. 5  is quite lengthy.  However,  its structure is
+  very simple and can be easily processed further.
+
+  Columns description:
+
+    * The first column  represents the number of the generation in the
+      evolution. Counting starts from 0.
+    * Rest of the columns represent alleles (values of the genes).
+
+  There are  multiple tools,  which  can be used  to visualize genetic
+  drift. Here, the gnuplot program will be used.
+
+  Tip: The  gnuplot visualization program  is a gem of  the scientific
+       software. It can be effectively combined with LaTeX through the
+       use  of  epslatex  terminal  to  produce  beautiful  scientific
+       drawings.  However,  it takes some time  and  effort to achieve
+       adequate level of proficiency. You can learn more about gnuplot
+       from http://gnuplot.info/ .
+
+  Exercise: With use of the package manager,  please find  and install
+  # 6.1   : package containing gnuplot visualization program.
+
+  Use of the gnuplot program in this tutorial will be slightly unusual.
+  We will call  gnuplot  from  the Bash  script feeding it  with  data
+  filtered  with use of the grep command.  The  awk  command  will  be
+  useful as well.
+
+  Tip: Data analysis can be performed with multiple tools or according
+       to different philosophies.  Here,  the command line  tools  and
+       some tenets of the philosophy described here:
+
+         http://www.catb.org/esr/writings/taoup/html/ch01s06.html
+
+       are applied.
+
+  Tip: The awk,  grep  and  sed  commands  can be conveniently used to
+       analyze data.
+
+  Exercise: Please read  the source code of  the ``postprocessing.sh''
+  # 6.2   : file from the ``examples/example_1'' directory.
+
+  From the source code of the  ``postprocessing.sh''  shell script you
+  can see,  that  the  main  job  is done  in  a loop  iterating  over
+  evolution generation numbers:
+
+  7 | for i in `cat evolution.dat | awk '{ print $1 }' | uniq`
+  8 | do
+  ...
+  31| done
+
+  Extraction of the population from i-th generation is done with  grep
+  command:
+
+  9 |   cat ${file} | grep "^${i} " > ${temp}
+
+  Then,  data  for  the i-th  generation  is visualized  as a separate
+  drawing with use of the gnuplot program.
+
+  Tip: For introduction  to  the programming  in Bash  please  see the
+       following on-line resource:
+
+         Mendel Cooper.   Advanced Bash-Scripting Guide.    2012, 2014.
+         https://tldp.org/LDP/abs/html/ .
+
+  Exercise: Run   the  ``postprocessing.sh''  shell  script  from  the
+  # 6.3   : ``examples/example_1'' directory.
+          :
+          : chmod u+x postprocessing.sh
+          : $ ./postprocessing.sh
+
+  Tip: Execution of ``postprocessing.sh'' file might take a while. The
+       result  of the execution is  the set of PNG files  that  can be
+       viewed in some image viewer.
+
+  Note: The resulting series of pictures  can be encoded  into a movie.
+        For  this  task,  software  like  GStreamer  can be used.  The
+        example command using OGV format is as follows:
+
+        $ gst-launch-1.0 -e multifilesrc location="%03d.png" \
+            index=0 caps="image/png,framerate=(fraction)10/1" \
+            ! pngdec ! videoconvert ! theoraenc ! oggmux \
+            ! filesink location=result.ogv
+
+        In order to use ``gst-launch-1.0'' command,  you will probably
+        need to install appropriate GStreamer package with use of your
+        package manager.
+
+        The video is very short———you might need to replay it  several
+        times to see what is going on.
+
+  At this momemt you have images (or video) of genetic drift available
+  to show to somebody!
