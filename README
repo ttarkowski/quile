@@ -35,6 +35,13 @@ Installation
 
   Please see the tutorial for more details.
 
+List of dependencies
+
+  The library  does not  depend  on any other software.  The user only
+  need  C++  compiler  supporting  C++20 standard of  the language  to
+  compile programs  written with use of  the library.  The software is
+  known to work with both GCC and Clang compilers.
+
 Documentation
 
   Documentation for the library  can be generated from the source code
