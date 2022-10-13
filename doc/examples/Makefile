@@ -8,4 +8,4 @@ all: $(patsubst %.cc,%.out,$(wildcard *.cc))
 	$< \
 	&& ./a.out 2>&1 | fold >$@ \
 	&& rm a.out \
-	&& ./trim.sh $@
+	&& bash trim.sh $@
