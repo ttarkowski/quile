@@ -75,6 +75,12 @@ Contributing to the software & Feature requests
 
   and describe your feature request.
 
+Test suite
+
+  Test suite in form of the short examples of the library features use
+  is located in doc/examples/ directory. The Makefile for GCC compiler
+  is provided.
+
                                  * * *
 
 This work  is a result of  the project funded  by the National Science
