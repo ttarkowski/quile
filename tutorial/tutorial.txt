@@ -774,4 +774,4 @@ Table of contents
                                 * * *
 
 Congratulations! You have completed the tutorial.  Now you are able to
-write genetic algorithms programs with use of the Quilë library.
+write genetic algorithm programs with use of the Quilë library.
