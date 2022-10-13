@@ -9,3 +9,7 @@ all: $(patsubst %.cc,%.out,$(wildcard *.cc))
 	&& ./a.out 2>&1 | fold >$@ \
 	&& rm a.out \
 	&& bash trim.sh $@
+
+.PHONY: clean
+clean:
+	rm evolution.dat *.out 2> /dev/null
