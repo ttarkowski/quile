@@ -42,6 +42,16 @@ List of dependencies
   compile programs  written with use of  the library.  The software is
   known to work with both GCC and Clang compilers.
 
+Compilation
+
+  To compile programs written with use of the library,  please use the
+  following command:
+
+    g++ -std=c++20 -DNDEBUG -O3 -Wall -Wextra -pedantic \
+      -I/home/${USER}/repos/quile/ -pthread your_program.cc
+
+  or similar. Please see documentation and tutorial for more details.
+
 Documentation
 
   Documentation for the library  can be generated from the source code
