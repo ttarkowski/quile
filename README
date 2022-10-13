@@ -98,6 +98,11 @@ Test suite
   is located in doc/examples/ directory. The Makefile for GCC compiler
   is provided, so tests execution can be performed with make command.
 
+Code statistics
+
+  * https://github.com/ttarkowski/quile/pulse
+  * https://www.openhub.net/p/quile
+
                                  * * *
 
 This work  is a result of  the project funded  by the National Science
