@@ -6,6 +6,8 @@ the terms of the MIT License (please see LICENSE file).
 The name  of this library  origins from fictional  language Neo-Quenya
 and means “color”.
 
+This software strives to be minimal.
+
 List of contents
 
   doc/          Documentation.
@@ -84,13 +86,15 @@ Reporting issues or problems
 
 Contributing to the software & Feature requests
 
-  At the moment, the Quilë library does not support code contributions.
-  However, if you need some feature to be implemented in code,  please
-  visit:
+  The Quilë library does not support  code contributions.  However, if
+  you need some feature to be implemented in code, please visit:
 
     https://github.com/ttarkowski/quile/discussions
 
-  and describe your feature request.
+  and describe your  feature request.  However,  please note that your
+  request  might be declined  or  permanently unresolved  due  to many
+  reasons———including the facts that the library strives to be minimal
+  and is intentionally developed as a one-person project.
 
 Test suite
 
