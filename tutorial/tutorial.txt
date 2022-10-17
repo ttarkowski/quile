@@ -579,7 +579,7 @@ Table of contents
 
   over domain [-10, 10]^2.
 
-  The  complete  program  can  be  found   in  ``examples/example_1/``
+  The  complete  program  can  be  found   in  ``examples/example_1/''
   directory:
 
   $ less ~/repos/examples/example_1/example_1.cc
