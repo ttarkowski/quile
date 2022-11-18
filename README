@@ -43,7 +43,8 @@ List of dependencies
   The library  does not  depend  on any other software.  The user only
   need  C++  compiler  supporting  C++20 standard of  the language  to
   compile programs  written with use of  the library.  The software is
-  known to work with both GCC and Clang compilers.
+  known to work with both GCC and Clang compilers   (the  library  was
+  tested on GCC 10.2.1 and Clang 13.0.1).
 
 Compilation
 
