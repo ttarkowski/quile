@@ -1,15 +1,17 @@
 all: $(patsubst %.cc,%.out,$(wildcard *.cc))
 
 %.out: %.cc
-	g++ -std=c++20 \
+	@g++ -std=c++20 \
 	-DQUILE_ENABLE_LOGGING \
 	-O3 -Wall -Wextra -pedantic \
 	-I../../ -pthread \
 	$< \
 	&& ./a.out 2>&1 | fold >$@ \
 	&& rm a.out \
-	&& bash trim.sh $@
+	&& bash trim.sh $@ \
+	&& echo "# $< test: PASS" \
+	|| echo "# $< test: FAIL"
 
 .PHONY: clean
 clean:
-	rm evolution.dat *.out 2> /dev/null
+	rm -f evolution.dat *.out
