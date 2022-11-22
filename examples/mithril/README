@@ -7,8 +7,13 @@ nanotubes. It requires additional software:
 The program can be compiled with following example command:
 
   g++ -Wall -Wextra -pedantic -O3 -std=c++20 -pthread -DNDEBUG \
-    -I../../ mithril.cc src/*.cc -DN_PHI=23 -DN_Z=10 \
+    -I../../ mithril.cc src/*.cc -DN_PHI=23 -DN_Z=4 \
     -o mithril
+
+Please note that typical program run is very long compared to  another
+examples.  Execution time varies from several hours to several days on
+modern (year 2022) hardware when one logical thread of CPU is used and
+N_PHI parameter is set to 23 and N_Z is in range [2, 9].
 
 Additional program  postprocessing.cc  can be compiled  with following
 example command:
