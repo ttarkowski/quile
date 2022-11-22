@@ -637,7 +637,7 @@ Table of contents
     | rents_sz));
 
   Exercise: Compile and run source code described in this section (i.e.
-  # 5.1   : from   directory   ``examples/example_1/``).    Open   the
+  # 5.1   : from   directory   ``examples/example_1/'').    Open   the
           : ``evolution.dat''  file with  the less command and examine
           : its content.
 
