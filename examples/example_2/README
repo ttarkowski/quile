@@ -1,0 +1,7 @@
+example_2 is an evolutionary program to solve eight queens puzzle. The
+program can be compiled with following example command:
+
+  g++ -Wall -Wextra -pedantic -O3 -std=c++20 -pthread -DNDEBUG \
+    -I../../ example_2.cc -o example_2
+
+For more details please see the tutorial.
