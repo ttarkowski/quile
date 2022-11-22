@@ -19,4 +19,5 @@ of atoms  in nanowire  unit cell,  can be  integer value  greater than
 only if pseudopotential  file described above is  located in program's
 directory. Please note that typical  program run is very long compared
 to another examples and requires a lot of computer resources to finish
-with meaningful result.
+with meaningful result.  Example program output (with Quantum ESPRESSO
+output files excluded) is available in example_output.tar.xz file.
