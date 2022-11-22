@@ -1,0 +1,13 @@
+example_1 is a simple evolutionary program  showing genetic drift over
+some function.  The program  can be  compiled  with  following example
+command:
+
+  g++ -Wall -Wextra -pedantic -O3 -std=c++20 -pthread -DNDEBUG \
+    -I../../ example_1.cc -o example_1
+
+The  postprocessing.sh  script  can be invoked  after execution of the
+program. It requires additional software:
+
+• gnuplot — postprocessing dependency
+
+For more details please see the tutorial.
