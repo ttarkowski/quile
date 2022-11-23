@@ -41,6 +41,19 @@ Barricelli [@Barricelli1962; @Galloway2011]. Evolutionary computations have
 found wide applications in many disciplines [@Katoch2021; @Ghaheri2015;
 @Goudos2016; @Kudjo2017; @Lee2018; @Drachal2021].
 
+The genetic algorithm is conceptually simple procedure. The aim is to find the
+most optimal solution of a given optimization problem. First, one begins with
+some sampling of the space of potential solutions---it can be done randomly or
+*ad hoc*. This procedure forms the first population of the evolutionary process,
+i.e. its first iteration. Each candidate solution from the population is
+evaluated in terms of "fitness". "Fitter" candidate solution has greater
+probability of becoming parent and entering next population of evolution's
+subsequent iteration. However, less "fit" individuals still can propagate,
+albeit with lower probability. This trait of evolutionary computations helps
+preventing premature optimization to the wrong local optimum. Iterations of the
+evolution continues as long as termination condition is not met. One example of
+termination condition is reaching the fitness function *plateau*.
+
 # Overview
 
 *Nature of problem:* Floating-point, integer, binary or permutation
