@@ -41,6 +41,8 @@ Barricelli [@Barricelli1962; @Galloway2011]. Evolutionary computations have
 found wide applications in many disciplines [@Katoch2021; @Ghaheri2015;
 @Goudos2016; @Kudjo2017; @Lee2018; @Drachal2021].
 
+# Overview
+
 *Nature of problem:* Floating-point, integer, binary or permutation
 single-objective constrained finite-dimensional optimization problems of
 arbitrary nature, i.e. maximization of $f\colon G \rightarrow \mathbb{R}$, where
