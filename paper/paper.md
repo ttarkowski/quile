@@ -139,9 +139,9 @@ developed with the library, C++ compiler supporting the C++20 standard of the
 language is needed.
 
 The library employs a database of already computed fitness function values. The
-software is therefore well suited for optimization tasks with computationally
-expensive fitness functions, where computation time is of the order of magnitude
-of seconds or more, like *ab initio* calculations in condensed matter physics.
+software is therefore well suited for optimization tasks with fitness functions
+calculated from simulation codes like *ab initio* (condensed matter physics) or
+finite element method calculations.
 This feature, however, does not exclude use of inexpensive fitness functions.
 For the sake of convenience the database itself is available through the
 intermediary objects, which are responsible for database cohesion and lifetime
