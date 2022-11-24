@@ -93,6 +93,18 @@ library tailored for problems with computationally expensive fitness functions.
   selection probability functions and termination conditions at client-side
   code.
 
+*Limitations:*
+
+- Client-side program compilation time is comparatively long due to
+  *header-only* nature of the library.
+- Set of variation operators is limited. In case of floating-point
+  representation alone the popular BLX recombination [@Eshelman1993] was not
+  implemented.
+- Very popular mechanisms of selection to the next generation, e.g.
+  $(\mu + \lambda )$-selection and $(\mu , \lambda )$-selection, were not
+  implemented.
+- Recombination with number of parents different than 2 is not supported.
+
 *Note*: For information about API documentation, tutorial, installation
 instructions, test suite, code statistics, reporting problems with the library,
 support inquiries and feature requests please see
