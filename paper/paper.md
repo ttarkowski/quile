@@ -170,7 +170,9 @@ design power* 6 W) for sample size of 10 per measurement point. Number of $n$
 queens puzzle solutions can be taken from [@oeisA000170]. Inset: Sample solution
 *4Q3/Q7/7Q/5Q2/2Q5/6Q1/1Q6/3Q4 w - - 0 0* for eight queens puzzle reached after
 creation of 56 unique genotypes in evolution (on average 123.61 with standard
-deviation 111.69 for sample size 100).\label{fig2}](fig2.pdf)
+deviation 111.69 for sample size 100). This figure can be reproduced by running
+[example_2/time](https://github.com/ttarkowski/quile/tree/main/examples/example_2/time).
+\label{fig2}](fig2.pdf)
 
 # Acknowledgements
 
