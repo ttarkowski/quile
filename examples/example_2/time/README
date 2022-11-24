@@ -1,0 +1,5 @@
+The  job.sh  script  is intended  for  performing measurement  of time
+complexity of n queens puzzle evolutionary solution.
+
+Please note,  that  example_2.cc  file is slightly different  than the
+corresponding file in parent directory.
