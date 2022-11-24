@@ -159,7 +159,10 @@ library are shown in \autoref{fig1} and in \autoref{fig2}.
 ![Genetic drift over function $f(x, y) = \cos \frac{r(x, y)}{4} + e$, where
 $r(x, y) = \sqrt{x^2 + y^2}$, on domain $[-10, 10]^2$. Three genotype
 generations were presented: the first one (#0), in half of the evolution (#6)
-and at the end (#12). Each generation has the same size. \label{fig1}](fig1.pdf)
+and at the end (#12). Each generation has the same size. This figure can be
+reproduced by running
+[example_1](https://github.com/ttarkowski/quile/tree/main/examples/example_1).
+\label{fig1}](fig1.pdf)
 
 ![The $n$ queens puzzle: time of genetic program execution $\Delta t$ and
 problem complexity $\xi$. Calculations were performed on low-spec CPU (*thermal
