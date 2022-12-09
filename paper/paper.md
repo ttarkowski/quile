@@ -116,7 +116,7 @@ software repository.
 - research project in computational materials science (cf.
   [Acknowledgements](#acknowledgements) section)
 - PhD thesis (to be published on-line)
-- 1 report and 2 articles [@Tarkowski2022a; @Tarkowski2022b; @Tarkowski2022c]
+- 1 report and 2 articles [@Tarkowski2022; @Tarkowski2022a; @Tarkowski2022b]
 
 # Statement of need
 
