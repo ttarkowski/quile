@@ -115,11 +115,8 @@ software repository.
 
 - research project in computational materials science (cf.
   [Acknowledgements](#acknowledgements) section)
-- PhD thesis (under review)
-- article (under preparation) about crystal structure prediction of boron
-  nanowires
-- article (under preparation) about energy decomposition of boron nanotubes
-- report [@Tarkowski2022]
+- PhD thesis (to be published on-line)
+- 1 report and 2 articles [@Tarkowski2022a; @Tarkowski2022b; @Tarkowski2022c]
 
 # Statement of need
 
