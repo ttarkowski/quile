@@ -26,6 +26,7 @@
 #define QUILE_H
 
 #include <algorithm>
+#include <array>
 #include <cassert>
 #include <climits>
 #include <cmath>
