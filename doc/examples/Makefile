@@ -6,11 +6,11 @@ all: $(patsubst %.cc,%.out,$(wildcard *.cc))
 	-O3 -Wall -Wextra -pedantic \
 	-I../../ -pthread \
 	$< \
-	&& ./a.out 2>&1 | fold >$@ \
-	&& rm a.out \
-	&& bash trim.sh $@ \
+	&& ./a.out >$@ 2>&1 \
 	&& echo "# $< test: PASS" \
-	|| echo "# $< test: FAIL"
+	|| echo "# $< test: FAIL" \
+	&& bash trim.sh $@ \
+	&& rm -f a.out
 
 .PHONY: clean
 clean:

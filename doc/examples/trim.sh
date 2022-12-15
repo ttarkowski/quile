@@ -1,5 +1,8 @@
 #!/bin/bash
 
+cat $1 | fold > tmp.txt
+mv tmp.txt $1
+
 lines=$(cat $1 | wc -l)
 max=50
 
