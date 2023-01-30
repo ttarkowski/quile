@@ -96,7 +96,7 @@ library tailored for problems with computationally expensive fitness functions.
 *Limitations:*
 
 - Client-side program compilation time is comparatively long due to
-  *header-only* nature of the library.
+  *header-only* nature of the library and the use of templates.
 - Set of variation operators is limited. In case of floating-point
   representation alone the popular BLX recombination [@Eshelman1993] was not
   implemented.
@@ -123,16 +123,16 @@ software repository.
 Scientific use of C++ genetic algorithms libraries seems to be dominated by four
 software packages: GAlib [@Wall], Evolving Objects [@Keijzer2002], OpenBEAGLE
 [@Gagne2006] and Evolutionary Computation Framework (ECF) [@Jakobovic]. Evolving
-Objects, OpenBEAGLE and ECF are written in C++98 standard of the language, while
-GAlib is written in pre-standard version of it. Those libraries, which are
+Objects, OpenBEAGLE and ECF are written in the C++98 standard of the language, while
+GAlib is written in a pre-standard version of it. Those libraries, which are
 written in C++98, while being comprehensive and feature-rich, also tend to be
-relatively hard to use for novice user inclined toward scientific computations.
+relatively hard to use for the novice user inclined toward scientific computations.
 The reason is the comparatively complex installation process or complexity of
 the library itself.
 
 The Quilë library tries to fill the niche of easy to use, high performance
 genetic algorithms scientific libraries by implementing the features using
-modern C++20 standard of the language. The software provides easy start for
+the modern C++20 standard of the language. The software provides an easy start for
 researchers and academic teachers, who need genetic algorithms and use C++ for
 their work. The library is available as a header-only (one file) implementation
 that can be installed by simply copying its source code. The user can run
@@ -143,26 +143,26 @@ covered.
 The library is implemented in generic (template metaprogramming) and partly in
 functional programming style with elements of concurrency. Modern elements of
 C++ were used, e.g. *concepts* [@Sutton2017], alongside with established
-constructs, e.g. SFINAE [@Vandevoorde2002]. In order to compile program
-developed with the library, C++ compiler supporting the C++20 standard of the
-language is needed.
+constructs, e.g. substitution failure is not an error (SFINAE) [@Vandevoorde2002]. 
+In order to compile program developed with the library, C++ compiler supporting 
+the C++20 standard of the language is needed.
 
 The library employs a database of already computed fitness function values. The
 software is therefore well suited for optimization tasks with fitness functions
 calculated from simulation codes like *ab initio* (condensed matter physics) or
 finite element method calculations.
-This feature, however, does not exclude use of inexpensive fitness functions.
+This feature, however, does not exclude the use of inexpensive fitness functions.
 For the sake of convenience the database itself is available through the
 intermediary objects, which are responsible for database cohesion and lifetime
-management. The intermediary object type is implemented with use of the smart
+management. The intermediary object type is implemented with the use of the smart
 pointer *std::shared_ptr* [@Alexandrescu2001]. Calculations of not yet available
-in database fitness function values are done concurrently in order to speed up
+in database fitness function values are computed concurrently in order to speed up
 the whole evolutionary process---thread pool design pattern is used to optimally
 balance the load on CPU cores [@Williams2019].
 
 Example usage of the library features is outlined in the
 [tutorial/tutorial.txt](https://github.com/ttarkowski/quile/blob/main/tutorial/tutorial.txt)
-file in the software repository. Example results obtained with use of the
+file in the software repository. Example results obtained with the use of the
 library are shown in \autoref{fig1} and in \autoref{fig2}.
 
 ![Genetic drift over function $f(x, y) = \cos \frac{r(x, y)}{4} + e$, where
