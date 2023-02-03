@@ -188,6 +188,6 @@ deviation 111.69 for sample size 100). This figure can be reproduced by running
 This work is a result of the projects funded by the National Science Centre of
 Poland (Twardowskiego 16, PL-30312 Kraków, Poland,
 [http://www.ncn.gov.pl/](http://www.ncn.gov.pl/)) under the grant number
-UMO-2016/23/B/ST3/03575.
+[UMO-2016/23/B/ST3/03575](https://projekty.ncn.gov.pl/en/index.php?projekt_id=359039).
 
 # References
