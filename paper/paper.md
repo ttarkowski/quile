@@ -168,6 +168,7 @@ $r(x, y) = \sqrt{x^2 + y^2}$, on domain $[-10, 10]^2$. Three genotype
 generations were presented: the first one (#0), in half of the evolution (#6)
 and at the end (#12). Each generation has the same size. This figure can be
 reproduced by running *examples/example_1* example from the software archive.
+\label{fig1}](fig1.pdf)
 
 ![The $n$ queens puzzle: time of genetic program execution $\Delta t$ and
 problem complexity $\xi$. Calculations were performed on low-spec CPU (*thermal
