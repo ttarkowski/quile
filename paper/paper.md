@@ -107,9 +107,8 @@ library tailored for problems with computationally expensive fitness functions.
 
 *Note*: For information about API documentation, tutorial, installation
 instructions, test suite, code statistics, reporting problems with the library,
-support inquiries and feature requests please see
-[README](https://github.com/ttarkowski/quile/blob/main/README) file in the
-software repository.
+support inquiries and feature requests please see *README* file in the software
+archive.
 
 *Scholarly publications and research projects using the software:*
 
@@ -160,18 +159,15 @@ in database fitness function values are computed concurrently in order to speed 
 the whole evolutionary process---thread pool design pattern is used to optimally
 balance the load on CPU cores [@Williams2019].
 
-Example usage of the library features is outlined in the
-[tutorial/tutorial.txt](https://github.com/ttarkowski/quile/blob/main/tutorial/tutorial.txt)
-file in the software repository. Example results obtained with the use of the
+Example usage of the library features is outlined in the *tutorial/tutorial.txt*
+file in the software archive. Example results obtained with the use of the
 library are shown in \autoref{fig1} and in \autoref{fig2}.
 
 ![Genetic drift over function $f(x, y) = \cos \frac{r(x, y)}{4} + e$, where
 $r(x, y) = \sqrt{x^2 + y^2}$, on domain $[-10, 10]^2$. Three genotype
 generations were presented: the first one (#0), in half of the evolution (#6)
 and at the end (#12). Each generation has the same size. This figure can be
-reproduced by running
-[example_1](https://github.com/ttarkowski/quile/tree/main/examples/example_1).
-\label{fig1}](fig1.pdf)
+reproduced by running *examples/example_1* example from the software archive.
 
 ![The $n$ queens puzzle: time of genetic program execution $\Delta t$ and
 problem complexity $\xi$. Calculations were performed on low-spec CPU (*thermal
@@ -180,7 +176,7 @@ queens puzzle solutions can be taken from [@oeisA000170]. Inset: Sample solution
 *4Q3/Q7/7Q/5Q2/2Q5/6Q1/1Q6/3Q4 w - - 0 0* for eight queens puzzle reached after
 creation of 56 unique genotypes in evolution (on average 123.61 with standard
 deviation 111.69 for sample size 100). This figure can be reproduced by running
-[example_2/time](https://github.com/ttarkowski/quile/tree/main/examples/example_2/time).
+*examples/example_2/time* example from the software archive.
 \label{fig2}](fig2.pdf)
 
 # Acknowledgements
