@@ -38,6 +38,16 @@ Installation
 
   Please see the tutorial for more details.
 
+  The latest stable release is v1.0.0 available for download at:
+
+    https://github.com/ttarkowski/quile/releases/tag/v1.0.0
+
+  and described in following paper:
+
+    Tomasz Tarkowski, Quilë: C++ genetic algorithms scientific library,
+    Journal  of  Open  Source  Software,  8 (82),  4902  (2023).   doi:
+    10.21105/joss.04902
+
 List of dependencies
 
   The library  does not  depend  on any other software.  The user only
